@@ -35,7 +35,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onClose }) => {
           {["Home", "Profile", "Games", "Leaderboard", "Tournament", "Premium Tournaments", "Activity", "Rewards", "Support"].map((link) => (
             <NavItem key={link}>
               <NavLink
-                href={`#${link.toLowerCase().replace(/\s/g, "-")}`}
+                href={`${link.toLowerCase().replace(/\s/g, "-")}`}
                 active={activeLink === link}
                 isClicked={isClicked}
                 onClick={() => handleLinkClick(link)}
@@ -62,22 +62,33 @@ const SidebarContainer = styled.div`
   width: 16rem;
   background-color: #242424;
   color: white;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 0 10px #82E300; /* Add shadow with #82E300 */
   padding: 1.5rem;
   border-top-right-radius: 1.5rem;
   border-bottom-right-radius: 1.5rem;
   position: relative;
 `;
 
+
+
 const CloseButton = styled.button`
   position: absolute;
   top: 1rem;
   right: 1rem;
   color: #b0b0b0;
+  border-radius: 50%; /* Makes it circular */
+  border: 2px solid #82E300; /* Green circular border */
+  background-color: transparent; /* Transparent background */
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Optional shadow */
+  transition: transform 0.2s ease;
   &:hover {
-    color: white;
+    transform: scale(1.1); /* Add hover effect */
   }
-  transition: color 0.3s;
+
+  &:active {
+    transform: scale(0.95); /* Add active effect */
+  }
 `;
 
 const LogoContainer = styled.div`
