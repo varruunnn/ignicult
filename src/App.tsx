@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LandingPage from './components/LandingPage/LandingPage';
 import Support from './components/Support/Support';
-import Footer from './components/Footer/Footer'; // Import the Footer component
+import Footer from './components/Footer/Footer';
 import RewardsPage from './components/RewardsPage/RewardsPage';
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
@@ -48,7 +48,7 @@ const App: React.FC = () => {
           <Route path="/activity" element={<Activity />} />
         </Routes>
       </div>
-      <Footer /> {/* Add the Footer component here */}
+      <Footer />
     </Router>
   );
 };
