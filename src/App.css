@@ -16,13 +16,13 @@ html, body {
     width: 100vw;
     height: 100vh;
     overflow: hidden;
-    z-index: -1; /* Place it behind the content */
+    z-index: 0; /* Place it behind the content */
 }
 
 .hex-container {
     position: absolute;
-    top: 20%;
-    left: 10%;
+    top: 0%;
+    left: 0%;
     display: flex;
     flex-direction: column;
     gap: -30px; /* Adjust overlap */
@@ -103,11 +103,11 @@ html, body {
 /* Main Content Area */
 /* .app-content {
     position: relative;
-    z-index: 1; /* Ensure content is above the background */
+    z-index: 1;
 
-
-/* .landing-page {
+}
+ .landing-page {
     padding: 20px;
     color: white;
     text-align: center;
-} */
+}  */

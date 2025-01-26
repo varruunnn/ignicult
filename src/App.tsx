@@ -12,37 +12,10 @@ const App: React.FC = () => {
   return (
     <Router>
       <Navbar /> 
-      <div className="app-background">
-        <div className="hex-container">
-          <div className="hex item">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
-          <div className="hex item">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
-          <div className="hex item">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
-        </div>
-      </div>
       <div className="app-content">
         <Routes>
           <Route path="/" element={<LandingPage />} />
+          <Route path="/home" element={<LandingPage />} />
           <Route path="/support" element={<Support />} />
           <Route path="/rewards" element={<RewardsPage />} />
           <Route path="/activity" element={<Activity />} />
