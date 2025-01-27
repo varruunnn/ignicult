@@ -1,5 +1,3 @@
-
-// import { ArrowDown, ArrowUp } from "lucide-react"
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
@@ -22,7 +20,7 @@ const Activity = () => {
     );
   };
   return (
-    <div className="bg-black min-h-screen  text-white">
+    <div className="bg-black min-h-screen py-50 text-white">
       <section>
         <div className="relative bg-[#1A1A1A] border ml-[31px] border-green-600 rounded-2xl p-4 w-[368px] h-[129px] shadow-lg flex items-center max-[391px]:w-[320px] justify-between">
           <div>

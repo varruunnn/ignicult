@@ -25,7 +25,7 @@ const Navbar = () => {
 
   return (
     <div className="max-[485px]:bg-black overflow-x-hidden text-white">
-      <header className="flex justify-between items-center px-6 py-4 bg-black h-[131px]">
+      <header className="fixed top-0 left-0 right-0 flex justify-between items-center px-6 py-4 bg-black h-[131px] z-50 shadow-md">
         <button
           onClick={toggleSidebar}
           className="cursor-pointer relative"
@@ -60,7 +60,11 @@ const Navbar = () => {
               <IoClose size={24} color="#82E300" />
             </button>
             <div className="content relative">
-             <input type="text" placeholder="Enter your email" className="w-[90%] h-[40px] absolute top-[1px] bg-[#C0FFC3] text-[#7A7A7A] p-1 rounded-md mb-4" />
+              <input
+                type="text"
+                placeholder="Enter your email"
+                className="w-[90%] h-[40px] absolute top-[1px] bg-[#C0FFC3] text-[#7A7A7A] p-1 rounded-md mb-4"
+              />
             </div>
           </div>
         </Popup>
@@ -69,7 +73,6 @@ const Navbar = () => {
   );
 };
 
-// Styled Popup
 const Popup = styled.div`
   position: fixed;
   top: 0;
