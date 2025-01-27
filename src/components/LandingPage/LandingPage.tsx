@@ -59,7 +59,7 @@ const LandingPage: React.FC = () => {
           <img
             src="/rocket.png"
             alt="rocket"
-            className="absolute max-w-full h-auto"
+            className="absolute max-[398px]:left-[55%] max-w-full h-auto"
             style={{
               top: "-3px",
               right: "110px",
@@ -122,12 +122,14 @@ const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      <section className="py-6 px-6 max-w-md mx-auto">
+      <section
+        className="py-6 px-6 max-w-md mx-auto mb-24" // Add bottom margin (mb-24)
+      >
         <h2 className="text-center text-3xl font-roboto text-[#82E300] font-bold mb-16">
-          Why choose ignicult ?
+          Why choose ignicult?
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-1 p-8 mt-[-40px] bg-black text-white">
-          <div className="flex items-center bg-[#363636]  p-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-1 p-8 bg-black text-white">
+          <div className="flex items-center bg-[#363636] p-6">
             <img src="/rockett.svg" alt="Fast" className="h-16 w-16 mr-4" />
             <div>
               <h3 className="text-[#82E300] text-[25px] font-bold font-[roboto]">
@@ -142,12 +144,11 @@ const LandingPage: React.FC = () => {
               >
                 and seamless
               </h3>
-
               <p className="text-sm">gaming experience with web3 integration</p>
             </div>
           </div>
 
-          <div className="flex items-center bg-[#363636]  p-6">
+          <div className="flex items-center bg-[#363636] p-6">
             <img
               src="/money.svg"
               alt="Earn Points"
@@ -158,7 +159,7 @@ const LandingPage: React.FC = () => {
                 Earn
               </h3>
               <h3
-                className="text-white text-[25px] mt-[-10px]  font-bold font-[GothiksRound]"
+                className="text-white text-[25px] mt-[-10px] font-bold font-[GothiksRound]"
                 style={{
                   textShadow: "2px 2px 4px rgba(0, 0, 0, 0.9)",
                   wordSpacing: "1px",
@@ -173,53 +174,50 @@ const LandingPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="flex items-center bg-[#363636]  p-6">
+          <div className="flex items-center bg-[#363636] p-6">
             <img src="/trust.svg" alt="Secure" className="h-16 w-16 mr-4" />
             <div>
               <h3 className="text-[#82E300] text-[25px] font-bold font-[roboto]">
                 Secure
               </h3>
               <h3
-                className="text-white text-[25px] mt-[-10px]  font-bold font-[GothiksRound]"
+                className="text-white text-[25px] mt-[-10px] font-bold font-[GothiksRound]"
                 style={{
                   textShadow: "2px 2px 4px rgba(0, 0, 0, 0.9)",
                   wordSpacing: "1px",
                 }}
               >
-              and transparent
+                and transparent
               </h3>
-
               <p className="text-sm">
                 transactions powered by blockchain technology
               </p>
             </div>
           </div>
 
-          <div className="flex items-center bg-[#363636]  p-6">
+          <div className="flex items-center bg-[#363636] p-6">
             <img src="/earth.svg" alt="Join" className="h-16 w-16 mr-4" />
             <div>
               <h3 className="text-[#82E300] text-[25px] font-bold font-[roboto]">
                 Join
               </h3>
               <h3
-                className="text-white text-[25px] mt-[-15px]  font-bold font-[GothiksRound]"
+                className="text-white text-[25px] mt-[-8px] font-bold font-[GothiksRound]"
                 style={{
                   textShadow: "2px 2px 4px rgba(0, 0, 0, 0.9)",
                 }}
               >
-                global   
+                global
               </h3>
               <h3
-                className="text-white text-[25px] mt-[-12px]  font-bold font-[GothiksRound]"
+                className="text-white text-[25px] mt-[-8px] font-bold font-[GothiksRound]"
                 style={{
                   textShadow: "2px 2px 4px rgba(0, 0, 0, 0.9)",
                 }}
               >
                 Community
               </h3>
-              <p className="text-sm">
-                 of gamers and blockchain enthusiasts
-              </p>
+              <p className="text-sm">of gamers and blockchain enthusiasts</p>
             </div>
           </div>
         </div>
