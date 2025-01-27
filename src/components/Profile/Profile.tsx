@@ -3,23 +3,23 @@ import React from "react";
 const ProfilePage: React.FC = () => {
   return (
     <div className="bg-black min-h-screen p-4 py-20 text-white overflow-hidden">
-      <h1 className="absolute text-3xl font-bold left-[39%] text-white top-[130px] z-49 max-[398px]:text-2xl max-[398px]:left-[39%] max-[398px]:top-[110px] max-[398px]:z-55">
+      <h1 className="absolute text-3xl font-bold left-[39%] text-white top-[130px] z-49 max-[398px]:text-2xl max-[398px]:left-[39%] max-[398px]:top-[80px] max-[398px]:z-11">
         Profile
       </h1>
-      <div className="border-4 border-[#92FF00] fixed h-[80vh] w-[110%] left-[-19px] top-[24%] rounded-[80px] p-4 max-[398px]:h-[70vh] max-[398px]:w-[105%] max-[398px]:top-[21%] max-[398px]:left-[-20px] max-[398px]:rounded-[40px]">
+      <div className="border-4 border-[#92FF00] fixed h-[80vh] w-[110%] left-[-19px] top-[24%] rounded-[80px] p-4 max-[398px]:h-[70vh] max-[398px]:w-[105%] max-[398px]:top-[25%] max-[398px]:left-[-14px] max-[398px]:rounded-[40px]">
         <div className="mt-20 absolute w-[90%] h-[50vh] rounded-[80px] p-4 max-[398px]:w-full max-[398px]:h-[45vh] max-[398px]:rounded-[40px]">
           <img
             src="/profilee.svg"
             alt="Profile"
-            className="w-16 h-16 absolute left-[43%] top-[-130px] rounded-full max-[398px]:w-12 max-[398px]:h-12 max-[398px]:top-[-100px] max-[398px]:left-[40%]"
+            className="w-16 h-16 absolute left-[43%] top-[-130px] rounded-full max-[398px]:w-12 max-[398px]:h-12 max-[398px]:top-[-120px] max-[398px]:z-11 max-[398px]:left-[40%]"
           />
-          <h1 className="text-lg absolute text-[#858585] left-[35%] top-[-60px] font-bold max-[398px]:text-base max-[398px]:top-[-50px] max-[398px]:left-[30%]">
+          <h1 className="text-lg absolute text-[#858585] left-[35%] top-[-60px] font-bold max-[398px]:text-base max-[398px]:top-[-70px] max-[398px]:left-[30%]">
             Wallet Address
           </h1>
-          <p className="text-sm absolute text-[#CACACA] left-[42%] top-[-30px] max-[398px]:text-xs max-[398px]:top-[-20px] max-[398px]:left-[35%]">
+          <p className="text-sm absolute text-[#CACACA] left-[42%] top-[-30px] max-[398px]:text-xs max-[398px]:top-[-50px] max-[398px]:left-[38%]">
             abcd12345
           </p>
-          <div className="flex items-center justify-between bg-[#92FF00]/10 border border-[#92FF00] rounded-lg p-4 mb-4 max-[398px]:p-2">
+          <div className="flex items-center max-[398px]:left-[-9px] max-[398px]:relative max-[398px]:top-[-30px] justify-between bg-[#92FF00]/10 border border-[#92FF00] rounded-lg p-4 mb-4 max-[398px]:p-2">
             <div>
               <h2 className="text-sm text-[#92FF00] max-[398px]:text-xs">
                 Total Points
@@ -33,7 +33,7 @@ const ProfilePage: React.FC = () => {
             </div>
           </div>
 
-          <div className="flex items-center justify-between bg-[#92FF00]/10 border border-[#92FF00] rounded-lg p-4 max-[398px]:p-2">
+          <div className="flex items-center max-[398px]:left-[-9px] justify-between max-[398px]:relative max-[398px]:top-[-30px] bg-[#92FF00]/10 border border-[#92FF00] rounded-lg p-4 max-[398px]:p-2">
             <div>
               <h2 className="text-sm text-[#92FF00] max-[398px]:text-xs">
                 Games Played
@@ -47,7 +47,7 @@ const ProfilePage: React.FC = () => {
             </div>
           </div>
 
-          <div className="mt-6 max-[398px]:mt-4">
+          <div className="mt-6 max-[398px]:left-[-9px] max-[398px]:relative max-[398px]:top-[-30px] max-[398px]:mt-4">
             <h2 className="text-sm text-[#92FF00] mb-2 max-[398px]:text-xs max-[398px]:mb-1">
               Tournaments Participated
             </h2>

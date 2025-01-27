@@ -20,9 +20,9 @@ const Activity = () => {
     );
   };
   return (
-    <div className="bg-black min-h-screen py-50 text-white">
+    <div className="bg-black min-h-screen py-50 w-full h-[100vh] text-white">
       <section>
-        <div className="relative bg-[#1A1A1A] border ml-[31px] border-green-600 rounded-2xl p-4 w-[368px] h-[129px] shadow-lg flex items-center max-[391px]:w-[320px] justify-between">
+        <div className="relative bg-[#1A1A1A]  border ml-[31px] border-green-600 rounded-2xl p-4 w-[368px] h-[129px] shadow-lg flex items-center max-[391px]:w-[320px] justify-between">
           <div>
             <h2 className="text-[#7FFF00] text-2xl font-bold mb-2"> {games[currentIndex].name}</h2>
             <p className="text-[#FFD700] text-xl font-mono">Score</p>

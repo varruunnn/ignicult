@@ -105,7 +105,7 @@ const Leaderboard: React.FC = () => {
           Leaderboard
         </h3>
         <select
-          className="bg-[#1e1e1e] text-[#92FF00] border-2 border-[#92FF00] p-2 rounded-[100px] w-[270px] absolute left-[18%] top-[50px]"
+          className="bg-[#1e1e1e] max-[398px]:left-[15%] text-[#92FF00] border-2 border-[#92FF00] p-2 rounded-[100px] w-[270px] absolute left-[18%] top-[50px]"
           value={selectedGame}
           onChange={(e) => setSelectedGame(e.target.value as GameName)}
         >
@@ -117,7 +117,7 @@ const Leaderboard: React.FC = () => {
         </select>
       </div>
       <div className="bg-black w-[103%] relative left-[-10px] h-[63vh] rounded-[30px] border-3 border-[#92FF00]">
-        <div className="flex gap-[30px] p-[20px] items-center mb-4">
+        <div className="flex gap-[30px] p-[20px] items-center max-[398px]:gap-[20px]  mb-4">
           {["Daily", "Weekly", "Monthly", "Overall"].map((period) => (
             <a
               key={period}
@@ -173,7 +173,7 @@ const Leaderboard: React.FC = () => {
                   {postion1.score}
                 </div>
                 <div className="relative">
-                  <img src="/trophy1.svg" alt="Crown" className="w-11 absolute left-[23px] top-[90px] h-11" /> 
+                  <img src="/trophy1.svg" alt="Crown" className="w-11 max-[398px]:top-[60px] absolute left-[23px] top-[90px] h-11" /> 
                 </div>
               </div>
             </div>
