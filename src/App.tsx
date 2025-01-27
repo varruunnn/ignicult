@@ -6,7 +6,6 @@ import Footer from "./components/Footer/Footer";
 import RewardsPage from "./components/RewardsPage/RewardsPage";
 import Navbar from "./components/Navbar/Navbar";
 import Activity from "./components/Activity/Activity";
-import "./App.css";
 import Profile from "./components/Profile/Profile";
 import Leaderboard from "./components/Leaderboard/Leaderboard";
 

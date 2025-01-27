@@ -136,7 +136,7 @@ const LandingPage: React.FC = () => {
                 Fast
               </h3>
               <h3
-                className="text-white text-[25px] mt-[-10px] font-bold font-[GothiksRound]"
+                className="text-white text-[25px] mt-[-10px] tracking-tighter font-bold font-[GothiksRound]"
                 style={{
                   textShadow: "2px 2px 4px rgba(0, 0, 0, 0.9)",
                   wordSpacing: "1px",
