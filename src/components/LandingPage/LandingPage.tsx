@@ -97,6 +97,40 @@ const GlowingSVG = styled.img`
         <h2 className="text-center text-3xl font-roboto text-[#82E300] font-bold mb-16">
           Why choose ignicult ? 
         </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-8 bg-black text-white">
+          <div className="flex items-center bg-gray-800 rounded-lg p-6">
+            <img src="/path/to/your/svg1.svg" alt="Fast" className="h-16 w-16 mr-4" />
+            <div>
+              <h3 className="text-green-500 text-lg font-bold">Fast</h3>
+              <p className="text-sm">and seamless gaming experience with web3 integration</p>
+            </div>
+          </div>
+
+          <div className="flex items-center bg-gray-800 rounded-lg p-6">
+            <img src="/path/to/your/svg2.svg" alt="Earn Points" className="h-16 w-16 mr-4" />
+            <div>
+              <h3 className="text-green-500 text-lg font-bold">Earn points</h3>
+              <p className="text-sm">for real-world rewards and use cultix to unlock on-chain benefits and ownership</p>
+            </div>
+          </div>
+
+          <div className="flex items-center bg-gray-800 rounded-lg p-6">
+            <img src="/path/to/your/svg3.svg" alt="Secure" className="h-16 w-16 mr-4" />
+            <div>
+              <h3 className="text-green-500 text-lg font-bold">Secure and transparent</h3>
+              <p className="text-sm">transactions powered by blockchain technology</p>
+            </div>
+          </div>
+
+          <div className="flex items-center bg-gray-800 rounded-lg p-6">
+            <img src="/path/to/your/svg4.svg" alt="Join" className="h-16 w-16 mr-4" />
+            <div>
+              <h3 className="text-green-500 text-lg font-bold">Join</h3>
+              <p className="text-sm">global community of gamers and blockchain enthusiasts</p>
+            </div>
+          </div>
+        </div>
+
       </section>
 
       <footer className="fixed bottom-0 w-full h-[75px] bg-[#363636] text-white flex justify-around items-center">
