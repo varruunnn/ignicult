@@ -2,59 +2,75 @@ import React from "react";
 
 const ProfilePage: React.FC = () => {
   return (
-    <div className="bg-black min-h-screen p-4 text-white">
-              <div className="flex flex-col absolute left-[33%] top-[-10px] items-center">
-        <div className="bg-green-500 rounded-full p-2 mb-2">
+    <div className="bg-black min-h-screen p-4 py-20 text-white overflow-hidden">
+      <h1 className="absolute text-3xl font-bold left-[39%] text-white top-[130px] z-49 max-[398px]:text-2xl max-[398px]:left-[39%] max-[398px]:top-[110px] max-[398px]:z-55">
+        Profile
+      </h1>
+      <div className="border-4 border-[#92FF00] fixed h-[80vh] w-[110%] left-[-19px] top-[24%] rounded-[80px] p-4 max-[398px]:h-[70vh] max-[398px]:w-[105%] max-[398px]:top-[21%] max-[398px]:left-[-20px] max-[398px]:rounded-[40px]">
+        <div className="mt-20 absolute w-[90%] h-[50vh] rounded-[80px] p-4 max-[398px]:w-full max-[398px]:h-[45vh] max-[398px]:rounded-[40px]">
           <img
             src="/profilee.svg"
             alt="Profile"
-            className="w-16 h-16 rounded-full"
+            className="w-16 h-16 absolute left-[43%] top-[-130px] rounded-full max-[398px]:w-12 max-[398px]:h-12 max-[398px]:top-[-100px] max-[398px]:left-[40%]"
           />
-        </div>
-        <h1 className="text-lg font-bold">Wallet Address</h1>
-        <p className="text-sm">abcd12345</p>
-      </div>
-      <div className="mt-2 border-4 border-red-400 relative h-[1px] w-[100%] rounded-[80px] p-4">
-        <div className="mt-44 absolute w-[90%] h-[90%] rounded-[80px] p-4">
-            <div className="flex items-center justify-between bg-green-500/10 border border-green-500 rounded-lg p-4 mb-4">
+          <h1 className="text-lg absolute text-[#858585] left-[35%] top-[-60px] font-bold max-[398px]:text-base max-[398px]:top-[-50px] max-[398px]:left-[30%]">
+            Wallet Address
+          </h1>
+          <p className="text-sm absolute text-[#CACACA] left-[42%] top-[-30px] max-[398px]:text-xs max-[398px]:top-[-20px] max-[398px]:left-[35%]">
+            abcd12345
+          </p>
+          <div className="flex items-center justify-between bg-[#92FF00]/10 border border-[#92FF00] rounded-lg p-4 mb-4 max-[398px]:p-2">
             <div>
-                <h2 className="text-sm text-green-500">Total Points</h2>
-                <p className="text-xl font-bold">000</p>
+              <h2 className="text-sm text-[#92FF00] max-[398px]:text-xs">
+                Total Points
+              </h2>
+              <p className="text-xl font-bold max-[398px]:text-base">000</p>
             </div>
-            <div className="bg-[#FED33C] p-2 rounded-full">
-                <span className="text-black">💯</span>
+            <div className="bg-[#FED33C] p-2 rounded-full max-[398px]:p-1">
+              <span className="text-black">
+                <img src="/100.svg" alt="" />
+              </span>
             </div>
+          </div>
+
+          <div className="flex items-center justify-between bg-[#92FF00]/10 border border-[#92FF00] rounded-lg p-4 max-[398px]:p-2">
+            <div>
+              <h2 className="text-sm text-[#92FF00] max-[398px]:text-xs">
+                Games Played
+              </h2>
+              <p className="text-xl font-bold max-[398px]:text-base">000</p>
+            </div>
+            <div className="bg-[#FED33C] p-1 rounded-full max-[398px]:p-0.5">
+              <span className="text-black">
+                <img src="/gc.svg" alt="" />
+              </span>
+            </div>
+          </div>
+
+          <div className="mt-6 max-[398px]:mt-4">
+            <h2 className="text-sm text-[#92FF00] mb-2 max-[398px]:text-xs max-[398px]:mb-1">
+              Tournaments Participated
+            </h2>
+            <div className="bg-[#92FF00]/10 border border-[#92FF00] rounded-lg p-4 mb-4 max-[398px]:p-2 max-[398px]:mb-2">
+              <p className="text-xl font-bold max-[398px]:text-base">000</p>
             </div>
 
-            <div className="flex items-center justify-between bg-green-500/10 border border-green-500 rounded-lg p-4">
-            <div>
-                <h2 className="text-sm text-green-500">Games Played</h2>
-                <p className="text-xl font-bold">000</p>
-            </div>
-            <div className="bg-[#FED33C] p-2 rounded-full">
-                <span className="text-black">🎮</span>
-            </div>
-            </div>
-            <div className="mt-6">
-            <h2 className="text-sm text-green-500 mb-2">Tournaments Participated</h2>
-            <div className="bg-green-500/10 border border-green-500 rounded-lg p-4 mb-4">
-            <p className="text-xl font-bold">000</p>
-            </div>
-
-            <h2 className="text-sm text-green-500 mb-2">Tournaments</h2>
-            <div className="bg-green-500/10 border border-green-500 rounded-lg p-4">
-            <select
-                className="w-full bg-black text-white border border-green-500 rounded-lg p-2"
-            >
+            <h2 className="text-sm text-[#92FF00] mb-2 max-[398px]:text-xs max-[398px]:mb-1">
+              Tournaments
+            </h2>
+            <div className="bg-[#353535] border border-[#92FF00] rounded-lg p-4 max-[398px]:p-2">
+              <select className="w-full bg-[353535] text-white border border-[#92FF00] rounded-[100px] p-2 max-[398px]:p-1">
                 <option>Cricket Catch Pro</option>
                 <option>Soccer Stars</option>
-            </select>
-            <div className="mt-4">
-                <h3 className="text-sm text-green-500">Highest Score</h3>
-                <p className="text-xl font-bold">00000</p>
+              </select>
+              <div className="mt-4 max-[398px]:mt-2">
+                <h3 className="text-sm text-[#92FF00] max-[398px]:text-xs">
+                  Highest Score
+                </h3>
+                <p className="text-xl font-bold max-[398px]:text-base">00000</p>
+              </div>
             </div>
-            </div>
-        </div>
+          </div>
         </div>
       </div>
     </div>
