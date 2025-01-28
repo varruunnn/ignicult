@@ -10,6 +10,7 @@ import Profile from "./components/Profile/Profile";
 import Leaderboard from "./components/Leaderboard/Leaderboard";
 import Games from "./components/Games/Games";
 import Tournaments from "./components/Tournaments/Tournaments";
+import Pt from "./components/Pt/Pt";
 
 const App: React.FC = () => {
   return (
@@ -26,6 +27,7 @@ const App: React.FC = () => {
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/games" element={<Games />} />
           <Route path="/tournament" element={<Tournaments />} />
+          <Route path="/premium-tournaments" element={<Pt />} />
         </Routes>
       </div>
       <Footer />
