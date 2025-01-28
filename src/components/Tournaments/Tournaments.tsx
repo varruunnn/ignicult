@@ -1,6 +1,4 @@
 import React, { useState } from "react"; 
-
-// Mock data for monthly tournaments
 const mockTournamentData = {
   "Cricket Catch Pro": [
     { rank: 1, wallet: "a1b2c3...908e", score: 10000 },
