@@ -2,11 +2,13 @@
   "compilerOptions": {
     "target": "ESNext",
     "module": "ESNext",
-    "jsx": "react-jsx",
+    "jsx": "react-jsx", // or "react" if you're not using React 17+ with the new JSX transform
+    "jsxImportSource": "react", // Required for React 17+ with the new JSX transform
     "strict": true,
+    "moduleResolution": "node",
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["src/**/*"]
+  "include": ["src"]
 }
