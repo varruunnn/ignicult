@@ -73,7 +73,7 @@ const Navbar = () => {
           wallets={wallets}
           connectModal={{ size: "compact" }}
           theme={darkTheme({
-            colors: { primaryButtonBg: "hsl(125, 96%, 47%)" },
+            colors: { primaryButtonBg: "hsla(143 100% 43% / 0.85)" },
           })}
           connectButton={{ label: "Lets Dive in" }}
           appMetadata={{
