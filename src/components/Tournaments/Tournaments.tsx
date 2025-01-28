@@ -1,5 +1,16 @@
-import React, { useState } from "react"; 
-const mockTournamentData = {
+import React, { useState } from "react";
+
+type Player = {
+  rank: number;
+  wallet: string;
+  score: number;
+};
+
+type TournamentData = {
+  [key: string]: Player[];
+};
+
+const mockTournamentData: TournamentData = {
   "Cricket Catch Pro": [
     { rank: 1, wallet: "a1b2c3...908e", score: 10000 },
     { rank: 2, wallet: "d4e5f6...123a", score: 9500 },
@@ -27,10 +38,10 @@ const mockTournamentData = {
 };
 
 export default function Tournaments() {
-  const [selectedGame, setSelectedGame] = useState("Cricket Catch Pro");
+  const [selectedGame, setSelectedGame] = useState<keyof typeof mockTournamentData>("Cricket Catch Pro");
 
   const handleGameChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedGame(event.target.value);
+    setSelectedGame(event.target.value as keyof typeof mockTournamentData);
   };
 
   return (
@@ -59,7 +70,7 @@ export default function Tournaments() {
           January 2025
         </h2>
         <div className="w-full max-h-[60vh] max-[399px]:mb-[40px] bg-[#3E3E3E] rounded-[20px] overflow-y-auto">
-          <table className="w-full text-left  text-sm text-gray-400 border-collapse border border-gray-600">
+          <table className="w-full text-left text-sm text-gray-400 border-collapse border border-gray-600">
             <thead>
               <tr className="text-[#82E300]">
                 <th className="py-2 px-4 border border-gray-600">Rank</th>
@@ -69,10 +80,7 @@ export default function Tournaments() {
             </thead>
             <tbody>
               {mockTournamentData[selectedGame].map((player) => (
-                <tr
-                  key={player.rank}
-                  className="hover:bg-gray-800 transition-colors"
-                >
+                <tr key={player.rank} className="hover:bg-gray-800 transition-colors">
                   <td className="py-2 px-4 border border-gray-600">{player.rank}</td>
                   <td className="py-2 px-4 border border-gray-600">{player.wallet}</td>
                   <td className="py-2 px-4 border border-gray-600">{player.score}</td>
