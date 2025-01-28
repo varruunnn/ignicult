@@ -223,7 +223,7 @@ const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      <footer className="fixed bottom-0 w-full h-[75px] bg-[#363636] text-white flex justify-around items-center">
+      {/* <footer className="fixed bottom-0 w-full h-[75px] bg-[#363636] text-white flex justify-around items-center">
         <div className="relative flex w-full h-[75px] flex-col items-center justify-center space-y-6">
           <img
             src="footer.svg"
@@ -277,7 +277,7 @@ const LandingPage: React.FC = () => {
             </span>
           </button>
         </div>
-      </footer>
+      </footer> */}
     </div>
   );
 };

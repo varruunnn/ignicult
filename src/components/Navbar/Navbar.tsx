@@ -1,9 +1,33 @@
 import Sidebar from "../Sidebar/Sidebar";
 import { useState } from "react";
+import { inAppWallet, createWallet } from "thirdweb/wallets";
+import { darkTheme } from "thirdweb/react";
+import { ConnectButton } from "thirdweb/react";
 import { IoMenu, IoClose } from "react-icons/io5";
 import styled from "styled-components";
-
+import { client } from "../../client";
 const Navbar = () => {
+  const wallets = [
+    inAppWallet({
+      auth: {
+        options: [
+          "google",
+          "discord",
+          "telegram",
+          "farcaster",
+          "email",
+          "x",
+          "passkey",
+          "phone",
+        ],
+      },
+    }),
+    createWallet("io.metamask"),
+    createWallet("com.coinbase.wallet"),
+    createWallet("me.rainbow"),
+    createWallet("io.rabby"),
+    createWallet("io.zerion.wallet"),
+  ];
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const [isPopupVisible, setPopupVisible] = useState(false);
 
@@ -33,7 +57,7 @@ const Navbar = () => {
         >
           <IoMenu size={37} className="text-white" />
         </button>
-        <button
+        {/* <button
           className="w-[120px] h-[41px] bg-[#282828] text-[#82E300] rounded-full hover:bg-[#3a3a3a] transition font-roboto font-semibold"
           style={{
             border: "2px solid #82E300",
@@ -43,7 +67,20 @@ const Navbar = () => {
           onClick={handleSignup}
         >
           Let's Dive In
-        </button>
+        </button> */}
+        <ConnectButton
+          client={client}
+          wallets={wallets}
+          connectModal={{ size: "compact" }}
+          theme={darkTheme({
+            colors: { primaryButtonBg: "hsl(125, 96%, 47%)" },
+          })}
+          connectButton={{ label: "Lets Dive in" }}
+          appMetadata={{
+            name: "Example app",
+            url: "https://example.com",
+          }}
+        />
       </header>
       <div
         className={`fixed top-0 left-0 h-full z-50 transition-transform duration-300 ease-in-out ${
@@ -55,7 +92,9 @@ const Navbar = () => {
       {isPopupVisible && (
         <Popup>
           <div className="popup-content relative h-[300px]">
-            <h1 className="text-[#FED33C] text-xl absolute left-[35%] top-1 font-bold mb-4">Let's Dive In</h1>
+            <h1 className="text-[#FED33C] text-xl absolute left-[35%] top-1 font-bold mb-4">
+              Let's Dive In
+            </h1>
             <button className="close-button" onClick={handleClosePopup}>
               <IoClose size={24} color="#82E300" />
             </button>

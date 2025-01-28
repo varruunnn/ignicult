@@ -1,50 +1,64 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![tw-banner](https://github.com/thirdweb-example/vite-starter/assets/57885104/cfe2164b-b50b-4d8e-aaaa-31331da2d647)
 
-Currently, two official plugins are available:
+# vite-starter
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Starter template to build onchain applications with [thirdweb](https://thirdweb.com) and [vite](https://vitejs.dev/). 
 
-## Expanding the ESLint configuration
+## Features 
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- thirdweb & vite pre-installed and configured to reduce setup steps
+- ConnectButton to onboard users to your application
 
-- Configure the top-level `parserOptions` property like this:
+## Installation
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+Install the template using [thirdweb create](https://portal.thirdweb.com/cli/create)
+
+```bash
+  npx thirdweb create app --vite
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Environment Variables
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+To run this project, you will need to add the following environment variables to your .env file:
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+`CLIENT_ID`
+
+To learn how to create a client ID, refer to the [client documentation](https://portal.thirdweb.com/typescript/v5/client). 
+
+## Run locally
+
+Install dependencies
+
+```bash
+yarn
 ```
+
+Start development server
+
+```bash
+yarn dev
+```
+
+Create a production build
+
+```bash
+yarn build
+```
+
+Preview the production build
+
+```bash
+yarn preview
+```
+
+## Additional Resources
+
+- [Documentation](https://portal.thirdweb.com/typescript/v5)
+- [Templates](https://thirdweb.com/templates)
+- [YouTube](https://www.youtube.com/c/thirdweb)
+- [Blog](https://blog.thirdweb.com)
+
+## Need help?
+
+For help or feedback, please [visit our support site](https://thirdweb.com/support)

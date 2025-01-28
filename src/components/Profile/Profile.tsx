@@ -59,7 +59,7 @@ const ProfilePage: React.FC = () => {
               Tournaments
             </h2>
             <div className="bg-[#353535] border border-[#92FF00] rounded-lg p-4 max-[398px]:p-2">
-              <select className="w-full bg-[353535] text-white border border-[#92FF00] rounded-[100px] p-2 max-[398px]:p-1">
+              <select className="w-full bg-[#353535] text-white border border-[#92FF00] rounded-[100px] p-2 max-[398px]:p-1">
                 <option>Cricket Catch Pro</option>
                 <option>Soccer Stars</option>
               </select>

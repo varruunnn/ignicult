@@ -19,9 +19,9 @@ const PremiumTournaments = () => {
       <h2 className="text-white text-lg font-semibold mb-3">
         Premium Tournaments
       </h2>
-      <div className="flex items-center border-3 border-[#F94EA6] mt-5 bg-black px-3 py-2 rounded-full w-full">
+      <div className="flex items-center border-2 border-[#F94EA6] mt-5 bg-black px-3 py-2 rounded-full w-full">
         <select
-          className="flex-grow appearance-none bg-transparent text-[#F94EA6]  outline-none p-2 rounded-md"
+          className="flex-grow appearance-none bg-transparent text-[#F94EA6] outline-none p-2 rounded-md"
           defaultValue="Cricket Catch Pro"
         >
           <option value="Cricket Catch Pro">Cricket Catch Pro</option>
@@ -45,32 +45,39 @@ const PremiumTournaments = () => {
           </svg>
         </button>
       </div>
-      <div className="relative border-2 max-[399px]:h-[120vh] border-[#F94EA6] mt-7 h-[80vh] bg-black p-4 rounded-[30px] w-[109%]">
+
+      <div className="relative border-2 border-[#F94EA6] mt-7 h-[80vh] bg-black p-4 rounded-[30px] w-[109%]">
         <h1 className="text-[#F94EA6] absolute left-[33%] font-bold font-[roboto] text-2xl">
           January 2025
         </h1>
 
-        <div className="flex max-[399px]:gap-5 justify-center mt-20 items-end gap-8 mb-8">
+        <div className="flex max-[399px]:gap-5  justify-center mt-20 items-end gap-8 mb-8">
           <div className="flex flex-col w-[100px]  h-[100px] items-center p-4  rounded-[80px] border-2 border-[#F94EA6] ">
             <div className="text-xl text-white font-bold">2</div>
             <div className="text-sm text-gray-300">{players[1].wallet}</div>
-            <div className="text-lg text-[#FEA50D] font-semibold">{players[1].score}</div>
+            <div className="text-lg text-[#FEA50D] font-semibold">
+              {players[1].score}
+            </div>
           </div>
 
           <div className="flex flex-col items-center w-[110px] h-[110px] p-5 rounded-full  border-2 border-[#F94EA6]   relative scale-125">
             <div className="absolute -top-6 text-4xl">👑</div>
             <div className="text-2xl text-white font-bold">1</div>
             <div className="text-sm text-gray-300">{players[0].wallet}</div>
-            <div className="text-xl text-[#FEA50D] font-semibold">{players[0].score}</div>
+            <div className="text-xl text-[#FEA50D] font-semibold">
+              {players[0].score}
+            </div>
           </div>
 
           <div className="flex flex-col w-[100px]  h-[100px] items-center p-4  rounded-[80px] border-2 border-[#F94EA6] ">
             <div className="text-xl font-bold text-white">3</div>
             <div className="text-sm text-gray-300">{players[2].wallet}</div>
-            <div className="text-lg text-[#FEA50D]  font-semibold">{players[2].score}</div>
+            <div className="text-lg text-[#FEA50D]  font-semibold">
+              {players[2].score}
+            </div>
           </div>
         </div>
-        <div className="border border-[#565656] bg-[#3E3E3E] ml-[8px] rounded-[30px] h-[80%] w-[96%]  overflow-hidden">
+        <div className="border border-[#565656] max-[399px]:mb-[20px] max-[399px]:h-[70%] bg-[#3E3E3E] ml-[8px] rounded-[30px] h-[80%] w-[96%]  overflow-hidden">
           <div className="grid grid-cols-3 bg-[#3E3E3E]  text-[#EE49FD] rounded-2xl font-bold text-center py-5">
             <span>Rank</span>
             <span>Wallet Address</span>
