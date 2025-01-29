@@ -179,7 +179,11 @@ const Particle: React.FC = () => {
                       }
                     },
                     "number": {
-                      "density": {}
+                      "density": {
+                        "enable": true,
+                        "width": 800,
+                        "height": 800
+                      },
                     },
                     "opacity": {
                       "animation": {},
@@ -447,8 +451,8 @@ const Particle: React.FC = () => {
               "number": {
                 "density": {
                   "enable": true,
-                  "width": 1920,
-                  "height": 1080
+                  "width": 1000,
+                  "height": 900
                 },
                 "limit": {
                   "mode": "delete",
