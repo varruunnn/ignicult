@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import Particle from "../Background/Particle";
 type Player = {
   rank: number;
   wallet: string;
@@ -65,7 +65,8 @@ export default function Tournaments() {
           </button>
         </div>
       </div>
-      <div className="bg-black w-[109%] left-[-6px] h-[100vh] absolute mt-10 border-4 border-[#82E300] p-4 rounded-[50px] shadow-xl">
+      <div className="w-[109%] left-[-6px] h-[100vh] absolute mt-10 border-4 border-[#82E300] p-4 rounded-[50px] shadow-xl">
+              <Particle />
         <h2 className="text-center text-3xl text-[#82E300] font-extrabold mb-4 text-shadow-glow">
           January 2025
         </h2>

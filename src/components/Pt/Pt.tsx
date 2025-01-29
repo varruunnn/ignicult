@@ -1,4 +1,5 @@
 import React from "react";
+import Particle from "../Background/Particle";
 interface Player {
   rank: number;
   wallet: string;
@@ -46,7 +47,8 @@ const PremiumTournaments = () => {
         </button>
       </div>
 
-      <div className="relative border-2 border-[#F94EA6] mt-7 h-[80vh] bg-black p-4 rounded-[30px] w-[109%]">
+      <div className="relative border-2 border-[#F94EA6] mt-7 h-[80vh] p-4 rounded-[30px] w-[109%]">
+              <Particle />
         <h1 className="text-[#F94EA6] absolute left-[33%] font-bold font-[roboto] text-2xl">
           January 2025
         </h1>

@@ -11,10 +11,13 @@ import Games from "./components/Games/Games";
 import Tournaments from "./components/Tournaments/Tournaments";
 import Pt from "./components/Pt/Pt";
 import ErrorPage from "./components/ErrorPage/ErrorPage";
+import Particles from "@tsparticles/react";
+import Particle from "./components/Background/Particle";
 
 export function App() {
   return (
     <Router>
+	  <Particle />
       <Navbar />
       <div className="app-content mt-20">
         <Routes>

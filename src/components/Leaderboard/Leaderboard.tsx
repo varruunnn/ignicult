@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import Particle from "../Background/Particle";
 const Leaderboard: React.FC = () => {
   type GameName = "Cricket Catch Pro" | "Soccer Stars" | "Basketball Blitz";
   const mockData: Record<
@@ -96,8 +96,9 @@ const Leaderboard: React.FC = () => {
   const postion3 = mockData[selectedGame][timeframe][2];
 
   return (
-    <div className="relative min-h-screen w-full bg-black py-[80px] overflow-x-hidden text-white">
-      <div className="relative w-full h-[15vh] bg-black">
+    <div className="relative min-h-screen w-full  py-[80px] overflow-x-hidden text-white">
+      <Particle />
+      <div className="relative w-full h-[15vh]">
         <h3 className="text-white text-2xl font-semibold absolute left-[32%]">
           Leaderboard
         </h3>
@@ -113,7 +114,8 @@ const Leaderboard: React.FC = () => {
           ))}
         </select>
       </div>
-      <div className="bg-black w-[103%] relative left-[-10px] h-[63vh] rounded-[30px] border-3 border-[#92FF00]">
+      <div className=" w-[103%] relative left-[-10px] h-[63vh] rounded-[30px] border-3 border-[#92FF00]">
+              <Particle />
         <div className="flex gap-[30px] p-[20px] items-center max-[398px]:gap-[20px]  mb-4">
           {["Daily", "Weekly", "Monthly", "Overall"].map((period) => (
             <a

@@ -1,4 +1,5 @@
 import React from "react";
+import Particle from "../Background/Particle";
 const games = [
   { id: 1, svg: "/game0.svg" },
   { id: 2, svg: "/game2.svg" },
@@ -17,10 +18,11 @@ export default function GamingSection() {
   };
 
   return (
-    <div className="px-6 mt-30 py-[90px] font-[roboto] w-full h-[100vh] bg-black text-white overflow-y-auto relative">
-<h1 className="text-5xl font-extrabold text-center text-[#82E300] mb-10 shadow-lg shadow-[#82E300]/50 tracking-wide transition-all duration-300 ease-in-out transform hover:scale-105 hover:text-[#66b300]">
-  Games
-</h1>
+    <div className="px-6 mt-30 py-[90px] font-[roboto] w-full h-[100vh] text-white overflow-y-auto relative">
+      <Particle />
+      <h1 className="text-5xl font-extrabold text-center text-[#82E300] mb-10 shadow-lg shadow-[#82E300]/50 tracking-wide transition-all duration-300 ease-in-out transform hover:scale-105 hover:text-[#66b300]">
+        Games
+      </h1>
 
       <div className="grid absolute max-[399px]:left-[9%] left-[14%] grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 pb-16">
         {games.map((game) => (
@@ -40,4 +42,3 @@ export default function GamingSection() {
     </div>
   );
 }
-

@@ -25,10 +25,10 @@ const LandingPage: React.FC = () => {
     alert("I am Glowing dv");
   };
   return (
-    <div className="max-[485px]:bg-black overflow-x-hidden text-white min-h-screen">
+    <div className=" overflow-x-hidden text-white min-h-screen">
       <section className="text-center py-[100px] bg-gradient-to-r from-black-800 to-black-600 max-w-md mx-auto">
         <div
-          className="mt-4 bg-black text-white p-4 shadow-lg relative"
+          className="mt-4  text-white p-4 shadow-lg relative"
           style={{ maxWidth: "100%", height: "auto" }}
         >
           <GlowingSVG
@@ -128,7 +128,7 @@ const LandingPage: React.FC = () => {
         <h2 className="text-center text-3xl font-roboto text-[#82E300] font-bold mb-16">
           Why choose ignicult?
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-1 p-8 bg-black text-white">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-1 p-8  text-white">
           <div className="flex items-center bg-[#363636] p-6">
             <img src="/rockett.svg" alt="Fast" className="h-16 w-16 mr-4" />
             <div>
