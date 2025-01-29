@@ -47,7 +47,7 @@ export default function Tournaments() {
   return (
     <div className="p-4 mt-0 w-full min-h-[100vh] bg-black text-white">
       <div className="text-center mt-20 max-[399px]:mt-[70px] ">
-        <h1 className="text-2xl font-bold text-[#82E300] text-shadow-glow">Monthly Tournaments</h1>
+        <h1 className="text-2xl relative font-bold text-[#82E300] text-shadow-glow">Monthly Tournaments</h1>
         <div className="mt-4 flex justify-center items-center">
           <select
             className="px-4 py-2 rounded-[50px] bg-gray-800 text-white border border-[#82E300] focus:outline-none hover:border-[#6ac100] transition-all"

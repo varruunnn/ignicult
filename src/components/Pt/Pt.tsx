@@ -16,13 +16,13 @@ const PremiumTournaments = () => {
     { rank: 7, wallet: "d0af8c...908e", score: 6038 },
   ];
   return (
-    <div className="flex flex-col mt-[120px] items-center overflow-x-hidden p-4 rounded-lg bg-black  w-[full] h-[100vh]">
-      <h2 className="text-white text-lg font-semibold mb-3">
+    <div className="flex flex-col mt-[200px] items-center overflow-x-hidden p-4 rounded-lg bg-black  w-[full] h-[100vh]">
+      <h2 className="text-white absolute text-lg z-10 font-semibold mt-[-26px]">
         Premium Tournaments
       </h2>
-      <div className="flex items-center border-2 border-[#F94EA6] mt-5 bg-black px-3 py-2 rounded-full w-full">
+      <div className="flex items-center border-2 relative border-[#F94EA6] mt-5 bg-black px-3 py-2 rounded-full w-full">
         <select
-          className="flex-grow appearance-none bg-transparent text-[#F94EA6] outline-none p-2 rounded-md"
+          className="flex-grow appearance-none  bg-transparent text-[#F94EA6] outline-none p-2 rounded-md"
           defaultValue="Cricket Catch Pro"
         >
           <option value="Cricket Catch Pro">Cricket Catch Pro</option>

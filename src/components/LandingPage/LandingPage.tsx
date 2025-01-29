@@ -69,7 +69,7 @@ const LandingPage: React.FC = () => {
           />
         </div>
       </section>
-      <section className="mt-[-100px px-6 max-w-md mx-auto">
+      <section className="mt-[-100px] relative px-6 max-w-md mx-auto">
         <h2 className="text-center text-3xl font-roboto text-[#82E300] font-bold mb-16">
           Welcome to Ignicult
         </h2>
@@ -123,9 +123,9 @@ const LandingPage: React.FC = () => {
       </section>
 
       <section
-        className="py-6 px-6 max-w-md mx-auto mb-24" // Add bottom margin (mb-24)
+        className="py-6 px-6 relative  max-w-md mx-auto mb-24" // Add bottom margin (mb-24)
       >
-        <h2 className="text-center text-3xl font-roboto text-[#82E300] font-bold mb-16">
+        <h2 className="text-center text-3xl font-roboto text-[#82E300] font-bold mb-1">
           Why choose ignicult?
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-1 p-8  text-white">

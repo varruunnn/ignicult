@@ -43,7 +43,7 @@ const Activity = () => {
         </div>
       </section>
       <section>
-        <div className="flex items-center  w-[90%] ml-[20px] max-[391px]:ml-[25px] justify-center mt-[50px] bg-black border border-gray-500 rounded-full px-6 py-3">
+        <div className="flex items-center relative w-[90%] ml-[20px] max-[391px]:ml-[25px] justify-center mt-[50px] bg-black border border-gray-500 rounded-full px-6 py-3">
           <button
             onClick={handlePrev}
             className="p-2 text-[#7FFF00] hover:text-green-500"
