@@ -14,7 +14,7 @@ const Footer = () => {
         onClick={handleClick}
       />
       <button onClick={()=>{navigate("/home")}} 
-        className="flex flex-col  left-[40px] top-[1px] absolute items-center cursor-pointer text-green-500">
+        className="flex flex-col  max-[399px]:left-[25px] left-[40px] top-[1px] absolute items-center cursor-pointer text-green-500">
         <img
           src="/home.svg"
           alt="Home Icon"
@@ -40,7 +40,7 @@ const Footer = () => {
       >
         Play Now
       </span>
-      <button className="flex flex-col right-[40px] top-[10px] absolute items-center cursor-pointer text-green-500"
+      <button className="flex flex-col right-[40px] top-[10px] absolute items-center cursor-pointer  max-[399px]:right-[25px] text-green-500"
       onClick={()=>{navigate("/profile")}} 
       >
         <img
