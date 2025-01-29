@@ -2,13 +2,12 @@ import Sidebar from "../Sidebar/Sidebar";
 import { useState } from "react";
 import { inAppWallet, createWallet } from "thirdweb/wallets";
 import { darkTheme } from "thirdweb/react";
-import { lightTheme } from "thirdweb/react";
 import { ConnectButton } from "thirdweb/react";
 import { IoMenu, IoClose } from "react-icons/io5";
 import styled from "styled-components";
 import { client } from "../../client";
 const Navbar = () => {
-  const customTheme = lightTheme({
+  const customTheme = darkTheme({
     colors: {
       selectedTextColor: "hsl(228, 78%, 48%)",
       secondaryIconColor: "hsl(0, 0%, 14%)",
@@ -17,8 +16,9 @@ const Navbar = () => {
       borderColor: "hsl(86, 100%, 50%)",
       accentText: "hsl(86, 100%, 50%)",
       separatorLine: "hsl(86, 100%, 50%)",
-      secondaryText: "hsl(0, 22%, 84%)",
-      primaryText: "hsl(360 100% 100%)",
+      secondaryText: "hsl(0, 0%, 95%)",
+      primaryText: "hsl(0, 0%, 100%)",
+      primaryButtonText: "hsl(0, 0%, 100%)",
     },
   });
   const wallets = [
