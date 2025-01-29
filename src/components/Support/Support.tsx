@@ -1,6 +1,6 @@
 const Support = () => {
   return (
-  <section className="py-[100px] h-[100vh] text-white max-w-md overflow-y-auto mx-auto relative ml-[10px] px-6">
+  <section className="py-[100px] h-[100vh] text-white max-w-md overflow-y-auto mx-auto relative px-6">
         <h2 className="text-center text-3xl font-roboto text-[#82E300] font-bold mb-16">
             Happy To Help You
         </h2>
