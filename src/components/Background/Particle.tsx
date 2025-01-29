@@ -73,14 +73,14 @@ const Particle: React.FC = () => {
               "interactivity": {
                 "detect_on": "canvas",
                 "events": {
-                  "onhover": {
+                  "onHover": {  // ✅ Corrected from "onhover" to "onHover"
                     "enable": true,
                     "mode": "repulse"
                   },
-                  "onclick": {
+                  "onClick": {  // ✅ Corrected from "onclick" to "onClick"
                     "enable": true,
                     "mode": "push"
-                  },
+                  }
                 },
                 "modes": {
                   "grab": {
