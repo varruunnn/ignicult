@@ -10,9 +10,15 @@ import { client } from "../../client";
 const Navbar = () => {
   const customTheme = lightTheme({
     colors: {
-      modalBg: "#1E1E1E",
-      accentButtonBg: "#4CAF50",
-      accentButtonText: "white",
+      selectedTextColor: "hsl(228, 78%, 48%)",
+      secondaryIconColor: "hsl(0, 0%, 14%)",
+      secondaryIconHoverColor: "hsl(240, 6%, 94%)",
+      modalBg: "hsl(0, 0%, 14%)",
+      borderColor: "hsl(86, 100%, 50%)",
+      accentText: "hsl(86, 100%, 50%)",
+      separatorLine: "hsl(86, 100%, 50%)",
+      secondaryText: "hsl(0, 22%, 84%)",
+      primaryText: "hsl(360 100% 100%)",
     },
   });
   const wallets = [
@@ -43,6 +49,7 @@ const Navbar = () => {
     setSidebarOpen(!isSidebarOpen);
   };
 
+  
   const closeSidebar = () => {
     setSidebarOpen(false);
   };
@@ -73,7 +80,9 @@ const Navbar = () => {
           <ConnectButton
             client={client}
             wallets={wallets}
+            modal-bg-color="#FFFFFF"
             connectModal={{ size: "compact" }}
+            theme={customTheme}
             connectButton={{
               label: "Lets dive in",
               style: {
@@ -106,6 +115,4 @@ const Navbar = () => {
     </div>
   );
 };
-
-
 export default Navbar;
