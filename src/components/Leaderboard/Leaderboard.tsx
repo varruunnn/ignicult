@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 
 const Leaderboard: React.FC = () => {
-  // Define the possible games as a type
   type GameName = "Cricket Catch Pro" | "Soccer Stars" | "Basketball Blitz";
-
-  // Define the mock data structure
   const mockData: Record<
     GameName,
     Record<
@@ -99,7 +96,7 @@ const Leaderboard: React.FC = () => {
   const postion3 = mockData[selectedGame][timeframe][2];
 
   return (
-    <div className="relative min-h-screen w-full bg-black py-5 overflow-x-hidden text-white">
+    <div className="relative min-h-screen w-full bg-black py-[80px] overflow-x-hidden text-white">
       <div className="relative w-full h-[15vh] bg-black">
         <h3 className="text-white text-2xl font-semibold absolute left-[32%]">
           Leaderboard

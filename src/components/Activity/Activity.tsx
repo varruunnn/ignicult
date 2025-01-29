@@ -20,7 +20,7 @@ const Activity = () => {
     );
   };
   return (
-    <div className="bg-black min-h-screen py-50 w-full h-[100vh] text-white">
+    <div className="bg-black min-h-screen py-[100px] w-full h-[100vh] text-white">
       <section>
         <div className="relative bg-[#1A1A1A]  border ml-[31px] border-green-600 rounded-2xl p-4 w-[368px] h-[129px] shadow-lg flex items-center max-[391px]:w-[320px] justify-between">
           <div>

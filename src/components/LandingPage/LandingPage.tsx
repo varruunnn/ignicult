@@ -26,7 +26,7 @@ const LandingPage: React.FC = () => {
   };
   return (
     <div className="max-[485px]:bg-black overflow-x-hidden text-white min-h-screen">
-      <section className="text-center py-35 bg-gradient-to-r from-black-800 to-black-600 max-w-md mx-auto">
+      <section className="text-center py-[100px] bg-gradient-to-r from-black-800 to-black-600 max-w-md mx-auto">
         <div
           className="mt-4 bg-black text-white p-4 shadow-lg relative"
           style={{ maxWidth: "100%", height: "auto" }}

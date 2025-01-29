@@ -1,6 +1,6 @@
 const RewardsPage = () => {
   return (
-    <div className="bg-black max-[400px]:ml-[-15px] max-[400px]:mb-[70px] py-10 text-left left-[-20px] relative min-h-screen overflow-x-hidden p-4 text-white">
+    <div className="bg-black max-[400px]:ml-[-15px] max-[400px]:mb-[70px] py-10 text-left left-[-20px] mt-[110px] relative min-h-screen overflow-x-hidden p-4 text-white">
       <header>
         <h1 className="text-[#92FF00] text-3xl bg-black font-roboto pl-10 font-semibold">Welcome to <br /> Ignicult  Rewards</h1>
         <p className="text-white font-roboto  bg-black  pl-10 mt-[15px]">At Ignicult, we reward both casual players and <br />blockchain enthusiasts. Here’s what you can earn <br />by joining us:</p>

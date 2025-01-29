@@ -16,7 +16,7 @@ export function App() {
 	return (
 		<Router>
 			<Navbar />
-			<div className="app-content mt-40">
+			<div className="app-content mt-20">
 			<Routes>
 				<Route path="/" element={<LandingPage />} />
 				<Route path="/home" element={<LandingPage />} />
