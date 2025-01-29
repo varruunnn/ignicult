@@ -133,7 +133,7 @@ const Leaderboard: React.FC = () => {
             </a>
           ))}
         </div>
-        <div className="flex justify-center items-end gap-0 p-4">
+        <div className="flex justify-center ml-[20px] items-end gap-0 p-4">
           <div className="flex flex-col items-center">
             <div className="bg-gradient-to-b from-[#535353] to-[#282828] h-36 p-4 rounded-t-lg w-32">
               <div className="relative">
@@ -217,7 +217,7 @@ const Leaderboard: React.FC = () => {
           ))} */}
         </div>
         <div>
-          <table className="w-full border-collapse bg-[#3E3E3E] text-center">
+          <table className="w-full ml-[10px] border-collapse bg-[#3E3E3E] text-center">
             <thead>
               <tr>
                 <th className="border-b text-[#92FF00] text-semibold border-gray-600 py-2">
