@@ -1,20 +1,26 @@
 import { useCallback, useEffect, useState } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
+import type { Container, Engine } from "@tsparticles/engine";
+import { loadSlim } from "@tsparticles/slim"; // Ensure this package is installed
 
-import { loadFull } from "tsparticles";
-export default function Particle() {
+const Particle: React.FC = () => {
   const [init, setInit] = useState(false);
+
+  // Initialize particles engine once
   useEffect(() => {
-    console.log("init");
-    initParticlesEngine(async (engine) => {
-      await loadFull(engine);
+    initParticlesEngine(async (engine: Engine) => {
+      await loadSlim(engine);
     }).then(() => {
       setInit(true);
     });
   }, []);
 
-  const particlesLoaded = (container) => {
-  };
+  // Properly typed callback function when particles are loaded
+  const particlesLoaded = useCallback(async (container?: Container) => {
+    if (container) {
+      console.log("Particles container loaded:", container);
+    }
+  }, []);
 
   return (
     <>
@@ -22,75 +28,99 @@ export default function Particle() {
         <Particles
           id="tsparticles"
           particlesLoaded={particlesLoaded}
-          style={{
-            zIndex: 1,
-          }}
           options={{
-            fpsLimit: 120,
-            interactivity: {
-              events: {
-                onClick: {
-                  enable: true,
-                  mode: "push",
+              "particles": {
+                "number": {
+                  "value": 80,
+                  "density": {
+                    "enable": true,
+                    "width": 800,
+                    "height":800,
+                  }
                 },
-                onHover: {
-                  enable: true,
-                  mode: "repulse",
+                "color": {
+                  "value": "#82E300"
                 },
-                resize: true,
-              },
-              modes: {
-                push: {
-                  quantity: 4,
+                "shape": {
+                  "type": "circle",
                 },
-                repulse: {
-                  distance: 200,
-                  duration: 0.4,
+                "opacity": {
+                  "value": 0.1,
+
                 },
-              },
-            },
-            particles: {
-              color: {
-                value: "#bae6fd",
-              },
-              links: {
-                color: "#e0f2fe",
-                distance: 150,
-                enable: true,
-                opacity: 0.5,
-                width: 1,
-              },
-              move: {
-                direction: "none",
-                enable: true,
-                outModes: {
-                  default: "bounce",
+                "size": {
+                  "value": 5,
+
                 },
-                random: false,
-                speed: 1.2,
-                straight: false,
-              },
-              number: {
-                density: {
-                  enable: true,
-                  area: 800,
+                "line_linked": {
+                  "enable": true,
+                  "distance": 150,
+                  "color": "#ffffff",
+                  "opacity": 0.4,
+                  "width": 1
                 },
-                value: 160,
+                "move": {
+                  "enable": true,
+                  "speed": 6,
+                  "direction": "none",
+                  "random": false,
+                  "straight": false,
+                  "attract": {
+                    "enable": false,
+                  }
+                }
               },
-              opacity: {
-                value: 0.5,
+              "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                  "onhover": {
+                    "enable": true,
+                    "mode": "repulse"
+                  },
+                  "onclick": {
+                    "enable": true,
+                    "mode": "push"
+                  },
+                },
+                "modes": {
+                  "grab": {
+                    "distance": 400,
+                    "line_linked": {
+                      "opacity": 1
+                    }
+                  },
+                  "bubble": {
+                    "distance": 400,
+                    "size": 20,
+                    "duration": 2,
+                    "opacity": 8,
+                    "speed": 1
+                  },
+                  "repulse": {
+                    "distance": 200
+                  },
+                  "push": {
+                    "particles_nb": 4
+                  },
+                  "remove": {
+                    "particles_nb": 2
+                  }
+                }
               },
-              shape: {
-                type: "circle",
-              },
-              size: {
-                value: { min: 1, max: 5 },
-              },
-            },
-            detectRetina: true,
-          }}
+              "retina_detect": true,
+              "config_demo": {
+                "hide_card": false,
+                "background_color": "#b61924",
+                "background_image": "",
+                "background_position": "50% 50%",
+                "background_repeat": "no-repeat",
+                "background_size": "cover"
+              }
+            }}
         />
       )}
     </>
   );
-}
+};
+
+export default Particle;

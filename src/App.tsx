@@ -17,7 +17,7 @@ import Particle from "./components/Background/Particle";
 export function App() {
   return (
     <Router>
-	  <Particle />
+	    <Particle />
       <Navbar />
       <div className="app-content mt-20">
         <Routes>
