@@ -22,9 +22,7 @@ export function App() {
     <Router>
       <Particle />
       <Navbar isSidebarOpen={isSidebarOpen} setSidebarOpen={setSidebarOpen} />
-
-      {/* Main Content Wrapper */}
-      <div className={`transition-all duration-300 ${isSidebarOpen ? "backdrop-blur-lg bg-opacity-30 pointer-events-none" : ""}`}>
+      <div className={`transition-all duration-300 ${isSidebarOpen ? "backdrop-blur-xl bg-opacity-30 pointer-events-none" : ""}`}>
         <div className="app-content mt-20">
           <Routes>
             <Route path="/" element={<LandingPage />} />
@@ -40,8 +38,8 @@ export function App() {
             <Route path="*" element={<ErrorPage />} />
           </Routes>
         </div>
-        <Footer />
       </div>
+      <Footer isSidebarOpen={isSidebarOpen} />
     </Router>
   );
 }

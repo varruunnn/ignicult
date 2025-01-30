@@ -59,14 +59,14 @@ const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen, setSidebarOpen }) => {
         className="fixed inset-0 backdrop-blur-sm bg-black/50 z-40 transition-opacity duration-300 cursor-pointer"
       ></div>
     )}
-      <div className={`relative z-50 ${isSidebarOpen ? "backdrop-blur-3xl bg-black/30" : ""}`}>
+      <div className={`relative z-50 ${isSidebarOpen ? "backdrop-blur-sm bg-black/30" : ""}`}>
         <header className="fixed top-0 left-0 right-0 flex backdrop-blur-sm justify-between items-center px-6 py-4 h-[131px] transition-all duration-300">
           <button onClick={toggleSidebar} className="cursor-pointer relative" aria-label="Open Sidebar Menu">
             <IoMenu size={37} className="text-white" />
           </button>
           <div
-            className={`rounded-xl transition-all duration-300 p-2 ${
-              isSidebarOpen ? "backdrop-blur-3xl bg-white/10" : ""
+            className={`rounded-xl transition-all  duration-300 p-2 ${
+              isSidebarOpen ? "backdrop-blur-sm bg-white/10" : ""
             }`}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
