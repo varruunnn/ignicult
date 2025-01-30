@@ -56,7 +56,7 @@ const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen, setSidebarOpen }) => {
     {isSidebarOpen && (
       <div 
         onClick={closeSidebar}
-        className="fixed inset-0 backdrop-blur-3xl bg-black/50 z-40 transition-opacity duration-300 cursor-pointer"
+        className="fixed inset-0 backdrop-blur-sm bg-black/50 z-40 transition-opacity duration-300 cursor-pointer"
       ></div>
     )}
       <div className={`relative z-50 ${isSidebarOpen ? "backdrop-blur-3xl bg-black/30" : ""}`}>
