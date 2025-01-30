@@ -68,7 +68,7 @@ const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen, setSidebarOpen }) => {
 
   return (
     <div className="max-[485px]:bg-transparent overflow-x-hidden text-white">
-      <header className="fixed top-0 left-0 right-0 flex justify-between items-center px-6 py-4 h-[131px] max-[398px]:z-10 z-50 shadow-md">
+      <header className="fixed top-0 left-0 right-0 backdrop-blur-sm flex justify-between items-center px-6 py-4 h-[131px] max-[398px]:z-10 z-50 shadow-md">
         <button
           onClick={toggleSidebar}
           className="cursor-pointer relative"
