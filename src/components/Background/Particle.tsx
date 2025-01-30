@@ -1,12 +1,10 @@
 import { useCallback, useEffect, useState } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import type { Container, Engine } from "@tsparticles/engine";
-import { loadSlim } from "@tsparticles/slim"; // Ensure this package is installed
+import { loadSlim } from "@tsparticles/slim";
 
 const Particle: React.FC = () => {
   const [init, setInit] = useState(false);
-
-  // Initialize particles engine once
   useEffect(() => {
     initParticlesEngine(async (engine: Engine) => {
       await loadSlim(engine);
@@ -14,8 +12,6 @@ const Particle: React.FC = () => {
       setInit(true);
     });
   }, []);
-
-  // Properly typed callback function when particles are loaded
   const particlesLoaded = useCallback(async (container?: Container) => {
     if (container) {
       console.log("Particles container loaded:", container);

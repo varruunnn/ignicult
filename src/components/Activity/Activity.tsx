@@ -31,7 +31,7 @@ const Activity = () => {
           <div className="flex flex-col items-center justify-center">
             <div className=" rounded-lg flex items-center justify-center">
               <img
-                src={games[currentIndex].image} // Replace with your image paths
+                src={games[currentIndex].image}
                 alt={games[currentIndex].name}
                 className="w-[93px] h-[93px] object-contain"
               />
