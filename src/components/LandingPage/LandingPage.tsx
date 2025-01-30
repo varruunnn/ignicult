@@ -74,7 +74,7 @@ const LandingPage: React.FC = () => {
           Welcome to Ignicult
         </h2>
         <div className="grid gap-1">
-          <div className="bg-[#363636] p-4 w-[308px] h-[136px] rounded-xs flex items-center text-left mx-auto">
+          <div className="bg-[#363636] p-4 w-[308px] h-[136px] flex items-center text-left mx-auto">
             <img
               src="/fire.svg"
               alt="Fire Icon"
@@ -86,7 +86,7 @@ const LandingPage: React.FC = () => {
               rewards!
             </p>
           </div>
-          <div className="bg-[#363636] p-4 w-[308px] h-[136px] rounded-xs flex items-center text-left mx-auto">
+          <div className="bg-[#363636] p-4 w-[308px] h-[136px] flex items-center text-left mx-auto">
             <img
               src="/joystick.svg"
               alt="Joystick Icon"
@@ -97,7 +97,7 @@ const LandingPage: React.FC = () => {
               players.
             </p>
           </div>
-          <div className="bg-[#363636] p-4 w-[308px] h-[136px] rounded-xs flex items-center text-left mx-auto">
+          <div className="bg-[#363636] p-4 w-[308px] h-[136px] flex items-center text-left mx-auto">
             <img
               src="/trophy.svg"
               alt="Trophy Icon"
@@ -108,7 +108,7 @@ const LandingPage: React.FC = () => {
               on-chain benefits and ownership.
             </p>
           </div>
-          <div className="bg-[#363636] p-4 w-[308px] h-[136px] rounded-xs flex items-center text-left mx-auto">
+          <div className="bg-[#363636] p-4 w-[308px] h-[136px] flex items-center text-left mx-auto">
             <img
               src="/Group.svg"
               alt="Group Icon"
@@ -122,99 +122,30 @@ const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      <section className="py-6 px-6 relative  max-w-md mx-auto mb-24">
-        <h2 className="text-center text-3xl  text-[#82E300] font-bold mb-1">
-          Why choose ignicult?
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-1 p-8  text-white">
-          <div className="flex items-center bg-[#363636] p-6">
-            <img src="/rockett.svg" alt="Fast" className="h-16 w-16 mr-4" />
+      <section className="py-6 px-6 relative max-w-md mx-auto mb-24">
+      <h2 className="text-center text-3xl text-[#82E300] font-bold mb-4">
+        Why choose ignicult?
+      </h2>
+      <div className="flex flex-wrap justify-center gap-1 p-4 text-white">
+        {[
+          { img: "/rockett.svg", title: "Fast", subtitle: "and seamless", desc: "gaming experience with web3 integration" },
+          { img: "/money.svg", title: "Earn", subtitle: "points", desc: "for real-world rewards and use cultix to unlock on-chain benefits and ownership" },
+          { img: "/trust.svg", title: "Secure", subtitle: "and transparent", desc: "transactions powered by blockchain technology" },
+          { img: "/earth.svg", title: "Join", subtitle: "global Community", desc: "of gamers and blockchain enthusiasts" }
+        ].map((item, index) => (
+          <div key={index} className="bg-[#363636] w-[308px] h-[136px]  flex items-center p-4 text-left mx-auto">
+            <img src={item.img} alt={item.title} className="h-12 w-12 mr-4" />
             <div>
-              <h3 className="text-[#82E300] text-[25px] font-bold ">Fast</h3>
-              <h3
-                className="text-white text-[25px] mt-[-10px] tracking-tighter font-bold"
-                style={{
-                  textShadow: "2px 2px 4px rgba(0, 0, 0, 0.9)",
-                  wordSpacing: "0px", // Reduce word spacing
-                  whiteSpace: "nowrap", // Prevent line break
-                }}
-              >
-                and seamless
+              <h3 className="text-[#82E300] text-lg font-bold">{item.title}</h3>
+              <h3 className="text-white text-lg mt-[-5px] font-bold tracking-tight" style={{ textShadow: "2px 2px 4px rgba(0, 0, 0, 0.9)", whiteSpace: "nowrap" }}>
+                {item.subtitle}
               </h3>
-
-              <p className="text-sm">gaming experience with web3 integration</p>
+              <p className="text-sm leading-tight">{item.desc}</p>
             </div>
           </div>
-
-          <div className="flex items-center bg-[#363636] p-6">
-            <img
-              src="/money.svg"
-              alt="Earn Points"
-              className="h-16 w-16 mr-4"
-            />
-            <div>
-              <h3 className="text-[#82E300] text-[25px] font-bold ">Earn</h3>
-              <h3
-                className="text-white text-[25px] mt-[-10px] font-bold "
-                style={{
-                  textShadow: "2px 2px 4px rgba(0, 0, 0, 0.9)",
-                  wordSpacing: "1px",
-                }}
-              >
-                points
-              </h3>
-              <p className="text-sm">
-                for real-world rewards and use cultix to unlock on-chain
-                benefits and ownership
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-center bg-[#363636] p-6">
-            <img src="/trust.svg" alt="Secure" className="h-16 w-16 mr-4" />
-            <div>
-              <h3 className="text-[#82E300] text-[25px] max-[399px]:left-[-4px] relative font-bold ">Secure</h3>
-              <h3
-                className="text-white text-[25px] mt-[-10px] max-[399px]:left-[-4px] relative tracking-tighter font-bold"
-                style={{
-                  textShadow: "2px 2px 4px rgba(0, 0, 0, 0.9)",
-                  wordSpacing: "0px", // Reduce word spacing
-                  whiteSpace: "nowrap", // Prevent line break
-                }}
-              >
-                and transparent
-              </h3>
-              <p className="text-sm">
-                transactions powered by blockchain technology
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-center bg-[#363636] p-6">
-            <img src="/earth.svg" alt="Join" className="h-16 w-16 mr-4" />
-            <div>
-              <h3 className="text-[#82E300] text-[25px] font-bold ">Join</h3>
-              <h3
-                className="text-white text-[25px] mt-[-8px] font-bold "
-                style={{
-                  textShadow: "2px 2px 4px rgba(0, 0, 0, 0.9)",
-                }}
-              >
-                global
-              </h3>
-              <h3
-                className="text-white text-[25px] mt-[-8px] font-bold "
-                style={{
-                  textShadow: "2px 2px 4px rgba(0, 0, 0, 0.9)",
-                }}
-              >
-                Community
-              </h3>
-              <p className="text-sm">of gamers and blockchain enthusiasts</p>
-            </div>
-          </div>
-        </div>
-      </section>
+        ))}
+      </div>
+    </section>
     </div>
   );
 };
