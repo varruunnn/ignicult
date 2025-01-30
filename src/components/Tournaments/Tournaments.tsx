@@ -45,7 +45,7 @@ export default function Tournaments() {
   };
 
   return (
-    <div className="p-4 mt-0 w-full min-h-[100vh] bg-black text-white">
+    <div className="p-4 mt-0 w-full min-h-[100vh] text-white">
       <div className="text-center mt-20 max-[399px]:mt-[70px] ">
         <h1 className="text-2xl relative font-bold text-[#82E300] text-shadow-glow">Monthly Tournaments</h1>
         <div className="mt-4 flex justify-center items-center">
@@ -65,9 +65,9 @@ export default function Tournaments() {
           </button>
         </div>
       </div>
-      <div className="w-[109%] left-[-6px] h-[100vh] absolute mt-10 border-4 border-[#82E300] p-4 rounded-[50px] shadow-xl">
+      <div className="w-[109%] left-[-6px] h-[100vh] absolute mt-10 border-4 border-[#82E300] p-4 rounded-[50px] ">
               <Particle />
-        <h2 className="text-center text-3xl text-[#82E300] font-extrabold mb-4 text-shadow-glow">
+        <h2 className="text-center text-3xl text-[#82E300] font-extrabold mb-4">
           January 2025
         </h2>
         <div className="w-full max-h-[60vh] max-[399px]:mb-[40px] bg-[#3E3E3E] rounded-[20px] overflow-y-auto">

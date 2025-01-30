@@ -2,7 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+#tsparticles {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, #051725, #000000); 
+  z-index: -1;
+}
+.blurred {
+  filter: blur(50px);
+  pointer-events: none; /* Prevents interactions when blurred */
+  transition: filter 0.3s ease-in-out;
+}
+body {
+  font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+
+/* :root {
   line-height: 1.5;
   font-weight: 400;
   font-synthesis: none;
@@ -13,10 +32,5 @@
   font-optical-sizing: auto;
   font-style: normal;
   font-variation-settings: "slnt" 0;
-}
+} */
 
-@layer base {
-  body {
-    @apply bg-zinc-950 text-neutral-200;
-  }
-}

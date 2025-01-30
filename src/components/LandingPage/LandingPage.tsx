@@ -25,7 +25,7 @@ const LandingPage: React.FC = () => {
     alert("I am Glowing dv");
   };
   return (
-    <div className=" overflow-x-hidden text-white min-h-screen">
+    <div className=" overflow-x-hidden font-roboto text-white min-h-screen">
       <section className="text-center py-[100px] bg-gradient-to-r from-black-800 to-black-600 max-w-md mx-auto">
         <div
           className="mt-4  text-white p-4 shadow-lg relative"
@@ -70,7 +70,7 @@ const LandingPage: React.FC = () => {
         </div>
       </section>
       <section className="mt-[-100px] relative px-6 max-w-md mx-auto">
-        <h2 className="text-center text-3xl font-roboto text-[#82E300] font-bold mb-16">
+        <h2 className="text-center text-3xl  text-[#82E300] font-bold mb-16">
           Welcome to Ignicult
         </h2>
         <div className="grid gap-1">
@@ -80,7 +80,7 @@ const LandingPage: React.FC = () => {
               alt="Fire Icon"
               className="w-[34px] h-[36px] mr-4"
             />
-            <p className="font-roboto">
+            <p className="">
               Ignicult is a revolutionary hyper-casual gaming platform where you
               can play, earn, and enjoy with both off-chain and on-chain
               rewards!
@@ -92,7 +92,7 @@ const LandingPage: React.FC = () => {
               alt="Joystick Icon"
               className="w-[34px] h-[36px] mr-4"
             />
-            <p className="font-roboto">
+            <p className="">
               Discover a variety of exciting games that cater to all types of
               players.
             </p>
@@ -103,7 +103,7 @@ const LandingPage: React.FC = () => {
               alt="Trophy Icon"
               className="w-[34px] h-[36px] mr-4"
             />
-            <p className="font-roboto">
+            <p className="">
               Earn IGNix points for real-world rewards and use Cultix to unlock
               on-chain benefits and ownership.
             </p>
@@ -114,7 +114,7 @@ const LandingPage: React.FC = () => {
               alt="Group Icon"
               className="w-[34px] h-[36px] mr-4"
             />
-            <p className="font-roboto">
+            <p className="">
               Create your profile and showcase your achievements to the
               community.
             </p>
@@ -122,28 +122,26 @@ const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      <section
-        className="py-6 px-6 relative  max-w-md mx-auto mb-24" // Add bottom margin (mb-24)
-      >
-        <h2 className="text-center text-3xl font-roboto text-[#82E300] font-bold mb-1">
+      <section className="py-6 px-6 relative  max-w-md mx-auto mb-24">
+        <h2 className="text-center text-3xl  text-[#82E300] font-bold mb-1">
           Why choose ignicult?
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-1 p-8  text-white">
           <div className="flex items-center bg-[#363636] p-6">
             <img src="/rockett.svg" alt="Fast" className="h-16 w-16 mr-4" />
             <div>
-              <h3 className="text-[#82E300] text-[25px] font-bold font-[roboto]">
-                Fast
-              </h3>
+              <h3 className="text-[#82E300] text-[25px] font-bold ">Fast</h3>
               <h3
-                className="text-white text-[25px] mt-[-10px] tracking-tighter font-bold font-[GothiksRound]"
+                className="text-white text-[25px] mt-[-10px] tracking-tighter font-bold"
                 style={{
                   textShadow: "2px 2px 4px rgba(0, 0, 0, 0.9)",
-                  wordSpacing: "1px",
+                  wordSpacing: "0px", // Reduce word spacing
+                  whiteSpace: "nowrap", // Prevent line break
                 }}
               >
                 and seamless
               </h3>
+
               <p className="text-sm">gaming experience with web3 integration</p>
             </div>
           </div>
@@ -155,11 +153,9 @@ const LandingPage: React.FC = () => {
               className="h-16 w-16 mr-4"
             />
             <div>
-              <h3 className="text-[#82E300] text-[25px] font-bold font-[roboto]">
-                Earn
-              </h3>
+              <h3 className="text-[#82E300] text-[25px] font-bold ">Earn</h3>
               <h3
-                className="text-white text-[25px] mt-[-10px] font-bold font-[GothiksRound]"
+                className="text-white text-[25px] mt-[-10px] font-bold "
                 style={{
                   textShadow: "2px 2px 4px rgba(0, 0, 0, 0.9)",
                   wordSpacing: "1px",
@@ -177,14 +173,13 @@ const LandingPage: React.FC = () => {
           <div className="flex items-center bg-[#363636] p-6">
             <img src="/trust.svg" alt="Secure" className="h-16 w-16 mr-4" />
             <div>
-              <h3 className="text-[#82E300] text-[25px] font-bold font-[roboto]">
-                Secure
-              </h3>
+              <h3 className="text-[#82E300] text-[25px] max-[399px]:left-[-4px] relative font-bold ">Secure</h3>
               <h3
-                className="text-white text-[25px] mt-[-10px] font-bold font-[GothiksRound]"
+                className="text-white text-[25px] mt-[-10px] max-[399px]:left-[-4px] relative tracking-tighter font-bold"
                 style={{
                   textShadow: "2px 2px 4px rgba(0, 0, 0, 0.9)",
-                  wordSpacing: "1px",
+                  wordSpacing: "0px", // Reduce word spacing
+                  whiteSpace: "nowrap", // Prevent line break
                 }}
               >
                 and transparent
@@ -198,11 +193,9 @@ const LandingPage: React.FC = () => {
           <div className="flex items-center bg-[#363636] p-6">
             <img src="/earth.svg" alt="Join" className="h-16 w-16 mr-4" />
             <div>
-              <h3 className="text-[#82E300] text-[25px] font-bold font-[roboto]">
-                Join
-              </h3>
+              <h3 className="text-[#82E300] text-[25px] font-bold ">Join</h3>
               <h3
-                className="text-white text-[25px] mt-[-8px] font-bold font-[GothiksRound]"
+                className="text-white text-[25px] mt-[-8px] font-bold "
                 style={{
                   textShadow: "2px 2px 4px rgba(0, 0, 0, 0.9)",
                 }}
@@ -210,7 +203,7 @@ const LandingPage: React.FC = () => {
                 global
               </h3>
               <h3
-                className="text-white text-[25px] mt-[-8px] font-bold font-[GothiksRound]"
+                className="text-white text-[25px] mt-[-8px] font-bold "
                 style={{
                   textShadow: "2px 2px 4px rgba(0, 0, 0, 0.9)",
                 }}
@@ -222,62 +215,6 @@ const LandingPage: React.FC = () => {
           </div>
         </div>
       </section>
-
-      {/* <footer className="fixed bottom-0 w-full h-[75px] bg-[#363636] text-white flex justify-around items-center">
-        <div className="relative flex w-full h-[75px] flex-col items-center justify-center space-y-6">
-          <img
-            src="footer.svg"
-            alt=""
-            className="w-[68px] h-[68px] absolute top-[-35px] z-10"
-            onClick={handleClick}
-          />
-          <button className="flex flex-col left-[40px] top-[1px] absolute items-center cursor-pointer text-green-500">
-            <img
-              src="/home.svg"
-              alt="Home Icon"
-              className="w-[46px] h-[46px] relative"
-            />
-            <span
-              className="text-sm font-bold font-roboto text-[#82E300] relative"
-              style={{
-                textShadow: "2px 2px 2px black",
-              }}
-            >
-              Home
-            </span>
-          </button>
-          <img
-            src="/vec.svg"
-            alt="Play Now Background"
-            className="w-[242px] h-[75px] absolute top-[2px] "
-          />
-          <span
-            className="absolute text-[#282828] font-semibold font-roboto text-lg"
-            style={{
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -10%)",
-            }}
-          >
-            Play Now
-          </span>
-          <button className="flex flex-col right-[40px] top-[10px] absolute items-center cursor-pointer text-green-500">
-            <img
-              src="/Group.svg"
-              alt="Profiles Icon"
-              className="w-[36px] h-[36px] relative"
-            />
-            <span
-              className="text-sm font-bold font-roboto text-[#82E300] relative"
-              style={{
-                textShadow: "2px 2px 2px black",
-              }}
-            >
-              Profiles
-            </span>
-          </button>
-        </div>
-      </footer> */}
     </div>
   );
 };

@@ -32,7 +32,7 @@ const Particle: React.FC = () => {
             "autoPlay": true,
             "background": {
               "color": {
-                "value": "#000"
+                "value": "transparent"
               },
               "image": "",
               "position": "",

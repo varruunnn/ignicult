@@ -2,7 +2,7 @@ import React from "react";
 
 const ProfilePage: React.FC = () => {
   return (
-    <div className="bg-black min-h-screen p-4 py-20 text-white overflow-hidden">
+    <div className="min-h-screen p-4 py-20 text-white overflow-hidden">
       <h1 className="absolute text-3xl font-bold left-[39%] text-white top-[130px] z-49 max-[398px]:text-2xl max-[398px]:left-[39%] max-[398px]:top-[135px] max-[398px]:z-11">
         Profile
       </h1>

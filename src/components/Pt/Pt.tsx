@@ -1,5 +1,4 @@
 import React from "react";
-import Particle from "../Background/Particle";
 interface Player {
   rank: number;
   wallet: string;
@@ -16,11 +15,11 @@ const PremiumTournaments = () => {
     { rank: 7, wallet: "d0af8c...908e", score: 6038 },
   ];
   return (
-    <div className="flex flex-col mt-[200px] items-center overflow-x-hidden p-4 rounded-lg bg-black  w-[full] h-[100vh]">
+    <div className="flex flex-col mt-[200px] items-center overflow-x-hidden p-4 rounded-lg   w-[full] h-[100vh]">
       <h2 className="text-white absolute text-lg z-10 font-semibold mt-[-26px]">
         Premium Tournaments
       </h2>
-      <div className="flex items-center border-2 relative border-[#F94EA6] mt-5 bg-black px-3 py-2 rounded-full w-full">
+      <div className="flex items-center border-2 relative border-[#F94EA6] mt-5 px-3 py-2 rounded-full w-full">
         <select
           className="flex-grow appearance-none  bg-transparent text-[#F94EA6] outline-none p-2 rounded-md"
           defaultValue="Cricket Catch Pro"
@@ -47,8 +46,7 @@ const PremiumTournaments = () => {
         </button>
       </div>
 
-      <div className="relative border-2 border-[#F94EA6] mt-7 h-[80vh] p-4 rounded-[30px] w-[109%]">
-              <Particle />
+      <div className="relative border-2 border-[#F94EA6] mt-7 h-[80vh] bg-black p-4 rounded-[30px] w-[109%]">
         <h1 className="text-[#F94EA6] absolute left-[33%] font-bold font-[roboto] text-2xl">
           January 2025
         </h1>
@@ -87,7 +85,7 @@ const PremiumTournaments = () => {
           </div>
           {players.slice(3).map((player) => (
             <div
-              className="grid grid-cols-3 text-center text-white py-2 border-t border-gray-700"
+              className="grid grid-cols-3 text-center text-white py-2 border-t border-gray-600"
               key={player.rank}
             >
               <span>{player.rank}</span>

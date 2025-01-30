@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Particle from "../Background/Particle";
 const Leaderboard: React.FC = () => {
   type GameName = "Cricket Catch Pro" | "Soccer Stars" | "Basketball Blitz";
   const mockData: Record<
@@ -97,8 +96,7 @@ const Leaderboard: React.FC = () => {
 
   return (
     <div className="relative min-h-screen w-full  py-[80px] overflow-x-hidden text-white">
-      <Particle />
-      <div className="relative w-full h-[15vh]">
+      <div className="relative bg-transparent w-full h-[15vh]">
         <h3 className="text-white text-2xl font-semibold absolute left-[32%]">
           Leaderboard
         </h3>
@@ -114,8 +112,7 @@ const Leaderboard: React.FC = () => {
           ))}
         </select>
       </div>
-      <div className=" w-[103%] relative left-[-10px] h-[63vh] rounded-[30px] border-3 border-[#92FF00]">
-              <Particle />
+      <div className=" w-[103%] bg-[black] relative left-[-10px] h-[63vh] rounded-[30px] border-2 border-[#92FF00]">
         <div className="flex gap-[30px] p-[20px] items-center max-[398px]:gap-[20px]  mb-4">
           {["Daily", "Weekly", "Monthly", "Overall"].map((period) => (
             <a
@@ -196,27 +193,6 @@ const Leaderboard: React.FC = () => {
               </div>
             </div>
           </div>
-
-          {/* {mockData[selectedGame][timeframe].slice(0, 3).map((entry, index) => (
-            <div
-              key={index}
-              className={`flex flex-col items-center bg-linear-to-r from-[#535353] to-[#282828] rounded-lg p-4 relative`}
-              style={{
-                marginTop: index === 0 ? "20px" : index === 1 ? "0px" : "10px",
-                transform: index === 0 ? "scale(1.1)" : index === 1 ? "scale(1.2)" : "scale(1)",
-              }}
-            >
-              <div
-                className={`text-xl font-bold ${
-                  index === 1 ? "text-yellow-400" : "text-gray-300"
-                }`}
-              >
-                {index === 0 ? 2 : index === 1 ? 1 : 3}
-              </div>
-              <div className="text-sm text-gray-400">{entry.wallet}</div>
-              <div className="text-2xl font-bold">{entry.score}</div>
-            </div>
-          ))} */}
         </div>
         <div>
           <table className="w-full ml-[10px] border-collapse bg-[#3E3E3E] text-center">
