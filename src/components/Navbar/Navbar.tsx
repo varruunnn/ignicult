@@ -3,18 +3,14 @@ import { useState } from "react";
 import { inAppWallet, createWallet } from "thirdweb/wallets";
 import { darkTheme } from "thirdweb/react";
 import { ConnectButton } from "thirdweb/react";
-import { IoMenu } from "react-icons/io5";
+import { IoMenu, IoClose } from "react-icons/io5";
+import styled from "styled-components";
 import { client } from "../../client";
-
 interface NavbarProps {
   isSidebarOpen: boolean;
   setSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
-
 const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen, setSidebarOpen }) => {
-  const [isLocalSidebarOpen, setLocalSidebarOpen] = useState<boolean>(isSidebarOpen);
-  const [isHovered, setIsHovered] = useState(false);
-
   const customTheme = darkTheme({
     colors: {
       selectedTextColor: "hsl(228, 78%, 48%)",
@@ -29,10 +25,20 @@ const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen, setSidebarOpen }) => {
       primaryButtonText: "hsl(0, 0%, 100%)",
     },
   });
-
   const wallets = [
     inAppWallet({
-      auth: { options: ["google", "discord", "telegram", "farcaster", "email", "x", "passkey", "phone"] },
+      auth: {
+        options: [
+          "google",
+          "discord",
+          "telegram",
+          "farcaster",
+          "email",
+          "x",
+          "passkey",
+          "phone",
+        ],
+      },
     }),
     createWallet("io.metamask"),
     createWallet("com.coinbase.wallet"),
@@ -40,63 +46,70 @@ const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen, setSidebarOpen }) => {
     createWallet("io.rabby"),
     createWallet("io.zerion.wallet"),
   ];
+  const [isPopupVisible, setPopupVisible] = useState(false);
 
   const toggleSidebar = () => {
-    setLocalSidebarOpen(!isLocalSidebarOpen);
-    setSidebarOpen(!isLocalSidebarOpen);
+    setSidebarOpen(!isSidebarOpen);
   };
-
+  
   const closeSidebar = () => {
-    setLocalSidebarOpen(false);
     setSidebarOpen(false);
   };
 
+
+  const handleSignup = () => {
+    setPopupVisible(true);
+  };
+
+  const handleClosePopup = () => {
+    setPopupVisible(false);
+  };
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
-    <div className="relative overflow-x-hidden text-white">
-    {isSidebarOpen && (
-      <div 
-        onClick={closeSidebar}
-        className="fixed inset-0 backdrop-blur-sm bg-black/50 z-40 transition-opacity duration-300 cursor-pointer"
-      ></div>
-    )}
-      <div className={`relative z-50 ${isSidebarOpen ? "backdrop-blur-sm bg-black/30" : ""}`}>
-        <header className="fixed top-0 left-0 right-0 flex backdrop-blur-sm justify-between items-center px-6 py-4 h-[131px] transition-all duration-300">
-          <button onClick={toggleSidebar} className="cursor-pointer relative" aria-label="Open Sidebar Menu">
-            <IoMenu size={37} className="text-white" />
-          </button>
-          <div
-            className={`rounded-xl transition-all  duration-300 p-2 ${
-              isSidebarOpen ? "backdrop-blur-sm bg-white/10" : ""
-            }`}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-          >
-            <ConnectButton
-              client={client}
-              wallets={wallets}
-              theme={customTheme}
-              connectButton={{
-                label: "Let's Dive In",
-                style: {
-                  backgroundColor: "black",
-                  borderRadius: "30px",
-                  color: "white",
-                  border: "2px solid #82E300",
-                  width: "140px",
-                  height: "45px",
-                  transition: "box-shadow 0.3s ease-in-out",
-                  boxShadow: isHovered
-                    ? "0 0 20px #000000, 0 0 40px #82E300, 0 0 60px #82E300"
-                    : "0 0 10px #82E300, 0 0 20px #82E300",
-                },
-              }}
-              appMetadata={{ name: "Example app", url: "https://example.com" }}
-            />
-          </div>
-        </header>
-      </div>
+    <div className="max-[485px]:bg-transparent overflow-x-hidden text-white">
+      <header className="fixed top-0 left-0 right-0 flex justify-between items-center px-6 py-4 h-[131px] max-[398px]:z-10 z-50 shadow-md">
+        <button
+          onClick={toggleSidebar}
+          className="cursor-pointer relative"
+          aria-label="Open Sidebar Menu"
+        >
+          <IoMenu size={37} className="text-white" />
+        </button>
+        <div
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          <ConnectButton
+            client={client}
+            wallets={wallets}
+            modal-bg-color="#FFFFFF"
+            connectModal={{ size: "compact" }}
+            theme={customTheme}
+            connectButton={{
+              label: "Lets dive in",
+              style: {
+                backgroundColor: "black",
+                borderRadius: "20000px",
+                color: "white",
+                border: "2px solid #82E300",
+                width: "120px",
+                height: "41px",
+                transition: "box-shadow 0.3s ease-in-out",
+                boxShadow: isHovered
+                  ? "0 0 15px #000000, 0 0 30px #82E300, 0 0 45px #82E300"
+                  : "0 0 10px #82E300, 0 0 20px #82E300",
+              },
+            }}
+            appMetadata={{
+              name: "Example app",
+              url: "https://example.com",
+            }}
+          />
+        </div>
+      </header>
       <div
-        className={`fixed top-0 left-0 h-full z-50 transition-transform duration-300 ease-in-out ${
+        className={`fixed top-0 left-0 h-full z-[1000] transition-transform duration-300 ease-in-out ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
@@ -105,5 +118,4 @@ const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen, setSidebarOpen }) => {
     </div>
   );
 };
-
 export default Navbar;
