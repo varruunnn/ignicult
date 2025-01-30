@@ -53,9 +53,12 @@ const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen, setSidebarOpen }) => {
 
   return (
     <div className="relative overflow-x-hidden text-white">
-      {isSidebarOpen && (
-        <div className="fixed inset-0 backdrop-blur-3xl bg-black/50 z-40 transition-opacity duration-300"></div>
-      )}
+    {isSidebarOpen && (
+      <div 
+        onClick={closeSidebar}
+        className="fixed inset-0 backdrop-blur-3xl bg-black/50 z-40 transition-opacity duration-300 cursor-pointer"
+      ></div>
+    )}
       <div className={`relative z-50 ${isSidebarOpen ? "backdrop-blur-3xl bg-black/30" : ""}`}>
         <header className="fixed top-0 left-0 right-0 flex backdrop-blur-sm justify-between items-center px-6 py-4 h-[131px] transition-all duration-300">
           <button onClick={toggleSidebar} className="cursor-pointer relative" aria-label="Open Sidebar Menu">
