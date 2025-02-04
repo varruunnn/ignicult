@@ -120,7 +120,7 @@ export default function Tournaments() {
             &rarr;
           </button>
         </div>
-        <div className="w-full max-h-[60vh] mb-4 bg-[#3E3E3E] rounded-lg overflow-y-auto">
+        <div className="w-full max-h-[50vh] mb-4 bg-[#3E3E3E] rounded-lg overflow-y-auto">
           <table className="w-full text-left text-sm text-gray-400 border-collapse">
             <thead className="bg-[#1e1e1e]">
               <tr>
