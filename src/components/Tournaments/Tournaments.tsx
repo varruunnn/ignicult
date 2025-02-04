@@ -72,7 +72,7 @@ export default function Tournaments() {
 
   return (
     <div className="p-4 w-full min-h-screen relative text-white">
-      <div className="absolute top-[50%] left-[40%]">
+      <div className="absolute top-[-21%] left-[20%]">
       <SwipeHintOverlay />
       </div>
       <div className="text-center mt-20">
