@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSwipeable } from "react-swipeable";
 import SwipeHintOverlay from "../SwipeHintOverlay/SwipeHintOverlay";
+
 interface Player {
   rank: number;
   wallet: string;
@@ -21,16 +22,11 @@ const PremiumTournaments = () => {
     { rank: 9, wallet: "d0af8c...908e", score: 6038 },
     { rank: 10, wallet: "d0af8c...908e", score: 6038 },
   ];
+
   useEffect(() => {
     setCurrentPage(0);
   }, []);
-    const swipeHandlers = useSwipeable({
-      onSwipedLeft: () => setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1)),
-      onSwipedRight: () => setCurrentPage((prev) => Math.max(prev - 1, 0)),
-      delta: 50,
-      trackTouch: true,
-      trackMouse: false,
-    });
+
   const podiumPlayers = players.slice(0, 3);
   const regularPlayers = players.slice(3);
   const totalPages = Math.ceil(regularPlayers.length / itemsPerPage);
@@ -39,12 +35,23 @@ const PremiumTournaments = () => {
     currentPage * itemsPerPage + itemsPerPage
   );
 
+  const swipeHandlers = useSwipeable({
+    onSwipedLeft: () =>
+      setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1)),
+    onSwipedRight: () =>
+      setCurrentPage((prev) => Math.max(prev - 1, 0)),
+    delta: 50,
+    trackTouch: true,
+    trackMouse: false,
+  });
+
   return (
-    <div className="flex flex-col relative mt-[140px] items-center overflow-x-hidden p-4 rounded-lg w-full h-[100vh]">
-      <h2 className="text-white absolute text-lg  font-semibold mt-[-16px]">
+    <div className="min-h-screen w-full mt-[120px] text-white overflow-y-auto overflow-x-hidden p-4">
+      <SwipeHintOverlay />
+      <h2 className="text-white text-lg font-semibold mb-4 text-center">
         Premium Tournaments
       </h2>
-      <div className="flex items-center border-2 relative border-[#F94EA6] mt-5 px-3 py-2 rounded-full w-full">
+      <div className="flex items-center border-2 border-[#F94EA6] mt-5  py-2 rounded-full w-full max-w-md mx-auto">
         <select
           className="flex-grow appearance-none bg-transparent text-[#F94EA6] outline-none p-2 rounded-md"
           defaultValue="Cricket Catch Pro"
@@ -70,29 +77,8 @@ const PremiumTournaments = () => {
           </svg>
         </button>
       </div>
-
-      <div className="relative border-2 border-[#F94EA6] mt-7 h-[80vh] bg-black p-4 rounded-[30px] w-[109%]">
-      <div className="relative flex items-center justify-center">
-          <button
-            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
-            disabled={currentPage === 0}
-            className="absolute left-0 ml-2 bg-[#1e1e1e] text-[#F94EA6] border border-[#F94EA6] p-2 rounded-full hover:bg-[#F94EA6] hover:text-black transition-all disabled:opacity-50 max-[399px]:p-1 max-[399px]:ml-1 max-[399px]:rounded-[100px]"
-          >
-            &larr;
-          </button>
-          <h2 className="text-center text-3xl text-[#F94EA6] font-extrabold">
-            January 2025
-          </h2>
-          <button
-            onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1))}
-            disabled={currentPage >= totalPages - 1}
-            className="absolute right-0 mr-2 bg-[#1e1e1e] text-[#F94EA6] border border-[#F94EA6] p-2 rounded-full hover:bg-[#F94EA6] hover:text-black transition-all disabled:opacity-50 max-[399px]:p-1 max-[399px]:mr-1 max-[399px]:rounded-[100px]"
-          >
-            &rarr;
-          </button>
-        </div>
-
-        <div className="flex max-[399px]:gap-5 justify-center mt-10 items-end gap-8 mb-8">
+      <div className="border-2 max-[361px]:w-[108%] border-[#F94EA6] mt-7 bg-black  rounded-[30px] w-[107%] ml-[-12px]">
+        <div className="flex max-[399px]:gap-5 max-[361px]:gap-4 justify-center mt-10 items-end gap-8 mb-8">
           <div className="flex flex-col w-[100px] h-[100px] items-center p-4 rounded-[80px] border-2 border-[#F94EA6]">
             <div className="text-xl text-white font-bold">
               {podiumPlayers[1]?.rank}
@@ -122,7 +108,10 @@ const PremiumTournaments = () => {
             </div>
           </div>
         </div>
-        <div className="border border-[#565656] max-[399px]:overflow-y-auto max-[399px]:mb-[20px] max-[399px]:h-[50%] bg-[#3E3E3E] ml-[8px] rounded-lg h-[40%] w-[96%] overflow-hidden"  {...swipeHandlers}>
+        <div
+          className="border border-[#565656] bg-[#3E3E3E] rounded-lg w-full overflow-hidden"
+          {...swipeHandlers}
+        >
           <div className="grid grid-cols-3 bg-[#3E3E3E] text-[#EE49FD] font-bold text-center py-3">
             <span>Rank</span>
             <span>Wallet Address</span>
@@ -134,10 +123,28 @@ const PremiumTournaments = () => {
               key={player.rank}
             >
               <span>{player.rank}</span>
-              <span>{player.wallet}</span>
+              <span className="truncate">{player.wallet}</span>
               <span>{player.score}</span>
             </div>
           ))}
+        </div>
+        <div className="flex relative  top-[-17px] mb-[100px] justify-center mt-6 gap-4">
+          <button
+            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
+            disabled={currentPage === 0}
+            className="bg-[#1e1e1e] text-[#F94EA6] border border-[#F94EA6] px-4 py-2 rounded hover:bg-[#F94EA6] hover:text-black transition-all disabled:opacity-50"
+          >
+            &larr; Prev
+          </button>
+          <button
+            onClick={() =>
+              setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1))
+            }
+            disabled={currentPage >= totalPages - 1}
+            className="bg-[#1e1e1e] text-[#F94EA6] border border-[#F94EA6] px-4 py-2 rounded hover:bg-[#F94EA6] hover:text-black transition-all disabled:opacity-50"
+          >
+            Next &rarr;
+          </button>
         </div>
       </div>
     </div>

@@ -13,20 +13,38 @@ type TournamentData = {
 };
 
 const mockTournamentData: TournamentData = {
-  "Cricket Catch Pro": [
-    { rank: 1, wallet: "a1b2c3...908e", score: 10000 },
-    { rank: 2, wallet: "d4e5f6...123a", score: 9500 },
-    { rank: 3, wallet: "g7h8i9...456b", score: 9200 },
-    { rank: 4, wallet: "d0af8c...908e", score: 6038 },
-    { rank: 5, wallet: "j1k2l3...789c", score: 5900 },
-    { rank: 6, wallet: "a1b2c3...908e", score: 10000 },
-    { rank: 7, wallet: "d4e5f6...123a", score: 9500 },
-    { rank: 8, wallet: "g7h8i9...456b", score: 9200 },
-    { rank: 9, wallet: "d0af8c...908e", score: 6038 },
-    { rank: 10, wallet: "j1k2l3...789c", score: 5900 },
-    { rank: 11, wallet: "a1b2c3...908e", score: 10000 },
-    { rank: 12, wallet: "d4e5f6...123a", score: 9500 },
-  ],
+"Cricket Catch Pro": [
+  { "rank": 1, "wallet": "a1b2c3...908e", "score": 10000 },
+  { "rank": 2, "wallet": "d4e5f6...123a", "score": 9500 },
+  { "rank": 3, "wallet": "g7h8i9...456b", "score": 9200 },
+  { "rank": 4, "wallet": "d0af8c...908e", "score": 6038 },
+  { "rank": 5, "wallet": "j1k2l3...789c", "score": 5900 },
+  { "rank": 6, "wallet": "a1b2c3...908e", "score": 10000 },
+  { "rank": 7, "wallet": "d4e5f6...123a", "score": 9500 },
+  { "rank": 8, "wallet": "g7h8i9...456b", "score": 9200 },
+  { "rank": 9, "wallet": "d0af8c...908e", "score": 6038 },
+  { "rank": 10, "wallet": "j1k2l3...789c", "score": 5900 },
+  { "rank": 11, "wallet": "a1b2c3...908e", "score": 10000 },
+  { "rank": 12, "wallet": "d4e5f6...123a", "score": 9500 },
+  { "rank": 13, "wallet": "c9d8e7...456b", "score": 8600 },
+  { "rank": 14, "wallet": "l2m3n4...789c", "score": 7800 },
+  { "rank": 15, "wallet": "o5p6q7...111f", "score": 7200 },
+  { "rank": 16, "wallet": "r9s8t7...224g", "score": 6900 },
+  { "rank": 17, "wallet": "h2u3v4...555d", "score": 6600 },
+  { "rank": 18, "wallet": "k8w7x6...333a", "score": 6400 },
+  { "rank": 19, "wallet": "z9y8x7...000e", "score": 6200 },
+  { "rank": 20, "wallet": "c1b2a3...678d", "score": 6100 },
+  { "rank": 21, "wallet": "v4w5x6...910f", "score": 6000 },
+  { "rank": 22, "wallet": "s7t8u9...654g", "score": 5900 },
+  { "rank": 23, "wallet": "p3q4r5...123b", "score": 5800 },
+  { "rank": 24, "wallet": "n9m8l7...456c", "score": 5700 },
+  { "rank": 25, "wallet": "j0k9i8...789e", "score": 5600 },
+  { "rank": 26, "wallet": "e5f6g7...123d", "score": 5500 },
+  { "rank": 27, "wallet": "d2c3b4...000f", "score": 5400 },
+  { "rank": 28, "wallet": "a7b8c9...111e", "score": 5300 },
+  { "rank": 29, "wallet": "t0u1v2...234g", "score": 5200 },
+  { "rank": 30, "wallet": "z4x5y6...789h", "score": 5100 }
+],
   "Color Circle Puzzle": [
     { rank: 1, wallet: "p1q2r3...123d", score: 10500 },
     { rank: 2, wallet: "s4t5u6...456e", score: 10100 },
@@ -42,6 +60,29 @@ const mockTournamentData: TournamentData = {
 };
 
 export default function Tournaments() {
+  const generatePageNumbers = () => {
+    const pages = [];
+    const maxVisiblePages = 3; 
+  pages.push(1);
+  if (currentPage + 1 > maxVisiblePages + 1) {
+    pages.push('...');
+  }
+  const start = Math.max(2, currentPage + 1 - Math.floor(maxVisiblePages / 2));
+  const end = Math.min(totalPages - 1, currentPage + 1 + Math.floor(maxVisiblePages / 2));
+
+  for (let i = start; i <= end; i++) {
+    pages.push(i);
+  }
+
+  if (end < totalPages - 1) {
+    pages.push('...');
+  }
+  if (totalPages > 1) {
+    pages.push(totalPages);
+  }
+
+  return pages;
+};
   const [selectedGame, setSelectedGame] = useState<keyof typeof mockTournamentData>(
     "Cricket Catch Pro"
   );
@@ -72,7 +113,7 @@ export default function Tournaments() {
   });
 
   return (
-    <div className="p-4 w-full min-h-screen relative text-white bg-black">
+    <div className="p-4 w-full min-h-screen relative text-white ">
       <div className="absolute top-[-21%] left-[20%]">
         <SwipeHintOverlay />
       </div>
@@ -102,25 +143,29 @@ export default function Tournaments() {
         className="mt-10 mx-auto w-full max-w-4xl border-4 border-[#82E300] p-4 rounded-3xl relative"
       >
         <div className="relative flex items-center justify-center mb-4">
-          <button
-            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
-            disabled={currentPage === 0}
-            className="absolute left-0 ml-2 bg-[#1e1e1e] text-[#82E300] border border-[#82E300] p-2 rounded-full hover:bg-[#6ac100] hover:text-black transition-all disabled:opacity-50 max-[399px]:p-1 max-[399px]:ml-1 max-[399px]:rounded-[100px]"
-          >
-            &larr;
-          </button>
           <h2 className="text-center text-3xl text-[#82E300] font-extrabold">
             January 2025
           </h2>
-          <button
-            onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1))}
-            disabled={currentPage >= totalPages - 1}
-            className="absolute right-0 mr-2 bg-[#1e1e1e] text-[#82E300] border border-[#82E300] p-2 rounded-full hover:bg-[#6ac100] hover:text-black transition-all disabled:opacity-50 max-[399px]:p-1 max-[399px]:mr-1 max-[399px]:rounded-[100px]"
-          >
-            &rarr;
-          </button>
         </div>
-        <div className="w-full max-h-[50vh] mb-4 bg-[#3E3E3E] rounded-lg overflow-y-auto">
+
+        {/* Pagination controls */}
+        <div className="flex justify-center gap-2 mb-4 flex-wrap">
+          {generatePageNumbers().map((page, index) => (
+            <button
+              key={index}
+              onClick={() => typeof page === 'number' && setCurrentPage(page - 1)}
+              className={`px-3 py-1 rounded-full ${
+                currentPage + 1 === page
+                  ? 'bg-[#82E300] text-black'
+                  : 'bg-[#1e1e1e] text-[#82E300] hover:bg-[#6ac100] hover:text-black'
+              } border border-[#82E300] transition-all`}
+              disabled={typeof page !== 'number'}
+            >
+              {page}
+            </button>
+          ))}
+        </div>
+        <div className="w-full max-h-[50vh] mb-4 max-[378px]:h-[40vh] max-[378px]:mb-[60px] bg-[#3E3E3E] rounded-lg overflow-y-auto">
           <table className="w-full text-left text-sm text-gray-400 border-collapse">
             <thead className="bg-[#1e1e1e]">
               <tr>
