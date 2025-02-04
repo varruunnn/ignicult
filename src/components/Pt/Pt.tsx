@@ -60,7 +60,7 @@ const PremiumTournaments = () => {
           <option value="Tournament 1">Tournament 1</option>
           <option value="Tournament 2">Tournament 2</option>
         </select>
-        <button className="ml-2 p-2 rounded-full bg-gradient-to-r from-[#EE49FD] via-[#F94EA6] to-[#C253F5]">
+        <button className="ml-2 p-2 relative left-[-10px] rounded-full bg-gradient-to-r from-[#EE49FD] via-[#F94EA6] to-[#C253F5]">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
