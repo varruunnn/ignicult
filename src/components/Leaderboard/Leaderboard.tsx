@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSwipeable } from "react-swipeable";
 import SwipeHintOverlay from "../SwipeHintOverlay/SwipeHintOverlay";
-
 const Leaderboard: React.FC = () => {
   type GameName = "Cricket Catch Pro" | "Soccer Stars" | "Basketball Blitz";
 
@@ -95,7 +94,6 @@ const Leaderboard: React.FC = () => {
   >("Daily");
   const [currentPage, setCurrentPage] = useState<number>(0);
   const itemsPerPage = 5;
-
   useEffect(() => {
     setCurrentPage(0);
   }, [selectedGame, timeframe]);
@@ -107,7 +105,6 @@ const Leaderboard: React.FC = () => {
     currentPage * itemsPerPage,
     currentPage * itemsPerPage + itemsPerPage
   );
-
   const swipeHandlers = useSwipeable({
     onSwipedLeft: () =>
       setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1)),
@@ -118,12 +115,14 @@ const Leaderboard: React.FC = () => {
   });
 
   return (
-    <div className="relative min-h-screen w-full py-20 overflow-x-hidden text-white">
+    <div className="relative min-h-screen w-full py-[80px] overflow-x-hidden text-white">
       <SwipeHintOverlay />
-      <div className="flex flex-col items-center space-y-4 mb-8">
-        <h3 className="text-white text-2xl font-semibold">Leaderboard</h3>
+      <div className="relative bg-transparent w-full h-[15vh]">
+        <h3 className="text-white text-2xl font-semibold absolute left-[32%]">
+          Leaderboard
+        </h3>
         <select
-          className="bg-[#1e1e1e] text-[#92FF00] border-2 border-[#92FF00] p-2 rounded-full w-[270px] text-center"
+          className="bg-[#1e1e1e] max-[398px]:left-[15%] text-[#92FF00] border-2 border-[#92FF00] p-2 rounded-[100px] w-[270px] absolute left-[18%] top-[50px]"
           value={selectedGame}
           onChange={(e) => setSelectedGame(e.target.value as GameName)}
         >
@@ -134,10 +133,7 @@ const Leaderboard: React.FC = () => {
           ))}
         </select>
       </div>
-      <div
-        {...swipeHandlers}
-        className="w-[103%] bg-[black] max-[399px]:h-[82vh] relative left-[-10px] h-[70vh] rounded-[30px] border-2 border-[#92FF00] touch-pan-y"
-      >
+      <div className="w-[103%] max-[399px]:h-[81vh] bg-[black] relative left-[-10px] h-[63vh] rounded-[30px] border-2 border-[#92FF00]">
         <div className="flex gap-[30px] p-[20px] items-center max-[398px]:gap-[20px] mb-4">
           {["Daily", "Weekly", "Monthly", "Overall"].map((period) => (
             <a
@@ -225,59 +221,55 @@ const Leaderboard: React.FC = () => {
             </div>
           </div>
         )}
-        <div className="h-[60vh] rounded-[20px] ">
-          <table className="min-w-full bg-[#3E3E3E] rounded-[20px]">
-            <thead className="bg-[#1e1e1e]">
+        <div className="max-[399px]:h-[60vh]" {...swipeHandlers}>
+          <table className="w-full ml-[10px] border-collapse bg-[#3E3E3E] text-center">
+            <thead>
               <tr>
-                <th className="py-3 px-4 text-[#92FF00] font-semibold">Rank</th>
-                <th className="py-3 px-4 text-[#92FF00] font-semibold">
+                <th className="border-b text-[#92FF00] font-semibold border-gray-600 py-2">
+                  Rank
+                </th>
+                <th className="border-b text-[#92FF00] font-semibold border-gray-600 py-2">
                   Wallet Address
                 </th>
-                <th className="py-3 px-4 text-[#92FF00] font-semibold">
+                <th className="border-b text-[#92FF00] font-semibold border-gray-600 py-2">
                   Total Score
                 </th>
               </tr>
             </thead>
             <tbody>
-              {paginatedData.map((entry) => (
-                <tr
-                  key={entry.rank}
-                  className="hover:bg-[#535353] transition-colors"
-                >
-                  <td className="py-3 px-4 border-b border-gray-600 text-center">
+              {paginatedData.map((entry, index) => (
+                <tr key={index}>
+                  <td className="border-b text-[#B9B9B9] border-gray-600 py-2">
                     {entry.rank}
                   </td>
-                  <td className="py-3 px-4 border-b border-gray-600 text-center truncate max-w-[150px]">
+                  <td className="border-b text-[#B9B9B9] border-gray-600 py-2">
                     {entry.wallet}
                   </td>
-                  <td className="py-3 px-4 border-b border-gray-600 text-center">
+                  <td className="border-b text-[#B9B9B9] border-gray-600 py-2">
                     {entry.score}
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
-        </div>
-        <div className="flex justify-center max-[399px]:hidden gap-4 mt-[-10px] pb-2 absolute bottom-0 left-0 right-0 py-2">
-        <button
-            className="bg-[#1e1e1e] text-[#92FF00] border border-[#92FF00] px-4 py-1 top-[2px] relative rounded-full hover:bg-[#92FF00] hover:text-black transition-all disabled:opacity-50"
-            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
-            disabled={currentPage === 0}
-          >
-            &larr; Prev
-          </button>
-          <span className="text-gray-300 top-[10px] relative ">
-            Page {currentPage + 1} of {totalPages}
-          </span>
-          <button
-            className="bg-[#1e1e1e] top-[2px] relative  text-[#92FF00] border border-[#92FF00] px-4 py-2 rounded-full hover:bg-[#92FF00] hover:text-black transition-all disabled:opacity-50"
-            onClick={() =>
-              setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1))
-            }
-            disabled={currentPage >= totalPages - 1}
-          >
-            Next &rarr;
-          </button>
+          <div className="flex justify-center mt-6 mb-4 gap-4">
+            <button
+              className="bg-[#1e1e1e] text-[#92FF00] border border-[#92FF00] px-4 py-2 rounded hover:bg-[#282828]"
+              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
+              disabled={currentPage === 0}
+            >
+              &larr; Prev
+            </button>
+            <button
+              className="bg-[#1e1e1e] text-[#92FF00] border border-[#92FF00] px-4 py-2 rounded hover:bg-[#282828]"
+              onClick={() =>
+                setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1))
+              }
+              disabled={currentPage >= totalPages - 1}
+            >
+              Next &rarr;
+            </button>
+          </div>
         </div>
       </div>
     </div>

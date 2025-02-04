@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-
+import { useSwipeable } from "react-swipeable";
+import SwipeHintOverlay from "../SwipeHintOverlay/SwipeHintOverlay";
 interface Player {
   rank: number;
   wallet: string;
@@ -20,15 +21,17 @@ const PremiumTournaments = () => {
     { rank: 9, wallet: "d0af8c...908e", score: 6038 },
     { rank: 10, wallet: "d0af8c...908e", score: 6038 },
   ];
-
-  // Reset pagination on mount (or if needed later)
   useEffect(() => {
     setCurrentPage(0);
   }, []);
-
-  // Podium data: first 3 players always shown at the top
+    const swipeHandlers = useSwipeable({
+      onSwipedLeft: () => setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1)),
+      onSwipedRight: () => setCurrentPage((prev) => Math.max(prev - 1, 0)),
+      delta: 50,
+      trackTouch: true,
+      trackMouse: false,
+    });
   const podiumPlayers = players.slice(0, 3);
-  // Regular players: rest of the players for paginated table
   const regularPlayers = players.slice(3);
   const totalPages = Math.ceil(regularPlayers.length / itemsPerPage);
   const paginatedPlayers = regularPlayers.slice(
@@ -37,8 +40,8 @@ const PremiumTournaments = () => {
   );
 
   return (
-    <div className="flex flex-col mt-[200px] items-center overflow-x-hidden p-4 rounded-lg w-full h-[100vh]">
-      <h2 className="text-white absolute text-lg  font-semibold mt-[-26px]">
+    <div className="flex flex-col relative mt-[140px] items-center overflow-x-hidden p-4 rounded-lg w-full h-[100vh]">
+      <h2 className="text-white absolute text-lg  font-semibold mt-[-16px]">
         Premium Tournaments
       </h2>
       <div className="flex items-center border-2 relative border-[#F94EA6] mt-5 px-3 py-2 rounded-full w-full">
@@ -69,13 +72,27 @@ const PremiumTournaments = () => {
       </div>
 
       <div className="relative border-2 border-[#F94EA6] mt-7 h-[80vh] bg-black p-4 rounded-[30px] w-[109%]">
-        <h1 className="text-[#F94EA6] absolute left-[33%] font-bold font-roboto text-2xl">
-          January 2025
-        </h1>
+      <div className="relative flex items-center justify-center">
+          <button
+            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
+            disabled={currentPage === 0}
+            className="absolute left-0 ml-2 bg-[#1e1e1e] text-[#F94EA6] border border-[#F94EA6] p-2 rounded-full hover:bg-[#F94EA6] hover:text-black transition-all disabled:opacity-50 max-[399px]:p-1 max-[399px]:ml-1 max-[399px]:rounded-[100px]"
+          >
+            &larr;
+          </button>
+          <h2 className="text-center text-3xl text-[#F94EA6] font-extrabold">
+            January 2025
+          </h2>
+          <button
+            onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1))}
+            disabled={currentPage >= totalPages - 1}
+            className="absolute right-0 mr-2 bg-[#1e1e1e] text-[#F94EA6] border border-[#F94EA6] p-2 rounded-full hover:bg-[#F94EA6] hover:text-black transition-all disabled:opacity-50 max-[399px]:p-1 max-[399px]:mr-1 max-[399px]:rounded-[100px]"
+          >
+            &rarr;
+          </button>
+        </div>
 
-        {/* Podium Section */}
-        <div className="flex max-[399px]:gap-5 justify-center mt-20 items-end gap-8 mb-8">
-          {/* Second Position */}
+        <div className="flex max-[399px]:gap-5 justify-center mt-10 items-end gap-8 mb-8">
           <div className="flex flex-col w-[100px] h-[100px] items-center p-4 rounded-[80px] border-2 border-[#F94EA6]">
             <div className="text-xl text-white font-bold">
               {podiumPlayers[1]?.rank}
@@ -85,7 +102,6 @@ const PremiumTournaments = () => {
               {podiumPlayers[1]?.score}
             </div>
           </div>
-          {/* First Position */}
           <div className="flex flex-col items-center w-[110px] h-[110px] p-5 rounded-full border-2 border-[#F94EA6] relative scale-125">
             <div className="absolute -top-6 text-4xl">👑</div>
             <div className="text-2xl text-white font-bold">
@@ -96,7 +112,6 @@ const PremiumTournaments = () => {
               {podiumPlayers[0]?.score}
             </div>
           </div>
-          {/* Third Position */}
           <div className="flex flex-col w-[100px] h-[100px] items-center p-4 rounded-[80px] border-2 border-[#F94EA6]">
             <div className="text-xl font-bold text-white">
               {podiumPlayers[2]?.rank}
@@ -107,10 +122,8 @@ const PremiumTournaments = () => {
             </div>
           </div>
         </div>
-
-        {/* Paginated Table Section */}
-        <div className="border border-[#565656] max-[399px]:overflow-y-auto max-[399px]:mb-[20px] max-[399px]:h-[40%] bg-[#3E3E3E] ml-[8px] rounded-[30px] h-[40%] w-[96%] overflow-hidden">
-          <div className="grid grid-cols-3 bg-[#3E3E3E] text-[#EE49FD] rounded-2xl font-bold text-center py-3">
+        <div className="border border-[#565656] max-[399px]:overflow-y-auto max-[399px]:mb-[20px] max-[399px]:h-[50%] bg-[#3E3E3E] ml-[8px] rounded-lg h-[40%] w-[96%] overflow-hidden"  {...swipeHandlers}>
+          <div className="grid grid-cols-3 bg-[#3E3E3E] text-[#EE49FD] font-bold text-center py-3">
             <span>Rank</span>
             <span>Wallet Address</span>
             <span>Top Score</span>
@@ -125,26 +138,6 @@ const PremiumTournaments = () => {
               <span>{player.score}</span>
             </div>
           ))}
-        </div>
-
-        {/* Pagination Buttons */}
-        <div className="flex justify-center relative mt-6 gap-4">
-          <button
-            className="bg-[#1e1e1e] text-[#F94EA6] border relative top-[-10px] border-[#F94EA6] px-4 py-2 rounded-[100px] hover:bg-[#282828]"
-            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
-            disabled={currentPage === 0}
-          >
-            &larr; Prev
-          </button>
-          <button
-            className="bg-[#1e1e1e] text-[#F94EA6] relative top-[-10px]  border border-[#F94EA6] px-4 py-2 rounded-[100px] hover:bg-[#282828]"
-            onClick={() =>
-              setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1))
-            }
-            disabled={currentPage >= totalPages - 1}
-          >
-            Next &rarr;
-          </button>
         </div>
       </div>
     </div>
