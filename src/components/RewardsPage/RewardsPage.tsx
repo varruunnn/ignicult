@@ -1,7 +1,6 @@
 import Particle from "../Background/Particle";
 import { motion } from "framer-motion";
 
-// Variants for the entire container (staggering children)
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -12,8 +11,6 @@ const containerVariants = {
     },
   },
 };
-
-// Variants for the header
 const headerVariants = {
   hidden: { opacity: 0, y: -20 },
   visible: {
