@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { useSwipeable } from "react-swipeable";
+import SwipeHintOverlay from "../SwipeHintOverlay/SwipeHintOverlay";
 
 const Leaderboard: React.FC = () => {
   type GameName = "Cricket Catch Pro" | "Soccer Stars" | "Basketball Blitz";
@@ -93,6 +95,7 @@ const Leaderboard: React.FC = () => {
   >("Daily");
   const [currentPage, setCurrentPage] = useState<number>(0);
   const itemsPerPage = 5;
+
   useEffect(() => {
     setCurrentPage(0);
   }, [selectedGame, timeframe]);
@@ -105,8 +108,18 @@ const Leaderboard: React.FC = () => {
     currentPage * itemsPerPage + itemsPerPage
   );
 
+  const swipeHandlers = useSwipeable({
+    onSwipedLeft: () =>
+      setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1)),
+    onSwipedRight: () => setCurrentPage((prev) => Math.max(prev - 1, 0)),
+    delta: 50,
+    trackTouch: true,
+    trackMouse: false,
+  });
+
   return (
     <div className="relative min-h-screen w-full py-20 overflow-x-hidden text-white">
+      <SwipeHintOverlay />
       <div className="flex flex-col items-center space-y-4 mb-8">
         <h3 className="text-white text-2xl font-semibold">Leaderboard</h3>
         <select
@@ -121,7 +134,10 @@ const Leaderboard: React.FC = () => {
           ))}
         </select>
       </div>
-      <div className="w-[103%] bg-[black] relative left-[-10px] h-[63vh] rounded-[30px] border-2 border-[#92FF00]">
+      <div
+        {...swipeHandlers}
+        className="w-[103%] bg-[black] max-[399px]:h-[82vh] relative left-[-10px] h-[70vh] rounded-[30px] border-2 border-[#92FF00] touch-pan-y"
+      >
         <div className="flex gap-[30px] p-[20px] items-center max-[398px]:gap-[20px] mb-4">
           {["Daily", "Weekly", "Monthly", "Overall"].map((period) => (
             <a
@@ -182,7 +198,7 @@ const Leaderboard: React.FC = () => {
                     <img
                       src="/trophy1.svg"
                       alt="Crown"
-                      className="w-11 max-[398px]:top-[60px] absolute left-[23px] top-[90px] h-11"
+                      className="w-11 max-[398px]:top-[60px] absolute left-[23px] top-[70px] h-11"
                     />
                   </div>
                 </div>
@@ -209,9 +225,8 @@ const Leaderboard: React.FC = () => {
             </div>
           </div>
         )}
-        <div className="overflow-y-auto">
-          {" "}
-          <table className="min-w-full overflow-y-auto bg-[#3E3E3E] rounded-lg">
+        <div className="h-[60vh] rounded-[20px] ">
+          <table className="min-w-full bg-[#3E3E3E] rounded-[20px]">
             <thead className="bg-[#1e1e1e]">
               <tr>
                 <th className="py-3 px-4 text-[#92FF00] font-semibold">Rank</th>
@@ -243,8 +258,8 @@ const Leaderboard: React.FC = () => {
             </tbody>
           </table>
         </div>
-        <div className="flex justify-center items-center mt-8 gap-4">
-          <button
+        <div className="flex justify-center max-[399px]:hidden gap-4 mt-[-10px] pb-2 absolute bottom-0 left-0 right-0 bg-black/80 backdrop-blur-sm py-2">
+        <button
             className="bg-[#1e1e1e] text-[#92FF00] border border-[#92FF00] px-4 py-2 rounded-full hover:bg-[#92FF00] hover:text-black transition-all disabled:opacity-50"
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
             disabled={currentPage === 0}

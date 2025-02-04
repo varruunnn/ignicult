@@ -119,19 +119,19 @@ const PremiumTournaments = () => {
             ))}
           </div>
         </div>
-        <div className="flex justify-center gap-4 mt-4 pb-2 relative bottom-0 left-0 right-0 bg-black/80 backdrop-blur-sm py-2">
-          <button
-            className="bg-[#1e1e1e] max-[380px]:top-[-20px] relative text-[#F94EA6] border border-[#F94EA6] px-3 py-1 text-sm rounded hover:bg-[#282828]"
+        <div className="flex justify-center gap-4 mt-[-10px] pb-2 absolute bottom-0 left-0 right-0 bg-black/80 backdrop-blur-sm py-2">
+        <button
+            className="bg-[#1e1e1e] text-[#F94EA6] border border-[#F94EA6] px-4 py-2 rounded-full hover:bg-[#92FF00] hover:text-black transition-all disabled:opacity-50"
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
             disabled={currentPage === 0}
           >
             &larr; Prev
           </button>
-          <span className="text-white max-[380px]:top-[-20px] relative text-sm flex items-center">
+          <span className="text-gray-300">
             Page {currentPage + 1} of {totalPages}
           </span>
           <button
-            className="bg-[#1e1e1e] max-[380px]:top-[-20px] relative text-[#F94EA6] border border-[#F94EA6] px-3 py-1 text-sm rounded hover:bg-[#282828]"
+            className="bg-[#1e1e1e] text-[#F94EA6] border border-[#F94EA6] px-4 py-2 rounded-full hover:bg-[#92FF00] hover:text-black transition-all disabled:opacity-50"
             onClick={() =>
               setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1))
             }

@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useSwipeable } from "react-swipeable";
+import SwipeHintOverlay from "../SwipeHintOverlay/SwipeHintOverlay";
 type Player = {
   rank: number;
   wallet: string;
@@ -9,7 +11,7 @@ type TournamentData = {
   [key: string]: Player[];
 };
 
-const mockTournamentData: TournamentData = {
+const mockTournamentData: TournamentData = {  
   "Cricket Catch Pro": [
     { rank: 1, wallet: "a1b2c3...908e", score: 10000 },
     { rank: 2, wallet: "d4e5f6...123a", score: 9500 },
@@ -21,6 +23,8 @@ const mockTournamentData: TournamentData = {
     { rank: 8, wallet: "g7h8i9...456b", score: 9200 },
     { rank: 9, wallet: "d0af8c...908e", score: 6038 },
     { rank: 10, wallet: "j1k2l3...789c", score: 5900 },
+    { rank: 11, wallet: "a1b2c3...908e", score: 10000 },
+    { rank: 12, wallet: "d4e5f6...123a", score: 9500 },
   ],
   "Color Circle Puzzle": [
     { rank: 1, wallet: "p1q2r3...123d", score: 10500 },
@@ -34,22 +38,50 @@ const mockTournamentData: TournamentData = {
     { rank: 9, wallet: "d0af8c...908e", score: 6038 },
     { rank: 10, wallet: "j1k2l3...789c", score: 5900 },
   ],
+  
 };
 
 export default function Tournaments() {
-  const [selectedGame, setSelectedGame] = useState<keyof typeof mockTournamentData>("Cricket Catch Pro");
+  const swipeHandlers = useSwipeable({
+    onSwipedLeft: () =>
+      setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1)),
+    onSwipedRight: () => setCurrentPage((prev) => Math.max(prev - 1, 0)),
+    delta: 50,
+    trackTouch: true,
+    trackMouse: false,
+  });
+  const [selectedGame, setSelectedGame] = useState<keyof typeof mockTournamentData>(
+    "Cricket Catch Pro"
+  );
+  const [currentPage, setCurrentPage] = useState<number>(0);
+  const itemsPerPage = 10;
+  useEffect(() => {
+    setCurrentPage(0);
+  }, [selectedGame]);
 
   const handleGameChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedGame(event.target.value as keyof typeof mockTournamentData);
   };
 
+  const tournamentData = mockTournamentData[selectedGame];
+  const totalPages = Math.ceil(tournamentData.length / itemsPerPage);
+  const paginatedData = tournamentData.slice(
+    currentPage * itemsPerPage,
+    currentPage * itemsPerPage + itemsPerPage
+  );
+
   return (
-    <div className="p-4 mt-0 overscroll-x-hidden w-full min-h-[100vh] text-white">
-      <div className="text-center mt-20 max-[399px]:mt-[70px] ">
-        <h1 className="text-2xl relative font-bold text-[#82E300] text-shadow-glow">Monthly Tournaments</h1>
+    <div className="p-4 w-full min-h-screen relative text-white">
+      <div className="absolute top-[50%] left-[40%]">
+      <SwipeHintOverlay />
+      </div>
+      <div className="text-center mt-20">
+        <h1 className="text-2xl font-bold text-[#82E300] text-shadow-glow">
+          Monthly Tournaments
+        </h1>
         <div className="mt-4 flex justify-center items-center">
           <select
-            className="px-4 py-2 rounded-[50px] bg-gray-800 text-white border border-[#82E300] focus:outline-none hover:border-[#6ac100] transition-all"
+            className="px-4 py-2 rounded-full bg-gray-800 text-white border border-[#82E300] focus:outline-none hover:border-[#6ac100] transition-all"
             value={selectedGame}
             onChange={handleGameChange}
           >
@@ -64,21 +96,21 @@ export default function Tournaments() {
           </button>
         </div>
       </div>
-      <div className="w-[109%] left-[-6px] h-[100vh] absolute mt-10 border-4 border-[#82E300] p-4 rounded-[50px] ">
+      <div className="mt-10 mx-auto w-full max-w-4xl border-4 border-[#82E300] p-4 rounded-3xl" {...swipeHandlers}>
         <h2 className="text-center text-3xl text-[#82E300] font-extrabold mb-4">
           January 2025
         </h2>
-        <div className="w-full max-h-[60vh] max-[399px]:mb-[40px] bg-[#3E3E3E] rounded-[20px] overflow-y-auto">
-          <table className="w-full text-left text-sm text-gray-400 border-collapse border border-gray-600">
-            <thead>
-              <tr className="text-[#82E300]">
+        <div className="w-full max-h-[60vh] mb-4 bg-[#3E3E3E] rounded-lg overflow-y-auto">
+          <table className="w-full text-left text-sm text-gray-400 border-collapse">
+            <thead className="bg-[#1e1e1e]">
+              <tr>
                 <th className="py-2 px-4 border border-gray-600">Rank</th>
                 <th className="py-2 px-4 border border-gray-600">Wallet Address</th>
                 <th className="py-2 px-4 border border-gray-600">Top Score</th>
               </tr>
             </thead>
             <tbody>
-              {mockTournamentData[selectedGame].map((player) => (
+              {paginatedData.map((player) => (
                 <tr key={player.rank} className="hover:bg-gray-800 transition-colors">
                   <td className="py-2 px-4 border border-gray-600">{player.rank}</td>
                   <td className="py-2 px-4 border border-gray-600">{player.wallet}</td>
@@ -87,6 +119,27 @@ export default function Tournaments() {
               ))}
             </tbody>
           </table>
+        </div>
+        <div className="flex justify-center items-center mt-4 gap-4">
+          <button
+            className="bg-[#1e1e1e] text-[#82E300] border border-[#82E300] px-4 py-2 rounded-full hover:bg-[#6ac100] hover:text-black transition-all disabled:opacity-50"
+            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
+            disabled={currentPage === 0}
+          >
+            &larr; Prev
+          </button>
+          <span className="text-gray-300">
+            Page {currentPage + 1} of {totalPages}
+          </span>
+          <button
+            className="bg-[#1e1e1e] text-[#82E300] border border-[#82E300] px-4 py-2 rounded-full hover:bg-[#6ac100] hover:text-black transition-all disabled:opacity-50"
+            onClick={() =>
+              setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1))
+            }
+            disabled={currentPage >= totalPages - 1}
+          >
+            Next &rarr;
+          </button>
         </div>
       </div>
     </div>
