@@ -258,19 +258,19 @@ const Leaderboard: React.FC = () => {
             </tbody>
           </table>
         </div>
-        <div className="flex justify-center max-[399px]:hidden gap-4 mt-[-10px] pb-2 absolute bottom-0 left-0 right-0 bg-black/80 backdrop-blur-sm py-2">
+        <div className="flex justify-center max-[399px]:hidden gap-4 mt-[-10px] pb-2 absolute bottom-0 left-0 right-0 py-2">
         <button
-            className="bg-[#1e1e1e] text-[#92FF00] border border-[#92FF00] px-4 py-2 rounded-full hover:bg-[#92FF00] hover:text-black transition-all disabled:opacity-50"
+            className="bg-[#1e1e1e] text-[#92FF00] border border-[#92FF00] px-4 py-1 top-[2px] relative rounded-full hover:bg-[#92FF00] hover:text-black transition-all disabled:opacity-50"
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
             disabled={currentPage === 0}
           >
             &larr; Prev
           </button>
-          <span className="text-gray-300">
+          <span className="text-gray-300 top-[10px] relative ">
             Page {currentPage + 1} of {totalPages}
           </span>
           <button
-            className="bg-[#1e1e1e] text-[#92FF00] border border-[#92FF00] px-4 py-2 rounded-full hover:bg-[#92FF00] hover:text-black transition-all disabled:opacity-50"
+            className="bg-[#1e1e1e] top-[2px] relative  text-[#92FF00] border border-[#92FF00] px-4 py-2 rounded-full hover:bg-[#92FF00] hover:text-black transition-all disabled:opacity-50"
             onClick={() =>
               setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1))
             }
