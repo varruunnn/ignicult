@@ -1,4 +1,3 @@
-import Particle from "../Background/Particle";
 import { motion } from "framer-motion";
 
 const containerVariants = {
@@ -41,7 +40,6 @@ const rewards = [
 const RewardsPage = () => {
   return (
     <div className="max-[400px]:ml-[-15px] max-[400px]:mb-[70px] py-10 text-left left-[-20px] mt-[110px] relative min-h-screen overflow-x-hidden p-4 text-white">
-      <Particle />
       <motion.header
         variants={headerVariants}
         initial="hidden"
