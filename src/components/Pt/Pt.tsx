@@ -20,15 +20,10 @@ const PremiumTournaments = () => {
     { rank: 9, wallet: "d0af8c...908e", score: 6038 },
     { rank: 10, wallet: "d0af8c...908e", score: 6038 },
   ];
-
-  // Reset pagination on mount (or if needed later)
   useEffect(() => {
     setCurrentPage(0);
   }, []);
-
-  // Podium data: first 3 players always shown at the top
   const podiumPlayers = players.slice(0, 3);
-  // Regular players: rest of the players for paginated table
   const regularPlayers = players.slice(3);
   const totalPages = Math.ceil(regularPlayers.length / itemsPerPage);
   const paginatedPlayers = regularPlayers.slice(
@@ -73,9 +68,8 @@ const PremiumTournaments = () => {
           January 2025
         </h1>
 
-        {/* Podium Section */}
+
         <div className="flex max-[399px]:gap-5 justify-center mt-20 items-end gap-8 mb-8">
-          {/* Second Position */}
           <div className="flex flex-col w-[100px] h-[100px] items-center p-4 rounded-[80px] border-2 border-[#F94EA6]">
             <div className="text-xl text-white font-bold">
               {podiumPlayers[1]?.rank}
@@ -85,7 +79,6 @@ const PremiumTournaments = () => {
               {podiumPlayers[1]?.score}
             </div>
           </div>
-          {/* First Position */}
           <div className="flex flex-col items-center w-[110px] h-[110px] p-5 rounded-full border-2 border-[#F94EA6] relative scale-125">
             <div className="absolute -top-6 text-4xl">👑</div>
             <div className="text-2xl text-white font-bold">
@@ -96,7 +89,6 @@ const PremiumTournaments = () => {
               {podiumPlayers[0]?.score}
             </div>
           </div>
-          {/* Third Position */}
           <div className="flex flex-col w-[100px] h-[100px] items-center p-4 rounded-[80px] border-2 border-[#F94EA6]">
             <div className="text-xl font-bold text-white">
               {podiumPlayers[2]?.rank}
@@ -107,8 +99,6 @@ const PremiumTournaments = () => {
             </div>
           </div>
         </div>
-
-        {/* Paginated Table Section */}
         <div className="border border-[#565656] bg-[#3E3E3E] rounded-[30px] h-[40%] w-full overflow-hidden flex flex-col">
           <div className="grid grid-cols-3 bg-[#3E3E3E] text-[#EE49FD] rounded-2xl font-bold text-center py-3">
             <span>Rank</span>
@@ -129,8 +119,6 @@ const PremiumTournaments = () => {
             ))}
           </div>
         </div>
-
-        {/* Pagination Buttons - Fixed at bottom */}
         <div className="flex justify-center gap-4 mt-4 pb-2 relative bottom-0 left-0 right-0 bg-black/80 backdrop-blur-sm py-2">
           <button
             className="bg-[#1e1e1e] max-[380px]:top-[-20px] relative text-[#F94EA6] border border-[#F94EA6] px-3 py-1 text-sm rounded hover:bg-[#282828]"

@@ -107,7 +107,6 @@ const Leaderboard: React.FC = () => {
 
   return (
     <div className="relative min-h-screen w-full py-20 overflow-x-hidden text-white">
-      {/* Header Section */}
       <div className="flex flex-col items-center space-y-4 mb-8">
         <h3 className="text-white text-2xl font-semibold">Leaderboard</h3>
         <select
@@ -122,8 +121,6 @@ const Leaderboard: React.FC = () => {
           ))}
         </select>
       </div>
-
-      {/* Main Content Container */}
       <div className="w-[103%] bg-[black] relative left-[-10px] h-[63vh] rounded-[30px] border-2 border-[#92FF00]">
         <div className="flex gap-[30px] p-[20px] items-center max-[398px]:gap-[20px] mb-4">
           {["Daily", "Weekly", "Monthly", "Overall"].map((period) => (
@@ -144,11 +141,8 @@ const Leaderboard: React.FC = () => {
             </a>
           ))}
         </div>
-
-        {/* Podium Section */}
         {currentPage === 0 && (
           <div className="flex justify-center ml-[20px] items-end gap-0 p-4">
-            {/* Second Position */}
             <div className="flex flex-col items-center">
               <div className="bg-gradient-to-b from-[#535353] to-[#282828] h-36 p-4 rounded-t-lg w-32">
                 <div className="relative">
@@ -168,7 +162,6 @@ const Leaderboard: React.FC = () => {
                 </div>
               </div>
             </div>
-            {/* First Position */}
             <div className="flex flex-col items-center">
               <div className="bg-gradient-to-b from-[#535353] to-[#282828] h-44 p-4 rounded-t-lg w-32">
                 <div className="relative">
@@ -195,7 +188,6 @@ const Leaderboard: React.FC = () => {
                 </div>
               </div>
             </div>
-            {/* Third Position */}
             <div className="flex flex-col items-center">
               <div className="bg-gradient-to-b from-[#535353] to-[#282828] h-32 p-4 rounded-t-lg w-32">
                 <div className="relative">
@@ -217,11 +209,8 @@ const Leaderboard: React.FC = () => {
             </div>
           </div>
         )}
-
-        {/* Leaderboard Table */}
         <div className="overflow-y-auto">
           {" "}
-          {/* Added this class to enable horizontal scrolling */}
           <table className="min-w-full overflow-y-auto bg-[#3E3E3E] rounded-lg">
             <thead className="bg-[#1e1e1e]">
               <tr>
@@ -254,8 +243,6 @@ const Leaderboard: React.FC = () => {
             </tbody>
           </table>
         </div>
-
-        {/* Pagination Controls */}
         <div className="flex justify-center items-center mt-8 gap-4">
           <button
             className="bg-[#1e1e1e] text-[#92FF00] border border-[#92FF00] px-4 py-2 rounded-full hover:bg-[#92FF00] hover:text-black transition-all disabled:opacity-50"
