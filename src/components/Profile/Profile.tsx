@@ -171,7 +171,7 @@ const ProfilePage: React.FC = () => {
           "
           >
             <h2
-              className="text-sm relative text-[#A3A3A3] mb-4
+              className="text-sm relative text-[#A3A3A3] mb-1
               max-[468px]:text-sm
               max-[400px]:text-xs
               max-[375px]:text-xs
@@ -192,16 +192,16 @@ const ProfilePage: React.FC = () => {
             >
               <p
                 className="text-xl text-[#FEA50D] absolute top-[40px] font-bold
-                max-[468px]:text-xl max-[468px]:top-[47px]
-                max-[400px]:text-lg max-[400px]:top-[45px]
-                max-[375px]:text-base max-[375px]:top-[40px]
-                max-[370px]:text-base max-[370px]:top-[45px]"
+                max-[468px]:text-xl max-[468px]:top-[36px]
+                max-[400px]:text-lg max-[400px]:top-[32px]
+                max-[375px]:text-base max-[375px]:top-[32px]
+                max-[370px]:text-base max-[370px]:top-[35px]"
               >
                 000
               </p>
             </div>
             <h2
-              className="text-sm relative mt-7 text-[#A3A3A3] mb-4
+              className="text-sm relative mt-7 text-[#A3A3A3] mb-1
               max-[468px]:text-sm
               max-[400px]:text-xs
               max-[375px]:text-xs
@@ -260,12 +260,21 @@ const ProfilePage: React.FC = () => {
                   </p>
                 </div>
                 <div
-                  className="mx-auto max-w-4xl absolute left-[-16px] grid grid-cols-2 w-[106%] gap-1 p-4 mt-[70px]
-                  max-[378px]:mt-40"
+                  className="mx-auto max-w-4xl  relative left-[-16px] grid grid-cols-2 w-[106%] gap-2 p-4 mt-[70px]
+                    max-[370px]:mt-40
+                    max-[370px]:w-full
+                    max-[370px]:h-auto
+                    max-[370px]:gap-4
+                    max-[370px]:left-[-22px]
+                    "
                 >
                   <div
-                    className="w-[185px] relative left-[-30px] h-[106px] p-4 text-center rounded-3xl
-                    max-[378px]:top-[-60px]"
+                    className="w-[210px] h-[140px] relative left-[-30px]  p-4 text-center rounded-3xl
+                    max-[370px]:top-[-60px]
+                    max-[370px]:w-[200px]
+                    max-[400px]:w-[200px]
+
+                    "
                   >
                     <img
                       src="/d1.svg"
@@ -277,8 +286,10 @@ const ProfilePage: React.FC = () => {
                     </p>
                   </div>
                   <div
-                    className="p-4 w-[185px] h-[106px] relative text-center rounded-3xl
-                    max-[378px]:top-[-60px]"
+                    className="p-4 w-[210px] h-[140px] relative text-center rounded-3xl
+                    max-[370px]:top-[-60px]
+                    max-[370px]:w-[200px]
+                    max-[400px]:w-[200px]"
                   >
                     <img
                       src="/d2.svg"
@@ -290,8 +301,11 @@ const ProfilePage: React.FC = () => {
                     </p>
                   </div>
                   <div
-                    className="p-4 w-[185px] h-[106px] relative left-[-30px] rounded-3xl text-center
-                    max-[378px]:top-[-80px]"
+                    className="p-4 w-[210px] h-[140px] relative left-[-30px] rounded-3xl text-center
+                    max-[370px]:top-[-60px]
+                    max-[370px]:w-[200px]
+                    max-[400px]:w-[200px]
+                    max-[378px]:mt-[-30px]"
                   >
                     <img
                       src="/d3.svg"
@@ -303,8 +317,11 @@ const ProfilePage: React.FC = () => {
                     </p>
                   </div>
                   <div
-                    className="p-4 w-[185px] h-[106px] relative text-center rounded-3xl
-                    max-[378px]:top-[-80px]"
+                    className="p-4 w-[210px] h-[140px] relative text-center rounded-3xl
+                    max-[370px]:top-[-60px]
+                    max-[370px]:w-[200px]
+                    max-[400px]:w-[200px]
+                    max-[378px]:mt-[-30px]"
                   >
                     <img
                       src="/d4.svg"
