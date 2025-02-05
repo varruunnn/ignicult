@@ -38,7 +38,7 @@ const ProfilePage: React.FC = () => {
             max-[468px]:w-16 max-[468px]:h-16 max-[468px]:top-[-130px] max-[468px]:left-[43%]
             max-[400px]:w-14 max-[400px]:h-14 max-[400px]:top-[-125px] max-[400px]:left-[42%]
             max-[375px]:w-12 max-[375px]:h-12 max-[375px]:top-[-120px] max-[375px]:left-[41%]
-            max-[370px]:w-12 max-[370px]:h-12 max-[370px]:top-[-115px] max-[370px]:left-[40%]"
+            max-[370px]:w-14 max-[370px]:h-14 max-[370px]:top-[-125px] max-[370px]:left-[40%]"
           />
 
           <h1
