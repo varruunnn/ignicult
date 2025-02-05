@@ -218,13 +218,8 @@ const ProfilePage: React.FC = () => {
               className="bg-[#353535] border w-[86vw] h-[23vh] border-[#92FF00] rounded-2xl p-4 relative
               max-[468px]:w-[86vw] max-[468px]:h-[23vh] max-[468px]:p-4
               max-[400px]:w-[88vw] max-[400px]:h-[22vh] max-[400px]:p-3
-              max-[375px]:w-[89vw] max-[375px]:h-[22vh] max-[375px]:p-2
+              max-[375px]:w-[89vw] max-[375px]:p-2
               max-[370px]:w-[90vw] max-[370px]:h-[22vh] max-[370px]:p-2"
-              style={
-                {
-                  height:window.innerHeight < 700 ? "30vh" :""
-                }
-              }
             >
               <select
                 className="w-full h-[5.5vh] bg-[#353535] text-white border border-[#B3B3B3] rounded-[100px] p-2
