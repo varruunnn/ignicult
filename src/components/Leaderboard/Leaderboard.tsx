@@ -107,7 +107,6 @@ const Leaderboard: React.FC = () => {
     currentPage * itemsPerPage,
     currentPage * itemsPerPage + itemsPerPage
   );
-
   const swipeHandlers = useSwipeable({
     onSwipedLeft: () =>
       setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1)),
@@ -158,7 +157,30 @@ const Leaderboard: React.FC = () => {
       </div>
 
       <div className="mx-0 mb-8 bg-[#141414] min-[400px]:h-[60vh] rounded-3xl border-t-2 border-[#92FF00]">
-        {/* Podium Section */}
+        <div className="flex gap-[0px] max-[369px]:gap-[15px] p-[5px] items-center max-[468px]:ml-[10px] max-[468px]:gap-[33px] max-[398px]:gap-[20px] mb-4">
+          {["Daily", "Weekly", "Monthly", "Overall"].map((period) => (
+            <a
+              key={period}
+              className={`relative px-4 py-2 mr-[-9px] text-md font-semibold cursor-pointer ${
+                timeframe === period ? "text-white" : "text-gray-500"
+              }`}
+              onClick={() =>
+                setTimeframe(
+                  period as "Daily" | "Weekly" | "Monthly" | "Overall"
+                )
+              }
+            >
+              {period}
+              {/* Underline animation */}
+              <span
+                className={`absolute bottom-0 left-0 h-[2px] bg-[#92FF00] transition-all duration-300 ease-in-out ${
+                  timeframe === period ? "w-full" : "w-0"
+                }`}
+              />
+            </a>
+          ))}
+        </div>
+
         {currentPage === 0 && (
           <div className="flex justify-center items-end gap-0 mb-4">
             {/* Second Place */}
@@ -241,9 +263,8 @@ const Leaderboard: React.FC = () => {
           </div>
         )}
 
-        {/* Regular Leaderboard Table */}
         <div className="p-5 mt-[-20px]" {...swipeHandlers}>
-          <table className="w-[115%] left-[-25px] mx-auto relative border-collapse bg-[#3E3E3E] text-center">
+          <table className="w-[115%] left-[-25px]  mx-auto relative border-collapse bg-[#3E3E3E] text-center">
             <thead>
               <tr>
                 <th className="border-b border-gray-600 py-2 px-3 text-[#92FF00] font-light">

@@ -52,7 +52,6 @@ const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen, setSidebarOpen }) => {
   ];
 
   const [isPopupVisible, setPopupVisible] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
 
   const toggleSidebar = () => {
     setSidebarOpen(!isSidebarOpen);
@@ -72,14 +71,12 @@ const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen, setSidebarOpen }) => {
 
   return (
     <div className="max-[485px]:bg-transparent overflow-x-hidden text-white">
-      {/* Animate the entire header sliding in from above */}
       <motion.header
         initial={{ y: -50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}
         className="fixed top-0 left-0 right-0 backdrop-blur-sm flex justify-between items-center px-6 py-4 h-[131px] max-[398px]:z-10 z-50 shadow-md"
       >
-        {/* Sidebar Toggle Button with a hover scale effect */}
         <motion.button
           whileHover={{ scale: 1.1 }}
           onClick={toggleSidebar}
@@ -94,8 +91,6 @@ const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen, setSidebarOpen }) => {
           initial={{ scale: 0.95, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.4 }}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
         >
           <ConnectButton
             client={client}
@@ -106,16 +101,12 @@ const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen, setSidebarOpen }) => {
             connectButton={{
               label: "Lets dive in",
               style: {
-                backgroundColor: "black",
+                backgroundColor: "#282828",
                 borderRadius: "20000px",
-                color: "white",
+                color: "#82E300",
                 border: "2px solid #82E300",
-                width: "120px",
+                minWidth: "1px",
                 height: "41px",
-                transition: "box-shadow 0.3s ease-in-out",
-                boxShadow: isHovered
-                  ? "0 0 15px #000000, 0 0 30px #82E300, 0 0 45px #82E300"
-                  : "0 0 10px #82E300, 0 0 20px #82E300",
               },
             }}
             appMetadata={{
