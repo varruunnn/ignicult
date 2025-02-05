@@ -84,7 +84,7 @@ const ProfilePage: React.FC = () => {
             max-[468px]:w-[65px] max-[468px]:h-[68px] 
             max-[400px]:w-[60px] max-[400px]:h-[68px] max-[400px]:left-[30px] max-[400px]:top-[98px]
             max-[375px]:w-[55px] max-[375px]:h-[60px] max-[375px]:left-[25px] max-[375px]:top-[95px]
-            max-[370px]:w-[50px] max-[370px]:h-[68px] max-[370px]:left-[20px] max-[370px]:top-[98px]"
+            max-[370px]:w-[50px] max-[370px]:h-[67px] max-[370px]:left-[20px] max-[370px]:top-[99px]"
           >
             <h3
               className="font-semibold leading-tight tracking-tighter text-center text-sm
@@ -110,6 +110,11 @@ const ProfilePage: React.FC = () => {
               max-[400px]:w-[70vw] max-[400px]:h-[90px] max-[400px]:right-[-55px] max-[400px]:top-[-5px]
               max-[375px]:w-[75vw] max-[375px]:h-[85px] max-[375px]:right-[-50px]
               max-[370px]:w-[78vw] max-[370px]:h-[80px] max-[370px]:right-[-45px]"
+              style={
+                {
+                  width:window.innerHeight < 700 ? "75vw" : ""
+                }
+              }
             >
               <span
                 className="text-[#FEA50D] ml-[10px] font-bold text-xl flex-grow text-left
@@ -136,6 +141,11 @@ const ProfilePage: React.FC = () => {
               max-[400px]:w-[70vw] max-[400px]:h-[90px] max-[400px]:right-[-55px] max-[400px]:top-[0px]
               max-[375px]:w-[65vw] max-[375px]:h-[85px] max-[375px]:right-[-50px]
               max-[370px]:w-[78vw] max-[370px]:h-[80px] max-[370px]:right-[-45px]"
+              style={
+                {
+                  width:window.innerHeight < 700 ? "75vw" : ""
+                }
+              }
             >
               <span
                 className="text-[#FEA50D] ml-[10px] font-bold text-xl flex-grow text-left
@@ -210,6 +220,11 @@ const ProfilePage: React.FC = () => {
               max-[400px]:w-[88vw] max-[400px]:h-[22vh] max-[400px]:p-3
               max-[375px]:w-[89vw] max-[375px]:h-[30vh] max-[375px]:p-2
               max-[370px]:w-[90vw] max-[370px]:h-[22vh] max-[370px]:p-2"
+              style={
+                {
+                  height:window.innerHeight < 700 ? "30vh" :""
+                }
+              }
             >
               <select
                 className="w-full h-[5.5vh] bg-[#353535] text-white border border-[#B3B3B3] rounded-[100px] p-2
