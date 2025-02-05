@@ -16,11 +16,11 @@ const ProfilePage: React.FC = () => {
           <p className="text-sm absolute text-[#CACACA] left-[42%] top-[-30px] max-[398px]:text-xs max-[398px]:top-[-50px] max-[398px]:left-[38%]">
             abcd12345
           </p>
-          <span className="rounded-c-right max-[370px]:h-[49px] max-[399px]:top-[-20px]  max-[399px]:left-[20px] left-[35px] bg-[#82E300] absolute text-black font-bold w-[65px] h-[65px]  py-1 rounded-l-lg ">
-            <h3 className="absolute font-extrabold text-sm top-[11px] left-[9px]">Total Points</h3>
+          <span className="rounded-c-right max-[370px]:h-[49px] max-[399px]:top-[-20px] max-[399px]:left-[20px] left-[35px] bg-[#82E300] absolute text-black font-bold w-[65px] h-[65px] py-1 rounded-l-lg flex items-center justify-center">
+            <h3 className="font-extrabold text-center text-sm">Total Points</h3>
           </span>
-          <span className="rounded-c-right max-[370px]:h-[49px] left-[35px] max-[399px]:left-[20px] max-[399px]:top-[70px] top-[97px] bg-[#82E300] absolute text-black max-[370px]:top-[40px] font-bold w-[65px] h-[65px]  py-1 rounded-l-lg ">
-            <h3 className="absolute font-extrabold text-sm top-[11px] left-[9px]">Games Played</h3>
+          <span className="rounded-c-right max-[370px]:h-[49px] left-[35px] max-[399px]:left-[20px] max-[399px]:top-[70px] top-[97px] bg-[#82E300] absolute text-black max-[370px]:top-[40px] font-bold w-[65px] h-[65px] py-1 rounded-l-lg flex items-center justify-center">
+            <h3 className="font-extrabold text-center text-sm">Games Played</h3>
           </span>
           <div className="flex flex-col  left-[17px] max-[399px]:left-[2px] relative gap-4 w-full">
             <div className="flex items-center max-[370px]:top-[-36px] max-[370px]:h-[49px] max-[399px]:top-[-36px] relative w-[74vw] right-[-60px]  h-[65px] justify-between bg-[#1E1E1E] border-2 border-[#82E300] rounded-lg rounded-r-3xl">
@@ -50,7 +50,9 @@ const ProfilePage: React.FC = () => {
               Tournaments Participated
             </h2>
             <div className="bg-black border h-[50px]  max-[399px]:h-[48px]  w-[86vw] max-[399px]:ml-[10px] max-[399px]:w-[89vw] border-[#92FF00] rounded-2xl p-4 mb-4 max-[398px]:p-2 max-[398px]:mb-2">
-              <p className="text-xl max-[399px]:top-[45px] text-[#FEA50D] text-left absolute top-[40px] font-bold max-[398px]:text-base">000</p>
+              <p className="text-xl max-[399px]:top-[45px] text-[#FEA50D] text-left absolute top-[40px] font-bold max-[398px]:text-base">
+                000
+              </p>
             </div>
 
             <h2 className="text-sm max-[370px]:mt-[-6px] max-[399px]:ml-[15px] max-[399px]:mt-[17px] max-[399px]:top-[7px]  relative text-[#A3A3A3] mb-2 max-[398px]:text-xs max-[398px]:mb-1">
@@ -65,10 +67,16 @@ const ProfilePage: React.FC = () => {
                 <h3 className="text-sm text-[#A3A3A3] relative max-[399px]:left-[8px] max-[399px]:top-[8px] max-[398px]:text-xs">
                   Highest Score
                 </h3>
-                <p className="text-xl text-right max-[399px]:right-[8px] relative text-[#FEA50D] max-[399px]:top-[-10px] top-[-24px] font-bold max-[398px]:text-base">00000</p>
+                <p className="text-xl text-right max-[399px]:right-[8px] relative text-[#FEA50D] max-[399px]:top-[-10px] top-[-24px] font-bold max-[398px]:text-base">
+                  00000
+                </p>
                 <div className="w-full h-[55px] max-[370px]:mt-[6px] top-[30px] rounded-2xl bg-black absolute">
-                <p className="absolute top-[7px] text-sm left-[18px]">Your Score</p>
-                <p className="absolute top-[25px] text-[#FEA50D] text-lg left-[20px]">000</p>
+                  <p className="absolute top-[7px] text-sm left-[18px]">
+                    Your Score
+                  </p>
+                  <p className="absolute top-[25px] text-[#FEA50D] text-lg left-[20px]">
+                    000
+                  </p>
                 </div>
               </div>
             </div>
