@@ -281,7 +281,7 @@ const ProfilePage: React.FC = () => {
                       alt="Image 1"
                       className="w-full h-full object-cover rounded-3xl"
                     />
-                    <p className="relative text-sm font-normal top-[-30px] left-[5px] text-[#FEA50D]">
+                    <p className="relative text-lg font-normal top-[-42px] left-[2px] text-[#FEA50D]">
                       Color ship shooter
                     </p>
                   </div>
@@ -296,8 +296,11 @@ const ProfilePage: React.FC = () => {
                       alt="Image 2"
                       className="w-full h-full object-cover rounded-3xl"
                     />
-                    <p className="relative text-sm font-normal top-[-30px] left-[40px] text-[#FEA50D]">
-                      48 Hr
+                    <p className="relative text-lg font-normal top-[-42px] left-[40px] text-[#FEA50D]">
+                      48 
+                    </p>
+                    <p className="absolute text-sm font-normal top-[63%] right-[14%] text-[#FEA50D]">
+                      HR
                     </p>
                   </div>
                   <div
@@ -312,8 +315,8 @@ const ProfilePage: React.FC = () => {
                       alt="Image 3"
                       className="w-full h-full object-cover rounded-3xl"
                     />
-                    <p className="relative text-sm font-normal top-[-30px] left-[40px] text-[#FEA50D]">
-                      -98 IGNIX
+                    <p className="relative text-lg font-normal top-[-40px] left-[40px] text-[#FEA50D]">
+                      -98 IGNIx
                     </p>
                   </div>
                   <div
@@ -328,7 +331,7 @@ const ProfilePage: React.FC = () => {
                       alt="Image 4"
                       className="w-full h-full object-cover rounded-3xl"
                     />
-                    <p className="relative text-sm font-normal top-[-30px] left-[10px] text-[#FEA50D]">
+                    <p className="relative text-lg font-normal top-[-43px] left-[5px] text-[#FEA50D]">
                       Color ship shooter
                     </p>
                   </div>
