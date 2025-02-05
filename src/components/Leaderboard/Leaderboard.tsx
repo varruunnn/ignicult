@@ -112,7 +112,7 @@ const Leaderboard: React.FC = () => {
     onSwipedLeft: () =>
       setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1)),
     onSwipedRight: () => setCurrentPage((prev) => Math.max(prev - 1, 0)),
-    delta: 20, 
+    delta: 20,
     trackTouch: true,
     trackMouse: false,
   });
@@ -135,8 +135,8 @@ const Leaderboard: React.FC = () => {
         </select>
       </div>
 
-      <div className="mx-0 mb-8 bg-black min-[400px]:h-[60vh]  rounded-2xl border-2 border-[#92FF00]">
-        <div className="flex gap-[0px] max-[369px]:gap-[15px]  p-[5px] items-center max-[468px]:ml-[10px] max-[468px]:gap-[33px] max-[398px]:gap-[20px] mb-4">
+      <div className="mx-0 mb-8 bg-black min-[400px]:h-[60vh] rounded-3xl border-t-2 border-[#92FF00]">
+        <div className="flex gap-[0px] max-[369px]:gap-[15px] p-[5px] items-center max-[468px]:ml-[10px] max-[468px]:gap-[33px] max-[398px]:gap-[20px] mb-4">
           {["Daily", "Weekly", "Monthly", "Overall"].map((period) => (
             <a
               key={period}
@@ -155,67 +155,57 @@ const Leaderboard: React.FC = () => {
             </a>
           ))}
         </div>
+
         {currentPage === 0 && (
-          <div className="flex justify-center items-end gap-0 ">
+          <div className="flex justify-center items-end gap-0">
+            {/* 2nd Place */}
             <div className="flex flex-col items-center">
-              <div className="bg-gradient-to-b max-[369px]:w-[100px] max-[399px]:w-[120px] max-[379px]:w-[110px] from-[#535353] to-[#282828] h-36 p-4 rounded-t-lg w-32">
+              <div className="bg-gradient-to-b max-[369px]:w-[100px] max-[399px]:w-[120px] max-[379px]:w-[110px] from-[#535353] to-[#282828] p-4 rounded-t-lg w-[103px] h-[154px]">
                 <div className="relative">
                   <div className="absolute -top-8 left-1/2 transform -translate-x-1/2">
-                    <div className="bg-yellow-500  w-8 h-8 flex items-center justify-center rounded-lg transform rotate-45">
-                      <span className="transform -rotate-45 text-white font-bold">
-                        {podiumData[1]?.rank}
-                      </span>
-                    </div>
+                    <img src="/two.svg" alt="2nd Place" className="mx-auto" />
                   </div>
-                  <div className="text-gray-300 max-[369px]:left-[-10px] relative text-sm mb-1">
+                  <div className="text-[#70C200] left-[-5px] top-[30px] max-[369px]:left-[-10px] relative text-sm mb-1">
                     {podiumData[1]?.wallet}
                   </div>
-                  <div className="text-yellow-500 text-2xl font-bold">
+                  <div className="text-yellow-500 mt-[30px] ml-[6px]  text-2xl font-bold">
                     {podiumData[1]?.score}
                   </div>
                 </div>
               </div>
             </div>
             <div className="flex flex-col items-center">
-              <div className="bg-gradient-to-b max-[369px]:w-[120px]  from-[#535353] to-[#282828] h-44 p-4 rounded-t-lg w-32">
+              <div className="bg-gradient-to-b max-[369px]:w-[120px] from-[#535353] to-[#282828]  p-4 rounded-t-lg w-[103px] h-[184px] ">
                 <div className="relative">
-                  <div className="absolute -top-8 left-1/2 transform -translate-x-1/2">
-                    <div className="bg-yellow-500 w-8 h-8 flex items-center justify-center rounded-lg transform rotate-45">
-                      <span className="transform -rotate-45 text-white font-bold">
-                        {podiumData[0]?.rank}
-                      </span>
-                    </div>
+                  <div className="absolute  -top-8 left-1/2 transform -translate-x-1/2">
+                    <img src="/one.svg" alt="1st Place" className="mx-auto" />
                   </div>
-                  <div className="text-gray-300 absolute top-[40px] text-sm mb-1">
+                  <div className="text-[#70C200] left-[-5px] absolute top-[40px] text-sm mb-1">
                     {podiumData[0]?.wallet}
                   </div>
-                  <div className="text-yellow-500 text-2xl font-bold flex items-center justify-center">
+                  <div className="text-yellow-500 text-2xl relative top-[57px] font-bold flex items-center justify-center">
                     {podiumData[0]?.score}
                   </div>
                   <div className="relative">
                     <img
                       src="/trophy1.svg"
                       alt="Crown"
-                      className="w-11 max-[398px]:top-[60px] absolute left-[23px] top-[70px] h-11"
+                      className="w-11 absolute left-[15px] top-[70px] h-11 max-[398px]:top-[60px]"
                     />
                   </div>
                 </div>
               </div>
             </div>
             <div className="flex flex-col items-center">
-              <div className="bg-gradient-to-b max-[369px]:w-[100px]  from-[#535353] to-[#282828] h-32 p-4 rounded-t-lg w-32">
+              <div className="bg-gradient-to-b max-[369px]:w-[100px] from-[#535353] to-[#282828] p-4 rounded-t-lg w-[103px] h-[140px]">
                 <div className="relative">
                   <div className="absolute -top-8 left-1/2 transform -translate-x-1/2">
-                    <div className="bg-yellow-500 w-8 h-8 flex items-center justify-center rounded-lg transform rotate-45">
-                      <span className="transform -rotate-45 text-white font-bold">
-                        {podiumData[2]?.rank}
-                      </span>
-                    </div>
+                    <img src="/three.svg" alt="3rd Place" className="mx-auto" />
                   </div>
-                  <div className="text-gray-300 max-[369px]:left-[-10px] relative text-sm mb-1">
+                  <div className="text-[#70C200] top-[30px]  max-[369px]:left-[-10px] relative text-sm mb-1">
                     {podiumData[2]?.wallet}
                   </div>
-                  <div className="text-yellow-500 text-2xl font-bold">
+                  <div className="text-yellow-500 relative top-[30px]  left-[10px] text-2xl font-bold">
                     {podiumData[2]?.score}
                   </div>
                 </div>
@@ -223,8 +213,9 @@ const Leaderboard: React.FC = () => {
             </div>
           </div>
         )}
+
         <div className="p-4" {...swipeHandlers}>
-          <table className="w-full border-collapse bg-[#3E3E3E] text-center">
+          <table className="w-full mx-auto relative border-collapse bg-[#3E3E3E] text-center">
             <thead>
               <tr>
                 <th className="border-b border-gray-600 py-2 text-[#92FF00] font-semibold">

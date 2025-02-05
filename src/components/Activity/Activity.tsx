@@ -1,6 +1,5 @@
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
 import { useState } from "react";
-import { ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const Activity = () => {
@@ -22,20 +21,19 @@ const Activity = () => {
     );
   };
 
-  // Animation variants
   const cardVariants = {
     enter: (direction: number) => ({
       x: direction > 0 ? 100 : -100,
-      opacity: 0
+      opacity: 0,
     }),
     center: {
       x: 0,
-      opacity: 1
+      opacity: 1,
     },
     exit: (direction: number) => ({
       x: direction > 0 ? -100 : 100,
-      opacity: 0
-    })
+      opacity: 0,
+    }),
   };
 
   const floatingAnim = {
@@ -43,14 +41,15 @@ const Activity = () => {
     transition: {
       duration: 2,
       repeat: Infinity,
-      ease: "easeInOut"
-    }
+      ease: "easeInOut",
+    },
   };
 
   return (
-    <div className="min-h-screen py-[100px] w-full h-[100vh] text-white">
-      <section>
-        <div className="relative bg-[#1A1A1A] border ml-[31px] border-green-600 rounded-2xl p-4 w-[368px] h-[129px] shadow-lg flex items-center max-[391px]:w-[320px] justify-between overflow-hidden">
+    <div className="min-h-screen flex flex-col items-center justify-center py-8 w-full text-white">
+      {/* First Section – Activity Card */}
+      <section className="w-full flex flex-col mt-[-300px] items-center relative">
+        <div className="bg-[#1A1A1A] border  border-green-600 rounded-2xl p-4 w-11/12 max-w-md h-[129px] shadow-lg flex items-center justify-between overflow-hidden">
           <AnimatePresence mode="wait" custom={1}>
             <motion.div
               key={currentIndex}
@@ -60,10 +59,10 @@ const Activity = () => {
               animate="center"
               exit="exit"
               transition={{ duration: 0.3 }}
-              className="w-full flex justify-between"
+              className="w-full flex justify-between items-center"
             >
               <div>
-                <motion.h2 
+                <motion.h2
                   className="text-[#7FFF00] text-2xl font-bold mb-2"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -72,7 +71,7 @@ const Activity = () => {
                   {games[currentIndex].name}
                 </motion.h2>
                 <p className="text-[#FFD700] text-xl font-mono">Score</p>
-                <motion.p 
+                <motion.p
                   className="text-[#FFD700] text-4xl font-mono mt-1"
                   key={games[currentIndex].score}
                   initial={{ scale: 0.5 }}
@@ -82,7 +81,7 @@ const Activity = () => {
                   {games[currentIndex].score}
                 </motion.p>
               </div>
-              <motion.div 
+              <motion.div
                 className="flex flex-col items-center justify-center"
                 whileHover={{ scale: 1.05 }}
               >
@@ -94,19 +93,21 @@ const Activity = () => {
               </motion.div>
             </motion.div>
           </AnimatePresence>
-          
-          <motion.div 
-            className="absolute bottom-[-12px] left-1/2 transform -translate-x-1/2 bg-[#7FFF00] rounded-full p-2"
-            animate={floatingAnim}
-          >
-            <ChevronDown className="text-black h-6 w-6" />
-          </motion.div>
         </div>
+        {/* Floating Chevron */}
+        <motion.div
+          className="absolute left-[43%]  transform -translate-x-1/2 bg-[#7FFF00] rounded-full p-2 mt-[-25px]"
+          animate={floatingAnim}
+          style={{ top: "calc(50% + 70px)" }} // Adjusts based on card height and spacing
+        >
+          <ChevronDown className="text-black h-6 w-6" />
+        </motion.div>
       </section>
 
-      <section>
-        <motion.div 
-          className="flex items-center relative w-[90%] ml-[20px] max-[391px]:ml-[25px] justify-center mt-[50px] bg-black border border-gray-500 rounded-full px-6 py-3"
+      {/* Second Section – Navigation Buttons */}
+      <section className="w-full flex flex-col items-center mt-10">
+        <motion.div
+          className="flex items-center justify-center bg-black border border-gray-500 rounded-full px-6 py-3 w-11/12 max-w-sm"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
@@ -119,7 +120,7 @@ const Activity = () => {
           >
             <ChevronLeft className="w-6 h-6" />
           </motion.button>
-          <motion.div 
+          <motion.div
             className="px-6 text-white text-lg"
             key={currentIndex}
             initial={{ opacity: 0 }}

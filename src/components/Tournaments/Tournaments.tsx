@@ -99,12 +99,12 @@ export default function Tournaments() {
       </div>
 
       <div className="text-center  mt-20">
-        <h1 className="text-2xl font-bold text-[#82E300] text-shadow-glow">
+        <h1 className=" ml-[-20px] text-xl  font-medium text-[#FFFFFF] text-shadow-glow">
           Monthly Tournaments
         </h1>
         <div className="mt-4 flex justify-center items-center">
           <select
-            className="px-4 py-2 rounded-full bg-gray-800 text-white border border-[#82E300] focus:outline-none hover:border-[#6ac100] transition-all"
+            className="px-4 py-2 w-[70vw] rounded-full bg-gray-800 text-white border border-[#82E300] focus:outline-none hover:border-[#6ac100] transition-all"
             value={selectedGame}
             onChange={handleGameChange}
           >
@@ -115,7 +115,20 @@ export default function Tournaments() {
             ))}
           </select>
           <button className="ml-2 px-3 py-2 rounded-full bg-[#82E300] hover:bg-[#6ac100] text-black shadow-glow transition-all">
-            ⟳
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="black"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="w-5 h-5 "
+          >
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="17 8 12 3 7 8" />
+            <line x1="12" y1="3" x2="12" y2="15" />
+          </svg>
           </button>
         </div>
       </div>
@@ -129,15 +142,13 @@ export default function Tournaments() {
             January 2025
           </h2>
         </div>
-
-        {/* Table Section */}
         <div className="w-full max-h-[50vh] mb-4 max-[378px]:h-[40vh] max-[378px]:mb-[60px] bg-[#3E3E3E] rounded-lg overflow-y-auto">
           <table className="w-full text-left text-sm text-gray-400 border-collapse">
-            <thead className="bg-[#1e1e1e]">
+            <thead className="bg-[#3E3E3E]">
               <tr>
-                <th className="py-2 px-4 border border-gray-600">Rank</th>
-                <th className="py-2 px-4 border border-gray-600">Wallet Address</th>
-                <th className="py-2 px-4 border border-gray-600">Top Score</th>
+                <th className="py-2 px-4 border text-[#82E300] border-gray-600">Rank</th>
+                <th className="py-2 px-4 border text-[#82E300] border-gray-600">Wallet Address</th>
+                <th className="py-2 px-4 border text-[#82E300] border-gray-600">Top Score</th>
               </tr>
             </thead>
             <tbody>
@@ -160,13 +171,11 @@ export default function Tournaments() {
             </tbody>
           </table>
         </div>
-
-        {/* Prev / Next Buttons */}
-        <div className="flex justify-center gap-4">
+        <div className="flex justify-center gap-10">
           <button
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
             disabled={currentPage === 0}
-            className="px-4 py-2 rounded-full bg-[#1e1e1e] text-[#82E300] border border-[#82E300] hover:bg-[#6ac100] hover:text-black transition-all disabled:opacity-50"
+            className="px-4 py-2 rounded-full max-[380px]:top-[-50px] relative bg-[#1e1e1e] text-[#82E300] border border-[#82E300] hover:bg-[#6ac100] hover:text-black transition-all disabled:opacity-50"
           >
             &larr; Prev
           </button>
@@ -175,7 +184,7 @@ export default function Tournaments() {
               setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1))
             }
             disabled={currentPage >= totalPages - 1}
-            className="px-4 py-2 rounded-full bg-[#1e1e1e] text-[#82E300] border border-[#82E300] hover:bg-[#6ac100] hover:text-black transition-all disabled:opacity-50"
+            className="px-4 py-2 rounded-full max-[380px]:top-[-50px] relative bg-[#1e1e1e] text-[#82E300] border border-[#82E300] hover:bg-[#6ac100] hover:text-black transition-all disabled:opacity-50"
           >
             Next &rarr;
           </button>
