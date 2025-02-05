@@ -215,7 +215,7 @@ const ProfilePage: React.FC = () => {
                 max-[400px]:w-[88vw] max-[400px]:h-[22vh] max-[400px]:p-3
                 max-[370px]:w-[90vw] max-[370px]:h-[22vh] max-[370px]:p-2"
               style={{
-                height: window.innerHeight < 700 ? "30vh" : "23vh",
+                height: window.innerWidth === 375 ? "30vh" : "23vh",
               }}
             >
               <select
