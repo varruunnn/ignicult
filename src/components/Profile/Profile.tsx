@@ -3,9 +3,6 @@ import React from "react";
 const ProfilePage: React.FC = () => {
   return (
     <div className="min-h-screen p-4 py-20  text-white overflow-y-auto overflow-x-hidden">
-      <h1 className="absolute text-3xl  font-bold left-[39%] text-white top-[130px] z-49 max-[398px]:text-2xl max-[398px]:left-[39%] max-[398px]:top-[135px] max-[398px]:z-11">
-        Profile
-      </h1>
       <div className="border-t-2 bg-[#141414] border-[#92FF00] fixed h-[80vh] w-[110%] left-[-19px] top-[24%] rounded-[80px] p-4 max-[398px]:h-[70vh] max-[398px]:w-[105%] max-[398px]:top-[25%] max-[398px]:left-[-14px] max-[398px]:rounded-[40px]">
         <div className="mt-20 absolute w-[90%] h-[50vh] rounded-[80px] p-4 max-[398px]:w-full max-[398px]:h-[45vh] max-[398px]:rounded-[40px]">
           <img
