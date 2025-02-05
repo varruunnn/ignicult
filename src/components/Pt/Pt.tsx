@@ -38,8 +38,7 @@ const PremiumTournaments = () => {
   const swipeHandlers = useSwipeable({
     onSwipedLeft: () =>
       setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1)),
-    onSwipedRight: () =>
-      setCurrentPage((prev) => Math.max(prev - 1, 0)),
+    onSwipedRight: () => setCurrentPage((prev) => Math.max(prev - 1, 0)),
     delta: 50,
     trackTouch: true,
     trackMouse: false,
@@ -51,39 +50,47 @@ const PremiumTournaments = () => {
       <h2 className="text-white text-lg font-semibold mb-4 text-center">
         Premium Tournaments
       </h2>
-      <div className="flex items-center border-2 border-[#F94EA6] mt-5  py-2 rounded-full w-full max-w-md mx-auto">
+      <div className="flex items-center border-2 border-[#F94EA6] mt-5  py-2 left-[-20px] relative rounded-full w-[80vw] max-w-md mx-auto">
         <select
-          className="flex-grow appearance-none bg-transparent text-[#F94EA6] outline-none p-2 rounded-md"
+          className="flex-grow  bg-transparent appearance-none text-[#F94EA6] outline-none p-2 rounded-md"
           defaultValue="Cricket Catch Pro"
+          style={{
+            backgroundImage:
+              'url("/downpt.svg")',
+              backgroundPosition: "right 10px center",
+              backgroundRepeat: "no-repeat",
+          }}
         >
           <option value="Cricket Catch Pro">Cricket Catch Pro</option>
           <option value="Tournament 1">Tournament 1</option>
           <option value="Tournament 2">Tournament 2</option>
         </select>
-        <button className="ml-2 p-2 relative left-[-10px] rounded-full bg-gradient-to-r from-[#EE49FD] via-[#F94EA6] to-[#C253F5]">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="white"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="w-5 h-5"
-          >
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-            <polyline points="17 8 12 3 7 8" />
-            <line x1="12" y1="3" x2="12" y2="15" />
-          </svg>
-        </button>
       </div>
+      <button className="ml-2 p-2 right-[10px] top-[196px] absolute rounded-full bg-gradient-to-r from-[#EE49FD] via-[#F94EA6] to-[#C253F5]">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="white"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="w-5 h-5"
+        >
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+          <polyline points="17 8 12 3 7 8" />
+          <line x1="12" y1="3" x2="12" y2="15" />
+        </svg>
+      </button>
       <div className="border-2 max-[361px]:w-[108%] border-[#F94EA6] mt-7 bg-black  rounded-[30px] w-[107%] ml-[-12px]">
         <div className="flex max-[399px]:gap-5 max-[361px]:gap-4 justify-center mt-10 items-end gap-8 mb-8">
           <div className="flex flex-col w-[100px] h-[100px] items-center p-4 rounded-[80px] border-2 border-[#F94EA6]">
             <div className="text-xl text-white font-bold">
               {podiumPlayers[1]?.rank}
             </div>
-            <div className="text-sm text-gray-300">{podiumPlayers[1]?.wallet}</div>
+            <div className="text-sm text-gray-300">
+              {podiumPlayers[1]?.wallet}
+            </div>
             <div className="text-lg text-[#FEA50D] font-semibold">
               {podiumPlayers[1]?.score}
             </div>
@@ -93,7 +100,9 @@ const PremiumTournaments = () => {
             <div className="text-2xl text-white font-bold">
               {podiumPlayers[0]?.rank}
             </div>
-            <div className="text-sm text-gray-300">{podiumPlayers[0]?.wallet}</div>
+            <div className="text-sm text-gray-300">
+              {podiumPlayers[0]?.wallet}
+            </div>
             <div className="text-xl text-[#FEA50D] font-semibold">
               {podiumPlayers[0]?.score}
             </div>
@@ -102,7 +111,9 @@ const PremiumTournaments = () => {
             <div className="text-xl font-bold text-white">
               {podiumPlayers[2]?.rank}
             </div>
-            <div className="text-sm text-gray-300">{podiumPlayers[2]?.wallet}</div>
+            <div className="text-sm text-gray-300">
+              {podiumPlayers[2]?.wallet}
+            </div>
             <div className="text-lg text-[#FEA50D] font-semibold">
               {podiumPlayers[2]?.score}
             </div>

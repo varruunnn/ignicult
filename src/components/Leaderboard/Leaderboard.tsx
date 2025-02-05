@@ -121,9 +121,14 @@ const Leaderboard: React.FC = () => {
       <div className="w-full py-8 px-4 flex flex-col items-center">
         <h3 className="text-3xl font-semibold mb-4">Leaderboard</h3>
         <select
-          className="bg-[#1e1e1e] text-[#92FF00] border-[1px]  border-[#92FF00] relative left-[-20px] p-2 rounded-full w-[75vw] h-[50px]"
+          className="bg-[#1e1e1e] text-[#92FF00] border-[1px] border-[#92FF00] relative left-[-20px] p-2 rounded-full w-[75vw] h-[50px] appearance-none pl-4 pr-8"
           value={selectedGame}
           onChange={(e) => setSelectedGame(e.target.value as GameName)}
+          style={{
+            backgroundImage: 'url("/down.svg")',
+            backgroundPosition: "right 10px center",
+            backgroundRepeat: "no-repeat",
+          }}
         >
           {Object.keys(mockData).map((game) => (
             <option key={game} value={game}>
@@ -131,6 +136,7 @@ const Leaderboard: React.FC = () => {
             </option>
           ))}
         </select>
+
         <button className="ml-2 px-3 py-2 absolute left-[82%] top-[182px] rounded-full bg-[#82E300] hover:bg-[#6ac100] text-black shadow-glow transition-all">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -146,31 +152,33 @@ const Leaderboard: React.FC = () => {
             <polyline points="17 8 12 3 7 8" />
             <line x1="12" y1="3" x2="12" y2="15" />
           </svg>
-          </button>
+        </button>
       </div>
 
       <div className="mx-0 mb-8 bg-[#141414] min-[400px]:h-[60vh] rounded-3xl border-t-2 border-[#92FF00]">
-      <div className="flex gap-[0px] max-[369px]:gap-[15px] p-[5px] items-center max-[468px]:ml-[10px] max-[468px]:gap-[33px] max-[398px]:gap-[20px] mb-4">
-      {["Daily", "Weekly", "Monthly", "Overall"].map((period) => (
-        <a
-          key={period}
-          className={`relative px-4 py-2 mr-[-9px] text-md font-semibold cursor-pointer ${
-            timeframe === period
-              ? "text-white"
-              : "text-gray-500"
-          }`}
-          onClick={() => setTimeframe(period as "Daily" | "Weekly" | "Monthly" | "Overall")}
-        >
-          {period}
-          {/* Underline animation */}
-          <span
-            className={`absolute bottom-0 left-0 h-[2px] bg-[#92FF00] transition-all duration-300 ease-in-out ${
-              timeframe === period ? "w-full" : "w-0"
-            }`}
-          />
-        </a>
-      ))}
-    </div>
+        <div className="flex gap-[0px] max-[369px]:gap-[15px] p-[5px] items-center max-[468px]:ml-[10px] max-[468px]:gap-[33px] max-[398px]:gap-[20px] mb-4">
+          {["Daily", "Weekly", "Monthly", "Overall"].map((period) => (
+            <a
+              key={period}
+              className={`relative px-4 py-2 mr-[-9px] text-md font-semibold cursor-pointer ${
+                timeframe === period ? "text-white" : "text-gray-500"
+              }`}
+              onClick={() =>
+                setTimeframe(
+                  period as "Daily" | "Weekly" | "Monthly" | "Overall"
+                )
+              }
+            >
+              {period}
+              {/* Underline animation */}
+              <span
+                className={`absolute bottom-0 left-0 h-[2px] bg-[#92FF00] transition-all duration-300 ease-in-out ${
+                  timeframe === period ? "w-full" : "w-0"
+                }`}
+              />
+            </a>
+          ))}
+        </div>
 
         {currentPage === 0 && (
           <div className="flex justify-center items-end gap-0">

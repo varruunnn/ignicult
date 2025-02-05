@@ -60,9 +60,8 @@ const mockTournamentData: TournamentData = {
 };
 
 export default function Tournaments() {
-  const [selectedGame, setSelectedGame] = useState<keyof typeof mockTournamentData>(
-    "Cricket Catch Pro"
-  );
+  const [selectedGame, setSelectedGame] =
+    useState<keyof typeof mockTournamentData>("Cricket Catch Pro");
   const [currentPage, setCurrentPage] = useState<number>(0);
   const itemsPerPage = 10;
 
@@ -84,8 +83,7 @@ export default function Tournaments() {
   const swipeHandlers = useSwipeable({
     onSwipedLeft: () =>
       setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1)),
-    onSwipedRight: () =>
-      setCurrentPage((prev) => Math.max(prev - 1, 0)),
+    onSwipedRight: () => setCurrentPage((prev) => Math.max(prev - 1, 0)),
     delta: 50,
     trackTouch: true,
     trackMouse: false,
@@ -104,9 +102,15 @@ export default function Tournaments() {
         </h1>
         <div className="mt-4 flex justify-center items-center">
           <select
-            className="px-4 py-2 w-[70vw] rounded-full bg-gray-800 text-white border border-[#82E300] focus:outline-none hover:border-[#6ac100] transition-all"
+            className="px-4 py-2 w-[70vw] rounded-full h-[6.5vh] bg-gray-900 appearance-none pl-4 pr-8 text-white border border-[#82E300] focus:outline-none hover:border-[#6ac100] transition-all"
             value={selectedGame}
             onChange={handleGameChange}
+            style={{
+              backgroundImage:
+                'url("/down.svg")',
+                backgroundPosition: "right 10px center",
+                backgroundRepeat: "no-repeat",
+            }}
           >
             {Object.keys(mockTournamentData).map((game) => (
               <option key={game} value={game}>
@@ -114,21 +118,22 @@ export default function Tournaments() {
               </option>
             ))}
           </select>
+
           <button className="ml-2 px-3 py-2 rounded-full bg-[#82E300] hover:bg-[#6ac100] text-black shadow-glow transition-all">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="black"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="w-5 h-5 "
-          >
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-            <polyline points="17 8 12 3 7 8" />
-            <line x1="12" y1="3" x2="12" y2="15" />
-          </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="black"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="w-5 h-5 "
+            >
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="17 8 12 3 7 8" />
+              <line x1="12" y1="3" x2="12" y2="15" />
+            </svg>
           </button>
         </div>
       </div>
@@ -146,9 +151,15 @@ export default function Tournaments() {
           <table className="w-full text-left text-sm text-gray-400 border-collapse">
             <thead className="bg-[#3E3E3E]">
               <tr>
-                <th className="py-2 px-4 border text-[#82E300] border-gray-600">Rank</th>
-                <th className="py-2 px-4 border text-[#82E300] border-gray-600">Wallet Address</th>
-                <th className="py-2 px-4 border text-[#82E300] border-gray-600">Top Score</th>
+                <th className="py-2 px-4 border text-[#82E300] border-gray-600">
+                  Rank
+                </th>
+                <th className="py-2 px-4 border text-[#82E300] border-gray-600">
+                  Wallet Address
+                </th>
+                <th className="py-2 px-4 border text-[#82E300] border-gray-600">
+                  Top Score
+                </th>
               </tr>
             </thead>
             <tbody>
