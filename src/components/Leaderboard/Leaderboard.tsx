@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSwipeable } from "react-swipeable";
+import { motion } from "framer-motion";
 import SwipeHintOverlay from "../SwipeHintOverlay/SwipeHintOverlay";
 
 const Leaderboard: React.FC = () => {
@@ -106,6 +107,7 @@ const Leaderboard: React.FC = () => {
     currentPage * itemsPerPage,
     currentPage * itemsPerPage + itemsPerPage
   );
+
   const swipeHandlers = useSwipeable({
     onSwipedLeft: () =>
       setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1)),
@@ -156,33 +158,16 @@ const Leaderboard: React.FC = () => {
       </div>
 
       <div className="mx-0 mb-8 bg-[#141414] min-[400px]:h-[60vh] rounded-3xl border-t-2 border-[#92FF00]">
-        <div className="flex gap-[0px] max-[369px]:gap-[15px] p-[5px] items-center max-[468px]:ml-[10px] max-[468px]:gap-[33px] max-[398px]:gap-[20px] mb-4">
-          {["Daily", "Weekly", "Monthly", "Overall"].map((period) => (
-            <a
-              key={period}
-              className={`relative px-4 py-2 mr-[-9px] text-md font-semibold cursor-pointer ${
-                timeframe === period ? "text-white" : "text-gray-500"
-              }`}
-              onClick={() =>
-                setTimeframe(
-                  period as "Daily" | "Weekly" | "Monthly" | "Overall"
-                )
-              }
-            >
-              {period}
-              {/* Underline animation */}
-              <span
-                className={`absolute bottom-0 left-0 h-[2px] bg-[#92FF00] transition-all duration-300 ease-in-out ${
-                  timeframe === period ? "w-full" : "w-0"
-                }`}
-              />
-            </a>
-          ))}
-        </div>
-
+        {/* Podium Section */}
         {currentPage === 0 && (
-          <div className="flex justify-center items-end gap-0">
-            <div className="flex flex-col items-center">
+          <div className="flex justify-center items-end gap-0 mb-4">
+            {/* Second Place */}
+            <motion.div
+              initial={{ y: 50, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.2, type: "spring", stiffness: 100 }}
+              className="flex flex-col items-center"
+            >
               <div className="bg-gradient-to-b max-[369px]:w-[100px] max-[399px]:w-[120px] max-[379px]:w-[110px] from-[#535353] to-[#121212] p-4 rounded-t-lg w-[103px] h-[154px]">
                 <div className="relative">
                   <div className="absolute -top-12 left-1/2 transform -translate-x-1/2">
@@ -195,16 +180,22 @@ const Leaderboard: React.FC = () => {
                   <div className="text-[#70C200] left-[-5px] top-[30px] max-[369px]:left-[-10px] relative text-sm mb-1">
                     {podiumData[1]?.wallet}
                   </div>
-                  <div className="text-yellow-500 mt-[30px] ml-[6px]  text-2xl font-bold">
+                  <div className="text-yellow-500 mt-[30px] ml-[6px] text-2xl font-bold">
                     {podiumData[1]?.score}
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="flex flex-col items-center">
-              <div className="bg-gradient-to-b max-[369px]:w-[120px] from-[#535353] to-[#121212]  p-4 rounded-t-lg w-[103px] h-[184px] ">
+            </motion.div>
+            {/* First Place */}
+            <motion.div
+              initial={{ y: 50, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.3, type: "spring", stiffness: 100 }}
+              className="flex flex-col items-center"
+            >
+              <div className="bg-gradient-to-b max-[369px]:w-[120px] from-[#535353] to-[#121212] p-4 rounded-t-lg w-[103px] h-[184px]">
                 <div className="relative">
-                  <div className="absolute  -top-8 left-1/2 transform -translate-x-1/2">
+                  <div className="absolute -top-8 left-1/2 transform -translate-x-1/2">
                     <img src="/one.svg" alt="1st Place" className="mx-auto" />
                   </div>
                   <div className="text-[#70C200] left-[-5px] absolute top-[40px] text-sm mb-1">
@@ -225,27 +216,34 @@ const Leaderboard: React.FC = () => {
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="flex flex-col items-center">
+            </motion.div>
+            {/* Third Place */}
+            <motion.div
+              initial={{ y: 50, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.4, type: "spring", stiffness: 100 }}
+              className="flex flex-col items-center"
+            >
               <div className="bg-gradient-to-b max-[369px]:w-[100px] from-[#535353] to-[#121212] p-4 rounded-t-lg w-[103px] h-[140px]">
                 <div className="relative">
                   <div className="absolute -top-8 left-1/2 transform -translate-x-1/2">
                     <img src="/three.svg" alt="3rd Place" className="mx-auto" />
                   </div>
-                  <div className="text-[#70C200] top-[30px]  max-[369px]:left-[-10px] relative text-sm mb-1">
+                  <div className="text-[#70C200] top-[30px] max-[369px]:left-[-10px] relative text-sm mb-1">
                     {podiumData[2]?.wallet}
                   </div>
-                  <div className="text-yellow-500 relative top-[30px]  left-[10px] text-2xl font-bold">
+                  <div className="text-yellow-500 relative top-[30px] left-[10px] text-2xl font-bold">
                     {podiumData[2]?.score}
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         )}
 
+        {/* Regular Leaderboard Table */}
         <div className="p-5 mt-[-20px]" {...swipeHandlers}>
-          <table className="w-[115%] left-[-25px]  mx-auto relative border-collapse bg-[#3E3E3E] text-center">
+          <table className="w-[115%] left-[-25px] mx-auto relative border-collapse bg-[#3E3E3E] text-center">
             <thead>
               <tr>
                 <th className="border-b border-gray-600 py-2 px-3 text-[#92FF00] font-light">

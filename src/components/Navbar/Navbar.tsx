@@ -3,13 +3,16 @@ import { useState } from "react";
 import { inAppWallet, createWallet } from "thirdweb/wallets";
 import { darkTheme } from "thirdweb/react";
 import { ConnectButton } from "thirdweb/react";
-import { IoMenu, IoClose } from "react-icons/io5";
+import { IoMenu } from "react-icons/io5";
 import styled from "styled-components";
 import { client } from "../../client";
+import { motion } from "framer-motion";
+
 interface NavbarProps {
   isSidebarOpen: boolean;
   setSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
+
 const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen, setSidebarOpen }) => {
   const customTheme = darkTheme({
     colors: {
@@ -25,6 +28,7 @@ const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen, setSidebarOpen }) => {
       primaryButtonText: "hsl(0, 0%, 100%)",
     },
   });
+
   const wallets = [
     inAppWallet({
       auth: {
@@ -46,16 +50,17 @@ const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen, setSidebarOpen }) => {
     createWallet("io.rabby"),
     createWallet("io.zerion.wallet"),
   ];
+
   const [isPopupVisible, setPopupVisible] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   const toggleSidebar = () => {
     setSidebarOpen(!isSidebarOpen);
   };
-  
+
   const closeSidebar = () => {
     setSidebarOpen(false);
   };
-
 
   const handleSignup = () => {
     setPopupVisible(true);
@@ -64,19 +69,31 @@ const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen, setSidebarOpen }) => {
   const handleClosePopup = () => {
     setPopupVisible(false);
   };
-  const [isHovered, setIsHovered] = useState(false);
 
   return (
     <div className="max-[485px]:bg-transparent overflow-x-hidden text-white">
-      <header className="fixed top-0 left-0 right-0 backdrop-blur-sm flex justify-between items-center px-6 py-4 h-[131px] max-[398px]:z-10 z-50 shadow-md">
-        <button
+      {/* Animate the entire header sliding in from above */}
+      <motion.header
+        initial={{ y: -50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="fixed top-0 left-0 right-0 backdrop-blur-sm flex justify-between items-center px-6 py-4 h-[131px] max-[398px]:z-10 z-50 shadow-md"
+      >
+        {/* Sidebar Toggle Button with a hover scale effect */}
+        <motion.button
+          whileHover={{ scale: 1.1 }}
           onClick={toggleSidebar}
           className="cursor-pointer relative"
           aria-label="Open Sidebar Menu"
         >
           <IoMenu size={37} className="text-white" />
-        </button>
-        <div
+        </motion.button>
+
+        {/* Connect Button Container with a slight scale-up on mount */}
+        <motion.div
+          initial={{ scale: 0.95, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.4 }}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
@@ -106,8 +123,10 @@ const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen, setSidebarOpen }) => {
               url: "https://example.com",
             }}
           />
-        </div>
-      </header>
+        </motion.div>
+      </motion.header>
+
+      {/* Sidebar container */}
       <div
         className={`fixed top-0 left-0 h-full z-[1000] transition-transform duration-300 ease-in-out ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
@@ -118,4 +137,5 @@ const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen, setSidebarOpen }) => {
     </div>
   );
 };
+
 export default Navbar;

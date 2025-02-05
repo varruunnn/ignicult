@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 const ProfilePage: React.FC = () => {
   return (
@@ -10,7 +11,7 @@ const ProfilePage: React.FC = () => {
       max-[370px]:mt-[120px]"
     >
       <div
-        className="border-t-2 bg-[#141414]  border-[#92FF00] relative h-[100vh] w-[100%] left-[-16px] max-w-4xl mx-auto rounded-t-[20px] p-4
+        className="border-t-2 bg-[#141414] border-[#92FF00] relative h-[100vh] w-[100%] left-[-16px] max-w-4xl mx-auto rounded-t-[20px] p-4
         max-[468px]:w-[109%]
         max-[400px]:w-[109%]
         max-[375px]:w-[109%]
@@ -24,14 +25,19 @@ const ProfilePage: React.FC = () => {
         max-[375px]:rounded-t-[20px]
         max-[370px]:rounded-t-[20px]"
       >
-        <div
+        {/* Wrap the inner content with a motion.div for a gentle fade & scale-up */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8 }}
           className="absolute left-0 w-full top-[100px] h-[100vh] rounded-[80px] p-4 mx-auto
           max-[468px]:rounded-[70px]
           max-[400px]:rounded-[60px]
           max-[375px]:rounded-[50px]
           max-[370px]:rounded-[40px]"
         >
-          <img
+          {/* Profile Image with a pop/bounce effect and hover scale */}
+          <motion.img
             src="/profilee.svg"
             alt="Profile"
             className="w-16 h-16 absolute left-[43%] top-[-130px] rounded-full
@@ -39,33 +45,50 @@ const ProfilePage: React.FC = () => {
             max-[400px]:w-14 max-[400px]:h-14 max-[400px]:top-[-125px] max-[400px]:left-[42%]
             max-[375px]:w-12 max-[375px]:h-12 max-[375px]:top-[-120px] max-[375px]:left-[41%]
             max-[370px]:w-14 max-[370px]:h-14 max-[370px]:top-[-125px] max-[370px]:left-[40%]"
+            initial={{ scale: 0, rotate: -90 }}
+            animate={{ scale: 1, rotate: 0 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            whileHover={{ scale: 1.1 }}
           />
 
-          <h1
+          {/* Wallet Address Title */}
+          <motion.h1
             className="text-lg absolute text-[#858585] left-[35%] top-[-60px] font-bold
             max-[468px]:text-lg max-[468px]:top-[-60px] max-[468px]:left-[35%]
             max-[400px]:text-base max-[400px]:top-[-55px] max-[400px]:left-[34%]
             max-[375px]:text-base max-[375px]:top-[-30x] max-[375px]:left-[33%]
             max-[370px]:text-sm max-[370px]:top-[-60px] max-[370px]:left-[34%]"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
           >
             Wallet Address
-          </h1>
+          </motion.h1>
 
-          <p
+          {/* Wallet Address Value */}
+          <motion.p
             className="text-sm absolute text-[#CACACA] left-[42%] top-[-30px]
             max-[468px]:text-sm max-[468px]:top-[-30px] max-[468px]:left-[42%]
             max-[400px]:text-xs max-[400px]:top-[-28px] max-[400px]:left-[41%]
             max-[375px]:text-xs max-[375px]:top-[-26px] max-[375px]:left-[40%]
             max-[370px]:text-xs max-[370px]:top-[-40px] max-[370px]:left-[39%]"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.35, duration: 0.5 }}
           >
             abcd12345
-          </p>
-          <span
+          </motion.p>
+
+          {/* Total Points */}
+          <motion.span
             className="bg-[#82E300] absolute text-black font-bold w-[65px] h-[66px] py-1 left-[35px] top-[16px] rounded-l-lg flex items-center justify-center
             max-[468px]:w-[65px] max-[468px]:h-[66px] 
             max-[400px]:w-[60px] max-[400px]:h-[68px] max-[400px]:left-[30px] max-[400px]:top-[11px]
             max-[375px]:w-[55px] max-[375px]:h-[60px] max-[375px]:left-[25px] max-[375px]:top-[12px]
             max-[370px]:w-[50px] max-[370px]:h-[67px] max-[370px]:left-[20px] max-[370px]:top-[11px]"
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.4, duration: 0.5 }}
           >
             <h3
               className="font-semibold leading-tight tracking-tighter text-black text-center text-sm
@@ -76,14 +99,18 @@ const ProfilePage: React.FC = () => {
             >
               Total Points
             </h3>
-          </span>
+          </motion.span>
 
-          <span
+          {/* Games Played */}
+          <motion.span
             className="bg-[#82E300] absolute text-black font-bold w-[65px] h-[68px] py-1 left-[35px] top-[105px] rounded-l-lg flex items-center justify-center
             max-[468px]:w-[65px] max-[468px]:h-[68px] 
             max-[400px]:w-[60px] max-[400px]:h-[68px] max-[400px]:left-[30px] max-[400px]:top-[98px]
             max-[375px]:w-[55px] max-[375px]:h-[60px] max-[375px]:left-[25px] max-[375px]:top-[95px]
             max-[370px]:w-[50px] max-[370px]:h-[67px] max-[370px]:left-[20px] max-[370px]:top-[99px]"
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.45, duration: 0.5 }}
           >
             <h3
               className="font-semibold leading-tight tracking-tighter text-center text-sm
@@ -94,14 +121,18 @@ const ProfilePage: React.FC = () => {
             >
               Games Played
             </h3>
-          </span>
+          </motion.span>
 
-          <div
+          {/* Cards Section: Game/Event Stats */}
+          <motion.div
             className="flex flex-col relative gap-4 h-[150px] w-full left-[17px]
             max-[468px]:left-[15px]
             max-[400px]:left-[10px]
             max-[375px]:left-[5px]
             max-[370px]:left-[2px]"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.5 }}
           >
             <div
               className="flex items-center relative w-[74vw] h-[95px] right-[-60px] justify-between bg-[#1E1E1E] border-2 border-[#82E300] rounded-lg rounded-r-3xl
@@ -161,14 +192,18 @@ const ProfilePage: React.FC = () => {
                 max-[370px]:w-[38px] max-[370px]:h-[38px]"
               />
             </div>
-          </div>
-          <div
+          </motion.div>
+
+          {/* Tournaments Section */}
+          <motion.div
             className="mt-10 relative w-full h-[55vh]
               max-[468px]:left-[20px]
               max-[400px]:left-[10px]
               max-[375px]:
-              max-[370px]:left-[3px]
-          "
+              max-[370px]:left-[3px]"
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.6, duration: 0.5 }}
           >
             <h2
               className="text-sm relative text-[#A3A3A3] mb-1
@@ -260,21 +295,18 @@ const ProfilePage: React.FC = () => {
                   </p>
                 </div>
                 <div
-                  className="mx-auto max-w-4xl  relative left-[-16px] grid grid-cols-2 w-[106%] gap-2 p-4 mt-[70px]
+                  className="mx-auto max-w-4xl relative left-[-16px] grid grid-cols-2 w-[106%] gap-2 p-4 mt-[70px]
                     max-[370px]:mt-40
                     max-[370px]:w-full
                     max-[370px]:h-auto
                     max-[370px]:gap-4
-                    max-[370px]:left-[-22px]
-                    "
+                    max-[370px]:left-[-22px]"
                 >
                   <div
-                    className="w-[210px] h-[140px] relative left-[-30px]  p-4 text-center rounded-3xl
+                    className="w-[210px] h-[140px] relative left-[-30px] p-4 text-center rounded-3xl
                     max-[370px]:top-[-60px]
                     max-[370px]:w-[200px]
-                    max-[400px]:w-[200px]
-
-                    "
+                    max-[400px]:w-[200px]"
                   >
                     <img
                       src="/d1.svg"
@@ -338,8 +370,8 @@ const ProfilePage: React.FC = () => {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     </div>
   );

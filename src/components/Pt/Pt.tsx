@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSwipeable } from "react-swipeable";
+import { motion } from "framer-motion";
 import SwipeHintOverlay from "../SwipeHintOverlay/SwipeHintOverlay";
 
 interface Player {
@@ -50,15 +51,14 @@ const PremiumTournaments = () => {
       <h2 className="text-white text-lg font-semibold mb-4 text-center">
         Premium Tournaments
       </h2>
-      <div className="flex items-center border-2 border-[#F94EA6] mt-5  py-2 left-[-20px] relative rounded-full w-[80vw] max-w-md mx-auto">
+      <div className="flex items-center border-2 border-[#F94EA6] mt-5 py-2 left-[-20px] relative rounded-full w-[80vw] max-w-md mx-auto">
         <select
-          className="flex-grow  bg-transparent appearance-none text-[#F94EA6] outline-none p-2 rounded-md"
+          className="flex-grow bg-transparent appearance-none text-[#F94EA6] outline-none p-2 rounded-md"
           defaultValue="Cricket Catch Pro"
           style={{
-            backgroundImage:
-              'url("/downpt.svg")',
-              backgroundPosition: "right 10px center",
-              backgroundRepeat: "no-repeat",
+            backgroundImage: 'url("/downpt.svg")',
+            backgroundPosition: "right 10px center",
+            backgroundRepeat: "no-repeat",
           }}
         >
           <option value="Cricket Catch Pro">Cricket Catch Pro</option>
@@ -82,7 +82,13 @@ const PremiumTournaments = () => {
           <line x1="12" y1="3" x2="12" y2="15" />
         </svg>
       </button>
-      <div className="border-2 max-[361px]:w-[108%] border-[#F94EA6] mt-7 bg-black  rounded-[30px] w-[107%] ml-[-12px]">
+    
+      <motion.div
+        initial={{ y: "-100vh", rotate: -15, opacity: 0 }}
+        animate={{ y: 0, rotate: 0, opacity: 1 }}
+        transition={{ type: "spring", stiffness: 120, damping: 25 }}
+        className="border-2 max-[361px]:w-[108%] border-[#F94EA6] mt-7 bg-black rounded-[30px] w-[107%] ml-[-12px]"
+      >
         <div className="flex max-[399px]:gap-5 max-[361px]:gap-4 justify-center mt-10 items-end gap-8 mb-8">
           <div className="flex flex-col w-[100px] h-[100px] items-center p-4 rounded-[80px] border-2 border-[#F94EA6]">
             <div className="text-xl text-white font-bold">
@@ -139,7 +145,7 @@ const PremiumTournaments = () => {
             </div>
           ))}
         </div>
-        <div className="flex relative  top-[-17px] mb-[100px] justify-center mt-6 gap-4">
+        <div className="flex relative top-[-17px] mb-[100px] justify-center mt-6 gap-4">
           <button
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
             disabled={currentPage === 0}
@@ -157,7 +163,7 @@ const PremiumTournaments = () => {
             Next &rarr;
           </button>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };

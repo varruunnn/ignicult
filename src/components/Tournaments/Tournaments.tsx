@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSwipeable } from "react-swipeable";
+import { motion } from "framer-motion";
 import SwipeHintOverlay from "../SwipeHintOverlay/SwipeHintOverlay";
 
 type Player = {
@@ -108,8 +109,8 @@ export default function Tournaments() {
             style={{
               backgroundImage:
                 'url("/down.svg")',
-                backgroundPosition: "right 10px center",
-                backgroundRepeat: "no-repeat",
+              backgroundPosition: "right 10px center",
+              backgroundRepeat: "no-repeat",
             }}
           >
             {Object.keys(mockTournamentData).map((game) => (
@@ -138,8 +139,11 @@ export default function Tournaments() {
         </div>
       </div>
 
-      <div
+      <motion.div
         {...swipeHandlers}
+        initial={{ y: "-100vh", rotate: -15, opacity: 0 }}
+        animate={{ y: 0, rotate: 0, opacity: 1 }}
+        transition={{ type: "spring", stiffness: 120, damping: 20 }}
         className="mt-10 mx-auto w-[108%] left-[-15px] max-w-4xl bg-[#141414] border-t-2 border-t-[#82E300] p-4 rounded-3xl relative"
       >
         <div className="relative flex items-center justify-center mb-4">
@@ -200,7 +204,7 @@ export default function Tournaments() {
             Next &rarr;
           </button>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }
