@@ -192,10 +192,10 @@ const ProfilePage: React.FC = () => {
             >
               <p
                 className="text-xl text-[#FEA50D] absolute top-[40px] font-bold
-                max-[468px]:text-xl max-[468px]:top-[40px]
-                max-[400px]:text-lg max-[400px]:top-[38px]
-                max-[375px]:text-base max-[375px]:top-[35px]
-                max-[370px]:text-base max-[370px]:top-[35px]"
+                max-[468px]:text-xl max-[468px]:top-[47px]
+                max-[400px]:text-lg max-[400px]:top-[45px]
+                max-[375px]:text-base max-[375px]:top-[40px]
+                max-[370px]:text-base max-[370px]:top-[45px]"
               >
                 000
               </p>
