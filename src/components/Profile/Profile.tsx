@@ -3,14 +3,14 @@ import React from "react";
 const ProfilePage: React.FC = () => {
   return (
     <div
-      className="h-[120vh] p-4 py-20 mt-[170px] text-white overflow-y-auto overflow-x-hidden
+      className="h-[120vh] p-4 py-20 mt-[170px] text-white overflow-x-hidden
       max-[468px]:mt-[150px]
       max-[400px]:mt-[140px]
       max-[375px]:mt-[130px]
       max-[370px]:mt-[120px]"
     >
       <div
-        className="border-t-2 bg-[#141414] border-[#92FF00] relative h-[120vh] w-[105%] left-[-16px] max-w-4xl mx-auto rounded-t-[20px] p-4
+        className="border-t-2 bg-[#141414]  border-[#92FF00] relative h-[100vh] w-[100%] left-[-16px] max-w-4xl mx-auto rounded-t-[20px] p-4
         max-[468px]:w-[109%]
         max-[400px]:w-[109%]
         max-[375px]:w-[109%]

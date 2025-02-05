@@ -183,7 +183,7 @@ const Leaderboard: React.FC = () => {
         {currentPage === 0 && (
           <div className="flex justify-center items-end gap-0">
             <div className="flex flex-col items-center">
-              <div className="bg-gradient-to-b max-[369px]:w-[100px] max-[399px]:w-[120px] max-[379px]:w-[110px] from-[#535353] to-[#282828] p-4 rounded-t-lg w-[103px] h-[154px]">
+              <div className="bg-gradient-to-b max-[369px]:w-[100px] max-[399px]:w-[120px] max-[379px]:w-[110px] from-[#535353] to-[#121212] p-4 rounded-t-lg w-[103px] h-[154px]">
                 <div className="relative">
                   <div className="absolute -top-12 left-1/2 transform -translate-x-1/2">
                     <img
@@ -202,7 +202,7 @@ const Leaderboard: React.FC = () => {
               </div>
             </div>
             <div className="flex flex-col items-center">
-              <div className="bg-gradient-to-b max-[369px]:w-[120px] from-[#535353] to-[#282828]  p-4 rounded-t-lg w-[103px] h-[184px] ">
+              <div className="bg-gradient-to-b max-[369px]:w-[120px] from-[#535353] to-[#121212]  p-4 rounded-t-lg w-[103px] h-[184px] ">
                 <div className="relative">
                   <div className="absolute  -top-8 left-1/2 transform -translate-x-1/2">
                     <img src="/one.svg" alt="1st Place" className="mx-auto" />
@@ -227,7 +227,7 @@ const Leaderboard: React.FC = () => {
               </div>
             </div>
             <div className="flex flex-col items-center">
-              <div className="bg-gradient-to-b max-[369px]:w-[100px] from-[#535353] to-[#282828] p-4 rounded-t-lg w-[103px] h-[140px]">
+              <div className="bg-gradient-to-b max-[369px]:w-[100px] from-[#535353] to-[#121212] p-4 rounded-t-lg w-[103px] h-[140px]">
                 <div className="relative">
                   <div className="absolute -top-8 left-1/2 transform -translate-x-1/2">
                     <img src="/three.svg" alt="3rd Place" className="mx-auto" />
