@@ -60,7 +60,6 @@ const ProfilePage: React.FC = () => {
           >
             abcd12345
           </p>
-
           <span
             className="bg-[#82E300] absolute text-black font-bold w-[65px] h-[66px] py-1 left-[35px] top-[16px] rounded-l-lg flex items-center justify-center
             max-[468px]:w-[65px] max-[468px]:h-[66px] 
@@ -107,14 +106,12 @@ const ProfilePage: React.FC = () => {
             <div
               className="flex items-center relative w-[74vw] h-[95px] right-[-60px] justify-between bg-[#1E1E1E] border-2 border-[#82E300] rounded-lg rounded-r-3xl
               max-[468px]:w-[74vw] max-[468px]:h-[95px] max-[468px]:right-[-60px]
-              max-[400px]:w-[70vw] max-[400px]:h-[90px] max-[400px]:right-[-55px] max-[400px]:top-[-5px]
+              max-[400px]:w-[74vw] max-[400px]:h-[90px] max-[400px]:right-[-55px] max-[400px]:top-[-5px]
               max-[375px]:w-[75vw] max-[375px]:h-[85px] max-[375px]:right-[-50px]
               max-[370px]:w-[78vw] max-[370px]:h-[80px] max-[370px]:right-[-45px]"
-              style={
-                {
-                  width:window.innerHeight < 700 ? "75vw" : ""
-                }
-              }
+              style={{
+                width: window.innerHeight < 700 ? "75vw" : "",
+              }}
             >
               <span
                 className="text-[#FEA50D] ml-[10px] font-bold text-xl flex-grow text-left
@@ -138,14 +135,12 @@ const ProfilePage: React.FC = () => {
             <div
               className="flex items-center relative w-[74vw] h-[97px] right-[-60px] justify-between bg-[#1E1E1E] border-2 border-[#82E300] rounded-lg rounded-r-3xl
               max-[468px]:w-[74vw] max-[468px]:h-[97px] max-[468px]:right-[-60px] max-[468px]:top-[6px]
-              max-[400px]:w-[70vw] max-[400px]:h-[90px] max-[400px]:right-[-55px] max-[400px]:top-[0px]
+              max-[400px]:w-[74vw] max-[400px]:h-[90px] max-[400px]:right-[-55px] max-[400px]:top-[0px]
               max-[375px]:w-[65vw] max-[375px]:h-[85px] max-[375px]:right-[-50px]
               max-[370px]:w-[78vw] max-[370px]:h-[80px] max-[370px]:right-[-45px]"
-              style={
-                {
-                  width:window.innerHeight < 700 ? "75vw" : ""
-                }
-              }
+              style={{
+                width: window.innerHeight < 700 ? "75vw" : "",
+              }}
             >
               <span
                 className="text-[#FEA50D] ml-[10px] font-bold text-xl flex-grow text-left
@@ -167,16 +162,16 @@ const ProfilePage: React.FC = () => {
               />
             </div>
           </div>
-
           <div
-            className="mt-10 relative left-[20px] w-full h-[55vh]
-            max-[468px]:mt-10 max-[468px]:left-[20px]
-            max-[400px]:mt-8 max-[400px]:left-[15px]
-            max-[375px]:mt-6 max-[375px]:left-[10px]
-            max-[370px]:mt-4 max-[370px]:left-[5px]"
+            className="mt-10 relative w-full h-[55vh]
+              max-[468px]:left-[20px]
+              max-[400px]:left-[10px]
+              max-[375px]:
+              max-[370px]:left-[3px]
+          "
           >
             <h2
-              className="text-sm relative text-[#A3A3A3] mb-2
+              className="text-sm relative text-[#A3A3A3] mb-4
               max-[468px]:text-sm
               max-[400px]:text-xs
               max-[375px]:text-xs
@@ -206,7 +201,7 @@ const ProfilePage: React.FC = () => {
               </p>
             </div>
             <h2
-              className="text-sm relative mt-7 text-[#A3A3A3] mb-2
+              className="text-sm relative mt-7 text-[#A3A3A3] mb-4
               max-[468px]:text-sm
               max-[400px]:text-xs
               max-[375px]:text-xs
@@ -215,11 +210,13 @@ const ProfilePage: React.FC = () => {
               Tournaments
             </h2>
             <div
-              className="bg-[#353535] border w-[86vw] h-[23vh] border-[#92FF00] rounded-2xl p-4 relative
-              max-[468px]:w-[86vw] max-[468px]:h-[23vh] max-[468px]:p-4
-              max-[400px]:w-[88vw] max-[400px]:h-[22vh] max-[400px]:p-3
-              max-[375px]:w-[89vw] max-[375px]:p-2
-              max-[370px]:w-[90vw] max-[370px]:h-[22vh] max-[370px]:p-2"
+              className="bg-[#353535] border w-[86vw] border-[#92FF00] rounded-2xl p-4 relative
+                max-[468px]:w-[86vw] max-[468px]:h-[23vh] max-[468px]:p-4
+                max-[400px]:w-[88vw] max-[400px]:h-[22vh] max-[400px]:p-3
+                max-[370px]:w-[90vw] max-[370px]:h-[22vh] max-[370px]:p-2"
+              style={{
+                height: window.innerHeight < 700 ? "30vh" : "23vh",
+              }}
             >
               <select
                 className="w-full h-[5.5vh] bg-[#353535] text-white border border-[#B3B3B3] rounded-[100px] p-2
@@ -250,12 +247,12 @@ const ProfilePage: React.FC = () => {
                 >
                   00000
                 </p>
-                <div className="w-full h-[55px] rounded-2xl max-[468px]:top-[55px] bg-[#141414] absolute top-[30px]
+                <div
+                  className="w-full h-[55px] rounded-2xl max-[468px]:top-[55px] bg-[#141414] absolute top-[30px]
                   max-[370px]:top-[34px] 
-                  max-[400px]:top-[44px]
-                ">
-                  <p className="absolute top-[7px] font-light italic text-sm left-[18px]
-                  ">
+                  max-[400px]:top-[44px]"
+                >
+                  <p className="absolute top-[7px] font-light italic text-sm left-[18px]">
                     Your Score
                   </p>
                   <p className="absolute top-[25px] text-[#FEA50D] text-lg left-[20px]">
@@ -322,7 +319,6 @@ const ProfilePage: React.FC = () => {
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </div>
