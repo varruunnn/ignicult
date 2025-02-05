@@ -185,7 +185,7 @@ const Leaderboard: React.FC = () => {
             <div className="flex flex-col items-center">
               <div className="bg-gradient-to-b max-[369px]:w-[100px] max-[399px]:w-[120px] max-[379px]:w-[110px] from-[#535353] to-[#282828] p-4 rounded-t-lg w-[103px] h-[154px]">
                 <div className="relative">
-                  <div className="absolute -top-8 left-1/2 transform -translate-x-1/2">
+                  <div className="absolute -top-12 left-1/2 transform -translate-x-1/2">
                     <img
                       src="/two.svg"
                       alt="2nd Place"
