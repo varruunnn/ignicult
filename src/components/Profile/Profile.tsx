@@ -91,7 +91,7 @@ const ProfilePage: React.FC = () => {
             transition={{ delay: 0.4, duration: 0.5 }}
           >
             <h3
-              className="font-light leading-tight tracking-tighter text-black text-center text-sm
+              className="font-medium leading-tight tracking-tighter text-black text-center text-sm
               max-[468px]:text-sm
               max-[400px]:text-sm
               max-[375px]:text-xs
@@ -113,7 +113,7 @@ const ProfilePage: React.FC = () => {
             transition={{ delay: 0.45, duration: 0.5 }}
           >
             <h3
-              className="font-semibold leading-tight tracking-tighter text-center text-sm
+              className="font-medium leading-tight tracking-tighter text-center text-sm
               max-[468px]:text-sm 
               max-[400px]:text-sm
               max-[375px]:text-xs
