@@ -91,7 +91,7 @@ const ProfilePage: React.FC = () => {
             transition={{ delay: 0.4, duration: 0.5 }}
           >
             <h3
-              className="font-semibold leading-tight tracking-tighter text-black text-center text-sm
+              className="font-light leading-tight tracking-tighter text-black text-center text-sm
               max-[468px]:text-sm
               max-[400px]:text-sm
               max-[375px]:text-xs
@@ -196,7 +196,7 @@ const ProfilePage: React.FC = () => {
 
           {/* Tournaments Section */}
           <motion.div
-            className="mt-10 relative w-full h-[55vh]
+            className="mt-[30px] relative w-full h-[55vh]
               max-[468px]:left-[20px]
               max-[400px]:left-[10px]
               max-[375px]:
@@ -254,7 +254,7 @@ const ProfilePage: React.FC = () => {
               }}
             >
               <select
-                className="w-full h-[5.5vh] bg-[#353535] text-white border border-[#B3B3B3] rounded-[100px] p-2
+                className="w-full h-[5.5vh] bg-[#353535] text-[#B3B3B3] border border-[#B3B3B3] rounded-[100px] p-2
                 max-[468px]:p-2
                 max-[400px]:p-1
                 max-[375px]:p-1
@@ -296,7 +296,7 @@ const ProfilePage: React.FC = () => {
                 </div>
                 <div
                   className="mx-auto max-w-4xl relative left-[-16px] grid grid-cols-2 w-[106%] gap-2 p-4 mt-[70px]
-                    max-[370px]:mt-40
+                    max-[370px]:mt-[110px]
                     max-[370px]:w-full
                     max-[370px]:h-auto
                     max-[370px]:gap-4
