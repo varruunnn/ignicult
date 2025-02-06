@@ -87,7 +87,7 @@ const PremiumTournaments = () => {
         initial={{ y: "-100vh", rotate: -15, opacity: 0 }}
         animate={{ y: 0, rotate: 0, opacity: 1 }}
         transition={{ type: "spring", stiffness: 120, damping: 25 }}
-        className="border-2 max-[361px]:w-[108%] border-[#F94EA6] mt-7 bg-black rounded-[30px] w-[107%] ml-[-12px]"
+        className="border-t-[2px] max-[361px]:w-[115%] border-[#F94EA6] mt-7 bg-black rounded-[30px] w-[107%] ml-[-22px]"
       >
         <div className="flex max-[399px]:gap-5 max-[361px]:gap-4 justify-center mt-10 items-end gap-8 mb-8">
           <div className="flex flex-col w-[100px] h-[100px] items-center p-4 rounded-[80px] border-2 border-[#F94EA6]">

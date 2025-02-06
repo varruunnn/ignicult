@@ -11,7 +11,7 @@ const ProfilePage: React.FC = () => {
       max-[370px]:mt-[120px]"
     >
       <div
-        className="border-t-2 bg-[#141414] border-[#92FF00] relative h-[100vh] w-[100%] left-[-16px] max-w-4xl mx-auto rounded-t-[20px] p-4
+        className="border-t-[1px] bg-[#141414] border-[#92FF00]  relative h-[100vh] w-[100%] left-[-16px] max-w-4xl mx-auto rounded-t-[20px] p-4
         max-[468px]:w-[109%]
         max-[400px]:w-[109%]
         max-[375px]:w-[109%]
@@ -261,7 +261,15 @@ const ProfilePage: React.FC = () => {
                 max-[370px]:p-1"
               >
                 <option>Cricket Catch Pro</option>
-                <option>Soccer Stars</option>
+                <option>Cricket Powerplay</option>
+                <option>Color Ship Shooter</option>
+                <option>Color Circle Puzzle</option>
+                <option>Wave Run</option>
+                <option>Number Snake</option>
+                <option>Fire Number Up</option>
+                <option>Two Colors</option>
+                <option>Drop The Number</option>
+                <option>Snake Color Break</option>
               </select>
               <div className="mt-4 relative">
                 <h3

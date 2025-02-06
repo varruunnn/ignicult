@@ -7,6 +7,7 @@ import { IoMenu } from "react-icons/io5";
 import styled from "styled-components";
 import { client } from "../../client";
 import { motion } from "framer-motion";
+import { useLocation } from "react-router-dom";
 
 interface NavbarProps {
   isSidebarOpen: boolean;
@@ -52,6 +53,26 @@ const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen, setSidebarOpen }) => {
   ];
 
   const [isPopupVisible, setPopupVisible] = useState(false);
+  const location = useLocation();
+  const isPremiumRoute = location.pathname === "/premium-tournaments";
+
+  const buttonStyle = isPremiumRoute
+    ? {
+        backgroundColor: "#282828",
+        borderRadius: "20000px",
+        color: "#F94EA6", 
+        border: "2px solid #F94EA6", 
+        minWidth: "1px",
+        height: "41px",
+      }
+    : {
+        backgroundColor: "#282828",
+        borderRadius: "20000px",
+        color: "#82E300", 
+        border: "2px solid #82E300", 
+        minWidth: "1px",
+        height: "41px",
+      };
 
   const toggleSidebar = () => {
     setSidebarOpen(!isSidebarOpen);
@@ -85,8 +106,6 @@ const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen, setSidebarOpen }) => {
         >
           <IoMenu size={37} className="text-white" />
         </motion.button>
-
-        {/* Connect Button Container with a slight scale-up on mount */}
         <motion.div
           initial={{ scale: 0.95, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
@@ -100,14 +119,7 @@ const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen, setSidebarOpen }) => {
             theme={customTheme}
             connectButton={{
               label: "Lets dive in",
-              style: {
-                backgroundColor: "#282828",
-                borderRadius: "20000px",
-                color: "#82E300",
-                border: "2px solid #82E300",
-                minWidth: "1px",
-                height: "41px",
-              },
+              style: buttonStyle,
             }}
             appMetadata={{
               name: "Example app",
@@ -116,8 +128,6 @@ const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen, setSidebarOpen }) => {
           />
         </motion.div>
       </motion.header>
-
-      {/* Sidebar container */}
       <div
         className={`fixed top-0 left-0 h-full z-[1000] transition-transform duration-300 ease-in-out ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"

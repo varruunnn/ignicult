@@ -1,16 +1,23 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
-
 const Footer = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
   const isHomeActive = location.pathname === "/" || location.pathname === "/home";
   const isProfileActive = location.pathname === "/profile";
-
+  const isPremiumRoute = location.pathname === "/premium-tournaments";
   const handleClick = () => {
     alert("I am Glowing dv");
   };
+  const handleFooter = (): string => {
+    if (isPremiumRoute) {
+      return '/footer1.svg'; 
+    } else {
+      return '/vec.svg'; 
+    }
+  };
+  
 
   return (
     <motion.footer
@@ -51,7 +58,7 @@ const Footer = () => {
           </motion.span>
         </motion.button>
         <motion.img
-          src="/vec.svg"
+          src={handleFooter()}
           alt="Play Now Background"
           className="w-[242px] h-[70px] absolute top-[-20px]"
           initial={{ opacity: 0 }}
