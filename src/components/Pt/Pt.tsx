@@ -51,7 +51,7 @@ const PremiumTournaments = () => {
       <h2 className="text-white text-lg font-semibold mb-4 text-center">
         Premium Tournaments
       </h2>
-      <div className="flex items-center bg-black border-2 border-[#F94EA6] mt-5 py-2 left-[-20px] relative rounded-full h-[47px] w-[80vw] max-w-md mx-auto">
+      <div className="flex items-center bg-black border-[1px] border-[#F94EA6] mt-5 py-2 left-[-20px] relative rounded-full h-[47px] w-[80vw] max-w-md mx-auto">
         <select
           className="flex-grow bg-transparent appearance-none text-[#F94EA6] outline-none p-2 rounded-md"
           defaultValue="Cricket Catch Pro"
@@ -82,68 +82,76 @@ const PremiumTournaments = () => {
           <line x1="12" y1="3" x2="12" y2="15" />
         </svg>
       </button>
-    
       <motion.div
-        initial={{ y: "-100vh", rotate: -15, opacity: 0 }}
-        animate={{ y: 0, rotate: 0, opacity: 1 }}
-        transition={{ type: "spring", stiffness: 120, damping: 25 }}
-        className="border-t-[2px] max-[361px]:w-[115%] border-[#F94EA6] mt-7 bg-black rounded-[30px] w-[107%] ml-[-22px]"
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8 }}
+        className="border-t-[1.8px] max-[361px]:w-[115%] border-[#F94EA6] mt-7 bg-black rounded-[30px] w-[107%] ml-[-22px]"
       >
-        <div className="flex max-[399px]:gap-5 max-[361px]:gap-4 justify-center mt-10 items-end gap-8 mb-8">
-          <div className="flex flex-col w-[100px] h-[100px] items-center p-4 rounded-[80px] border-2 border-[#F94EA6]">
-            <div className="text-xl text-white font-bold">
-              {podiumPlayers[1]?.rank}
+        <h2 className="relative mt-[10px] text-center text-xl text-[#F94EA6] font-extrabold">
+          January 2025
+        </h2>
+        <div
+          className="flex justify-center items-end gap-8 mt-10 mb-8 
+                     max-[468px]:gap-7 max-[400px]:gap-6 max-[375px]:gap-5 max-[370px]:gap-4"
+        >
+          <div className="mt-[-28px] relative">
+            {/* Second Place */}
+            <div className="absolute text-center top-[47%] left-[26%] max-[468px]:left-[-4%] max-[468px]:top-[88%] max-[400px]:left-[-3%] max-[375px]:left-[-3%]">
+              <div className="text-[12px] text-[#B9B9B9]">
+                {podiumPlayers[1]?.wallet}
+              </div>
+              <div className="text-sm text-[#FEA50D] font-semibold">
+                {podiumPlayers[1]?.score}
+              </div>
             </div>
-            <div className="text-sm text-gray-300">
-              {podiumPlayers[1]?.wallet}
+            <div className="absolute text-center top-[47%] left-[69%] max-[468px]:left-[73%] max-[468px]:top-[88%] max-[400px]:left-[73%] max-[375px]:left-[73%]">
+              <div className="text-[12px] text-[#B9B9B9]">
+                {podiumPlayers[2]?.wallet}
+              </div>
+              <div className="text-sm text-[#FEA50D] font-semibold">
+                {podiumPlayers[2]?.score}
+              </div>
             </div>
-            <div className="text-lg text-[#FEA50D] font-semibold">
-              {podiumPlayers[1]?.score}
+            <img src="/threee.svg" alt="podium" />
+            <div className="absolute text-center top-[42%] left-[41%] max-[468px]:left-[36%] max-[468px]:top-[58%] max-[400px]:left-[35%] max-[375px]:left-[35%]">
+              <div className="text-[12px] text-[#B9B9B9]">
+                {podiumPlayers[0]?.wallet}
+              </div>
+              <div className="text-sm text-[#FEA50D] font-semibold">
+                {podiumPlayers[0]?.score}
+              </div>
             </div>
-          </div>
-          <div className="flex flex-col items-center w-[110px] h-[110px] p-5 rounded-full border-2 border-[#F94EA6] relative scale-125">
-            <div className="absolute -top-6 text-4xl">👑</div>
-            <div className="text-2xl text-white font-bold">
-              {podiumPlayers[0]?.rank}
-            </div>
-            <div className="text-sm text-gray-300">
-              {podiumPlayers[0]?.wallet}
-            </div>
-            <div className="text-xl text-[#FEA50D] font-semibold">
-              {podiumPlayers[0]?.score}
-            </div>
-          </div>
-          <div className="flex flex-col w-[100px] h-[100px] items-center p-4 rounded-[80px] border-2 border-[#F94EA6]">
-            <div className="text-xl font-bold text-white">
-              {podiumPlayers[2]?.rank}
-            </div>
-            <div className="text-sm text-gray-300">
-              {podiumPlayers[2]?.wallet}
-            </div>
-            <div className="text-lg text-[#FEA50D] font-semibold">
-              {podiumPlayers[2]?.score}
+            <div
+              className="bg-[#FFCA28] font-semibold text-black justify-center w-[30px] text-center rounded-3xl h-[30px] 
+                         absolute top-1/2 left-1/2 transform -translate-x-[50%] -translate-y-[-58px]"
+            >
+              1
             </div>
           </div>
         </div>
-        <div
-          className="border border-[#565656] bg-[#3E3E3E] rounded-lg w-full overflow-hidden"
-          {...swipeHandlers}
-        >
-          <div className="grid grid-cols-3 bg-[#3E3E3E] text-[#EE49FD] font-bold text-center py-3">
-            <span>Rank</span>
-            <span>Wallet Address</span>
-            <span>Top Score</span>
-          </div>
-          {paginatedPlayers.map((player) => (
-            <div
-              className="grid grid-cols-3 text-center text-white py-2 border-t border-gray-600"
-              key={player.rank}
-            >
-              <span>{player.rank}</span>
-              <span className="truncate">{player.wallet}</span>
-              <span>{player.score}</span>
+
+        <div className="flex justify-center mt-[20px] items-center w-full h-full">
+          <div
+            className="border border-[#565656] bg-[#3E3E3E] rounded-lg w-[80%] max-w-[90%] overflow-hidden"
+            {...swipeHandlers}
+          >
+            <div className="grid grid-cols-3 bg-[#3E3E3E] text-[#EE49FD] font-bold text-center py-3">
+              <span className="px-2">Rank</span>
+              <span className="px-2">Wallet Address</span>
+              <span className="px-2">Top Score</span>
             </div>
-          ))}
+            {paginatedPlayers.map((player) => (
+              <div
+                key={player.rank}
+                className="grid grid-cols-3 text-center text-[#B9B9B9] py-2 border-t border-gray-600"
+              >
+                <span className="px-2">{player.rank}</span>
+                <span className="truncate px-2">{player.wallet}</span>
+                <span className="px-2">{player.score}</span>
+              </div>
+            ))}
+          </div>
         </div>
         <div className="flex relative top-[-17px] mb-[100px] justify-center mt-6 gap-4">
           <button

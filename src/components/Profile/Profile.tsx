@@ -25,7 +25,6 @@ const ProfilePage: React.FC = () => {
         max-[375px]:rounded-t-[20px]
         max-[370px]:rounded-t-[20px]"
       >
-        {/* Wrap the inner content with a motion.div for a gentle fade & scale-up */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -36,8 +35,7 @@ const ProfilePage: React.FC = () => {
           max-[375px]:rounded-[50px]
           max-[370px]:rounded-[40px]"
         >
-          {/* Profile Image with a pop/bounce effect and hover scale */}
-          <motion.img
+      <motion.img
             src="/profilee.svg"
             alt="Profile"
             className="w-16 h-16 absolute left-[43%] top-[-130px] rounded-full border-[1px] border-[#82E300]
@@ -64,8 +62,6 @@ const ProfilePage: React.FC = () => {
           >
             Wallet Address
           </motion.h1>
-
-          {/* Wallet Address Value */}
           <motion.p
             className="text-sm absolute text-[#CACACA] left-[42%] top-[-30px]
             max-[468px]:text-sm max-[468px]:top-[-30px] max-[468px]:left-[42%]
@@ -100,8 +96,6 @@ const ProfilePage: React.FC = () => {
               Total Points
             </h3>
           </motion.span>
-
-          {/* Games Played */}
           <motion.span
             className="bg-[#82E300] absolute text-black font-bold w-[65px] h-[68px] py-1 left-[35px] top-[105px] rounded-l-lg flex items-center justify-center
             max-[468px]:w-[65px] max-[468px]:h-[68px] 
@@ -122,8 +116,6 @@ const ProfilePage: React.FC = () => {
               Games Played
             </h3>
           </motion.span>
-
-          {/* Cards Section: Game/Event Stats */}
           <motion.div
             className="flex flex-col relative gap-4 h-[150px] w-full left-[17px]
             max-[468px]:left-[15px]
@@ -193,8 +185,6 @@ const ProfilePage: React.FC = () => {
               />
             </div>
           </motion.div>
-
-          {/* Tournaments Section */}
           <motion.div
             className="mt-[30px] relative w-full h-[55vh]
               max-[468px]:left-[20px]

@@ -60,18 +60,20 @@ const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen, setSidebarOpen }) => {
     ? {
         backgroundColor: "#282828",
         borderRadius: "20000px",
-        color: "#F94EA6", 
-        border: "2px solid #F94EA6", 
+        color: "#F94EA6",
+        border: "2px solid #F94EA6",
         minWidth: "1px",
         height: "41px",
+        boxShadow: "0 2px 4px rgba(249, 78, 166, 1)",
       }
     : {
         backgroundColor: "#282828",
         borderRadius: "20000px",
-        color: "#82E300", 
-        border: "2px solid #82E300", 
+        color: "#82E300",
+        border: "2px solid #82E300",
         minWidth: "1px",
         height: "41px",
+        boxShadow: "0px 2px 5px rgba(130, 227, 0, 1)", 
       };
 
   const toggleSidebar = () => {

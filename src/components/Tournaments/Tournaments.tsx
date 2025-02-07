@@ -113,7 +113,7 @@ export default function Tournaments() {
         </motion.h1>
         <div className="mt-4 flex justify-center items-center">
           <motion.select
-            className="px-4 py-2 w-[70vw] rounded-full h-[5.9vh] bg-gray-900 appearance-none pl-4 pr-8 text-white border border-[#82E300] focus:outline-none hover:border-[#6ac100] transition-all"
+            className="px-4 py-2 w-[70vw] rounded-full h-[5.9vh] bg-gray-900 appearance-none pl-4 pr-8 text-white border-t-[1px] border-[#82E300] focus:outline-none hover:border-[#6ac100] transition-all"
             value={selectedGame}
             onChange={handleGameChange}
             style={{
@@ -147,7 +147,7 @@ export default function Tournaments() {
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
-              className="w-[20px] h-[20px]"
+              className="w-[20px] h-[25px]"
             >
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
               <polyline points="17 8 12 3 7 8" />
@@ -156,8 +156,6 @@ export default function Tournaments() {
           </motion.button>
         </div>
       </motion.div>
-
-      {/* Tournaments Card */}
       <motion.div
         {...swipeHandlers}
         initial={{ opacity: 0, scale: 0.95, y: 30 }}
