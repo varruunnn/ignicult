@@ -15,7 +15,7 @@ const ProfilePage: React.FC = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         className="text-white relative  text-lg font-semibold text-center text-shadow-glow mt-[-35px]
-          max-[468px]:left-[1px] max-[468px]:top-[-12px]
+          max-[468px]:left-[-2px] max-[468px]:top-[-16px]
           max-[400px]:left-[-4px]
           max-[370px]:left-[-3px]
         "
@@ -52,10 +52,10 @@ const ProfilePage: React.FC = () => {
             src="/profilee.svg"
             alt="Profile"
             className="w-16 h-16 absolute left-[43%] top-[-130px] rounded-full border-[1px] border-[#82E300]
-              max-[468px]:w-[80px] max-[468px]:h-[80px] max-[468px]:top-[-130px] max-[468px]:left-[41%]
-              max-[400px]:w-14 max-[400px]:h-14 max-[400px]:top-[-125px] max-[400px]:left-[42%]
+              max-[468px]:w-[80px] max-[468px]:h-[80px] max-[468px]:top-[-140px] max-[468px]:left-[40%]
+              max-[400px]:w-[70px] max-[400px]:h-[70px] max-[400px]:top-[-135px] max-[400px]:left-[40%]
               max-[375px]:w-12 max-[375px]:h-12 max-[375px]:top-[-120px] max-[375px]:left-[41%]
-              max-[370px]:w-[70px] max-[370px]:h-[70px] max-[370px]:top-[-125px] max-[370px]:left-[40%]"
+              max-[370px]:w-[70px] max-[370px]:h-[70px] max-[370px]:top-[-135px] max-[370px]:left-[39.5%]"
             initial={{ scale: 0, rotate: -90 }}
             animate={{ scale: 1, rotate: 0 }}
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
