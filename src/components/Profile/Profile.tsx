@@ -15,9 +15,9 @@ const ProfilePage: React.FC = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         className="text-white relative  text-lg font-semibold text-center text-shadow-glow mt-[-35px]
-          max-[468px]:left-[1px]
+          max-[468px]:left-[1px] max-[468px]:top-[-12px]
           max-[400px]:left-[-4px]
-          max-[370px]:left-[-9px]
+          max-[370px]:left-[-3px]
         "
       >
         Profile
@@ -52,10 +52,10 @@ const ProfilePage: React.FC = () => {
             src="/profilee.svg"
             alt="Profile"
             className="w-16 h-16 absolute left-[43%] top-[-130px] rounded-full border-[1px] border-[#82E300]
-              max-[468px]:w-16 max-[468px]:h-16 max-[468px]:top-[-130px] max-[468px]:left-[43%]
+              max-[468px]:w-[80px] max-[468px]:h-[80px] max-[468px]:top-[-130px] max-[468px]:left-[41%]
               max-[400px]:w-14 max-[400px]:h-14 max-[400px]:top-[-125px] max-[400px]:left-[42%]
               max-[375px]:w-12 max-[375px]:h-12 max-[375px]:top-[-120px] max-[375px]:left-[41%]
-              max-[370px]:w-14 max-[370px]:h-14 max-[370px]:top-[-125px] max-[370px]:left-[40%]"
+              max-[370px]:w-[70px] max-[370px]:h-[70px] max-[370px]:top-[-125px] max-[370px]:left-[40%]"
             initial={{ scale: 0, rotate: -90 }}
             animate={{ scale: 1, rotate: 0 }}
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
@@ -63,10 +63,10 @@ const ProfilePage: React.FC = () => {
           />
           <motion.h1
             className="text-lg absolute text-[#858585] left-[35%] top-[-60px] font-bold
-              max-[468px]:text-lg max-[468px]:top-[-60px] max-[468px]:left-[35%]
+              max-[468px]:text-lg max-[468px]:top-[-50px] max-[468px]:left-[35%]
               max-[400px]:text-base max-[400px]:top-[-55px] max-[400px]:left-[34%]
               max-[375px]:text-base max-[375px]:top-[-30x] max-[375px]:left-[33%]
-              max-[370px]:text-sm max-[370px]:top-[-60px] max-[370px]:left-[34%]"
+              max-[370px]:text-sm max-[370px]:top-[-50px] max-[370px]:left-[36%]"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.5 }}
@@ -75,10 +75,10 @@ const ProfilePage: React.FC = () => {
           </motion.h1>
           <motion.p
             className="text-sm absolute text-[#CACACA] left-[42%] top-[-30px]
-              max-[468px]:text-sm max-[468px]:top-[-30px] max-[468px]:left-[42%]
+              max-[468px]:text-sm max-[468px]:top-[-24px] max-[468px]:left-[42%]
               max-[400px]:text-xs max-[400px]:top-[-28px] max-[400px]:left-[41%]
               max-[375px]:text-xs max-[375px]:top-[-26px] max-[375px]:left-[40%]
-              max-[370px]:text-xs max-[370px]:top-[-40px] max-[370px]:left-[39%]"
+              max-[370px]:text-xs max-[370px]:top-[-32px] max-[370px]:left-[41%]"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.35, duration: 0.5 }}

@@ -95,8 +95,6 @@ export default function Tournaments() {
       <div className="absolute top-[-21%] left-[20%]">
         <SwipeHintOverlay />
       </div>
-
-      {/* Header & Game Selector */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -133,7 +131,7 @@ export default function Tournaments() {
           </motion.select>
 
           <motion.button
-            className="ml-2 px-3 py-2 rounded-full bg-[#82E300] hover:bg-[#6ac100] text-black shadow-glow transition-all"
+            className="ml-2 w-[40px] h-[40px] flex justify-center items-center rounded-full bg-[#82E300] hover:bg-[#6ac100] text-black shadow-glow transition-all"
             whileHover={{ scale: 1.1 }}
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -147,7 +145,7 @@ export default function Tournaments() {
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
-              className="w-[20px] h-[25px]"
+              className="w-[16px] h-[16px]"
             >
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
               <polyline points="17 8 12 3 7 8" />
@@ -211,11 +209,11 @@ export default function Tournaments() {
             </tbody>
           </table>
         </div>
-        <div className="flex justify-center gap-10">
+        <div className="flex  justify-center gap-10">
           <motion.button
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
             disabled={currentPage === 0}
-            className="px-4 py-2 rounded-full relative bg-[#1e1e1e] text-[#82E300] border border-[#82E300] hover:bg-[#6ac100] hover:text-black transition-all disabled:opacity-50"
+            className="px-4 py-2 max-[370px]:top-[-40px] max-[376px]:top-[-55px] rounded-full relative bg-[#1e1e1e] text-[#82E300] border border-[#82E300] hover:bg-[#6ac100] hover:text-black transition-all disabled:opacity-50"
             whileHover={{ scale: 1.05 }}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -228,7 +226,7 @@ export default function Tournaments() {
               setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1))
             }
             disabled={currentPage >= totalPages - 1}
-            className="px-4 py-2 rounded-full relative bg-[#1e1e1e] text-[#82E300] border border-[#82E300] hover:bg-[#6ac100] hover:text-black transition-all disabled:opacity-50"
+            className="px-4 py-2 max-[370px]:top-[-40px] max-[376px]:top-[-55px]  rounded-full relative bg-[#1e1e1e] text-[#82E300] border border-[#82E300] hover:bg-[#6ac100] hover:text-black transition-all disabled:opacity-50"
             whileHover={{ scale: 1.05 }}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}

@@ -66,22 +66,23 @@ const PremiumTournaments = () => {
           <option value="Tournament 2">Tournament 2</option>
         </select>
       </div>
-      <button className="ml-2 p-2 right-[10px] top-[186px] absolute rounded-full bg-gradient-to-r from-[#EE49FD] via-[#F94EA6] to-[#C253F5]">
+      <button className="ml-2 w-[40px] h-[40px] flex justify-center items-center right-[10px] top-[184px] absolute rounded-full bg-gradient-to-r from-[#EE49FD] via-[#F94EA6] to-[#C253F5]">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           fill="none"
-          stroke="white"
+          stroke="black"
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className="w-[25px] h-[25px]"
+          className="w-[20px] h-[20px]"
         >
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
           <polyline points="17 8 12 3 7 8" />
           <line x1="12" y1="3" x2="12" y2="15" />
         </svg>
       </button>
+
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}

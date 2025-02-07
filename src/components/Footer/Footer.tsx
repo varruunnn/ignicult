@@ -24,7 +24,7 @@ const Footer = () => {
       initial={{ y: 50, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="fixed bottom-0 w-full h-[75px] bg-[#363636] text-white flex justify-around items-center"
+      className="fixed bottom-0 w-full h-[75px] bg-[#282828] text-white flex justify-around items-center"
     >
       <div className="relative flex w-full h-[75px] flex-col items-center justify-center space-y-6">
         <motion.img
@@ -48,10 +48,10 @@ const Footer = () => {
             whileHover={{ rotate: 10 }}
           />
           <motion.span
-            className={`text-sm font-bold top-[-15px] relative font-roboto ${
+            className={`text-[9px] font-bold top-[-15px] relative font-roboto ${
               isHomeActive ? "text-[#82E300]" : "text-white"
             }`}
-            style={{ textShadow: "2px 2px 2px black" }}
+            
             whileHover={{ scale: 1.1 }}
           >
             Home
@@ -88,10 +88,10 @@ const Footer = () => {
             whileHover={{ rotate: -10 }}
           />
           <motion.span
-            className={`text-sm font-bold top-[-15px] relative font-roboto ${
+            className={`text-[9px] font-bold top-[-15px] relative font-roboto ${
               isProfileActive ? "text-[#82E300]" : "text-white"
             }`}
-            style={{ textShadow: "2px 2px 2px black" }}
+            
             whileHover={{ scale: 1.1 }}
           >
             Profiles
