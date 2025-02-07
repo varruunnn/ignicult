@@ -124,7 +124,7 @@ const PremiumTournaments = () => {
             </div>
             <div
               className="bg-[#FFCA28] font-semibold text-black justify-center w-[30px] text-center rounded-3xl h-[30px] 
-                         absolute top-1/2 left-1/2 transform -translate-x-[50%] -translate-y-[-58px]"
+             absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-[-58px] border-[3px] border-black"
             >
               1
             </div>
