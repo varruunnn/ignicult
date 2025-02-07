@@ -137,7 +137,7 @@ const LandingPage: React.FC = () => {
             <img src={item.img} alt={item.title} className="h-12 w-12 mr-4" />
             <div>
               <h3 className="text-[#82E300] text-lg font-bold">{item.title}</h3>
-              <h3 className="text-white text-lg mt-[-5px] font-bold tracking-tight" style={{ textShadow: "2px 2px 4px rgba(0, 0, 0, 0.9)", whiteSpace: "nowrap" }}>
+              <h3 className="text-white text-lg mt-[-5px] font-bold tracking-tight" style={{whiteSpace: "nowrap" }}>
                 {item.subtitle}
               </h3>
               <p className="text-sm leading-tight">{item.desc}</p>
