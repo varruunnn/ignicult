@@ -140,7 +140,7 @@ const Leaderboard: React.FC = () => {
           ))}
         </select>
 
-        <button className="ml-2 w-[42px] h-[42px] flex justify-center items-center absolute left-[82%] top-[170px] rounded-full bg-[#82E300] hover:bg-[#6ac100] text-black shadow-glow transition-all">
+        <button className="ml-2 w-[44px] h-[44px] flex justify-center items-center absolute left-[82%] top-[170px] rounded-full bg-[#82E300] hover:bg-[#6ac100] text-black shadow-glow transition-all">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
