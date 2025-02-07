@@ -51,7 +51,7 @@ const PremiumTournaments = () => {
       <h2 className="text-white text-lg font-semibold mb-4 text-center">
         Premium Tournaments
       </h2>
-      <div className="flex items-center bg-black border-[1px] border-[#F94EA6] mt-5 py-2 left-[-20px] relative rounded-full h-[47px] w-[80vw] max-w-md mx-auto">
+      <div className="flex items-center bg-black border-[1px] border-[#F94EA6] mt-5 py-2 left-[-20px] relative rounded-full h-[43px] w-[80vw] max-w-md mx-auto">
         <select
           className="flex-grow bg-transparent appearance-none text-[#F94EA6] outline-none p-2 rounded-md"
           defaultValue="Cricket Catch Pro"
@@ -75,7 +75,7 @@ const PremiumTournaments = () => {
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className="w-[23px] h-[25px]"
+          className="w-[25px] h-[25px]"
         >
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
           <polyline points="17 8 12 3 7 8" />
@@ -96,7 +96,6 @@ const PremiumTournaments = () => {
                      max-[468px]:gap-7 max-[400px]:gap-6 max-[375px]:gap-5 max-[370px]:gap-4"
         >
           <div className="mt-[-28px] relative">
-            {/* Second Place */}
             <div className="absolute text-center top-[47%] left-[26%] max-[468px]:left-[-4%] max-[468px]:top-[88%] max-[400px]:left-[-3%] max-[375px]:left-[-3%]">
               <div className="text-[12px] text-[#B9B9B9]">
                 {podiumPlayers[1]?.wallet}
