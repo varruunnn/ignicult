@@ -131,7 +131,7 @@ export default function Tournaments() {
           </motion.select>
 
           <motion.button
-            className="ml-2 w-[40px] h-[40px] flex justify-center items-center rounded-full bg-[#82E300] hover:bg-[#6ac100] text-black shadow-glow transition-all"
+            className="ml-2 w-[42px] h-[42px] flex justify-center items-center rounded-full bg-[#82E300] hover:bg-[#6ac100] text-black shadow-glow transition-all"
             whileHover={{ scale: 1.1 }}
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}

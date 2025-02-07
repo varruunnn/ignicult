@@ -120,9 +120,9 @@ const Leaderboard: React.FC = () => {
     <div className="min-h-screen w-full mt-[93px] text-white overflow-x-hidden overflow-y-auto">
       <SwipeHintOverlay />
       <div className="w-full py-8 px-4 flex flex-col items-center">
-      <h2 className="text-white text-lg font-semibold mb-4 text-center">
-        Leaderboard
-      </h2>
+        <h2 className="text-white text-lg font-semibold mb-4 text-center">
+          Leaderboard
+        </h2>
         <select
           className="bg-[#1e1e1e] text-[#92FF00] border-[1px] border-[#92FF00] relative left-[-20px] p-2 rounded-full w-[75vw] h-[45px] appearance-none pl-4 pr-8"
           value={selectedGame}
@@ -140,7 +140,7 @@ const Leaderboard: React.FC = () => {
           ))}
         </select>
 
-        <button className="ml-2 px-3 py-2 absolute left-[82%] top-[170px] rounded-full bg-[#82E300] hover:bg-[#6ac100] text-black shadow-glow transition-all">
+        <button className="ml-2 w-[42px] h-[42px] flex justify-center items-center absolute left-[82%] top-[170px] rounded-full bg-[#82E300] hover:bg-[#6ac100] text-black shadow-glow transition-all">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -149,7 +149,7 @@ const Leaderboard: React.FC = () => {
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="w-[20px] h-[25px] "
+            className="w-[20px] h-[20px]"
           >
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
             <polyline points="17 8 12 3 7 8" />

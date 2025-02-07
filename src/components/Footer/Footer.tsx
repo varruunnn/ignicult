@@ -38,7 +38,7 @@ const Footer = () => {
           onClick={() => navigate("/home")}
           whileHover={{ scale: 1.05 }}
           className={`flex flex-col max-[399px]:left-[25px] left-[40px] top-[10px] absolute items-center cursor-pointer ${
-            isHomeActive ? "text-green-500" : "text-white"
+            isHomeActive ? "text-green-500" : "text-[#6E6876]"
           }`}
         >
           <motion.img
@@ -49,7 +49,7 @@ const Footer = () => {
           />
           <motion.span
             className={`text-[9px] font-bold top-[-15px] relative font-roboto ${
-              isHomeActive ? "text-[#82E300]" : "text-white"
+              isHomeActive ? "text-[#82E300]" : "text-[#6E6876]"
             }`}
             
             whileHover={{ scale: 1.1 }}
@@ -78,7 +78,7 @@ const Footer = () => {
           onClick={() => navigate("/profile")}
           whileHover={{ scale: 1.05 }}
           className={`flex flex-col right-[40px] top-[20px] absolute items-center cursor-pointer max-[399px]:right-[25px] ${
-            isProfileActive ? "text-[#82E300]" : "text-white"
+            isProfileActive ? "text-[#82E300]" : "text-[#6E6876]"
           }`}
         >
           <motion.img
@@ -89,7 +89,7 @@ const Footer = () => {
           />
           <motion.span
             className={`text-[9px] font-bold top-[-15px] relative font-roboto ${
-              isProfileActive ? "text-[#82E300]" : "text-white"
+              isProfileActive ? "text-[#82E300]" : "text-[#6E6876]"
             }`}
             
             whileHover={{ scale: 1.1 }}
