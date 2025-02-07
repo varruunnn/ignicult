@@ -253,7 +253,7 @@ const ProfilePage: React.FC = () => {
               }}
             >
               <select
-                className="w-full h-[5.9vh] bg-[#353535] text-[#B3B3B3] border border-[#B3B3B3] rounded-[100px] p-2
+                className="w-full h-[6.5vh] mt-[1px]  bg-[#353535] text-[#B3B3B3] border border-[#B3B3B3] rounded-[100px] p-2
                 max-[468px]:p-2
                 max-[400px]:p-1
                 max-[375px]:p-1

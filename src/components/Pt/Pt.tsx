@@ -66,7 +66,7 @@ const PremiumTournaments = () => {
           <option value="Tournament 2">Tournament 2</option>
         </select>
       </div>
-      <button className="ml-2  w-[42px] h-[42px] flex justify-center items-center right-[10px] top-[184px] absolute rounded-full bg-gradient-to-r from-[#EE49FD] via-[#F94EA6] to-[#C253F5]">
+      <button className="ml-2 w-[42px] h-[42px] flex justify-center items-center right-[10px] top-[184px] absolute rounded-full bg-gradient-to-r from-[#EE49FD] via-[#F94EA6] to-[#C253F5]">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
@@ -92,14 +92,11 @@ const PremiumTournaments = () => {
         <h2 className="relative mt-[10px] text-center text-xl text-[#F94EA6] font-extrabold">
           January 2025
         </h2>
-        <div
-          className="flex justify-center items-end gap-8 mt-10 mb-8 
-                     max-[468px]:gap-7 max-[400px]:gap-6 max-[375px]:gap-5 max-[370px]:gap-4"
-        >
+        <div className="flex justify-center items-end gap-8 mt-10 mb-8 
+                     max-[468px]:gap-7 max-[400px]:gap-6 max-[375px]:gap-5 max-[370px]:gap-4">
           <div className="mt-[-28px] relative">
             <div className="absolute text-center top-[47%] left-[26%] max-[468px]:left-[-4%] max-[468px]:top-[88%] max-[400px]:left-[-3%] max-[375px]:left-[-3%]">
-            <div className="absolute bg-[#FFFFFF] w-[28px] h-[28px] rounded-3xl border-2 border-black text-black font-semibold max-[468px]:top-[-45px] max-[468px]:left-[25px] 
-              ">
+              <div className="absolute bg-[#FFFFFF] w-[28px] h-[28px] rounded-3xl border-2 border-black text-black font-semibold max-[468px]:top-[-45px] max-[468px]:left-[25px]">
                 2
               </div>
               <div className="text-[12px] text-[#B9B9B9]">
@@ -110,8 +107,7 @@ const PremiumTournaments = () => {
               </div>
             </div>
             <div className="absolute text-center top-[47%] left-[69%] max-[468px]:left-[73%] max-[468px]:top-[88%] max-[400px]:left-[73%] max-[375px]:left-[73%]">
-              <div className="absolute bg-[#FF8228] w-[28px] h-[28px] rounded-3xl border-2 border-black text-black font-semibold max-[468px]:top-[-45px] max-[468px]:left-[21px] 
-              ">
+              <div className="absolute bg-[#FF8228] w-[28px] h-[28px] rounded-3xl border-2 border-black text-black font-semibold max-[468px]:top-[-45px] max-[468px]:left-[21px]">
                 3
               </div>
               <div className="text-[12px] text-[#B9B9B9]">
@@ -144,15 +140,17 @@ const PremiumTournaments = () => {
             className="border border-[#565656] bg-[#3E3E3E] rounded-lg w-[80%] max-w-[90%] overflow-hidden"
             {...swipeHandlers}
           >
-            <div className="grid grid-cols-3 bg-[#3E3E3E] text-[#EE49FD] font-bold text-center py-3">
+            {/* Header Row with Vertical Dividers */}
+            <div className="grid grid-cols-3 divide-x divide-gray-600 bg-[#3E3E3E] text-[#EE49FD] font-bold text-center py-3">
               <span className="px-2">Rank</span>
               <span className="px-2">Wallet Address</span>
               <span className="px-2">Top Score</span>
             </div>
+            {/* Data Rows with Vertical Dividers */}
             {paginatedPlayers.map((player) => (
               <div
                 key={player.rank}
-                className="grid grid-cols-3 text-center text-[#B9B9B9] py-2 border-t border-gray-600"
+                className="grid grid-cols-3 divide-x divide-gray-600 text-center text-[#B9B9B9] py-2 border-t border-gray-600"
               >
                 <span className="px-2">{player.rank}</span>
                 <span className="truncate px-2">{player.wallet}</span>

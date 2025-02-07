@@ -262,16 +262,16 @@ const Leaderboard: React.FC = () => {
         )}
 
         <div className="p-5 mt-[-20px]" {...swipeHandlers}>
-          <table className="w-[115%] left-[-25px]  mx-auto relative border-collapse bg-[#3E3E3E] text-center">
+          <table className="w-[115%] left-[-25px] mx-auto relative border-collapse bg-[#3E3E3E] text-center">
             <thead>
               <tr>
-                <th className="border-b border-gray-600 py-2 px-3 text-[#92FF00] font-light">
+                <th className="border-b border-gray-600 border-r py-2 px-3 text-[#92FF00] font-light">
                   Rank
                 </th>
-                <th className="border-b border-gray-600 py-2 text-[#92FF00] font-light">
+                <th className="border-b border-gray-600 border-r py-2 px-3 text-[#92FF00] font-light">
                   Wallet Address
                 </th>
-                <th className="border-b border-gray-600 py-2 mr-[-113px] text-[#92FF00] font-light">
+                <th className="border-b border-gray-600 py-2 px-3 text-[#92FF00] font-light">
                   Total Score
                 </th>
               </tr>
@@ -279,13 +279,13 @@ const Leaderboard: React.FC = () => {
             <tbody>
               {paginatedData.map((entry, index) => (
                 <tr key={index}>
-                  <td className="border-b border-gray-600 py-2 text-[#B9B9B9]">
+                  <td className="border-b border-gray-600 border-r py-2 px-3 text-[#B9B9B9]">
                     {entry.rank}
                   </td>
-                  <td className="border-b border-gray-600 py-2 text-[#B9B9B9]">
+                  <td className="border-b border-gray-600 border-r py-2 px-3 text-[#B9B9B9]">
                     {entry.wallet}
                   </td>
-                  <td className="border-b border-gray-600 py-2 text-[#B9B9B9]">
+                  <td className="border-b border-gray-600 py-2 px-3 text-[#B9B9B9]">
                     {entry.score}
                   </td>
                 </tr>

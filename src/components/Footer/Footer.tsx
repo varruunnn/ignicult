@@ -24,7 +24,7 @@ const Footer = () => {
       initial={{ y: 50, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="fixed bottom-0 w-full h-[75px] bg-[#282828] text-white flex justify-around items-center"
+      className="fixed bottom-0 w-full h-[69px]  bg-[#282828] text-white flex justify-around items-center"
     >
       <div className="relative flex w-full h-[75px] flex-col items-center justify-center space-y-6">
         <motion.img
@@ -44,11 +44,11 @@ const Footer = () => {
           <motion.img
             src="/home.svg"
             alt="Home Icon"
-            className="w-[36px] h-[36px] top-[-15px] relative"
+            className="w-[36px] h-[36px] left-[10px] top-[-15px] relative"
             whileHover={{ rotate: 10 }}
           />
           <motion.span
-            className={`text-[9px] font-bold top-[-15px] relative font-roboto ${
+            className={`text-[9px] font-bold left-[10px] top-[-15px] relative font-roboto ${
               isHomeActive ? "text-[#82E300]" : "text-[#6E6876]"
             }`}
             
@@ -88,11 +88,11 @@ const Footer = () => {
           <motion.img
             src="/Group.svg"
             alt="Profiles Icon"
-            className="w-[26px] h-[26px] top-[-18px] relative"
+            className="w-[26px] h-[26px] left-[-10px] top-[-18px] relative"
             whileHover={{ rotate: -10 }}
           />
           <motion.span
-            className={`text-[9px] font-bold top-[-15px] relative font-roboto ${
+            className={`text-[9px] font-bold left-[-10px] top-[-15px] relative font-roboto ${
               isProfileActive ? "text-[#82E300]" : "text-[#6E6876]"
             }`}
             

@@ -43,7 +43,7 @@ export default function GamingSection() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.5 }}
-        className="text-5xl font-extrabold text-center text-[#82E300] mb-10 shadow-lg shadow-[#82E300]/50 tracking-wide transition-all duration-300 ease-in-out transform hover:scale-105 hover:text-[#66b300]"
+        className="text-lg font-semibold text-center text-[#FFFFFF] mb-10  tracking-wide transition-all duration-300 ease-in-out transform hover:scale-105 hover:text-[#66b300]"
       >
         Games
       </motion.h1>
@@ -57,12 +57,12 @@ export default function GamingSection() {
             viewport={{ once: true, amount: 0.5 }}
             whileHover={{ scale: 1.05, boxShadow: "0 0 20px 4px rgba(130,227,0,0.8)" }}
             onClick={() => handleGameClick(game.id)}
-            className="w-[300px] h-[200px] rounded-lg shadow-lg cursor-pointer transition-transform"
+            className="w-[300px] h-[200px] rounded-lg  cursor-pointer transition-transform"
           >
             <img
               src={game.svg}
               alt={`Game ${game.id}`}
-              className="w-full h-full object-cover rounded-lg shadow-[0_0_20px_4px_rgba(130,227,0,0.8)]"
+              className="w-full h-full object-cover rounded-lg "
             />
           </motion.div>
         ))}
