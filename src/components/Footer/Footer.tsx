@@ -66,8 +66,12 @@ const Footer = () => {
           transition={{ delay: 0.3, duration: 0.5 }}
         />
         <motion.span
-          className="absolute text-[#282828] font-semibold font-roboto text-lg"
-          style={{ top: "30%", left: "40%", transform: "translate(-50%, -10%)" }}
+          className="absolute text-[#282828] font-semibold font-roboto text-lg
+          max-[468px]:left-[41.4%]
+          max-[400px]:left-[40.2%]
+          max-[370px]:left-[39.5%]
+          "
+          style={{ top: "30%", transform: "translate(-50%, -10%)" }}
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ delay: 0.4, duration: 0.5 }}
