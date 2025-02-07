@@ -113,7 +113,7 @@ export default function Tournaments() {
         </motion.h1>
         <div className="mt-4 flex justify-center items-center">
           <motion.select
-            className="px-4 py-2 w-[70vw] rounded-full h-[5.9vh] bg-gray-900 appearance-none pl-4 pr-8 text-white border-t-[1px] border-[#82E300] focus:outline-none hover:border-[#6ac100] transition-all"
+            className="px-4 py-2 w-[70vw] rounded-full h-[5.9vh] bg-gray-900 appearance-none pl-4 pr-8 text-white border-[1px] border-[#82E300] focus:outline-none hover:border-[#6ac100] transition-all"
             value={selectedGame}
             onChange={handleGameChange}
             style={{

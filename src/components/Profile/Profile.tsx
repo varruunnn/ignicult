@@ -48,8 +48,6 @@ const ProfilePage: React.FC = () => {
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
             whileHover={{ scale: 1.1 }}
           />
-
-          {/* Wallet Address Title */}
           <motion.h1
             className="text-lg absolute text-[#858585] left-[35%] top-[-60px] font-bold
             max-[468px]:text-lg max-[468px]:top-[-60px] max-[468px]:left-[35%]
@@ -74,8 +72,6 @@ const ProfilePage: React.FC = () => {
           >
             abcd12345
           </motion.p>
-
-          {/* Total Points */}
           <motion.span
             className="bg-[#82E300] absolute text-black font-bold w-[65px] h-[66px] py-1 left-[35px] top-[16px] rounded-l-lg flex items-center justify-center
             max-[468px]:w-[65px] max-[468px]:h-[66px] 
