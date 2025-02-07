@@ -40,11 +40,11 @@ const ProfilePage: React.FC = () => {
           <motion.img
             src="/profilee.svg"
             alt="Profile"
-            className="w-16 h-16 absolute left-[43%] top-[-130px] rounded-full
-            max-[468px]:w-16 max-[468px]:h-16 max-[468px]:top-[-130px] max-[468px]:left-[43%]
-            max-[400px]:w-14 max-[400px]:h-14 max-[400px]:top-[-125px] max-[400px]:left-[42%]
-            max-[375px]:w-12 max-[375px]:h-12 max-[375px]:top-[-120px] max-[375px]:left-[41%]
-            max-[370px]:w-14 max-[370px]:h-14 max-[370px]:top-[-125px] max-[370px]:left-[40%]"
+            className="w-16 h-16 absolute left-[43%] top-[-130px] rounded-full border-[1px] border-[#82E300]
+  max-[468px]:w-16 max-[468px]:h-16 max-[468px]:top-[-130px] max-[468px]:left-[43%]
+  max-[400px]:w-14 max-[400px]:h-14 max-[400px]:top-[-125px] max-[400px]:left-[42%]
+  max-[375px]:w-12 max-[375px]:h-12 max-[375px]:top-[-120px] max-[375px]:left-[41%]
+  max-[370px]:w-14 max-[370px]:h-14 max-[370px]:top-[-125px] max-[370px]:left-[40%]"
             initial={{ scale: 0, rotate: -90 }}
             animate={{ scale: 1, rotate: 0 }}
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
@@ -254,7 +254,7 @@ const ProfilePage: React.FC = () => {
               }}
             >
               <select
-                className="w-full h-[5.5vh] bg-[#353535] text-[#B3B3B3] border border-[#B3B3B3] rounded-[100px] p-2
+                className="w-full h-[5.9vh] bg-[#353535] text-[#B3B3B3] border border-[#B3B3B3] rounded-[100px] p-2
                 max-[468px]:p-2
                 max-[400px]:p-1
                 max-[375px]:p-1
@@ -337,7 +337,7 @@ const ProfilePage: React.FC = () => {
                       className="w-full h-full object-cover rounded-3xl"
                     />
                     <p className="relative text-lg font-normal top-[-42px] left-[40px] text-[#FEA50D]">
-                      48 
+                      48
                     </p>
                     <p className="absolute text-sm font-normal top-[63%] right-[14%] text-[#FEA50D]">
                       HR

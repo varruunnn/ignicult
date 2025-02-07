@@ -120,9 +120,11 @@ const Leaderboard: React.FC = () => {
     <div className="min-h-screen w-full mt-[93px] text-white overflow-x-hidden overflow-y-auto">
       <SwipeHintOverlay />
       <div className="w-full py-8 px-4 flex flex-col items-center">
-        <h3 className="text-3xl font-semibold mb-4">Leaderboard</h3>
+      <h2 className="text-white text-lg font-semibold mb-4 text-center">
+        Leaderboard
+      </h2>
         <select
-          className="bg-[#1e1e1e] text-[#92FF00] border-[1px] border-[#92FF00] relative left-[-20px] p-2 rounded-full w-[75vw] h-[50px] appearance-none pl-4 pr-8"
+          className="bg-[#1e1e1e] text-[#92FF00] border-[1px] border-[#92FF00] relative left-[-20px] p-2 rounded-full w-[75vw] h-[45px] appearance-none pl-4 pr-8"
           value={selectedGame}
           onChange={(e) => setSelectedGame(e.target.value as GameName)}
           style={{
@@ -138,7 +140,7 @@ const Leaderboard: React.FC = () => {
           ))}
         </select>
 
-        <button className="ml-2 px-3 py-2 absolute left-[82%] top-[182px] rounded-full bg-[#82E300] hover:bg-[#6ac100] text-black shadow-glow transition-all">
+        <button className="ml-2 px-3 py-2 absolute left-[82%] top-[170px] rounded-full bg-[#82E300] hover:bg-[#6ac100] text-black shadow-glow transition-all">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -147,7 +149,7 @@ const Leaderboard: React.FC = () => {
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="w-5 h-5 "
+            className="w-[20px] h-[25px] "
           >
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
             <polyline points="17 8 12 3 7 8" />
@@ -156,7 +158,7 @@ const Leaderboard: React.FC = () => {
         </button>
       </div>
 
-      <div className="mx-0 mb-8 bg-[#141414] min-[400px]:h-[60vh] rounded-3xl border-t-2 border-[#92FF00]">
+      <div className="mx-0 mb-8 bg-[#141414] min-[400px]:h-[60vh] rounded-3xl border-t-[1px] border-[#92FF00]">
         <div className="flex gap-[0px] max-[369px]:gap-[15px] p-[5px] items-center max-[468px]:ml-[10px] max-[468px]:gap-[33px] max-[398px]:gap-[20px] mb-4">
           {["Daily", "Weekly", "Monthly", "Overall"].map((period) => (
             <a
@@ -171,7 +173,6 @@ const Leaderboard: React.FC = () => {
               }
             >
               {period}
-              {/* Underline animation */}
               <span
                 className={`absolute bottom-0 left-0 h-[2px] bg-[#92FF00] transition-all duration-300 ease-in-out ${
                   timeframe === period ? "w-full" : "w-0"
@@ -182,8 +183,7 @@ const Leaderboard: React.FC = () => {
         </div>
 
         {currentPage === 0 && (
-          <div className="flex justify-center items-end gap-0 mb-4">
-            {/* Second Place */}
+          <div className="flex justify-center items-end mt-[30px] gap-0 mb-4">
             <motion.div
               initial={{ y: 50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -208,7 +208,6 @@ const Leaderboard: React.FC = () => {
                 </div>
               </div>
             </motion.div>
-            {/* First Place */}
             <motion.div
               initial={{ y: 50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -239,7 +238,6 @@ const Leaderboard: React.FC = () => {
                 </div>
               </div>
             </motion.div>
-            {/* Third Place */}
             <motion.div
               initial={{ y: 50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}

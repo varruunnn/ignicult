@@ -51,7 +51,7 @@ const PremiumTournaments = () => {
       <h2 className="text-white text-lg font-semibold mb-4 text-center">
         Premium Tournaments
       </h2>
-      <div className="flex items-center border-2 border-[#F94EA6] mt-5 py-2 left-[-20px] relative rounded-full w-[80vw] max-w-md mx-auto">
+      <div className="flex items-center bg-black border-2 border-[#F94EA6] mt-5 py-2 left-[-20px] relative rounded-full h-[47px] w-[80vw] max-w-md mx-auto">
         <select
           className="flex-grow bg-transparent appearance-none text-[#F94EA6] outline-none p-2 rounded-md"
           defaultValue="Cricket Catch Pro"
@@ -66,7 +66,7 @@ const PremiumTournaments = () => {
           <option value="Tournament 2">Tournament 2</option>
         </select>
       </div>
-      <button className="ml-2 p-2 right-[10px] top-[196px] absolute rounded-full bg-gradient-to-r from-[#EE49FD] via-[#F94EA6] to-[#C253F5]">
+      <button className="ml-2 p-2 right-[10px] top-[186px] absolute rounded-full bg-gradient-to-r from-[#EE49FD] via-[#F94EA6] to-[#C253F5]">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
@@ -75,7 +75,7 @@ const PremiumTournaments = () => {
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className="w-5 h-5"
+          className="w-[23px] h-[25px]"
         >
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
           <polyline points="17 8 12 3 7 8" />
