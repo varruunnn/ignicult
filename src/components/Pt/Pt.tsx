@@ -98,6 +98,10 @@ const PremiumTournaments = () => {
         >
           <div className="mt-[-28px] relative">
             <div className="absolute text-center top-[47%] left-[26%] max-[468px]:left-[-4%] max-[468px]:top-[88%] max-[400px]:left-[-3%] max-[375px]:left-[-3%]">
+            <div className="absolute bg-[#FFFFFF] w-[28px] h-[28px] rounded-3xl border-2 border-black text-black font-semibold max-[468px]:top-[-45px] max-[468px]:left-[25px] 
+              ">
+                2
+              </div>
               <div className="text-[12px] text-[#B9B9B9]">
                 {podiumPlayers[1]?.wallet}
               </div>
@@ -106,6 +110,10 @@ const PremiumTournaments = () => {
               </div>
             </div>
             <div className="absolute text-center top-[47%] left-[69%] max-[468px]:left-[73%] max-[468px]:top-[88%] max-[400px]:left-[73%] max-[375px]:left-[73%]">
+              <div className="absolute bg-[#FF8228] w-[28px] h-[28px] rounded-3xl border-2 border-black text-black font-semibold max-[468px]:top-[-45px] max-[468px]:left-[21px] 
+              ">
+                3
+              </div>
               <div className="text-[12px] text-[#B9B9B9]">
                 {podiumPlayers[2]?.wallet}
               </div>
