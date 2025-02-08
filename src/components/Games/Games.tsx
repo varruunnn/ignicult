@@ -37,7 +37,7 @@ export default function GamingSection() {
   };
 
   return (
-    <div className="px-6 mt-30 py-[90px] font-[roboto] w-full h-[100vh] text-white overflow-y-auto relative">
+    <div className="px-6 mt-30 py-[90px] font-[roboto] mb-[50px] overflow-x-hidden w-full h-[100vh] text-white overflow-y-auto relative">
       <motion.h1
         variants={headingVariants}
         initial="hidden"
