@@ -43,11 +43,17 @@ export default function GamingSection() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.5 }}
-        className="text-lg font-semibold text-center text-[#FFFFFF] mb-10  tracking-wide transition-all duration-300 ease-in-out transform hover:scale-105 "
+        className="text-lg font-semibold text-center text-[#FFFFFF] mb-10  tracking-wide transition-all duration-300 ease-in-out transform relative hover:scale-105 
+        max-[370px]:left-[-1px]
+        "
       >
         Games
       </motion.h1>
-      <div className="grid absolute max-[399px]:left-[9%] left-[14%] grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 pb-16">
+      <div className="grid absolute grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 pb-16 w-full mx-auto justify-center
+      max-[468px]:left-[15%]
+      max-[400px]:left-[11%]
+      max-[370px]:left-[8%]
+      ">
         {games.map((game) => (
           <motion.div
             key={game.id}
