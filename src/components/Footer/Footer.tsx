@@ -1,4 +1,4 @@
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, } from "react-router-dom";
 import { motion } from "framer-motion";
 const Footer = () => {
   const navigate = useNavigate();
@@ -8,7 +8,7 @@ const Footer = () => {
   const isProfileActive = location.pathname === "/profile";
   const isPremiumRoute = location.pathname === "/premium-tournaments";
   const handleClick = () => {
-    alert("I am Glowing dv");
+    navigate('/games')
   };
   const handleFooter = (): string => {
     if (isPremiumRoute) {
