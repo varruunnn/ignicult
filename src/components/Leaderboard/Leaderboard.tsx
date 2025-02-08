@@ -292,23 +292,28 @@ const Leaderboard: React.FC = () => {
               ))}
             </tbody>
           </table>
-          <div className="flex justify-center mt-6 mb-[55px] gap-4">
+          <div className="flex justify-center mt-6 mb-[55px] gap-4
+          
+          ">
             <button
-              className="bg-[#1e1e1e] text-[#92FF00] border border-[#92FF00] px-4 py-2 rounded-[100px] hover:bg-[#282828]"
-              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
-              disabled={currentPage === 0}
-            >
-              &larr; Prev
-            </button>
-            <button
-              className="bg-[#1e1e1e] text-[#92FF00] border border-[#92FF00] px-4 py-2 rounded-[100px] hover:bg-[#282828]"
-              onClick={() =>
-                setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1))
-              }
-              disabled={currentPage >= totalPages - 1}
-            >
-              Next &rarr;
-            </button>
+            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
+            disabled={currentPage === 0}
+            className="bg-[#1e1e1e] text-[#92FF00] relative border border-[#92FF00] px-4 py-2 rounded hover:bg-[#92FF00] hover:text-black transition-all disabled:opacity-50
+            max-[370px]:top-[-14px]
+            "
+          >
+            &larr; Prev
+          </button>
+          <button
+            onClick={() =>
+              setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1))
+            }
+            disabled={currentPage >= totalPages - 1}
+            className="bg-[#1e1e1e] text-[#92FF00] border relative border-[#92FF00] px-4 py-2 rounded hover:bg-[#92FF00] hover:text-black transition-all disabled:opacity-50
+             max-[370px]:top-[-14px]"
+          >
+            Next &rarr;
+          </button>
           </div>
         </div>
       </div>

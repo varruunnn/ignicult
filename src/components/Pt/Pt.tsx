@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react"; 
 import { useSwipeable } from "react-swipeable";
 import { motion } from "framer-motion";
 import SwipeHintOverlay from "../SwipeHintOverlay/SwipeHintOverlay";
@@ -46,7 +46,7 @@ const PremiumTournaments = () => {
   });
 
   return (
-    <div className="min-h-screen w-full mt-[120px] text-white overflow-y-auto overflow-x-hidden p-4">
+    <div className="min-h-screen w-full mt-[120px] text-white overflow-y-auto overflow-x-hidden p-4 pb-20">
       <SwipeHintOverlay />
       <h2 className="text-white text-lg font-semibold mb-4 text-center">
         Premium Tournaments
@@ -82,18 +82,16 @@ const PremiumTournaments = () => {
           <line x1="12" y1="3" x2="12" y2="15" />
         </svg>
       </button>
-
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.8 }}
-        className="border-t-[1.8px] max-[361px]:w-[115%] border-[#F94EA6] mt-7 bg-black rounded-[30px] w-[107%] ml-[-22px]"
+        className="border-t-[1.8px] max-[468px]:w-[110%] max-[361px]:w-[115%] border-[#F94EA6] mt-7 bg-[#1e1e1e] rounded-t-[30px] w-[107%] ml-[-22px] min-h-[80vh] pb-[1px] mb-[-10px]"
       >
         <h2 className="relative mt-[10px] text-center text-xl text-[#F94EA6] font-extrabold">
           January 2025
         </h2>
-        <div className="flex justify-center items-end gap-8 mt-10 mb-8 
-                     max-[468px]:gap-7 max-[400px]:gap-6 max-[375px]:gap-5 max-[370px]:gap-4">
+        <div className="flex justify-center items-end gap-8 mt-10 mb-8 max-[468px]:gap-7 max-[400px]:gap-6 max-[375px]:gap-5 max-[370px]:gap-4">
           <div className="mt-[-28px] relative">
             <div className="absolute text-center top-[47%] left-[26%] max-[468px]:left-[-4%] max-[468px]:top-[88%] max-[400px]:left-[-3%] max-[375px]:left-[-3%]">
               <div className="absolute bg-[#FFFFFF] w-[28px] h-[28px] rounded-3xl border-2 border-black text-black font-semibold max-[468px]:top-[-45px] max-[468px]:left-[25px]">
@@ -126,10 +124,7 @@ const PremiumTournaments = () => {
                 {podiumPlayers[0]?.score}
               </div>
             </div>
-            <div
-              className="bg-[#FFCA28] font-semibold text-black justify-center w-[30px] text-center rounded-3xl h-[30px] 
-             absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-[-58px] border-[3px] border-black"
-            >
+            <div className="bg-[#FFCA28] font-semibold text-black justify-center w-[30px] text-center rounded-3xl h-[30px] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-[-58px] border-[3px] border-black">
               1
             </div>
           </div>
@@ -140,13 +135,11 @@ const PremiumTournaments = () => {
             className="border border-[#565656] bg-[#3E3E3E] rounded-lg w-[80%] max-w-[90%] overflow-hidden"
             {...swipeHandlers}
           >
-            {/* Header Row with Vertical Dividers */}
             <div className="grid grid-cols-3 divide-x divide-gray-600 bg-[#3E3E3E] text-[#EE49FD] font-bold text-center py-3">
               <span className="px-2">Rank</span>
               <span className="px-2">Wallet Address</span>
               <span className="px-2">Top Score</span>
             </div>
-            {/* Data Rows with Vertical Dividers */}
             {paginatedPlayers.map((player) => (
               <div
                 key={player.rank}
@@ -163,7 +156,7 @@ const PremiumTournaments = () => {
           <button
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
             disabled={currentPage === 0}
-            className="bg-[#1e1e1e] text-[#F94EA6] border border-[#F94EA6] px-4 py-2 rounded hover:bg-[#F94EA6] hover:text-black transition-all disabled:opacity-50"
+            className="bg-[#1e1e1e] text-[#F94EA6] relative top-[15px] border border-[#F94EA6] px-4 py-2 rounded hover:bg-[#F94EA6] hover:text-black transition-all disabled:opacity-50"
           >
             &larr; Prev
           </button>
@@ -172,7 +165,7 @@ const PremiumTournaments = () => {
               setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1))
             }
             disabled={currentPage >= totalPages - 1}
-            className="bg-[#1e1e1e] text-[#F94EA6] border border-[#F94EA6] px-4 py-2 rounded hover:bg-[#F94EA6] hover:text-black transition-all disabled:opacity-50"
+            className="bg-[#1e1e1e] text-[#F94EA6] border relative top-[15px] border-[#F94EA6] px-4 py-2 rounded hover:bg-[#F94EA6] hover:text-black transition-all disabled:opacity-50"
           >
             Next &rarr;
           </button>

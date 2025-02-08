@@ -43,7 +43,7 @@ export default function GamingSection() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.5 }}
-        className="text-lg font-semibold text-center text-[#FFFFFF] mb-10  tracking-wide transition-all duration-300 ease-in-out transform hover:scale-105 hover:text-[#66b300]"
+        className="text-lg font-semibold text-center text-[#FFFFFF] mb-10  tracking-wide transition-all duration-300 ease-in-out transform hover:scale-105 "
       >
         Games
       </motion.h1>

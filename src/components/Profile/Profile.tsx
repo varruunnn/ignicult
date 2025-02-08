@@ -253,7 +253,7 @@ const ProfilePage: React.FC = () => {
               }}
             >
               <select
-                className="w-full h-[6.5vh] mt-[1px]  bg-[#353535] text-[#B3B3B3] border border-[#B3B3B3] rounded-[100px] p-2
+                className="w-full h-[6.5vh] mt-[1px]  appearance-none bg-[#353535] text-[#B3B3B3] border border-[#B3B3B3] rounded-[100px] p-2
                 max-[468px]:p-2
                 max-[400px]:p-1
                 max-[375px]:p-1
@@ -270,6 +270,18 @@ const ProfilePage: React.FC = () => {
                 <option>Drop The Number</option>
                 <option>Snake Color Break</option>
               </select>
+              <div className="absolute top-[-30%]  max-[370px]:top-[-30%] max-[370px]:right-[20px] flex items-center justify-center h-full pointer-events-none
+              max-[468px]:right-[30px] max-[468px]:top-[-28%]
+              ">
+                <svg
+                  width="12"
+                  height="12"
+                  fill="#B3B3B3"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M0 3L6 9L12 3H0Z" />
+                </svg>
+              </div>
               <div className="mt-4 relative">
                 <h3
                   className="text-sm text-[#A3A3A3] relative

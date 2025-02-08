@@ -213,7 +213,7 @@ export default function Tournaments() {
           <motion.button
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
             disabled={currentPage === 0}
-            className="px-4 py-2 max-[370px]:top-[-40px] max-[376px]:top-[-55px] rounded-full relative bg-[#1e1e1e] text-[#82E300] border border-[#82E300] hover:bg-[#6ac100] hover:text-black transition-all disabled:opacity-50"
+            className="px-4 py-2 max-[370px]:top-[-49px] max-[376px]:top-[-55px] rounded relative bg-[#1e1e1e] text-[#82E300] border border-[#82E300] hover:bg-[#6ac100] hover:text-black transition-all disabled:opacity-50"
             whileHover={{ scale: 1.05 }}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -226,7 +226,7 @@ export default function Tournaments() {
               setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1))
             }
             disabled={currentPage >= totalPages - 1}
-            className="px-4 py-2 max-[370px]:top-[-40px] max-[376px]:top-[-55px]  rounded-full relative bg-[#1e1e1e] text-[#82E300] border border-[#82E300] hover:bg-[#6ac100] hover:text-black transition-all disabled:opacity-50"
+            className="px-4 py-2 max-[370px]:top-[-49px] max-[376px]:top-[-55px]  rounded relative bg-[#1e1e1e] text-[#82E300] border border-[#82E300] hover:bg-[#6ac100] hover:text-black transition-all disabled:opacity-50"
             whileHover={{ scale: 1.05 }}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -239,3 +239,22 @@ export default function Tournaments() {
     </div>
   );
 }
+{/* <button
+onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
+disabled={currentPage === 0}
+className="bg-[#1e1e1e] text-[#92FF00] relative border border-[#92FF00] px-4 py-2 rounded hover:bg-[#92FF00] hover:text-black transition-all disabled:opacity-50
+max-[370px]:top-[-14px]
+"
+>
+&larr; Prev
+</button>
+<button
+onClick={() =>
+  setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1))
+}
+disabled={currentPage >= totalPages - 1}
+className="bg-[#1e1e1e] text-[#92FF00] border relative border-[#92FF00] px-4 py-2 rounded hover:bg-[#92FF00] hover:text-black transition-all disabled:opacity-50
+ max-[370px]:top-[-14px]"
+>
+Next &rarr;
+</button> */}

@@ -30,7 +30,7 @@ const Footer = () => {
         <motion.img
           src="footer.svg"
           alt=""
-          className="w-[68px] h-[68px] absolute top-[-30px] z-10"
+          className="w-[68px] h-[68px] absolute top-[-25px] z-10"
           onClick={handleClick}
           whileHover={{ scale: 1.1 }}
         />
@@ -44,11 +44,11 @@ const Footer = () => {
           <motion.img
             src="/home.svg"
             alt="Home Icon"
-            className="w-[36px] h-[36px] left-[10px] top-[-15px] relative"
+            className="w-[36px] h-[36px] left-[10px] top-[-20px] relative"
             whileHover={{ rotate: 10 }}
           />
           <motion.span
-            className={`text-[9px] font-bold left-[10px] top-[-15px] relative font-roboto ${
+            className={`text-[9px] font-bold left-[10px] top-[-20px] relative font-roboto ${
               isHomeActive ? "text-[#82E300]" : "text-[#6E6876]"
             }`}
             
@@ -88,11 +88,11 @@ const Footer = () => {
           <motion.img
             src="/Group.svg"
             alt="Profiles Icon"
-            className="w-[26px] h-[26px] left-[-10px] top-[-18px] relative"
+            className="w-[26px] h-[26px] left-[-10px] top-[-21px] relative"
             whileHover={{ rotate: -10 }}
           />
           <motion.span
-            className={`text-[9px] font-bold left-[-10px] top-[-15px] relative font-roboto ${
+            className={`text-[9px] font-bold left-[-10px] top-[-20px] relative font-roboto ${
               isProfileActive ? "text-[#82E300]" : "text-[#6E6876]"
             }`}
             

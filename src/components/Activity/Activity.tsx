@@ -8,7 +8,7 @@ const Activity = () => {
       id: 1,
       name: "Wave Runner",
       score: 0,
-      image: "/game1.svg",
+      image: "/game10.svg",
       info: {
         ignixEarned: 1,
         acceptedAt: "06/01/2025, 0 GMT",
@@ -17,11 +17,12 @@ const Activity = () => {
         dnf: "No",
       },
     },
+
     {
       id: 2,
       name: "Colorship",
       score: 0,
-      image: "/game1.svg",
+      image: "/game2.svg",
       info: {
         ignixEarned: 2,
         acceptedAt: "06/01/2025, 1 GMT",
@@ -32,9 +33,9 @@ const Activity = () => {
     },
     {
       id: 3,
-      name: "Sky Dash",
+      name: "Cricket Catch Pro",
       score: 0,
-      image: "/game1.svg",
+      image: "/game3.svg",
       info: {
         ignixEarned: 3,
         acceptedAt: "06/01/2025, 2 GMT",
@@ -45,9 +46,74 @@ const Activity = () => {
     },
     {
       id: 4,
-      name: "Rocket Leap",
+      name: "Cricket PowerPlay",
       score: 0,
-      image: "/game1.svg",
+      image: "/game4.svg",
+      info: {
+        ignixEarned: 4,
+        acceptedAt: "06/01/2025, 3 GMT",
+        completedAt: "06/01/2025, GMT",
+        quitAt: "N/A",
+        dnf: "No",
+      },
+    },
+    {
+      id: 5,
+      name: "Fire Number Up",
+      score: 0,
+      image: "/game8.svg",
+      info: {
+        ignixEarned: 4,
+        acceptedAt: "06/01/2025, 3 GMT",
+        completedAt: "06/01/2025, GMT",
+        quitAt: "N/A",
+        dnf: "No",
+      },
+    },
+    {
+      id: 6,
+      name: "Drop The Number",
+      score: 0,
+      image: "/game5.svg",
+      info: {
+        ignixEarned: 4,
+        acceptedAt: "06/01/2025, 3 GMT",
+        completedAt: "06/01/2025, GMT",
+        quitAt: "N/A",
+        dnf: "No",
+      },
+    },
+    {
+      id: 7,
+      name: "Snake Color Break",
+      score: 0,
+      image: "/game6.svg",
+      info: {
+        ignixEarned: 4,
+        acceptedAt: "06/01/2025, 3 GMT",
+        completedAt: "06/01/2025, GMT",
+        quitAt: "N/A",
+        dnf: "No",
+      },
+    },
+    {
+      id: 8,
+      name: "Number Snake",
+      score: 0,
+      image: "/game7.svg",
+      info: {
+        ignixEarned: 4,
+        acceptedAt: "06/01/2025, 3 GMT",
+        completedAt: "06/01/2025, GMT",
+        quitAt: "N/A",
+        dnf: "No",
+      },
+    },
+    {
+      id: 9,
+      name: "Two Colors",
+      score: 0,
+      image: "/game9.svg",
       info: {
         ignixEarned: 4,
         acceptedAt: "06/01/2025, 3 GMT",
