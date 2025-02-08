@@ -24,9 +24,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onClose }) => {
 
   return (
     <SidebarContainer>
-      <CloseButton onClick={onClose}>
-        <IoClose size={24} />
-      </CloseButton>
+        <IoClose size={24} onClick={onClose}  className="absolute top-[31px] border-2 rounded-[50%] border-[#82e300] right-[20px]" />
       <LogoContainer>
         <img
           src="/igni.svg"
@@ -82,24 +80,7 @@ const SidebarContainer = styled.div`
   position: relative;
 `;
 
-const CloseButton = styled.button`
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  color: #b0b0b0;
-  border-radius: 50%;
-  border: 2px solid #82e300;
-  background-color: transparent;
-  cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s ease;
-  &:hover {
-    transform: scale(1.1);
-  }
-  &:active {
-    transform: scale(0.95);
-  }
-`;
+
 
 const LogoContainer = styled.div`
   display: flex;
@@ -159,8 +140,6 @@ const NavLink = styled.a<{ active: boolean; isClicked: boolean; isPremium: boole
     background-image: linear-gradient(to right, #ee49fd, #f94ea6, #c253f5);
     background-clip: text;
   `}
-
-  /* For non-premium links: Green Underline */
   ${(props) =>
     !props.isPremium &&
     `
