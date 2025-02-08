@@ -16,10 +16,12 @@ const Sidebar: React.FC<SidebarProps> = ({ onClose }) => {
     setActiveLink(link);
     setIsClicked(true);
     navigate(`/${link.toLowerCase().replace(/\s/g, "-")}`);
+    onClose();
     setTimeout(() => {
       setIsClicked(false);
-    }, 100);
+    }, 10);
   };
+
 
   return (
     <SidebarContainer>
