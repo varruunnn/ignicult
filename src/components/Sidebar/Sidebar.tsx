@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { IoClose } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 interface SidebarProps {
@@ -7,55 +8,66 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ onClose }) => {
-    const [activeLink, setActiveLink] = useState<string | null>(null);
-    const [isClicked, setIsClicked] = useState<boolean>(false);
-  
-    const handleLinkClick = (link: string) => {
-      setActiveLink(link);
-      setIsClicked(true);
-      setTimeout(() => {
-        setIsClicked(false);
-      }, 100);
-    };
-  
-    return (
-      <SidebarContainer>
-        <CloseButton onClick={onClose}>
-          <IoClose size={24} />
-        </CloseButton>
-        <LogoContainer>
-          <img
-            src="/igni.svg"
-            alt="Company Logo"
-            className="w-10 h-10 rounded-full"
-          />
-          <h1 className="text-xl font-poppins font-semibold">IGNICULT</h1>
-        </LogoContainer>
-        <Nav>
-          {["Home", "Profile", "Games", "Leaderboard", "Tournament", "Premium Tournaments", "Activity", "Rewards", "Support"].map((link) => (
-            <NavItem key={link}>
-              <NavLink
-                href={`${link.toLowerCase().replace(/\s/g, "-")}`}
-                active={activeLink === link}
-                isClicked={isClicked}
-                onClick={() => handleLinkClick(link)}
-                isPremium={link === "Premium Tournaments"} 
-              >
-                <IconWrapper>
-                  <img
-                    src={`/${link.toLowerCase().replace(/\s/g, "-")}.svg`} 
-                    alt={`${link} icon`}
-                    className="w-6 h-6"
-                  />
-                </IconWrapper>
-                {link}
-              </NavLink>
-            </NavItem>
-          ))}
-        </Nav>
-      </SidebarContainer>
-    );
+  const navigate = useNavigate();
+  const [activeLink, setActiveLink] = useState<string | null>(null);
+  const [isClicked, setIsClicked] = useState<boolean>(false);
+
+  const handleLinkClick = (link: string) => {
+    setActiveLink(link);
+    setIsClicked(true);
+    navigate(`/${link.toLowerCase().replace(/\s/g, "-")}`);
+    setTimeout(() => {
+      setIsClicked(false);
+    }, 100);
   };
+
+  return (
+    <SidebarContainer>
+      <CloseButton onClick={onClose}>
+        <IoClose size={24} />
+      </CloseButton>
+      <LogoContainer>
+        <img
+          src="/igni.svg"
+          alt="Company Logo"
+          className="w-10 h-10 rounded-full"
+        />
+        <h1 className="text-xl font-poppins font-semibold">IGNICULT</h1>
+      </LogoContainer>
+      <Nav>
+        {[
+          "Home",
+          "Profile",
+          "Games",
+          "Leaderboard",
+          "Tournament",
+          "Premium Tournaments",
+          "Activity",
+          "Rewards",
+          "Support",
+        ].map((link) => (
+          <NavItem key={link}>
+            <NavLink
+              active={activeLink === link}
+              isClicked={isClicked}
+              onClick={() => handleLinkClick(link)}
+              isPremium={link === "Premium Tournaments"}
+            >
+              <IconWrapper>
+                <img
+                  src={`/${link.toLowerCase().replace(/\s/g, "-")}.svg`}
+                  alt={`${link} icon`}
+                  className="w-6 h-6"
+                />
+              </IconWrapper>
+              {link}
+            </NavLink>
+          </NavItem>
+        ))}
+      </Nav>
+    </SidebarContainer>
+  );
+};
 export default Sidebar;
 const SidebarContainer = styled.div`
   height: 100%;
@@ -67,15 +79,13 @@ const SidebarContainer = styled.div`
   position: relative;
 `;
 
-
-
 const CloseButton = styled.button`
   position: absolute;
   top: 1rem;
   right: 1rem;
   color: #b0b0b0;
   border-radius: 50%; /* Makes it circular */
-  border: 2px solid #82E300; /* Green circular border */
+  border: 2px solid #82e300; /* Green circular border */
   background-color: transparent; /* Transparent background */
   cursor: pointer;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Optional shadow */
@@ -108,8 +118,11 @@ const NavItem = styled.div`
   display: inline-block;
 `;
 
-
-const NavLink = styled.a<{ active: boolean; isClicked: boolean; isPremium: boolean }>`
+const NavLink = styled.a<{
+  active: boolean;
+  isClicked: boolean;
+  isPremium: boolean;
+}>`
   display: flex;
   align-items: center;
   padding: 0.5rem 1rem;
@@ -196,11 +209,9 @@ const NavLink = styled.a<{ active: boolean; isClicked: boolean; isPremium: boole
   `}
 `;
 
-
 const IconWrapper = styled.div`
   margin-right: 8px;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
-
