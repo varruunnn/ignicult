@@ -22,7 +22,6 @@ const Sidebar: React.FC<SidebarProps> = ({ onClose }) => {
     }, 10);
   };
 
-
   return (
     <SidebarContainer>
       <CloseButton onClick={onClose}>
@@ -70,7 +69,9 @@ const Sidebar: React.FC<SidebarProps> = ({ onClose }) => {
     </SidebarContainer>
   );
 };
+
 export default Sidebar;
+
 const SidebarContainer = styled.div`
   height: 100%;
   width: 16rem;
@@ -86,18 +87,17 @@ const CloseButton = styled.button`
   top: 1rem;
   right: 1rem;
   color: #b0b0b0;
-  border-radius: 50%; /* Makes it circular */
-  border: 2px solid #82e300; /* Green circular border */
-  background-color: transparent; /* Transparent background */
+  border-radius: 50%;
+  border: 2px solid #82e300;
+  background-color: transparent;
   cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Optional shadow */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s ease;
   &:hover {
-    transform: scale(1.1); /* Add hover effect */
+    transform: scale(1.1);
   }
-
   &:active {
-    transform: scale(0.95); /* Add active effect */
+    transform: scale(0.95);
   }
 `;
 
@@ -119,14 +119,10 @@ const NavItem = styled.div`
   position: relative;
   display: inline-block;
 `;
-
-const NavLink = styled.a<{
-  active: boolean;
-  isClicked: boolean;
-  isPremium: boolean;
-}>`
+const NavLink = styled.a<{ active: boolean; isClicked: boolean; isPremium: boolean }>`
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   text-decoration: none;
@@ -134,6 +130,7 @@ const NavLink = styled.a<{
   background-color: transparent;
   transition: background-color 0.3s ease;
   position: relative;
+  cursor: pointer; 
 
   &:hover {
     background-color: #2a2a2a;
@@ -150,19 +147,16 @@ const NavLink = styled.a<{
       left: 0;
       width: 100%;
       height: 2px;
-      background-image: linear-gradient(to right, #EE49FD, #F94EA6, #C253F5);
+      background-image: linear-gradient(to right, #ee49fd, #f94ea6, #c253f5);
       transform: scaleX(0);
       transform-origin: bottom left;
       transition: transform 0.3s ease;
     }
-
     &:active:after {
       transform: scaleX(1);
     }
-
-    /* Gradient text for Premium Tournaments */
     color: transparent;
-    background-image: linear-gradient(to right, #EE49FD, #F94EA6, #C253F5);
+    background-image: linear-gradient(to right, #ee49fd, #f94ea6, #c253f5);
     background-clip: text;
   `}
 
@@ -177,18 +171,15 @@ const NavLink = styled.a<{
       left: 0;
       width: 100%;
       height: 2px;
-      background-color: #82E300; /* Green color for normal links */
+      background-color: #82e300;
       transform: scaleX(0);
       transform-origin: bottom left;
       transition: transform 0.3s ease;
     }
-
     &:active:after {
       transform: scaleX(1);
     }
   `}
-
-  /* Underline appears when active for non-premium */
   ${(props) =>
     !props.isPremium &&
     props.active &&
@@ -198,8 +189,6 @@ const NavLink = styled.a<{
       transform-origin: bottom left;
     }
   `}
-
-  /* Underline disappears after the click duration */
   ${(props) =>
     props.isClicked &&
     !props.isPremium &&
