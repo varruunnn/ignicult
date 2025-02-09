@@ -96,78 +96,158 @@ const RewardsPage = () => {
   };
 
   return (
-    <div className="max-[400px]:ml-[-15px] max-[400px]:mb-[70px] py-10 pb-20 text-left left-[-20px] mt-[110px] relative min-h-screen overflow-x-hidden p-4 text-white">
-      <motion.header
-        initial={{ opacity: 0, scale: 0 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
-      >
-        <h1 className="text-[#92FF00] text-3xl font-roboto pl-10 font-semibold">
-          Welcome to <br /> Ignicult Rewards
-        </h1>
-        <p className="text-white font-roboto pl-10 mt-[15px]">
-          At Ignicult, we reward both casual players and <br /> blockchain
-          enthusiasts. Here’s what you can earn <br /> by joining us:
-        </p>
-      </motion.header>
-      <motion.section
-        initial={{ opacity: 0, scale: 0 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
-      >
-        {rewards.map((reward, index) => (
-          <div key={index} className="mb-4">
-            <motion.div
-              onClick={() => handleRewardClick(index)}
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className="bg-[#363636] relative w-[349px] h-[67px] pl-10 mt-[10px] ml-9 cursor-pointer flex items-center"
-            >
-              {reward.isMultiline ? (
-                <h3 className="text-[#92FF00] text-lg font-roboto font-medium absolute left-[25px] top-[5px]">
-                  {reward.title}
-                  <br /> Rewards
-                </h3>
-              ) : (
-                <h3
-                  className="text-[#92FF00] text-[21px] font-roboto font-medium absolute left-[25px]"
-                  style={{ top: reward.top }}
-                >
-                  {reward.title}
-                </h3>
-              )}
-              <motion.img
-                src="/arrow.svg"
-                alt="arrow"
-                className="absolute max-[399px]:right-[35px] right-[20px] top-[20px]"
-                animate={{ rotate: selectedReward === index ? 180 : 0 }}
+    <div>
+      <div className="max-[400px]:ml-[-15px] lg:hidden max-[400px]:mb-[70px] py-10 pb-20 text-left left-[-20px] mt-[110px] relative min-h-screen overflow-x-hidden p-4 text-white">
+        <motion.header
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <h1 className="text-[#92FF00] text-3xl font-roboto pl-10 font-semibold">
+            Welcome to <br /> Ignicult Rewards
+          </h1>
+          <p className="text-white font-roboto pl-10 mt-[15px]">
+            At Ignicult, we reward both casual players and <br /> blockchain
+            enthusiasts. Here’s what you can earn <br /> by joining us:
+          </p>
+        </motion.header>
+        <motion.section
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          {rewards.map((reward, index) => (
+            <div key={index} className="mb-4">
+              <motion.div
+                onClick={() => handleRewardClick(index)}
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              />
-            </motion.div>
-            <AnimatePresence>
-              {selectedReward === index && (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="bg-black p-4 rounded-lg mt-2 w-[349px] ml-9"
-                >
-                  <h4 className="text-xl font-bold mb-2">{reward.infoTitle}</h4>
-                  <ul className="list-disc ml-5">
-                    {reward.infoDetails.map((detail, i) => (
-                      <li key={i} className="mb-1">
-                        {detail}
-                      </li>
-                    ))}
-                  </ul>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-        ))}
-      </motion.section>
+                className="bg-[#363636] relative w-[349px] h-[67px] pl-10 mt-[10px] ml-9 cursor-pointer flex items-center"
+              >
+                {reward.isMultiline ? (
+                  <h3 className="text-[#92FF00] text-lg font-roboto font-medium absolute left-[25px] top-[5px]">
+                    {reward.title}
+                    <br /> Rewards
+                  </h3>
+                ) : (
+                  <h3
+                    className="text-[#92FF00] text-[21px] font-roboto font-medium absolute left-[25px]"
+                    style={{ top: reward.top }}
+                  >
+                    {reward.title}
+                  </h3>
+                )}
+                <motion.img
+                  src="/arrow.svg"
+                  alt="arrow"
+                  className="absolute max-[399px]:right-[35px] right-[20px] top-[20px]"
+                  animate={{ rotate: selectedReward === index ? 180 : 0 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                />
+              </motion.div>
+              <AnimatePresence>
+                {selectedReward === index && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="bg-black p-4 rounded-lg mt-2 w-[349px] ml-9"
+                  >
+                    <h4 className="text-xl font-bold mb-2">
+                      {reward.infoTitle}
+                    </h4>
+                    <ul className="list-disc ml-5">
+                      {reward.infoDetails.map((detail, i) => (
+                        <li key={i} className="mb-1">
+                          {detail}
+                        </li>
+                      ))}
+                    </ul>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          ))}
+        </motion.section>
+      </div>
+      <div className="max-[400px]:ml-[-15px] max-[1023px]:hidden max-[400px]:mb-[70px] py-10 pb-20 text-left  mt-[110px] relative min-h-screen w-[150%] overflow-x-hidden p-4 text-white">
+        <motion.header
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <h1 className="text-[#92FF00]  text-2xl left-[0%] relative font-roboto pl-10 font-semibold">
+            Welcome to <br /> Ignicult Rewards
+          </h1>
+          <div className="bg-[#92FF00] w-full mt-[10px] left-[-20px] relative h-[2px]"></div>
+          <p className="text-white font-roboto text-[10px] pl-10 mt-[15px]">
+            At Ignicult, we reward both casual players and blockchain
+            enthusiasts. Here’s what you can earn by joining us:
+          </p>
+        </motion.header>
+        <motion.section
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          {rewards.map((reward, index) => (
+            <div key={index} className="mb-4">
+              <motion.div
+                onClick={() => handleRewardClick(index)}
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                className="bg-[#363636] relative w-[90vw] h-[67px] pl-10 mt-[10px] ml-9 cursor-pointer flex items-center"
+              >
+                {reward.isMultiline ? (
+                  <h3 className="text-[#92FF00] text-lg font-roboto font-medium absolute left-[25px] top-[5px]">
+                    {reward.title}
+                    <br /> Rewards
+                  </h3>
+                ) : (
+                  <h3
+                    className="text-[#92FF00] text-[21px] font-roboto font-medium absolute left-[25px]"
+                    style={{ top: reward.top }}
+                  >
+                    {reward.title}
+                  </h3>
+                )}
+                <motion.img
+                  src="/arrow.svg"
+                  alt="arrow"
+                  className="absolute max-[399px]:right-[35px] right-[20px] top-[20px]"
+                  animate={{ rotate: selectedReward === index ? 180 : 0 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                />
+              </motion.div>
+              <AnimatePresence>
+                {selectedReward === index && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="bg-black p-4 rounded-lg mt-2 w-[90vw] ml-9"
+                  >
+                    <h4 className="text-xl font-bold mb-2">
+                      {reward.infoTitle}
+                    </h4>
+                    <ul className="list-disc ml-5">
+                      {reward.infoDetails.map((detail, i) => (
+                        <li key={i} className="mb-1">
+                          {detail}
+                        </li>
+                      ))}
+                    </ul>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          ))}
+        </motion.section>
+      </div>
     </div>
   );
 };

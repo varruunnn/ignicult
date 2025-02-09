@@ -91,151 +91,297 @@ export default function Tournaments() {
   });
 
   return (
-    <div className="p-4 w-full mt-[-40px] min-h-screen relative text-white">
-      <div className="absolute top-[-21%] left-[20%]">
-        <SwipeHintOverlay />
-      </div>
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="text-center mt-20"
-      >
-        <motion.h1
-          className="ml-[-20px] text-white text-lg font-semibold text-center text-shadow-glow"
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.2, duration: 0.6 }}
+    <div>
+      <div className="p-4 w-full mt-[-40px] lg:hidden min-h-screen relative text-white">
+        <div className="absolute top-[-21%] left-[20%]">
+          <SwipeHintOverlay />
+        </div>
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center mt-20"
         >
-          Monthly Tournaments
-        </motion.h1>
-        <div className="mt-4 flex justify-center items-center">
-          <motion.select
-            className="px-4 py-2 w-[70vw] rounded-full h-[5.9vh] bg-gray-900 appearance-none pl-4 pr-8 text-white border-[1px] border-[#82E300] focus:outline-none hover:border-[#6ac100] transition-all"
-            value={selectedGame}
-            onChange={handleGameChange}
-            style={{
-              backgroundImage: 'url("/down.svg")',
-              backgroundPosition: "right 10px center",
-              backgroundRepeat: "no-repeat",
-            }}
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.5 }}
+          <motion.h1
+            className="ml-[-20px] text-white text-lg font-semibold text-center text-shadow-glow"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
           >
-            {Object.keys(mockTournamentData).map((game) => (
-              <option key={game} value={game}>
-                {game}
-              </option>
-            ))}
-          </motion.select>
-
-          <motion.button
-            className="ml-2 w-[44px] h-[44px] flex justify-center items-center rounded-full bg-[#82E300] hover:bg-[#6ac100] text-black shadow-glow transition-all"
-            whileHover={{ scale: 1.1 }}
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.35, duration: 0.5 }}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="black"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="w-[16px] h-[16px]"
+            Monthly Tournaments
+          </motion.h1>
+          <div className="mt-4 flex justify-center items-center">
+            <motion.select
+              className="px-4 py-2 w-[70vw] rounded-full h-[5.9vh] bg-gray-900 appearance-none pl-4 pr-8 text-white border-[1px] border-[#82E300] focus:outline-none hover:border-[#6ac100] transition-all"
+              value={selectedGame}
+              onChange={handleGameChange}
+              style={{
+                backgroundImage: 'url("/down.svg")',
+                backgroundPosition: "right 10px center",
+                backgroundRepeat: "no-repeat",
+              }}
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.5 }}
             >
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-              <polyline points="17 8 12 3 7 8" />
-              <line x1="12" y1="3" x2="12" y2="15" />
-            </svg>
-          </motion.button>
-        </div>
-      </motion.div>
-      <motion.div
-        {...swipeHandlers}
-        initial={{ opacity: 0, scale: 0.95, y: 30 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="mt-10 mx-auto w-[108%] left-[-15px] max-w-4xl bg-[#141414] border-t-2 border-t-[#82E300] p-4 rounded-3xl relative"
-      >
-        <div className="relative flex items-center justify-center mb-4">
-          <motion.h2
-            className="text-center text-xl text-[#82E300] font-extrabold"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.5 }}
-          >
-            January 2025
-          </motion.h2>
-        </div>
-        <div className="w-full max-h-[50vh] mb-4 max-[378px]:h-[40vh] max-[378px]:mb-[60px] bg-[#3E3E3E] rounded-lg overflow-y-auto">
-          <table className="w-full text-left text-sm text-gray-400 border-collapse">
-            <thead className="bg-[#3E3E3E]">
-              <tr>
-                <th className="py-2 px-4 border text-[#82E300] border-gray-600">
-                  Rank
-                </th>
-                <th className="py-2 px-4 border text-[#82E300] border-gray-600">
-                  Wallet Address
-                </th>
-                <th className="py-2 px-4 border text-[#82E300] border-gray-600">
-                  Top Score
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {paginatedData.map((player, index) => (
-                <motion.tr
-                  key={player.rank}
-                  className="hover:bg-gray-800 transition-colors"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 + index * 0.05, duration: 0.3 }}
-                >
-                  <td className="py-2 px-4 border border-gray-600">
-                    {player.rank}
-                  </td>
-                  <td className="py-2 px-4 border border-gray-600">
-                    {player.wallet}
-                  </td>
-                  <td className="py-2 px-4 border border-gray-600">
-                    {player.score}
-                  </td>
-                </motion.tr>
+              {Object.keys(mockTournamentData).map((game) => (
+                <option key={game} value={game}>
+                  {game}
+                </option>
               ))}
-            </tbody>
-          </table>
-        </div>
-        <div className="flex  justify-center gap-10">
-          <motion.button
-            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
-            disabled={currentPage === 0}
-            className="px-4 py-2 max-[370px]:top-[-49px] max-[376px]:top-[-55px] rounded relative bg-[#1e1e1e] text-[#82E300] border border-[#82E300] hover:bg-[#6ac100] hover:text-black transition-all disabled:opacity-50"
-            whileHover={{ scale: 1.05 }}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.4 }}
+            </motion.select>
+
+            <motion.button
+              className="ml-2 w-[44px] h-[44px] flex justify-center items-center rounded-full bg-[#82E300] hover:bg-[#6ac100] text-black shadow-glow transition-all"
+              whileHover={{ scale: 1.1 }}
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.35, duration: 0.5 }}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="black"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="w-[16px] h-[16px]"
+              >
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="17 8 12 3 7 8" />
+                <line x1="12" y1="3" x2="12" y2="15" />
+              </svg>
+            </motion.button>
+          </div>
+        </motion.div>
+        <motion.div
+          {...swipeHandlers}
+          initial={{ opacity: 0, scale: 0.95, y: 30 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="mt-10 mx-auto w-[108%] left-[-15px] max-w-4xl bg-[#141414] border-t-2 border-t-[#82E300] p-4 rounded-3xl relative"
+        >
+          <div className="relative flex items-center justify-center mb-4">
+            <motion.h2
+              className="text-center text-xl text-[#82E300] font-extrabold"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.5 }}
+            >
+              January 2025
+            </motion.h2>
+          </div>
+          <div className="w-full max-h-[50vh] mb-4 max-[378px]:h-[40vh] max-[378px]:mb-[60px] bg-[#3E3E3E] rounded-lg overflow-y-auto">
+            <table className="w-full text-left text-sm text-gray-400 border-collapse">
+              <thead className="bg-[#3E3E3E]">
+                <tr>
+                  <th className="py-2 px-4 border text-[#82E300] border-gray-600">
+                    Rank
+                  </th>
+                  <th className="py-2 px-4 border text-[#82E300] border-gray-600">
+                    Wallet Address
+                  </th>
+                  <th className="py-2 px-4 border text-[#82E300] border-gray-600">
+                    Top Score
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {paginatedData.map((player, index) => (
+                  <motion.tr
+                    key={player.rank}
+                    className="hover:bg-gray-800 transition-colors"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4 + index * 0.05, duration: 0.3 }}
+                  >
+                    <td className="py-2 px-4 border border-gray-600">
+                      {player.rank}
+                    </td>
+                    <td className="py-2 px-4 border border-gray-600">
+                      {player.wallet}
+                    </td>
+                    <td className="py-2 px-4 border border-gray-600">
+                      {player.score}
+                    </td>
+                  </motion.tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="flex  justify-center gap-10">
+            <motion.button
+              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
+              disabled={currentPage === 0}
+              className="px-4 py-2 max-[370px]:top-[-49px] max-[376px]:top-[-55px] rounded relative bg-[#1e1e1e] text-[#82E300] border border-[#82E300] hover:bg-[#6ac100] hover:text-black transition-all disabled:opacity-50"
+              whileHover={{ scale: 1.05 }}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.4 }}
+            >
+              &larr; Prev
+            </motion.button>
+            <motion.button
+              onClick={() =>
+                setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1))
+              }
+              disabled={currentPage >= totalPages - 1}
+              className="px-4 py-2 max-[370px]:top-[-49px] max-[376px]:top-[-55px]  rounded relative bg-[#1e1e1e] text-[#82E300] border border-[#82E300] hover:bg-[#6ac100] hover:text-black transition-all disabled:opacity-50"
+              whileHover={{ scale: 1.05 }}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.55, duration: 0.4 }}
+            >
+              Next &rarr;
+            </motion.button>
+          </div>
+        </motion.div>
+      </div>
+      <div className="p-4 w-full mt-[0px] min-h-screen max-[1023px]:hidden relative text-white">
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center mt-20"
+        >
+          <motion.h1
+            className=" text-white text-lg font-semibold text-left ml-[15px] text-shadow-glow"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
           >
-            &larr; Prev
-          </motion.button>
-          <motion.button
-            onClick={() =>
-              setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1))
-            }
-            disabled={currentPage >= totalPages - 1}
-            className="px-4 py-2 max-[370px]:top-[-49px] max-[376px]:top-[-55px]  rounded relative bg-[#1e1e1e] text-[#82E300] border border-[#82E300] hover:bg-[#6ac100] hover:text-black transition-all disabled:opacity-50"
-            whileHover={{ scale: 1.05 }}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.55, duration: 0.4 }}
-          >
-            Next &rarr;
-          </motion.button>
-        </div>
-      </motion.div>
+            Monthly Tournaments
+          </motion.h1>
+
+          <div className="mt-4 flex absolute top-[12%] right-[1%] justify-center items-center">
+            <motion.select
+              className="px-4 py-2 w-[20vw] rounded-full h-[8vh] bg-gray-900 appearance-none pl-4 pr-8 text-white border-[1px] border-[#82E300] focus:outline-none hover:border-[#6ac100] transition-all"
+              value={selectedGame}
+              onChange={handleGameChange}
+              style={{
+                backgroundImage: 'url("/down.svg")',
+                backgroundPosition: "right 10px center",
+                backgroundRepeat: "no-repeat",
+              }}
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.5 }}
+            >
+              {Object.keys(mockTournamentData).map((game) => (
+                <option key={game} value={game}>
+                  {game}
+                </option>
+              ))}
+            </motion.select>
+
+            <motion.button
+              className="ml-2 w-[44px] h-[44px] flex justify-center items-center rounded-full bg-[#82E300] hover:bg-[#6ac100] text-black shadow-glow transition-all"
+              whileHover={{ scale: 1.1 }}
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.35, duration: 0.5 }}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="black"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="w-[16px] h-[16px]"
+              >
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="17 8 12 3 7 8" />
+                <line x1="12" y1="3" x2="12" y2="15" />
+              </svg>
+            </motion.button>
+          </div>
+          <div className="bg-[#92FF00] w-[110%] mt-[40px] left-[-20px] relative h-[2px]"></div>
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95, y: 30 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="mt-10 mx-auto w-[108%] left-[-15px] max-w-4xl bg-[#3E3E3E]  p-4 rounded-3xl relative"
+        >
+          <div className="relative flex items-center justify-center mb-4">
+            <motion.h2
+              className="text-center text-xl relative left-[-20px] text-[#82E300] font-extrabold"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.5 }}
+            >
+              January 2025
+            </motion.h2>
+          </div>
+          <div className="w-[100%] mb-4 bg-[#3E3E3E] text-center rounded-lg">
+            <table className="w-full text-centre text-sm text-gray-400 border-collapse">
+              <thead className="bg-[#3E3E3E]">
+                <tr>
+                  <th className="py-2 px-4 border  text-[#82E300] border-gray-600">
+                    Rank
+                  </th>
+                  <th className="py-2 px-4 border text-[#82E300] border-gray-600">
+                    Wallet Address
+                  </th>
+                  <th className="py-2 px-4 border text-[#82E300] border-gray-600">
+                    Top Score
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {paginatedData.map((player, index) => (
+                  <motion.tr
+                    key={player.rank}
+                    className="hover:bg-gray-800 transition-colors"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4 + index * 0.05, duration: 0.3 }}
+                  >
+                    <td className="py-2 text-centre px-4 border border-gray-600">
+                      {player.rank}
+                    </td>
+                    <td className="py-2 text-centre px-4 border border-gray-600">
+                      {player.wallet}
+                    </td>
+                    <td className="py-2 text-centre px-4 border border-gray-600">
+                      {player.score}
+                    </td>
+                  </motion.tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="flex  justify-center gap-10">
+            <motion.button
+              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
+              disabled={currentPage === 0}
+              className="px-4 py-2 max-[370px]:top-[-49px] max-[376px]:top-[-55px] rounded relative bg-[#1e1e1e] text-[#82E300] border border-[#82E300] hover:bg-[#6ac100] hover:text-black transition-all disabled:opacity-50"
+              whileHover={{ scale: 1.05 }}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.4 }}
+            >
+              &larr; Prev
+            </motion.button>
+            <motion.button
+              onClick={() =>
+                setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1))
+              }
+              disabled={currentPage >= totalPages - 1}
+              className="px-4 py-2 max-[370px]:top-[-49px] max-[376px]:top-[-55px]  rounded relative bg-[#1e1e1e] text-[#82E300] border border-[#82E300] hover:bg-[#6ac100] hover:text-black transition-all disabled:opacity-50"
+              whileHover={{ scale: 1.05 }}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.55, duration: 0.4 }}
+            >
+              Next &rarr;
+            </motion.button>
+          </div>
+        </motion.div>
+      </div>
     </div>
   );
 }

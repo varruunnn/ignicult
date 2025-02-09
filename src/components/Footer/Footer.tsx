@@ -24,7 +24,9 @@ const Footer = () => {
       initial={{ y: 50, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="fixed bottom-0 w-full h-[69px]  bg-[#282828] text-white flex justify-around items-center"
+      className="fixed bottom-0 w-full h-[69px]  bg-[#282828] text-white flex justify-around items-center
+      lg:hidden
+      "
     >
       <div className="relative flex w-full h-[75px] flex-col items-center justify-center space-y-6">
         <motion.img

@@ -73,7 +73,7 @@ const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen, setSidebarOpen }) => {
         border: "2px solid #82E300",
         minWidth: "1px",
         height: "41px",
-        boxShadow: "0px 2px 5px rgba(130, 227, 0, 1)", 
+        boxShadow: "0px 2px 5px rgba(130, 227, 0, 1)",
       };
 
   const toggleSidebar = () => {
@@ -93,13 +93,71 @@ const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen, setSidebarOpen }) => {
   };
 
   return (
-    <div className="max-[485px]:bg-transparent overflow-x-hidden text-white">
+    <div
+      className="max-[485px]:bg-transparent overflow-x-hidden text-white
+    min-[1024px]:bg-none
+    "
+    >
       <motion.header
         initial={{ y: -50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="fixed top-0 left-0 right-0 backdrop-blur-sm flex justify-between items-center px-6 py-4 h-[131px] max-[398px]:z-10 z-50 shadow-md"
+        className="fixed top-0 left-0 right-0 backdrop-blur-sm flex justify-between items-center px-6 py-4 h-[131px] max-[398px]:z-10 z-50 shadow-md
+
+        min-[1024px]:h-[100px]
+        "
       >
+        <button className="absolute max-[1023px]:hidden cursor-pointer w-[200px] h-[200px] top-[26%] z-50 left-[28%] "
+        onClick={()=>{
+          alert("iamglowingdiv")
+        }}
+        >
+          <img
+            src="/homee.svg"
+            className=" relative left-[-2%] top-[-44%] w-[20px] z-50 "
+            alt=""
+          />
+          <h3 className="absolute  text-[#9A999C] top-[1%] left-[10%] z-50">
+            Home
+          </h3>
+        </button>
+        <button className="absolute max-[1023px]:hidden cursor-pointer w-[200px] h-[200px] top-[26%] z-50 left-[62%] "
+        onClick={()=>{
+          alert("iamglowingdiv")
+        }}
+        >
+          <img
+            src="/play.svg"
+            className=" relative left-[-2%] top-[-44%] w-[160px] z-50 "
+            alt=""
+          />
+        </button>
+        <div className="absolute max-[1023px]:hidden min-[1024px]:top-[0px] z-100">
+          <img
+            src="/vector2.svg"
+            className="max-[1023px]:hidden fixed  left-[20%] top-[0] z-10 rounded-lg"
+            alt="desktopnav"
+          />
+          <img
+            src="/vector22.svg"
+            className="max-[1023px]:hidden fixed left-[17.4%] top-[0] -z-1 w-[64.3%] rounded-lg"
+            alt=""
+          />
+        </div>
+        <button className="absolute max-[1023px]:hidden cursor-pointer w-[200px] h-[200px] top-[26%] z-50 left-[48%] "
+        onClick={()=>{
+          alert("iamglowingdiv")
+        }}
+        >
+          <img
+            src="/groupp.svg"
+            className=" relative right-[-2%] top-[-44%] w-[20px] z-50 "
+            alt=""
+          />
+          <h3 className="absolute  text-[#9A999C] top-[1%] left-[14%] z-50">
+            Profile
+          </h3>
+        </button>
         <motion.button
           whileHover={{ scale: 1.1 }}
           onClick={toggleSidebar}
