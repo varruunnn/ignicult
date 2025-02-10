@@ -163,140 +163,279 @@ const Activity = () => {
   };
 
   return (
-    <div className="min-h-screen  flex flex-col items-center justify-center py-8 w-full text-white">
-      <section className="w-full flex flex-col mt-[-300px] items-center relative">
-        <div className="bg-[#1A1A1A] border border-green-600 rounded-2xl p-4 w-11/12 max-w-md h-[129px] shadow-lg flex items-center justify-between overflow-hidden">
-          <AnimatePresence mode="wait" custom={1}>
-            <motion.div
-              key={currentIndex}
-              custom={1}
-              variants={cardVariants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{ duration: 0.3 }}
-              className="w-full flex justify-between items-center"
-            >
-              <div>
-                <motion.h2
-                  className="text-[#7FFF00] text-2xl font-bold mb-2"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  {games[currentIndex].name}
-                </motion.h2>
-                <p className="text-[#FFD700] text-xl font-mono">Score</p>
-                <motion.p
-                  className="text-[#FFD700] text-4xl font-mono mt-1"
-                  key={games[currentIndex].score}
-                  initial={{ scale: 0.5 }}
-                  animate={{ scale: 1 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
-                  {games[currentIndex].score}
-                </motion.p>
-              </div>
+    <div>
+      <div className="min-h-screen min-[1023px]:hidden flex flex-col items-center justify-center py-8 w-full text-white">
+        <section className="w-full flex flex-col mt-[-300px] items-center relative">
+          <div className="bg-[#1A1A1A] border border-green-600 rounded-2xl p-4 w-11/12 max-w-md h-[129px] shadow-lg flex items-center justify-between overflow-hidden">
+            <AnimatePresence mode="wait" custom={1}>
               <motion.div
-                className="flex flex-col items-center justify-center"
-                whileHover={{ scale: 1.05 }}
-              >
-                <img
-                  src={games[currentIndex].image}
-                  alt={games[currentIndex].name}
-                  className="w-[93px] h-[93px] object-contain"
-                />
-              </motion.div>
-            </motion.div>
-          </AnimatePresence>
-        </div>
-        <motion.div
-          onClick={() => setShowInfo((prev) => !prev)}
-          className="absolute bottom-0 transform -translate-x-1/2 cursor-pointer"
-          initial={{ rotate: 0, y: 0 }}
-          animate={{
-            rotate: showInfo ? 180 : 0,
-            ...floatingAnim,
-          }}
-        >
-          <img
-            src="/activityy.svg"
-            alt="Toggle Activity Info"
-            className="w-8 h-8"
-          />
-        </motion.div>
-
-        <div
-          className="flex flex-col bg-blue items-center mt-4
-        "
-        >
-          <AnimatePresence>
-            {showInfo && (
-              <motion.div
-                className="bg-black p-4 rounded-lg mt-2 w-11/12 max-w-sm"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
+                key={currentIndex}
+                custom={1}
+                variants={cardVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
                 transition={{ duration: 0.3 }}
+                className="w-full flex justify-between items-center"
               >
-                <p>
-                  <span className="font-semibold">IGNIx Earned:</span>{" "}
-                  {games[currentIndex].info.ignixEarned}
-                </p>
-                <p>
-                  <span className="font-semibold">Accepted At:</span>{" "}
-                  {games[currentIndex].info.acceptedAt}
-                </p>
-                <p>
-                  <span className="font-semibold">Completed At:</span>{" "}
-                  {games[currentIndex].info.completedAt}
-                </p>
-                <p>
-                  <span className="font-semibold">Quit At:</span>{" "}
-                  {games[currentIndex].info.quitAt}
-                </p>
-                <p>
-                  <span className="font-semibold">DNF:</span>{" "}
-                  {games[currentIndex].info.dnf}
-                </p>
+                <div>
+                  <motion.h2
+                    className="text-[#7FFF00] text-2xl font-bold mb-2"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    {games[currentIndex].name}
+                  </motion.h2>
+                  <p className="text-[#FFD700] text-xl font-mono">Score</p>
+                  <motion.p
+                    className="text-[#FFD700] text-4xl font-mono mt-1"
+                    key={games[currentIndex].score}
+                    initial={{ scale: 0.5 }}
+                    animate={{ scale: 1 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
+                    {games[currentIndex].score}
+                  </motion.p>
+                </div>
+                <motion.div
+                  className="flex flex-col items-center justify-center"
+                  whileHover={{ scale: 1.05 }}
+                >
+                  <img
+                    src={games[currentIndex].image}
+                    alt={games[currentIndex].name}
+                    className="w-[93px] h-[93px] object-contain"
+                  />
+                </motion.div>
               </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-      </section>
-      <section className="w-full flex flex-col items-center mt-10">
-        <motion.div
-          className="flex items-center justify-center bg-black border border-gray-500 rounded-full px-6 py-3 w-11/12 max-w-sm"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-        >
-          <motion.button
-            onClick={handlePrev}
-            className="p-2 text-[#7FFF00] hover:text-green-500"
-            whileHover={{ scale: 1.2 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            <ChevronLeft className="w-6 h-6" />
-          </motion.button>
+            </AnimatePresence>
+          </div>
           <motion.div
-            className="px-6 text-white text-lg"
-            key={currentIndex}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            onClick={() => setShowInfo((prev) => !prev)}
+            className="absolute bottom-0 transform -translate-x-1/2 cursor-pointer"
+            initial={{ rotate: 0, y: 0 }}
+            animate={{
+              rotate: showInfo ? 180 : 0,
+              ...floatingAnim,
+            }}
           >
-            {currentIndex + 1}/{games.length}
+            <img
+              src="/activityy.svg"
+              alt="Toggle Activity Info"
+              className="w-8 h-8"
+            />
           </motion.div>
-          <motion.button
-            onClick={handleNext}
-            className="p-2 text-[#7FFF00] hover:text-green-500"
-            whileHover={{ scale: 1.2 }}
-            whileTap={{ scale: 0.9 }}
+
+          <div
+            className="flex flex-col bg-blue items-center mt-4
+        "
           >
-            <ChevronRight className="w-6 h-6" />
-          </motion.button>
-        </motion.div>
-      </section>
+            <AnimatePresence>
+              {showInfo && (
+                <motion.div
+                  className="bg-black p-4 rounded-lg mt-2 w-11/12 max-w-sm"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <p>
+                    <span className="font-semibold">IGNIx Earned:</span>{" "}
+                    {games[currentIndex].info.ignixEarned}
+                  </p>
+                  <p>
+                    <span className="font-semibold">Accepted At:</span>{" "}
+                    {games[currentIndex].info.acceptedAt}
+                  </p>
+                  <p>
+                    <span className="font-semibold">Completed At:</span>{" "}
+                    {games[currentIndex].info.completedAt}
+                  </p>
+                  <p>
+                    <span className="font-semibold">Quit At:</span>{" "}
+                    {games[currentIndex].info.quitAt}
+                  </p>
+                  <p>
+                    <span className="font-semibold">DNF:</span>{" "}
+                    {games[currentIndex].info.dnf}
+                  </p>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        </section>
+        <section className="w-full flex flex-col items-center mt-10">
+          <motion.div
+            className="flex items-center justify-center bg-black border border-gray-500 rounded-full px-6 py-3 w-11/12 max-w-sm"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+          >
+            <motion.button
+              onClick={handlePrev}
+              className="p-2 text-[#7FFF00] hover:text-green-500"
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </motion.button>
+            <motion.div
+              className="px-6 text-white text-lg"
+              key={currentIndex}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+            >
+              {currentIndex + 1}/{games.length}
+            </motion.div>
+            <motion.button
+              onClick={handleNext}
+              className="p-2 text-[#7FFF00] hover:text-green-500"
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <ChevronRight className="w-6 h-6" />
+            </motion.button>
+          </motion.div>
+        </section>
+      </div>
+      <div className="min-h-screen max-[1023px]:hidden  flex flex-col items-center justify-center py-8 w-full text-white">
+        <section className="w-full flex flex-col mt-[60px] items-center relative">
+          <div className="bg-[#1A1A1A] border border-green-600 rounded-2xl p-4 w-11/12 max-w-md h-[129px] shadow-lg flex items-center justify-between overflow-hidden">
+            <h1 className="absolute top-[-90%] text-2xl left-[3%]">Activity</h1>
+            <div className="bg-[#92FF00] absolute top-[-66%] w-full mt-[10px] left-[0px]  h-[2px]"></div>
+            <AnimatePresence mode="wait" custom={1}>
+              <motion.div
+                key={currentIndex}
+                custom={1}
+                variants={cardVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{ duration: 0.3 }}
+                className="w-full flex justify-between items-center"
+              >
+                <div>
+                  <motion.h2
+                    className="text-[#7FFF00] text-2xl font-bold mb-2"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    {games[currentIndex].name}
+                  </motion.h2>
+                  <p className="text-[#FFD700] text-xl font-mono">Score</p>
+                  <motion.p
+                    className="text-[#FFD700] text-4xl font-mono mt-1"
+                    key={games[currentIndex].score}
+                    initial={{ scale: 0.5 }}
+                    animate={{ scale: 1 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
+                    {games[currentIndex].score}
+                  </motion.p>
+                </div>
+                <motion.div
+                  className="flex flex-col items-center justify-center"
+                  whileHover={{ scale: 1.05 }}
+                >
+                  <img
+                    src={games[currentIndex].image}
+                    alt={games[currentIndex].name}
+                    className="w-[93px] h-[93px] object-contain"
+                  />
+                </motion.div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+          <motion.div
+            onClick={() => setShowInfo((prev) => !prev)}
+            className="absolute bottom-0 transform -translate-x-1/2 cursor-pointer"
+            initial={{ rotate: 0, y: 0 }}
+            animate={{
+              rotate: showInfo ? 180 : 0,
+              ...floatingAnim,
+            }}
+          >
+            <img
+              src="/activityy.svg"
+              alt="Toggle Activity Info"
+              className="w-8 h-8"
+            />
+          </motion.div>
+
+          <div
+            className="flex flex-col bg-blue items-center mt-4
+        "
+          >
+            <AnimatePresence>
+              {showInfo && (
+                <motion.div
+                  className="bg-black p-4 rounded-lg mt-2 w-11/12 max-w-sm"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <p>
+                    <span className="font-semibold">IGNIx Earned:</span>{" "}
+                    {games[currentIndex].info.ignixEarned}
+                  </p>
+                  <p>
+                    <span className="font-semibold">Accepted At:</span>{" "}
+                    {games[currentIndex].info.acceptedAt}
+                  </p>
+                  <p>
+                    <span className="font-semibold">Completed At:</span>{" "}
+                    {games[currentIndex].info.completedAt}
+                  </p>
+                  <p>
+                    <span className="font-semibold">Quit At:</span>{" "}
+                    {games[currentIndex].info.quitAt}
+                  </p>
+                  <p>
+                    <span className="font-semibold">DNF:</span>{" "}
+                    {games[currentIndex].info.dnf}
+                  </p>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        </section>
+        <section className="w-full flex flex-col items-center mt-10">
+          <motion.div
+            className="flex items-center justify-center bg-black border border-gray-500 rounded-full px-6 py-3 w-11/12 max-w-sm"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+          >
+            <motion.button
+              onClick={handlePrev}
+              className="p-2 text-[#7FFF00] hover:text-green-500"
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </motion.button>
+            <motion.div
+              className="px-6 text-white text-lg"
+              key={currentIndex}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+            >
+              {currentIndex + 1}/{games.length}
+            </motion.div>
+            <motion.button
+              onClick={handleNext}
+              className="p-2 text-[#7FFF00] hover:text-green-500"
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <ChevronRight className="w-6 h-6" />
+            </motion.button>
+          </motion.div>
+        </section>
+      </div>
     </div>
   );
 };

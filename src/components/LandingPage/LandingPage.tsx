@@ -124,51 +124,55 @@ const LandingPage: React.FC = () => {
           </div>
         </div>
       </section>
-      <section className="max-[1023px]:hidden relative min-[1023px]:mt-[100px] px-6 max-w-[100%] mx-auto">
+      <section className="max-[1023px]:hidden relative min-[1023px]:mt-[100px] px-6 max-w-[100%] mx-auto
+      
+      ">
         <h2 className="text-center text-3xl text-[#82E300] font-bold mb-16">
           Welcome to Ignicult
         </h2>
         <div className="relative overflow-hidden h-[150px]">
-          <div className="bg-[#363636] p-4 w-[200px] h-[126px] flex items-center absolute left-[10vw] top-0 text-left mx-auto">
+          <div className="bg-[#363636] p-4 w-[200px] h-[126px] flex items-center absolute left-[10vw] top-0 text-left mx-auto
+          min-[1339px]:w-[260px] 
+          ">
             <img
               src="/fire.svg"
               alt="Fire Icon"
               className="w-[34px] h-[36px] mr-4"
             />
-            <p className="text-[11px]">
+            <p className="text-[11px] min-[1339px]:text-[13.6px]">
               Ignicult is a revolutionary hyper-casual gaming platform where you
               can play, earn, and enjoy with both off-chain and on-chain rewards!
             </p>
           </div>
-          <div className="bg-[#363636] p-4 w-[200px] h-[126px] flex items-center absolute left-[30vw] top-0 text-left mx-auto">
+          <div className="bg-[#363636] p-4 w-[200px] h-[126px] flex items-center absolute left-[30vw] top-0 text-left mx-auto min-[1339px]:w-[260px] ">
             <img
               src="/joystick.svg"
               alt="Joystick Icon"
               className="w-[34px] h-[36px] mr-4"
             />
-            <p className="text-[14px]">
+            <p className="text-[14px] min-[1339px]:text-[15px]">
               Discover a variety of exciting games that cater to all types of
               players.
             </p>
           </div>
-          <div className="bg-[#363636] p-4 w-[200px] h-[126px] flex items-center absolute left-[50vw] top-0 text-left mx-auto">
+          <div className="bg-[#363636] p-4 w-[200px] h-[126px] flex items-center absolute left-[50vw] top-0 text-left mx-auto min-[1339px]:w-[260px] ">
             <img
               src="/trophy.svg"
               alt="Trophy Icon"
               className="w-[34px] h-[36px] mr-4"
             />
-            <p className="text-[12px]">
+            <p className="text-[12px] min-[1339px]:text-[15px]">
               Earn IGNix points for real-world rewards and use Cultix to unlock
               on-chain benefits and ownership.
             </p>
           </div>
-          <div className="bg-[#363636] p-4 w-[200px] h-[126px] flex items-center absolute left-[71vw] top-0 text-left mx-auto">
+          <div className="bg-[#363636] p-4 w-[200px] h-[126px] flex items-center absolute left-[71vw] top-0 text-left mx-auto min-[1339px]:w-[260px] ">
             <img
               src="/Group.svg"
               alt="Group Icon"
               className="w-[34px] h-[36px] mr-4"
             />
-            <p className="text-[14px]">
+            <p className="text-[14px] min-[1339px]:text-[15px] ">
               Create your profile and showcase your achievements to the
               community.
             </p>
@@ -228,13 +232,14 @@ const LandingPage: React.FC = () => {
           ))}
         </div>
       </section>
-      <section className="py-6 px-6 max-[1023px]:hidden mt-[150px] relative max-w-[100%] mx-auto mb-24">
+      <section className="py-6 px-6 max-[1023px]:hidden mt-[150px] relative max-w-[100%] mx-auto mb-24  min-[1339px]:mt-[40px]">
         <h2 className="text-center text-3xl text-[#82E300] font-bold mb-16">
           Why choose ignicult?
         </h2>
         {/* Set an explicit height here as well */}
         <div className="relative overflow-hidden h-[150px]">
-          <div className="bg-[#363636] p-4 w-[200px] h-[126px] flex items-center absolute left-[10vw] top-0 text-left mx-auto">
+          <div className="bg-[#363636] p-4 w-[200px] h-[126px] flex items-center absolute left-[10vw] top-0 text-left mx-auto
+          min-[1339px]:w-[260px] ">
             <img
               src="/rockett.svg"
               alt="Fast"
@@ -242,12 +247,12 @@ const LandingPage: React.FC = () => {
             />
             <div>
               <h3 className="text-[#82E300] text-lg font-bold">Fast</h3>
-              <p className="text-[11px]">
+              <p className="text-[11px] min-[1339px]:text-[14px]">
                 and seamless gaming experience with web3 integration
               </p>
             </div>
           </div>
-          <div className="bg-[#363636] p-4 w-[200px] h-[126px] flex items-center absolute left-[30vw] top-0 text-left mx-auto">
+          <div className="bg-[#363636] p-4 w-[200px] h-[126px] flex items-center absolute left-[30vw] top-0 text-left mx-auto min-[1339px]:w-[260px] ">
             <img
               src="/money.svg"
               alt="Earn"
@@ -255,13 +260,13 @@ const LandingPage: React.FC = () => {
             />
             <div>
               <h3 className="text-[#82E300] text-lg font-bold">Earn</h3>
-              <p className="text-[11px]">
+              <p className="text-[11px] min-[1339px]:text-[14px]">
                 points for real-world rewards and use cultix to unlock on-chain
                 benefits and ownership
               </p>
             </div>
           </div>
-          <div className="bg-[#363636] p-4 w-[200px] h-[126px] flex items-center absolute left-[50vw] top-0 text-left mx-auto">
+          <div className="bg-[#363636] p-4 w-[200px] h-[126px] flex items-center absolute left-[50vw] top-0 text-left mx-auto min-[1339px]:w-[260px] ">
             <img
               src="/trust.svg"
               alt="Secure"
@@ -269,12 +274,12 @@ const LandingPage: React.FC = () => {
             />
             <div>
               <h3 className="text-[#82E300] text-lg font-bold">Secure</h3>
-              <p className="text-[11px]">
+              <p className="text-[11px] min-[1339px]:text-[14px]">
                 and transparent transactions powered by blockchain technology
               </p>
             </div>
           </div>
-          <div className="bg-[#363636] p-4 w-[200px] h-[126px] flex items-center absolute left-[71vw] top-0 text-left mx-auto">
+          <div className="bg-[#363636] p-4 w-[200px] h-[126px] flex items-center absolute left-[71vw] top-0 text-left mx-auto min-[1339px]:w-[260px]  ">
             <img
               src="/earth.svg"
               alt="Join"
@@ -282,7 +287,7 @@ const LandingPage: React.FC = () => {
             />
             <div>
               <h3 className="text-[#82E300] text-lg font-bold">Join</h3>
-              <p className="text-[11px]">
+              <p className="text-[11px] min-[1339px]:text-[14px]">
                 global Community of gamers and blockchain enthusiasts
               </p>
             </div>

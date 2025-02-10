@@ -182,7 +182,7 @@ const RewardsPage = () => {
             Welcome to <br /> Ignicult Rewards
           </h1>
           <div className="bg-[#92FF00] w-full mt-[10px] left-[-20px] relative h-[2px]"></div>
-          <p className="text-white font-roboto text-[10px] pl-10 mt-[15px]">
+          <p className="text-white font-roboto text-[12px] pl-10 mt-[15px]">
             At Ignicult, we reward both casual players and blockchain
             enthusiasts. Here’s what you can earn by joining us:
           </p>

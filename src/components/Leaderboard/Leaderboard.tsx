@@ -117,203 +117,405 @@ const Leaderboard: React.FC = () => {
   });
 
   return (
-    <div className="min-h-screen w-full mt-[93px] text-white overflow-x-hidden overflow-y-auto">
-      <SwipeHintOverlay />
-      <div className="w-full py-8 px-4 flex flex-col items-center">
-        <h2 className="text-white text-lg font-semibold mb-4 text-center">
-          Leaderboard
-        </h2>
-        <select
-          className="bg-[#1e1e1e] text-[#92FF00] border-[1px] border-[#92FF00] relative left-[-20px] p-2 rounded-full w-[75vw] h-[45px] appearance-none pl-4 pr-8"
-          value={selectedGame}
-          onChange={(e) => setSelectedGame(e.target.value as GameName)}
-          style={{
-            backgroundImage: 'url("/down.svg")',
-            backgroundPosition: "right 10px center",
-            backgroundRepeat: "no-repeat",
-          }}
-        >
-          {Object.keys(mockData).map((game) => (
-            <option key={game} value={game}>
-              {game}
-            </option>
-          ))}
-        </select>
-
-        <button className="ml-2 w-[46px] h-[46px] flex justify-center items-center absolute left-[82%] top-[167px] rounded-full bg-[#82E300] hover:bg-[#6ac100] text-black shadow-glow transition-all">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="black"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="w-[20px] h-[20px]"
+    <div>
+      <div className="min-h-screen min-[1023px]:hidden w-full mt-[93px] text-white overflow-x-hidden overflow-y-auto">
+        <SwipeHintOverlay />
+        <div className="w-full py-8 px-4 flex flex-col items-center">
+          <h2 className="text-white text-lg font-semibold mb-4 text-center">
+            Leaderboard
+          </h2>
+          <select
+            className="bg-[#1e1e1e] text-[#92FF00] border-[1px] border-[#92FF00] relative left-[-20px] p-2 rounded-full w-[75vw] h-[45px] appearance-none pl-4 pr-8"
+            value={selectedGame}
+            onChange={(e) => setSelectedGame(e.target.value as GameName)}
+            style={{
+              backgroundImage: 'url("/down.svg")',
+              backgroundPosition: "right 10px center",
+              backgroundRepeat: "no-repeat",
+            }}
           >
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-            <polyline points="17 8 12 3 7 8" />
-            <line x1="12" y1="3" x2="12" y2="15" />
-          </svg>
-        </button>
-      </div>
+            {Object.keys(mockData).map((game) => (
+              <option key={game} value={game}>
+                {game}
+              </option>
+            ))}
+          </select>
 
-      <div className="mx-0 mb-8 bg-[#141414] min-[400px]:h-[60vh] rounded-3xl border-t-[1px] border-[#92FF00]">
-        <div className="flex gap-[0px] max-[369px]:gap-[15px] p-[5px] items-center max-[468px]:ml-[10px] max-[468px]:gap-[33px] max-[398px]:gap-[20px] mb-4">
-          {["Daily", "Weekly", "Monthly", "Overall"].map((period) => (
-            <a
-              key={period}
-              className={`relative px-4 py-2 mr-[-9px] text-md font-semibold cursor-pointer ${
-                timeframe === period ? "text-white" : "text-gray-500"
-              }`}
-              onClick={() =>
-                setTimeframe(
-                  period as "Daily" | "Weekly" | "Monthly" | "Overall"
-                )
-              }
+          <button className="ml-2 w-[46px] h-[46px] flex justify-center items-center absolute left-[82%] top-[167px] rounded-full bg-[#82E300] hover:bg-[#6ac100] text-black shadow-glow transition-all">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="black"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="w-[20px] h-[20px]"
             >
-              {period}
-              <span
-                className={`absolute bottom-0 left-0 h-[2px] bg-[#92FF00] transition-all duration-300 ease-in-out ${
-                  timeframe === period ? "w-full" : "w-0"
-                }`}
-              />
-            </a>
-          ))}
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="17 8 12 3 7 8" />
+              <line x1="12" y1="3" x2="12" y2="15" />
+            </svg>
+          </button>
         </div>
 
-        {currentPage === 0 && (
-          <div className="flex justify-center items-end mt-[30px] gap-0 mb-4">
-            <motion.div
-              initial={{ y: 50, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.2, type: "spring", stiffness: 100 }}
-              className="flex flex-col items-center"
-            >
-              <div className="bg-gradient-to-b max-[369px]:w-[100px] max-[399px]:w-[120px] max-[379px]:w-[110px] from-[#535353] to-[#121212] p-4 rounded-t-lg w-[103px] h-[154px]">
-                <div className="relative">
-                  <div className="absolute -top-12 left-1/2 transform -translate-x-1/2">
-                    <img
-                      src="/two.svg"
-                      alt="2nd Place"
-                      className="mx-auto w-[69px] h-[69px]"
-                    />
-                  </div>
-                  <div className="text-[#70C200] left-[-5px] top-[30px] max-[369px]:left-[-10px] relative text-sm mb-1">
-                    {podiumData[1]?.wallet}
-                  </div>
-                  <div className="text-yellow-500 mt-[30px] ml-[6px] text-2xl font-bold">
-                    {podiumData[1]?.score}
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-            <motion.div
-              initial={{ y: 50, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.3, type: "spring", stiffness: 100 }}
-              className="flex flex-col items-center"
-            >
-              <div className="bg-gradient-to-b max-[369px]:w-[120px] from-[#535353] to-[#121212] p-4 rounded-t-lg w-[103px] h-[184px]">
-                <div className="relative">
-                  <div className="absolute -top-8 left-1/2 transform -translate-x-1/2">
-                    <img src="/one.svg" alt="1st Place" className="mx-auto" />
-                  </div>
-                  <div className="text-[#70C200] left-[-5px] absolute top-[40px] text-sm mb-1">
-                    {podiumData[0]?.wallet}
-                  </div>
-                  <div className="text-yellow-500 text-2xl relative top-[57px] font-bold flex items-center justify-center">
-                    {podiumData[0]?.score}
-                  </div>
-                  <div className="relative">
-                    <img
-                      src="/trophy1.svg"
-                      alt="Crown"
-                      className="w-11 absolute left-[16px] top-[70px] h-11 max-[398px]:top-[60px]"
-                      style={{
-                        left: window.innerWidth < 369 ? "20px" : "",
-                      }}
-                    />
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-            <motion.div
-              initial={{ y: 50, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.4, type: "spring", stiffness: 100 }}
-              className="flex flex-col items-center"
-            >
-              <div className="bg-gradient-to-b max-[369px]:w-[100px] from-[#535353] to-[#121212] p-4 rounded-t-lg w-[103px] h-[140px]">
-                <div className="relative">
-                  <div className="absolute -top-8 left-1/2 transform -translate-x-1/2">
-                    <img src="/three.svg" alt="3rd Place" className="mx-auto" />
-                  </div>
-                  <div className="text-[#70C200] top-[30px] max-[369px]:left-[-10px] relative text-sm mb-1">
-                    {podiumData[2]?.wallet}
-                  </div>
-                  <div className="text-yellow-500 relative top-[30px] left-[10px] text-2xl font-bold">
-                    {podiumData[2]?.score}
-                  </div>
-                </div>
-              </div>
-            </motion.div>
+        <div className="mx-0 mb-8 bg-[#141414] min-[400px]:h-[60vh] rounded-3xl border-t-[1px] border-[#92FF00]">
+          <div className="flex gap-[0px] max-[369px]:gap-[15px] p-[5px] items-center max-[468px]:ml-[10px] max-[468px]:gap-[33px] max-[398px]:gap-[20px] mb-4">
+            {["Daily", "Weekly", "Monthly", "Overall"].map((period) => (
+              <a
+                key={period}
+                className={`relative px-4 py-2 mr-[-9px] text-md font-semibold cursor-pointer ${timeframe === period ? "text-white" : "text-gray-500"
+                  }`}
+                onClick={() =>
+                  setTimeframe(
+                    period as "Daily" | "Weekly" | "Monthly" | "Overall"
+                  )
+                }
+              >
+                {period}
+                <span
+                  className={`absolute bottom-0 left-0 h-[2px] bg-[#92FF00] transition-all duration-300 ease-in-out ${timeframe === period ? "w-full" : "w-0"
+                    }`}
+                />
+              </a>
+            ))}
           </div>
-        )}
 
-        <div className="p-5 mt-[-20px]" {...swipeHandlers}>
-          <table className="w-[115%] left-[-25px] mx-auto relative border-collapse bg-[#3E3E3E] text-center">
-            <thead>
-              <tr>
-                <th className="border-b border-gray-600 border-r py-2 px-3 text-[#92FF00] font-light">
-                  Rank
-                </th>
-                <th className="border-b border-gray-600 border-r py-2 px-3 text-[#92FF00] font-light">
-                  Wallet Address
-                </th>
-                <th className="border-b border-gray-600 py-2 px-3 text-[#92FF00] font-light">
-                  Total Score
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {paginatedData.map((entry, index) => (
-                <tr key={index}>
-                  <td className="border-b border-gray-600 border-r py-2 px-3 text-[#B9B9B9]">
-                    {entry.rank}
-                  </td>
-                  <td className="border-b border-gray-600 border-r py-2 px-3 text-[#B9B9B9]">
-                    {entry.wallet}
-                  </td>
-                  <td className="border-b border-gray-600 py-2 px-3 text-[#B9B9B9]">
-                    {entry.score}
-                  </td>
+          {currentPage === 0 && (
+            <div className="flex justify-center items-end mt-[30px] gap-0 mb-4">
+              <motion.div
+                initial={{ y: 50, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.2, type: "spring", stiffness: 100 }}
+                className="flex flex-col items-center"
+              >
+                <div className="bg-gradient-to-b max-[369px]:w-[100px] max-[399px]:w-[120px] max-[379px]:w-[110px] from-[#535353] to-[#121212] p-4 rounded-t-lg w-[103px] h-[154px]">
+                  <div className="relative">
+                    <div className="absolute -top-12 left-1/2 transform -translate-x-1/2">
+                      <img
+                        src="/two.svg"
+                        alt="2nd Place"
+                        className="mx-auto w-[69px] h-[69px]"
+                      />
+                    </div>
+                    <div className="text-[#70C200] left-[-5px] top-[30px] max-[369px]:left-[-10px] relative text-sm mb-1">
+                      {podiumData[1]?.wallet}
+                    </div>
+                    <div className="text-yellow-500 mt-[30px] ml-[6px] text-2xl font-bold">
+                      {podiumData[1]?.score}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+              <motion.div
+                initial={{ y: 50, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.3, type: "spring", stiffness: 100 }}
+                className="flex flex-col items-center"
+              >
+                <div className="bg-gradient-to-b max-[369px]:w-[120px] from-[#535353] to-[#121212] p-4 rounded-t-lg w-[103px] h-[184px]">
+                  <div className="relative">
+                    <div className="absolute -top-8 left-1/2 transform -translate-x-1/2">
+                      <img src="/one.svg" alt="1st Place" className="mx-auto" />
+                    </div>
+                    <div className="text-[#70C200] left-[-5px] absolute top-[40px] text-sm mb-1">
+                      {podiumData[0]?.wallet}
+                    </div>
+                    <div className="text-yellow-500 text-2xl relative top-[57px] font-bold flex items-center justify-center">
+                      {podiumData[0]?.score}
+                    </div>
+                    <div className="relative">
+                      <img
+                        src="/trophy1.svg"
+                        alt="Crown"
+                        className="w-11 absolute left-[16px] top-[70px] h-11 max-[398px]:top-[60px]"
+                        style={{
+                          left: window.innerWidth < 369 ? "20px" : "",
+                        }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+              <motion.div
+                initial={{ y: 50, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.4, type: "spring", stiffness: 100 }}
+                className="flex flex-col items-center"
+              >
+                <div className="bg-gradient-to-b max-[369px]:w-[100px] from-[#535353] to-[#121212] p-4 rounded-t-lg w-[103px] h-[140px]">
+                  <div className="relative">
+                    <div className="absolute -top-8 left-1/2 transform -translate-x-1/2">
+                      <img src="/three.svg" alt="3rd Place" className="mx-auto" />
+                    </div>
+                    <div className="text-[#70C200] top-[30px] max-[369px]:left-[-10px] relative text-sm mb-1">
+                      {podiumData[2]?.wallet}
+                    </div>
+                    <div className="text-yellow-500 relative top-[30px] left-[10px] text-2xl font-bold">
+                      {podiumData[2]?.score}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          )}
+
+          <div className="p-5 mt-[-20px]" {...swipeHandlers}>
+            <table className="w-[115%] left-[-25px] mx-auto relative border-collapse bg-[#3E3E3E] text-center">
+              <thead>
+                <tr>
+                  <th className="border-b border-gray-600 border-r py-2 px-3 text-[#92FF00] font-light">
+                    Rank
+                  </th>
+                  <th className="border-b border-gray-600 border-r py-2 px-3 text-[#92FF00] font-light">
+                    Wallet Address
+                  </th>
+                  <th className="border-b border-gray-600 py-2 px-3 text-[#92FF00] font-light">
+                    Total Score
+                  </th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-          <div className="flex justify-center mt-6 mb-[55px] gap-4
+              </thead>
+              <tbody>
+                {paginatedData.map((entry, index) => (
+                  <tr key={index}>
+                    <td className="border-b border-gray-600 border-r py-2 px-3 text-[#B9B9B9]">
+                      {entry.rank}
+                    </td>
+                    <td className="border-b border-gray-600 border-r py-2 px-3 text-[#B9B9B9]">
+                      {entry.wallet}
+                    </td>
+                    <td className="border-b border-gray-600 py-2 px-3 text-[#B9B9B9]">
+                      {entry.score}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <div className="flex justify-center mt-6 mb-[55px] gap-4
           
           ">
-            <button
-            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
-            disabled={currentPage === 0}
-            className="bg-[#1e1e1e] text-[#92FF00] relative border border-[#92FF00] px-4 py-2 rounded hover:bg-[#92FF00] hover:text-black transition-all disabled:opacity-50
+              <button
+                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
+                disabled={currentPage === 0}
+                className="bg-[#1e1e1e] text-[#92FF00] relative border border-[#92FF00] px-4 py-2 rounded hover:bg-[#92FF00] hover:text-black transition-all disabled:opacity-50
             max-[370px]:top-[-14px]
             "
-          >
-            &larr; Prev
-          </button>
-          <button
-            onClick={() =>
-              setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1))
-            }
-            disabled={currentPage >= totalPages - 1}
-            className="bg-[#1e1e1e] text-[#92FF00] border relative border-[#92FF00] px-4 py-2 rounded hover:bg-[#92FF00] hover:text-black transition-all disabled:opacity-50
+              >
+                &larr; Prev
+              </button>
+              <button
+                onClick={() =>
+                  setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1))
+                }
+                disabled={currentPage >= totalPages - 1}
+                className="bg-[#1e1e1e] text-[#92FF00] border relative border-[#92FF00] px-4 py-2 rounded hover:bg-[#92FF00] hover:text-black transition-all disabled:opacity-50
              max-[370px]:top-[-14px]"
+              >
+                Next &rarr;
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div className="min-h-screen relative max-[1023px]:hidden w-full mt-[93px] text-white overflow-x-hidden">
+        <div className="w-full py-8 relative px-4 flex flex-col items-center">
+          <h2 className="text-white text-2xl absolute top-[39%] left-[3%] font-semibold mb-4 text-center">
+            Leaderboard
+          </h2>
+          <select
+            className="bg-[#1e1e1e] text-[#92FF00] border-[1px] border-[#92FF00] relative right-[-36%] p-2 rounded-full w-[20vw] h-[45px] appearance-none pl-4 pr-8"
+            value={selectedGame}
+            onChange={(e) => setSelectedGame(e.target.value as GameName)}
+            style={{
+              backgroundImage: 'url("/down.svg")',
+              backgroundPosition: "right 10px center",
+              backgroundRepeat: "no-repeat",
+            }}
           >
-            Next &rarr;
+            {Object.keys(mockData).map((game) => (
+              <option key={game} value={game}>
+                {game}
+              </option>
+            ))}
+          </select>
+
+          <button className="ml-2 w-[46px] h-[46px] flex justify-center items-center absolute right-[0.8%] top-[31px] rounded-full bg-[#82E300] hover:bg-[#6ac100] text-black shadow-glow transition-all">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="black"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="w-[20px] h-[20px]"
+            >
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="17 8 12 3 7 8" />
+              <line x1="12" y1="3" x2="12" y2="15" />
+            </svg>
           </button>
+        </div>
+        <div className="bg-[#92FF00] w-full mt-[-6px] left-[0px] relative h-[2px]"></div>
+
+        <div className="mx-0 mt-[20px] mb-8  rounded-3xl ">
+          <div className="flex gap-[80px] p-[5px] left-[30%] relative items-center  mb-4">
+            {["Daily", "Weekly", "Monthly", "Overall"].map((period) => (
+              <a
+                key={period}
+                className={`relative px-4 py-2 mr-[-9px] text-md font-semibold cursor-pointer ${timeframe === period ? "text-white" : "text-gray-500"
+                  }`}
+                onClick={() =>
+                  setTimeframe(
+                    period as "Daily" | "Weekly" | "Monthly" | "Overall"
+                  )
+                }
+              >
+                {period}
+                <span
+                  className={`absolute bottom-0 left-0 h-[2px] bg-[#92FF00] transition-all duration-300 ease-in-out ${timeframe === period ? "w-full" : "w-0"
+                    }`}
+                />
+              </a>
+            ))}
+          </div>
+
+          {currentPage === 0 && (
+            <div className="flex justify-center items-end mt-[30px] gap-0 mb-4">
+              <motion.div
+                initial={{ y: 50, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.2, type: "spring", stiffness: 100 }}
+                className="flex flex-col items-center"
+              >
+                <div className="bg-gradient-to-b max-[369px]:w-[100px] max-[399px]:w-[120px] max-[379px]:w-[110px] from-[#535353] to-[#121212] p-4 rounded-t-lg w-[103px] h-[154px]">
+                  <div className="relative">
+                    <div className="absolute -top-12 left-1/2 transform -translate-x-1/2">
+                      <img
+                        src="/two.svg"
+                        alt="2nd Place"
+                        className="mx-auto w-[69px] h-[69px]"
+                      />
+                    </div>
+                    <div className="text-[#70C200] left-[-5px] top-[30px] max-[369px]:left-[-10px] relative text-sm mb-1">
+                      {podiumData[1]?.wallet}
+                    </div>
+                    <div className="text-yellow-500 mt-[30px] ml-[6px] text-2xl font-bold">
+                      {podiumData[1]?.score}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+              <motion.div
+                initial={{ y: 50, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.3, type: "spring", stiffness: 100 }}
+                className="flex flex-col items-center"
+              >
+                <div className="bg-gradient-to-b max-[369px]:w-[120px] from-[#535353] to-[#121212] p-4 rounded-t-lg w-[103px] h-[184px]">
+                  <div className="relative">
+                    <div className="absolute -top-8 left-1/2 transform -translate-x-1/2">
+                      <img src="/one.svg" alt="1st Place" className="mx-auto" />
+                    </div>
+                    <div className="text-[#70C200] left-[-5px] absolute top-[40px] text-sm mb-1">
+                      {podiumData[0]?.wallet}
+                    </div>
+                    <div className="text-yellow-500 text-2xl relative top-[57px] font-bold flex items-center justify-center">
+                      {podiumData[0]?.score}
+                    </div>
+                    <div className="relative">
+                      <img
+                        src="/trophy1.svg"
+                        alt="Crown"
+                        className="w-11 absolute left-[16px] top-[70px] h-11 max-[398px]:top-[60px]"
+                        style={{
+                          left: window.innerWidth < 369 ? "20px" : "",
+                        }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+              <motion.div
+                initial={{ y: 50, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.4, type: "spring", stiffness: 100 }}
+                className="flex flex-col items-center"
+              >
+                <div className="bg-gradient-to-b max-[369px]:w-[100px] from-[#535353] to-[#121212] p-4 rounded-t-lg w-[103px] h-[140px]">
+                  <div className="relative">
+                    <div className="absolute -top-8 left-1/2 transform -translate-x-1/2">
+                      <img src="/three.svg" alt="3rd Place" className="mx-auto" />
+                    </div>
+                    <div className="text-[#70C200] top-[30px] max-[369px]:left-[-10px] relative text-sm mb-1">
+                      {podiumData[2]?.wallet}
+                    </div>
+                    <div className="text-yellow-500 relative top-[30px] left-[10px] text-2xl font-bold">
+                      {podiumData[2]?.score}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          )}
+
+          <div className="p-5 mt-[-20px]" {...swipeHandlers}>
+            <table className="w-[65vw] left-[px] rounded-2xl mx-auto relative border-collapse bg-[#3E3E3E] text-center">
+              <thead>
+                <tr>
+                  <th className="border-b border-gray-600 border-r py-2 px-3 text-[#92FF00] font-light">
+                    Rank
+                  </th>
+                  <th className="border-b border-gray-600 border-r py-2 px-3 text-[#92FF00] font-light">
+                    Wallet Address
+                  </th>
+                  <th className="border-b border-gray-600 py-2 px-3 text-[#92FF00] font-light">
+                    Total Score
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {paginatedData.map((entry, index) => (
+                  <tr key={index}>
+                    <td className="border-b border-gray-600 border-r py-2 px-3 text-[#B9B9B9]">
+                      {entry.rank}
+                    </td>
+                    <td className="border-b border-gray-600 border-r py-2 px-3 text-[#B9B9B9]">
+                      {entry.wallet}
+                    </td>
+                    <td className="border-b border-gray-600 py-2 px-3 text-[#B9B9B9]">
+                      {entry.score}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <div className="flex justify-center mt-6 mb-[55px] gap-4
+            
+            ">
+              <button
+                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
+                disabled={currentPage === 0}
+                className="bg-[#1e1e1e] text-[#92FF00] relative border border-[#92FF00] px-4 py-2 rounded hover:bg-[#92FF00] hover:text-black transition-all disabled:opacity-50
+              max-[370px]:top-[-14px]
+              "
+              >
+                &larr; Prev
+              </button>
+              <button
+                onClick={() =>
+                  setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1))
+                }
+                disabled={currentPage >= totalPages - 1}
+                className="bg-[#1e1e1e] text-[#92FF00] border relative border-[#92FF00] px-4 py-2 rounded hover:bg-[#92FF00] hover:text-black transition-all disabled:opacity-50
+               max-[370px]:top-[-14px]"
+              >
+                Next &rarr;
+              </button>
+            </div>
           </div>
         </div>
       </div>
