@@ -61,7 +61,7 @@ const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen, setSidebarOpen }) => {
     { name: "Profile", path: "/profile", icon: "/profile.svg" },
     { name: "Games", path: "/games", icon: "/games.svg" },
     { name: "Leaderboard", path: "/leaderboard", icon: "/leaderboard.svg" },
-    { name: "Tournaments", path: "/tournaments", icon: "/tournament.svg" },
+    { name: "Tournaments", path: "/tournament", icon: "/tournament.svg" },
     { name: "Premium Tournaments", path: "/premium-tournaments", icon: "/premium-tournaments.svg" },
     { name: "Activity", path: "/activity", icon: "/activity.svg" },
     { name: "Rewards", path: "/rewards", icon: "/rewards.svg" },
