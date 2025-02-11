@@ -24,12 +24,12 @@ const Sidebar: React.FC<SidebarProps> = ({ onClose }) => {
 
   return (
     <SidebarContainer>
-        <IoClose size={24} onClick={onClose}  className="absolute top-[31px] border-2 rounded-[50%] border-[#82e300] right-[20px]" />
+        <IoClose size={24} onClick={onClose}  className="absolute top-[36px] border-2 rounded-[50%] border-[#82e300] right-[20px]" />
       <LogoContainer>
         <img
-          src="/igni.svg"
+          src="/blackLOgo.svg"
           alt="Company Logo"
-          className="w-10 h-10 rounded-full"
+          className="w-12 h-12 rounded-[20px]  max-[371px]:w-12 max-[371px]:h-12 max-[375px]:w-10 max-[375px]:h-10"
         />
         <h1 className="text-xl font-poppins font-semibold">IGNICULT</h1>
       </LogoContainer>
