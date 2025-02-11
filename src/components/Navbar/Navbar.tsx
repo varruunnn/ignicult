@@ -191,7 +191,7 @@ const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen, setSidebarOpen }) => {
             <div className="absolute max-[1023px]:hidden min-[1024px]:top-[0px] z-100">
               <img
                 src="/vector2.svg"
-                className="max-[1023px]:hidden fixed min-[2559px]:left-[31%] min-[2559px]:w-[40%] left-[20%] top-[0] z-10 min-[1399px]:left-[27%] rounded-lg"
+                className="max-[1023px]:hidden min-[1399px]:w-[950px] fixed min-[2559px]:left-[31%] min-[2559px]:w-[40%] left-[20%] top-[0] z-10 min-[1399px]:left-[27%] rounded-lg"
                 alt="desktopnav"
               />
             </div>

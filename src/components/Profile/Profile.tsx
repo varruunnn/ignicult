@@ -397,21 +397,12 @@ const ProfilePage: React.FC = () => {
 
 
 
-      <div className="p-4 py-20 mt-[170px] text-white overflow-x-hidden max-[1023px]:hidden
+      <div className="p-4 py-20 mt-[170px] min-[1339px]:mt-[280px] min-[1399px]:w-[1440px] text-white overflow-x-hidden max-[1023px]:hidden
     
     "
       >
-        <motion.h1
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-white text-lg font-semibold text-center text-shadow-glow mb-8
-        top-[25%] left-[13%] absolute
-        "
-        >
-          Profile
-        </motion.h1>
-        <div className="bg-[#92FF00] w-full mt-[10px] left-[0px] relative h-[2px]"></div>
+
+        <div className="bg-[#92FF00] w-full mt-[10px] left-[0px] relative h-[2px] min-[1399px]:w-[1440px] min-[1399px]:left-[6%]"></div>
         <div className=" absolute w-full max-w-4xl mx-auto  p-4">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
@@ -419,10 +410,11 @@ const ProfilePage: React.FC = () => {
             transition={{ duration: 0.8 }}
             className="absolute left-0 w-full top-[100px] h-[100vh] rounded-[80px] p-4 mx-auto"
           >
+
             <motion.img
               src="/profilee.svg"
               alt="Profile"
-              className="w-[80px] h-[80px]  left-[4%] top-[-30%] absolute rounded-full border-[1px] border-[#82E300]
+              className="w-[80px] h-[80px] min-[1399px]:top-[-29%] left-[4%] top-[-33%] absolute rounded-full border-[1px] border-[#82E300]
         
             "
               initial={{ scale: 0, rotate: -90 }}
@@ -430,6 +422,16 @@ const ProfilePage: React.FC = () => {
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
               whileHover={{ scale: 1.1 }}
             />
+            <motion.h1
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="text-white text-lg font-semibold text-center text-shadow-glow mb-8
+        top-[-30%] left-[17.5%] absolute min-[1399px]:top-[-29%]
+        "
+            >
+              Profile
+            </motion.h1>
             <motion.h1
               className="text-sm absolute text-[#858585] left-[17.6%] top-[-25%] font-bold"
               initial={{ opacity: 0, y: -20 }}
@@ -447,108 +449,92 @@ const ProfilePage: React.FC = () => {
               abcd12345
             </motion.p>
 
-            <motion.span
-              className="bg-[#82E300] absolute text-black font-bold w-[65px] h-[66px] py-1 left-[8.5%] top-[-10%] rounded-l-lg flex items-center justify-center
 
-            "
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.4, duration: 0.5 }}
-            >
-              <h3
-                className="font-medium leading-tight tracking-tighter text-black text-center text-sm
-"
-              >
-                Total Points
-              </h3>
-            </motion.span>
-            <motion.span
-              className="bg-[#82E300] absolute text-black font-bold w-[65px] h-[68px] py-1 right-[-39%] top-[-10%] rounded-r-lg flex items-center justify-center"
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.45, duration: 0.5 }}
-            >
-              <h3
-                className="font-medium leading-tight tracking-tighter text-center text-sm
-                max-[468px]:text-sm 
-                max-[400px]:text-sm
-                max-[375px]:text-xs
-                max-[370px]:text-xs"
-              >
-                Games Played
-              </h3>
-            </motion.span>
+
             <motion.div
-              className="flex flex-col relative gap-4 h-[150px] w-full left-[17px]
-              max-[468px]:left-[15px]
-              max-[400px]:left-[10px]
-              max-[375px]:left-[5px]
-              max-[370px]:left-[2px]"
+              className="flex flex-col relative gap-4 h-[150px] w-full left-[17px] 
+      max-[468px]:left-[15px]
+      max-[400px]:left-[10px]
+      max-[375px]:left-[5px]
+      max-[370px]:left-[2px]"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.5 }}
             >
               <div
-                className="flex items-center relative w-[38vw] h-[95px] top-[-54%] left-[11.8%] justify-between bg-[#1E1E1E] border-2 border-[#82E300] rounded-lg rounded-r-3xl"
+                className="flex items-center justify-between relative w-[38vw] h-[69px] bg-[#1E1E1E] border-2 border-[#82E300] rounded-xl rounded-r-3xl top-[-51.1%] left-[10%] min-[1399px]:left-[20%]
+        max-[468px]:w-[74vw] max-[468px]:h-[97px]
+        max-[400px]:w-[74vw] max-[400px]:h-[90px]
+        max-[375px]:w-[65vw] max-[375px]:h-[85px]
+        max-[370px]:w-[78vw] max-[370px]:h-[80px]"
               >
-                <span
-                  className="text-[#FEA50D] ml-[10px] font-bold text-xl flex-grow text-left
-                max-[468px]:text-xl
-                max-[400px]:text-lg
-                max-[375px]:text-base
-                max-[370px]:text-base"
-                >
-                  000
-                </span>
+                <div className="flex items-center">
+                  <span className="text-[#FEA50D] ml-2 font-bold text-xl">
+                    000
+                  </span>
+                  <motion.span
+                    className="bg-[#82E300] text-black font-bold left-[-95%] relative w-[65px] h-[68.4px] py-1 rounded-l-lg flex items-center justify-center"
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.45, duration: 0.5 }}
+                  >
+                    <h3 className="font-medium leading-tight tracking-tighter text-center text-sm">
+                      Total Points
+                    </h3>
+                  </motion.span>
+                </div>
                 <img
                   src="/100.svg"
                   alt="Emoji Events"
-                  className="w-[50px] h-[50px] mr-[5px] bg-[#FFA500] rounded-3xl
-                max-[468px]:w-[50px] max-[468px]:h-[50px]
-                max-[400px]:w-[45px] max-[400px]:h-[45px]
-                max-[375px]:w-[40px] max-[375px]:h-[40px]
-                max-[370px]:w-[38px] max-[370px]:h-[38px]"
+                  className="w-[50px] h-[50px] mr-1 bg-[#FFA500] rounded-3xl"
                 />
               </div>
+
               <div
-                className="flex items-center relative w-[38vw] h-[97px] right-[-73.5%] top-[-109%] justify-between bg-[#1E1E1E] border-2 border-[#82E300] rounded-lg rounded-l-3xl
-                max-[468px]:w-[74vw] max-[468px]:h-[97px] max-[468px]:right-[-60px] max-[468px]:top-[6px]
-                max-[400px]:w-[74vw] max-[400px]:h-[90px] max-[400px]:right-[-55px] max-[400px]:top-[0px]
-                max-[375px]:w-[65vw] max-[375px]:h-[85px] max-[375px]:right-[-50px]
-                max-[370px]:w-[78vw] max-[370px]:h-[80px] max-[370px]:right-[-45px]"
+                className="flex items-center left-[70%] justify-between top-[-108%] relative w-[40vw] h-[70px] bg-[#1E1E1E] border-2 border-[#82E300] rounded-xl rounded-l-3xl min-[1399px]:left-[100%]
+        max-[468px]:w-[74vw] max-[468px]:h-[97px]
+        max-[400px]:w-[74vw] max-[400px]:h-[90px]
+        max-[375px]:w-[65vw] max-[375px]:h-[85px]
+        max-[370px]:w-[78vw] max-[370px]:h-[80px]"
               >
-                <span
-                  className="text-[#FEA50D] mr-[10px] font-bold text-xl flex-grow text-right
-                max-[468px]:text-xl
-                max-[400px]:text-lg
-                max-[375px]:text-base
-                max-[370px]:text-base"
-                >
-                  000
-                </span>
                 <img
                   src="/gc.svg"
                   alt="Emoji Events"
-                  className="w-[50px] h-[50px] absolute left-[1.5%] bg-[#FFA500] rounded-3xl"
+                  className="w-[50px] h-[50px] ml-1 bg-[#FFA500] rounded-3xl"
                 />
+                <div className="flex items-center">
+                  <span className="text-[#FEA50D] mr-1 font-bold text-xl">
+                    000
+                  </span>
+                  <motion.span
+                    className="bg-[#82E300] text-black font-bold w-[65px] h-[68px] py-1 rounded-r-lg flex items-center justify-center"
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.45, duration: 0.5 }}
+                  >
+                    <h3 className="font-medium leading-tight tracking-tighter text-center text-sm">
+                      Games Played
+                    </h3>
+                  </motion.span>
+                </div>
               </div>
             </motion.div>
+
             <motion.div
-              className="mt-[-100px] relative w-full h-[55vh]
-              max-[468px]:left-[20px]
-              max-[400px]:left-[10px]
-              max-[375px]:
-              max-[370px]:left-[3px]"
+              className="mt-[-100px] relative w-full h-[55vh] left-[-2%] min-[1339px]:left-[10%]  min-[1339px]:mt-[-10px]
+      max-[468px]:left-[20px]
+      max-[400px]:left-[10px]
+      max-[370px]:left-[3px]"
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.6, duration: 0.5 }}
             >
               <h2
                 className="text-sm relative left-[7.5%] text-[#A3A3A3] top-[-10%] mb-1
-              max-[468px]:text-sm
-              max-[400px]:text-xs
-              max-[375px]:text-xs
-              max-[370px]:text-xs"
+      max-[468px]:text-sm
+      max-[400px]:text-xs
+      max-[375px]:text-xs
+      max-[370px]:text-xs"
               >
                 Tournaments Participated
               </h2>
@@ -557,36 +543,35 @@ const ProfilePage: React.FC = () => {
               >
                 <p
                   className="text-xl text-[#FEA50D] absolute top-[12px] font-bold
-                max-[468px]:text-xl max-[468px]:top-[36px]
-                max-[400px]:text-lg max-[400px]:top-[32px]
-                max-[375px]:text-base max-[375px]:top-[32px]
-                max-[370px]:text-base max-[370px]:top-[35px]"
+        max-[468px]:text-xl max-[468px]:top-[36px]
+        max-[400px]:text-lg max-[400px]:top-[32px]
+        max-[375px]:text-base max-[375px]:top-[32px]
+        max-[370px]:text-base max-[370px]:top-[35px]"
                 >
                   000
                 </p>
               </div>
               <div
-                className="bg-[#353535]  w-[42vw] left-[76.5%] top-[-27.5%] h-[45vh]  rounded-xl p-4 relative
-                max-[468px]:w-[86vw] max-[468px]:h-[23vh] max-[468px]:p-4
-                max-[400px]:w-[88vw] max-[400px]:h-[22vh] max-[400px]:p-3
-                max-[370px]:w-[90vw] max-[370px]:h-[22vh] max-[370px]:p-2"
-
+                className="bg-[#353535]  w-[42vw] left-[76.5%] top-[-27.5%] h-[45vh]  rounded-xl p-4 relative min-[1399px]:left-[90%]
+        max-[468px]:w-[86vw] max-[468px]:h-[23vh] max-[468px]:p-4
+        max-[400px]:w-[88vw] max-[400px]:h-[22vh] max-[400px]:p-3
+        max-[370px]:w-[90vw] max-[370px]:h-[22vh] max-[370px]:p-2"
               >
                 <h2
                   className="text-sm relative mt-7 left-[6%] text-[#A3A3A3] mb-1
-              max-[468px]:text-sm
-              max-[400px]:text-xs
-              max-[375px]:text-xs
-              max-[370px]:text-xs"
+        max-[468px]:text-sm
+        max-[400px]:text-xs
+        max-[375px]:text-xs
+        max-[370px]:text-xs"
                 >
                   Tournaments
                 </h2>
                 <select
                   className="w-[20vw] h-[6.5vh] mt-[1px]  appearance-none bg-[#353535] text-[#B3B3B3] border border-[#92FF00] rounded-lg p-2 relative left-[6%]
-                max-[468px]:p-2
-                max-[400px]:p-1
-                max-[375px]:p-1
-                max-[370px]:p-1"
+        max-[468px]:p-2
+        max-[400px]:p-1
+        max-[375px]:p-1
+        max-[370px]:p-1"
                 >
                   <option>Cricket Catch Pro</option>
                   <option>Cricket Powerplay</option>
@@ -599,8 +584,7 @@ const ProfilePage: React.FC = () => {
                   <option>Drop The Number</option>
                   <option>Snake Color Break</option>
                 </select>
-                <div className="absolute top-[-19%] left-[44%]  max-[370px]:top-[-30%] max-[370px]:right-[20px] flex items-center justify-center h-full pointer-events-none
-              ">
+                <div className="absolute top-[-17.5%] left-[21vw]  max-[370px]:top-[-30%] max-[370px]:right-[20px] flex items-center justify-center h-full pointer-events-none">
                   <svg
                     width="12"
                     height="12"
@@ -613,10 +597,10 @@ const ProfilePage: React.FC = () => {
                 <div className="mt-7 relative left-[6%]">
                   <h3
                     className="text-sm text-[#A3A3A3] relative
-                  max-[468px]:text-sm max-[468px]:top-[24px]
-                  max-[400px]:text-xs
-                  max-[375px]:text-xs max-[375px]:top-[20px]
-                  max-[370px]:text-xs max-[370px]:top-[7px]"
+          max-[468px]:text-sm max-[468px]:top-[24px]
+          max-[400px]:text-xs
+          max-[375px]:text-xs max-[375px]:top-[20px]
+          max-[370px]:text-xs max-[370px]:top-[7px]"
                   >
                     Highest Score
                   </h3>
@@ -627,8 +611,8 @@ const ProfilePage: React.FC = () => {
                   </p>
                   <div
                     className="w-[35vw] h-[55px] rounded-2xl max-[468px]:top-[55px] bg-[#141414] absolute top-[30px]
-                  max-[370px]:top-[34px] 
-                  max-[400px]:top-[44px]"
+          max-[370px]:top-[34px] 
+          max-[400px]:top-[44px]"
                   >
                     <p className="absolute top-[7px] font-light italic text-sm left-[18px]">
                       Your Score
@@ -641,9 +625,9 @@ const ProfilePage: React.FC = () => {
               </div>
               <div
                 className="w-[210px] h-[140px] relative top-[-90%] left-[40px] p-4 text-center rounded-3xl
-                    max-[370px]:top-[-60px]
-                    max-[370px]:w-[200px]
-                    max-[400px]:w-[200px]"
+          max-[370px]:top-[-60px]
+          max-[370px]:w-[200px]
+          max-[400px]:w-[200px]"
               >
                 <img
                   src="/d1.svg"
@@ -654,60 +638,61 @@ const ProfilePage: React.FC = () => {
                   Color ship shooter
                 </p>
               </div>
-              
+
               <div
-                    className="p-4 w-[210px] h-[140px] left-[40px] relative top-[-90%] text-center rounded-3xl
-                    max-[370px]:top-[-60px]
-                    max-[370px]:w-[200px]
-                    max-[400px]:w-[200px]"
-                  >
-                    <img
-                      src="/d2.svg"
-                      alt="Image 2"
-                      className="w-full h-full object-cover rounded-3xl"
-                    />
-                    <p className="relative text-lg font-normal top-[-42px] left-[40px] text-[#FEA50D]">
-                      48
-                    </p>
-                    <p className="absolute text-sm font-normal top-[63%] right-[14%] text-[#FEA50D]">
-                      HR
-                    </p>
-                  </div>
-                  
-                  <div
-                    className="p-4 w-[210px] h-[140px] left-[300px] absolute top-[17%] rounded-3xl text-center
-                    max-[370px]:top-[-60px]
-                    max-[370px]:w-[200px]
-                    max-[400px]:w-[200px]
-                    max-[378px]:mt-[-30px]"
-                  >
-                    <img
-                      src="/d3.svg"
-                      alt="Image 3"
-                      className="w-full h-full object-cover rounded-3xl"
-                    />
-                    <p className="relative text-lg font-normal top-[-40px] left-[40px] text-[#FEA50D]">
-                      -98 IGNIx
-                    </p>
-                  </div>
-                  <div
-                    className="p-4 w-[210px] h-[140px] left-[300px] absolute top-[56.5%] text-center rounded-3xl
-                    max-[370px]:top-[-60px]
-                    max-[370px]:w-[200px]
-                    max-[400px]:w-[200px]
-                    max-[378px]:mt-[-30px]"
-                  >
-                    <img
-                      src="/d4.svg"
-                      alt="Image 4"
-                      className="w-full h-full object-cover rounded-3xl"
-                    />
-                    <p className="relative text-lg font-normal top-[-43px] left-[5px] text-[#FEA50D]">
-                      Color ship shooter
-                    </p>
-                  </div>
+                className="p-4 w-[210px] h-[140px] left-[40px] relative top-[-90%] text-center rounded-3xl
+          max-[370px]:top-[-60px]
+          max-[370px]:w-[200px]
+          max-[400px]:w-[200px]"
+              >
+                <img
+                  src="/d2.svg"
+                  alt="Image 2"
+                  className="w-full h-full object-cover rounded-3xl"
+                />
+                <p className="relative text-lg font-normal top-[-42px] left-[40px] text-[#FEA50D]">
+                  48
+                </p>
+                <p className="absolute text-sm font-normal top-[63%] right-[14%] text-[#FEA50D]">
+                  HR
+                </p>
+              </div>
+
+              <div
+                className="p-4 w-[210px] h-[140px] left-[300px] absolute top-[17%] rounded-3xl text-center min-[1399px]:top-[9%]
+          max-[370px]:top-[-60px]
+          max-[370px]:w-[200px]
+          max-[400px]:w-[200px]
+          max-[378px]:mt-[-30px]"
+              >
+                <img
+                  src="/d3.svg"
+                  alt="Image 3"
+                  className="w-full h-full object-cover rounded-3xl"
+                />
+                <p className="relative text-lg font-normal top-[-40px] left-[40px] text-[#FEA50D]">
+                  -98 IGNIx
+                </p>
+              </div>
+              <div
+                className="p-4 w-[210px] h-[140px] left-[300px] absolute top-[56.5%] text-center rounded-3xl min-[1399px]:top-[37%]
+          max-[370px]:top-[-60px]
+          max-[370px]:w-[200px]
+          max-[400px]:w-[200px]
+          max-[378px]:mt-[-30px]"
+              >
+                <img
+                  src="/d4.svg"
+                  alt="Image 4"
+                  className="w-full h-full object-cover rounded-3xl"
+                />
+                <p className="relative text-lg font-normal top-[-43px] left-[5px] text-[#FEA50D]">
+                  Color ship shooter
+                </p>
+              </div>
             </motion.div>
           </motion.div>
+
         </div>
       </div>
     </div>
