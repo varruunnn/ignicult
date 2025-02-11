@@ -362,9 +362,11 @@ const Leaderboard: React.FC = () => {
         <div className="bg-[#92FF00] w-full mt-[-6px] left-[0px] relative h-[2px]"></div>
 
         <div className="mx-0 mt-[20px] mb-8  rounded-3xl ">
-          <div className="flex gap-[80px] p-[5px] left-[30%] relative items-center  mb-4">
+          <motion.div className="flex gap-[80px] p-[5px] left-[30%] relative items-center  mb-4"
+
+          >
             {["Daily", "Weekly", "Monthly", "Overall"].map((period) => (
-              <a
+              <motion.a
                 key={period}
                 className={`relative px-4 py-2 mr-[-9px] text-md font-semibold cursor-pointer ${timeframe === period ? "text-white" : "text-gray-500"
                   }`}
@@ -373,15 +375,20 @@ const Leaderboard: React.FC = () => {
                     period as "Daily" | "Weekly" | "Monthly" | "Overall"
                   )
                 }
+                whileHover={
+                  {
+                    scale: 1.2
+                  }
+                }
               >
                 {period}
                 <span
                   className={`absolute bottom-0 left-0 h-[2px] bg-[#92FF00] transition-all duration-300 ease-in-out ${timeframe === period ? "w-full" : "w-0"
                     }`}
                 />
-              </a>
+              </motion.a>
             ))}
-          </div>
+          </motion.div>
 
           {currentPage === 0 && (
             <div className="flex justify-center items-end mt-[30px] gap-0 mb-4">
