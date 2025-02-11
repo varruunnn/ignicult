@@ -259,7 +259,6 @@ const PremiumTournaments = () => {
           <div className="flex justify-center mt-[20px] left-[16%] relative items-center w-[68vw] h-full">
             <div
               className="border border-[#565656] bg-[#3E3E3E] rounded-lg w-[80%] max-w-[90%] overflow-hidden"
-              {...swipeHandlers}
             >
               <div className="grid grid-cols-3 divide-x divide-gray-600 bg-[#3E3E3E] text-[#EE49FD] font-bold text-center py-3">
                 <span className="px-2">Rank</span>

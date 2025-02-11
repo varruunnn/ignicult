@@ -462,7 +462,7 @@ const Leaderboard: React.FC = () => {
             </div>
           )}
 
-          <div className="p-5 mt-[-20px]" {...swipeHandlers}>
+          <div className="p-5 mt-[-20px]">
             <table className="w-[65vw] left-[px] rounded-2xl mx-auto relative border-collapse bg-[#3E3E3E] text-center">
               <thead>
                 <tr>
