@@ -245,22 +245,26 @@ const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen, setSidebarOpen }) => {
         {isPopupVisible && (
           <div
             onClick={closePopup}
-            className="fixed inset-0 z-[1000] flex items-center justify-center bg-black bg-opacity-50"
+            className="fixed inset-0 [perspective::1000px] [transform-style:preserve:3d] z-[1000] flex items-center justify-center bg-black bg-opacity-50"
           >
             <motion.div
               onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside the popup
-              initial={{ scale: 0.8, opacity: 0 }}
+              initial={{ scale: 0.1, opacity: 0  }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.3 }}
               className="bg-[#141414] p-6 rounded-lg w-[60vw] h-[30vh] relative"
             >
-              <button
+              <motion.button
+                whileHover={{
+                  scale: 1.2,
+                }}
+                
                 onClick={closePopup}
                 className="absolute top-2 right-2 text-white text-2xl"
                 aria-label="Close Menu Popup"
               >
                 &times;
-              </button>
+              </motion.button>
               <ul className="mt-4 flex flex-wrap justify-center gap-4">
                 {routes.map((route) => {
                   const isPremium = route.name === "Premium Tournaments";
@@ -270,7 +274,10 @@ const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen, setSidebarOpen }) => {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2 }}
-                        whileHover={{ scale: 1.05 }}
+                        whileHover={{ scale: 1.05 ,rotateX:20,rotateY:-10,boxShadow: isPremium ? "0 20px 50px #F94EA6" : "0 20px 50px #82E300" }}
+                        style={{
+                          translateZ:100,
+                        }}
                         className={`${isPremium
                             ? "border border-[#F94EA6]"
                             : "border border-[#82E300]"
@@ -281,7 +288,10 @@ const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen, setSidebarOpen }) => {
                             navigate(route.path);
                             closePopup();
                           }}
-                          whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
+
+                          whileHover={{ scale: 1.05, transition: { duration: 0.2 },
+                          boxShadow: isPremium ? "0 20px 50px #F94EA6" : "0 20px 50px #82E300"
+                        }}
                           whileTap={{ scale: 0.95 }}
                           className="flex items-center p-2 hover:bg-[#282828] transition-colors"
                         >
@@ -296,7 +306,7 @@ const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen, setSidebarOpen }) => {
                                 ? "bg-gradient-to-r from-[#EE49FD] to-[#F94EA6] bg-clip-text text-transparent"
                                 : "text-white"
                               }`}
-                            whileHover={{ scale: 1.05 }}
+                            whileHover={{ scale: 1.05}}
                           >
                             {route.name}
                           </motion.span>
