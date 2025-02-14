@@ -5,7 +5,6 @@ import Navbar from "./components/Navbar/Navbar";
 import Particle from "./components/Background/Particle";
 import ErrorPage from "./components/ErrorPage/ErrorPage";
 import LoadingSpinner from "./components/LoadingSpinner/LoadingSpinner"; 
-
 const LandingPage = lazy(() => import("./components/LandingPage/LandingPage"));
 const Support = lazy(() => import("./components/Support/Support"));
 const RewardsPage = lazy(() => import("./components/RewardsPage/RewardsPage"));
@@ -15,6 +14,7 @@ const Leaderboard = lazy(() => import("./components/Leaderboard/Leaderboard"));
 const Games = lazy(() => import("./components/Games/Games"));
 const Tournaments = lazy(() => import("./components/Tournaments/Tournaments"));
 const Pt = lazy(() => import("./components/Pt/Pt"));
+
 
 export function App() {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
