@@ -246,7 +246,7 @@ export default function Tournaments() {
           className="text-center mt-20"
         >
           <motion.h1
-            className=" text-white text-lg font-semibold text-left ml-[15px] text-shadow-glow"
+            className=" text-white text-xl font-semibold text-left ml-[15px] text-shadow-glow"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2, duration: 0.6 }}
@@ -254,7 +254,7 @@ export default function Tournaments() {
             Monthly Tournaments
           </motion.h1>
 
-          <div className="mt-4 flex absolute top-[12%] right-[1%] justify-center items-center">
+          <div className="mt-4 flex absolute top-[9%] right-[1%] justify-center items-center">
             <motion.select
               className="px-4 py-2 w-[20vw] rounded-full h-[8vh] bg-gray-900 appearance-none pl-4 pr-8 text-white border-[1px] border-[#82E300] focus:outline-none hover:border-[#6ac100] transition-all"
               value={selectedGame}

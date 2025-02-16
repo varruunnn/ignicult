@@ -322,7 +322,7 @@ const Leaderboard: React.FC = () => {
 
       <div className="min-h-screen relative max-[1023px]:hidden w-full mt-[93px] text-white overflow-x-hidden">
         <div className="w-full py-8 relative px-4 flex flex-col items-center">
-          <h2 className="text-white text-2xl absolute top-[39%] left-[3%] font-semibold mb-4 text-center">
+          <h2 className="text-white text-2xl absolute top-[37%] left-[3%] font-semibold mb-4 text-center">
             Leaderboard
           </h2>
           <select

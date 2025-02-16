@@ -176,10 +176,10 @@ const PremiumTournaments = () => {
 
 
       <div className="min-h-screen w-full mt-[120px] max-[1023px]:hidden text-white overflow-y-auto overflow-x-hidden p-4 pb-20">
-        <h2 className="text-white text-lg font-semibold mb-4 text-left top-[17%] absolute">
+        <h2 className="text-white text-xl font-semibold mb-4 text-left top-[17%] absolute">
           Premium Tournaments
         </h2>
-        <div className="flex items-center bg-black border-[1px] border-[#F94EA6] mt-5 py-2 right-[-36%] relative rounded-full h-[43px] w-[20vw] max-w-md mx-auto">
+        <div className="flex items-center bg-black border-[1px] border-[#F94EA6] mt-5 py-2 right-[-36%] relative rounded-full h-[43px] w-[20vw] top-[-8px] max-w-md mx-auto">
           <select
             className="flex-grow bg-transparent appearance-none text-[#F94EA6] outline-none p-2 rounded-md"
             defaultValue="Cricket Catch Pro"
@@ -194,7 +194,7 @@ const PremiumTournaments = () => {
             <option value="Tournament 2">Tournament 2</option>
           </select>
         </div>
-        <button className="ml-2 w-[42px] h-[42px] flex justify-center items-center right-[10px] top-[156px] absolute rounded-full bg-gradient-to-r from-[#EE49FD] via-[#F94EA6] to-[#C253F5]">
+        <button className="ml-2 w-[42px] h-[42px] flex justify-center items-center right-[10px] top-[148px] absolute rounded-full bg-gradient-to-r from-[#EE49FD] via-[#F94EA6] to-[#C253F5]">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"

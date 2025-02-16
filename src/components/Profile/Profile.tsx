@@ -659,7 +659,7 @@ const ProfilePage: React.FC = () => {
               </div>
 
               <div
-                className="p-4 w-[210px] h-[140px] left-[300px] absolute top-[17%] rounded-3xl text-center min-[1399px]:top-[9%]
+                className="p-4 w-[210px] h-[140px] left-[300px] absolute top-[20%] rounded-3xl text-center min-[1399px]:top-[9%]
           max-[370px]:top-[-60px]
           max-[370px]:w-[200px]
           max-[400px]:w-[200px]
@@ -675,7 +675,7 @@ const ProfilePage: React.FC = () => {
                 </p>
               </div>
               <div
-                className="p-4 w-[210px] h-[140px] left-[300px] absolute top-[56.5%] text-center rounded-3xl min-[1399px]:top-[37%]
+                className="p-4 w-[210px] h-[140px] left-[300px] absolute top-[61.5%] text-center rounded-3xl min-[1399px]:top-[37%]
           max-[370px]:top-[-60px]
           max-[370px]:w-[200px]
           max-[400px]:w-[200px]
