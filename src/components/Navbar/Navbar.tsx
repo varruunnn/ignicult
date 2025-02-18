@@ -160,9 +160,9 @@ const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen, setSidebarOpen }) => {
           transition={{ duration: 0.5 }}
           className="fixed top-0 left-0 right-0 backdrop-blur-sm flex justify-between items-center px-6 py-4 h-[131px] max-[398px]:z-10 z-50 shadow-md min-[1024px]:h-[100px]"
         >
-          <div className="absolute min-[2559px]:h-[5vh] min-[2559px]:w-[89%] min-[1339px]:h-[10vh] w-[95%] h-[15vh] min-[1440px]:w-[90%] min-[1440px]:left-[10%]">
+          <div className="absolute   min-[1339px]:w-[90vw] min-[1339px]:left-[10%]  min-[2559px]:h-[5vh] min-[2559px]:w-[89%] min-[1339px]:h-[10vh] w-[95%] h-[15vh]">
             <motion.button
-              className="absolute max-[1023px]:hidden cursor-pointer w-[60px] h-[40px] top-[26%] z-50 left-[28%]"
+              className="absolute min-[1339px]:left-[20%] max-[1023px]:hidden cursor-pointer w-[60px] h-[40px] top-[26%] z-50 left-[28%]"
               onClick={() => {
                 navigate("/home");
               }}
@@ -182,7 +182,7 @@ const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen, setSidebarOpen }) => {
               </h3>
             </motion.button>
             <motion.button
-              className="absolute max-[1023px]:hidden cursor-pointer w-[200px] h-[4px] top-[9%] z-50 left-[59%]"
+              className="absolute  max-[1023px]:hidden cursor-pointer w-[200px] h-[4px] top-[9%] z-50 left-[59%]"
               onClick={() => {
                 navigate("/games");
               }}
@@ -198,10 +198,10 @@ const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen, setSidebarOpen }) => {
                 alt=""
               />
             </motion.button>
-            <div className="absolute max-[1023px]:hidden min-[1024px]:top-[0px] z-100">
+            <div className="absolute  max-[1023px]:hidden min-[1024px]:top-[0px] z-100">
               <img
                 src="/vector2.svg"
-                className="max-[1023px]:hidden min-[1399px]:w-[950px] fixed min-[2559px]:left-[31%] min-[2559px]:w-[40%] left-[20%] top-[0] z-10 min-[1399px]:left-[27%] rounded-lg"
+                className="max-[1023px]:hidden min-[1399px]:w-[950px] fixed min-[2559px]:left-[31%] min-[2559px]:w-[40%] left-[20%] top-[0] z-10 min-[1399px]:left-[18%] rounded-lg"
                 alt="desktopnav"
               />
             </div>
@@ -238,7 +238,7 @@ const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen, setSidebarOpen }) => {
             initial={{ scale: 0.95, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.4 }}
-            className="pointer-events-auto relative z-[60]"
+            className="pointer-events-auto relative   z-[60]"
             whileHover={
               {
                 scale:0.9

@@ -397,13 +397,13 @@ const ProfilePage: React.FC = () => {
 
 
 
-      <div className="p-4 py-20 mt-[170px] min-[1339px]:mt-[280px] min-[1399px]:w-[1440px] text-white overflow-x-hidden max-[1023px]:hidden
+      <div className="p-4 py-20 mt-[170px] min-[1339px]:mt-[280px]  text-white overflow-x-hidden max-[1023px]:hidden
     
     "
       >
 
-        <div className="bg-[#92FF00] w-full mt-[10px] left-[0px] relative h-[2px] min-[1399px]:w-[1440px] min-[1399px]:left-[6%]"></div>
-        <div className=" absolute w-full max-w-4xl mx-auto  p-4">
+        <div className="bg-[#92FF00] w-full min-[1339px]:w-[1339px] min-[1339px]:left-[21%] z-50 absolute mt-[10px] left-[0px] h-[2px]"></div>
+        <div className=" absolute w-full max-w-4xl  mx-auto  p-4">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -414,7 +414,7 @@ const ProfilePage: React.FC = () => {
             <motion.img
               src="/profilee.svg"
               alt="Profile"
-              className="w-[80px] h-[80px] min-[1399px]:top-[-29%] left-[4%] top-[-33%] absolute rounded-full border-[1px] border-[#82E300]
+              className="w-[80px] h-[80px] min-[1339px]:left-[35%] min-[1399px]:top-[-29%] left-[4%] top-[-33%] absolute rounded-full border-[1px] border-[#82E300]
         
             "
               initial={{ scale: 0, rotate: -90 }}
@@ -427,13 +427,13 @@ const ProfilePage: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
               className="text-white text-lg font-semibold text-center text-shadow-glow mb-8
-        top-[-30%] left-[17.5%] absolute min-[1399px]:top-[-29%]
+        top-[-30%] left-[17.5%] absolute min-[1339px]:left-[50%] min-[1399px]:top-[-29%]
         "
             >
               Profile
             </motion.h1>
             <motion.h1
-              className="text-sm absolute text-[#858585] left-[17.6%] top-[-25%] font-bold"
+              className="text-sm absolute text-[#858585] min-[1339px]:left-[50%] left-[17.6%] top-[-25%] font-bold"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.5 }}
@@ -441,7 +441,7 @@ const ProfilePage: React.FC = () => {
               Wallet Address
             </motion.h1>
             <motion.p
-              className="text-md absolute text-[#CACACA] left-[17.6%] top-[-22%]"
+              className="text-md absolute min-[1339px]:left-[50%] text-[#CACACA] left-[17.6%] top-[-22%]"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.35, duration: 0.5 }}
@@ -452,7 +452,7 @@ const ProfilePage: React.FC = () => {
 
 
             <motion.div
-              className="flex flex-col relative gap-4 h-[150px] w-full left-[17px] 
+              className="flex flex-col relative gap-4 min-[1339px]:left-[19.5%]  h-[150px] w-full left-[17px] 
       max-[468px]:left-[15px]
       max-[400px]:left-[10px]
       max-[375px]:left-[5px]
@@ -462,7 +462,7 @@ const ProfilePage: React.FC = () => {
               transition={{ delay: 0.5, duration: 0.5 }}
             >
               <div
-                className="flex items-center justify-between relative w-[38vw] h-[69px] bg-[#1E1E1E] border-2 border-[#82E300] rounded-xl rounded-r-3xl top-[-51.1%] left-[10%] min-[1399px]:left-[20%]
+                className="flex items-center justify-between  relative w-[38vw] h-[69px] bg-[#1E1E1E] border-2 border-[#82E300] rounded-xl rounded-r-3xl top-[-51.1%] left-[10%] min-[1399px]:left-[20%]
         max-[468px]:w-[74vw] max-[468px]:h-[97px]
         max-[400px]:w-[74vw] max-[400px]:h-[90px]
         max-[375px]:w-[65vw] max-[375px]:h-[85px]
@@ -521,7 +521,7 @@ const ProfilePage: React.FC = () => {
             </motion.div>
 
             <motion.div
-              className="mt-[-100px] relative w-full h-[55vh] left-[-2%] min-[1339px]:left-[10%]  min-[1339px]:mt-[-10px]
+              className="mt-[-100px] relative w-full h-[55vh] min-[1339px]:absolute left-[-2%] min-[1339px]:left-[26%]  min-[1339px]:mt-[-10px]
       max-[468px]:left-[20px]
       max-[400px]:left-[10px]
       max-[370px]:left-[3px]"
@@ -584,7 +584,7 @@ const ProfilePage: React.FC = () => {
                   <option>Drop The Number</option>
                   <option>Snake Color Break</option>
                 </select>
-                <div className="absolute top-[-17.5%] left-[21vw]  max-[370px]:top-[-30%] max-[370px]:right-[20px] flex items-center justify-center h-full pointer-events-none">
+                <div className="absolute top-[-17.5%] left-[21vw]  max-[370px]:top-[-30%] max-[370px]:right-[20px] flex items-center justify-center h-full min-[1339px]:left-[50%] min-[1339px]:top-[-75px] pointer-events-none">
                   <svg
                     width="12"
                     height="12"
@@ -659,7 +659,7 @@ const ProfilePage: React.FC = () => {
               </div>
 
               <div
-                className="p-4 w-[210px] h-[140px] left-[300px] absolute top-[20%] rounded-3xl text-center min-[1399px]:top-[9%]
+                className="p-4 w-[210px] h-[140px] left-[300px] absolute top-[20%] rounded-3xl text-center min-[1399px]:top-[15%] 
           max-[370px]:top-[-60px]
           max-[370px]:w-[200px]
           max-[400px]:w-[200px]
@@ -675,7 +675,7 @@ const ProfilePage: React.FC = () => {
                 </p>
               </div>
               <div
-                className="p-4 w-[210px] h-[140px] left-[300px] absolute top-[61.5%] text-center rounded-3xl min-[1399px]:top-[37%]
+                className="p-4 w-[210px] h-[140px]  left-[300px] absolute top-[61.5%] text-center rounded-3xl min-[1399px]:top-[47%]
           max-[370px]:top-[-60px]
           max-[370px]:w-[200px]
           max-[400px]:w-[200px]
@@ -700,16 +700,3 @@ const ProfilePage: React.FC = () => {
 };
 
 export default ProfilePage;
-/*
-                <div
-                  className="mx-auto max-w-4xl relative left-[-16px] grid grid-cols-2 w-[106%] gap-2 p-4 mt-[70px]
-                    max-[370px]:mt-[110px]
-                    max-[370px]:w-full
-                    max-[370px]:h-auto
-                    max-[370px]:gap-4
-                    max-[370px]:left-[-22px]"
-                >
-
-
-
-                  */
