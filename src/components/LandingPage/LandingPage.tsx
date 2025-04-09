@@ -167,26 +167,29 @@ const LandingPage = () => {
                   >
                     Explore Games
                   </Button>
-                  <Button
-                    onClick={handleConnectWallet}
-                    className="text-base py-2 px-4 bg-[#2A2A2A] border-[#3A3A3A]"
-                  >
+                  <Button onClick={handleConnectWallet} className="text-base">
                     Sign In
                   </Button>
                 </div>
                 <AnimatePresence>
                   {showConnect && (
-                    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-                      <div className="bg-black rounded-lg p-6 relative max-w-md w-full mx-4">
-                        <button
-                          onClick={handleCloseModal}
-                          className="absolute top-2 right-2 text-gray-500 hover:text-gray-800 text-xl"
-                        >
-                          &times;
-                        </button>
+                    <motion.div
+                      className="fixed mt-[70px] inset-0 flex items-center justify-center z-50"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      onClick={handleCloseModal}
+                    >
+                      <motion.div
+                        className="rounded-2xl p-6 relative max-w-md mx-4"
+                        initial={{ scale: 0.95 }}
+                        animate={{ scale: 1 }}
+                        exit={{ scale: 0.95 }}
+                        onClick={(e) => e.stopPropagation()}
+                      >
                         <ConnectEmbed client={client} wallets={wallets} />
-                      </div>
-                    </div>
+                      </motion.div>
+                    </motion.div>
                   )}
                 </AnimatePresence>
               </div>

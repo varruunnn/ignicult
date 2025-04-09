@@ -235,14 +235,14 @@ const CouponCard = ({ coupon }: { coupon: Coupon }) => {
     >
       <motion.div
         className="relative w-full h-48 cursor-pointer"
-        initial={false}
-        animate={{ rotateY: isFlipped ? 180 : 0 }}
-        transition={{
-          duration: 0.6,
-          type: "spring",
-          stiffness: 300,
-          damping: 20,
-        }}
+        // initial={false}
+        // animate={{ rotateY: isFlipped ? 180 : 0 }}
+        // transition={{
+        //   duration: 0.6,
+        //   type: "spring",
+        //   stiffness: 300,
+        //   damping: 20,
+        // }}
         style={{ transformStyle: "preserve-3d" }}
       >
         <motion.div
