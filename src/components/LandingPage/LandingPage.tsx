@@ -132,9 +132,9 @@ const LandingPage = () => {
           </div>
           <motion.div
             className="absolute inset-0 z-20 flex items-center justify-center"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            // initial={{ opacity: 0, y: 50 }}
+            // animate={{ opacity: 1, y: 0 }}
+            // transition={{ duration: 0.6 }}
           >
             <div className="container mx-auto px-6 text-center">
               <div className="max-w-4xl mx-auto">

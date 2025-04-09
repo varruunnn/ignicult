@@ -41,9 +41,9 @@ const Games = () => {
     >
       <div className="max-w-7xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          // initial={{ opacity: 0, y: -20 }}
+          // animate={{ opacity: 1, y: 0 }}
+          // transition={{ duration: 0.8 }}
           className="text-center mb-12"
         >
           <motion.span className=" text-5xl font-bold font-rubik text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-yellow-500 to-red-600 inline-block">

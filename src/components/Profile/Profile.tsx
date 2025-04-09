@@ -354,9 +354,9 @@ const Profile = () => {
       <div className="pt-24 pb-12">
         <motion.div
           className="max-w-6xl mx-auto px-6"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          // initial={{ opacity: 0, y: 50 }}
+          // animate={{ opacity: 1, y: 0 }}
+          // transition={{ duration: 0.6 }}
         >
           <div className="relative bg-gradient-to-b from-[#1A1A1A] to-[#0D0D0D] rounded-3xl p-8 border border-gray-800 shadow-2xl overflow-hidden">
             <div className="absolute top-0 right-0 w-40 h-40 bg-yellow-500 rounded-full filter blur-3xl opacity-10"></div>
