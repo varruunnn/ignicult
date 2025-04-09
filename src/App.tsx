@@ -3,14 +3,14 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import ErrorPage from "./components/ErrorPage/ErrorPage";
 import LoadingScreen from './LoadingScreen';
-
-
-const LandingPage = lazy(() => import("./components/LandingPage/LandingPage"));
+import LandingPage from './components/LandingPage/LandingPage';
+import Profile from './components/Profile/Profile';
+// const LandingPage = lazy(() => import("./components/LandingPage/LandingPage"));
 const Games = lazy(() => import("./components/Games/Games"));
 const RewardsPage = lazy(() => import("./components/RewardsPage/RewardsPage"));
 const Footer = lazy(() => import("./components/Footer/Footer"));
 const Leaderboard = lazy(() => import("./components/Leaderboard/Leaderboard"));
-const Profile = lazy(() => import("./components/Profile/Profile"));
+// const Profile = lazy(() => import("./components/Profile/Profile"));
 const Help = lazy(() => import("./components/Help/Help"));
 const Activity = lazy(() => import("./components/Activity/Activity"));
 const Tournaments = lazy(() => import("./components/Tournaments/Tournaments"));
