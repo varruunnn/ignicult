@@ -141,13 +141,13 @@ const LandingPage = () => {
                 <div>
                   <h1 className="text-4xl md:text-5xl font-extrabold mb-6 tracking-tight">
                     <span className="font-rubik text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-yellow-500 to-red-600 inline-block">
-                      Welcome to
-                      <img
+                      Welcome to <br /> IGNICULT
+                      {/* <img
                         src="./blackLOgo.svg"
                         alt="logo"
                         className="w-16 relative left-[50%] top-[11px] translate-x-[-50%]"
                         loading="eager"
-                      />
+                      /> */}
                     </span>
                   </h1>
                 </div>
