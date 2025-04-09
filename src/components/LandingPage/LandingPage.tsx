@@ -1,299 +1,339 @@
-import React from "react";
-import styled, { keyframes } from "styled-components";
-const LandingPage: React.FC = () => {
-  const glow = keyframes`
-  0%, 100% {
-    filter: drop-shadow(0 0 0px #92FF00);
-  }
-  50% {
-    filter: drop-shadow(0 0 15px #92FF00);
-  }
-`;
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+const TrendingGamesCarousel = React.lazy(
+  () => import("./TrendingGamesCarousel")
+);
+import { inAppWallet } from "thirdweb/wallets";
+import { client } from "../../client";
+import { ConnectEmbed } from "thirdweb/react";
+import { Trophy, Award, Star, Activity } from "lucide-react";
 
-  const GlowingSVG = styled.img`
-    max-width: 100%;
-    height: auto;
-    position: relative;
-    top: -22px;
-    right: 1px;
-    width: 390px;
-    height: 168px;
-
-    animation: ${glow} 2s infinite;
-  `;
-  const handleClick = () => {
-    alert("I am Glowing dv");
-  };
+const Button = ({
+  children,
+  primary = false,
+  onClick,
+  className = "",
+}: {
+  children: React.ReactNode;
+  primary?: boolean;
+  onClick?: () => void;
+  className?: string;
+}) => {
   return (
-    <div className=" overflow-x-hidden font-roboto text-white min-h-screen">
-      <section className="text-center min-[1023px]:hidden py-[100px] bg-gradient-to-r from-black-800 to-black-600 max-w-md mx-auto">
-        <div
-          className="mt-4  text-white p-4 shadow-lg relative"
-          style={{ maxWidth: "100%", height: "auto" }}
-        >
-          <GlowingSVG
-            onClick={handleClick}
-            src="/component41.svg"
-            alt="Trending Game"
-          />
-          <h1
-            className="absolute left-[51%] text-[#D9FFA6] font-semibold top-[75px]"
-            style={{
-              textShadow: `
-              -2px -2px 0 #000, 
-              2px -2px 0 #000,  
-              -2px 2px 0 #000, 
-              2px 2px 0 #000,   
-              0px -2px 0 #000,
-              0px 2px 0 #000, 
-              -2px 0px 0 #000, 
-              2px 0px 0 #000    
-            `,
-            }}
-          >
-            Trending Game
-          </h1>
-          <p className="absolute left-[49%] text-[#D9FFA6] font-semibold top-[93px]">
-            Drop The Number
-          </p>
-          <img
-            src="/rocket.png"
-            alt="rocket"
-            className="absolute max-[398px]:left-[55%] max-w-full h-auto"
-            style={{
-              top: "-3px",
-              right: "110px",
-              width: "88px",
-              height: "88px",
-            }}
-          />
-        </div>
-      </section>
-      <section className="mt-[-100px] lg:hidden relative px-6 max-w-md mx-auto">
-        <h2 className="text-center text-3xl  text-[#82E300] font-bold mb-16">
-          Welcome to Ignicult
-        </h2>
-        <div
-          className="grid gap-1
-        "
-        >
-          <div className="bg-[#363636] p-4 w-[308px] h-[136px] flex items-center text-left mx-auto">
-            <img
-              src="/fire.svg"
-              alt="Fire Icon"
-              className="w-[34px] h-[36px] mr-4"
-            />
-            <p className="">
-              Ignicult is a revolutionary hyper-casual gaming platform where you
-              can play, earn, and enjoy with both off-chain and on-chain
-              rewards!
-            </p>
-          </div>
-          <div className="bg-[#363636] p-4 w-[308px] h-[136px] flex items-center text-left mx-auto">
-            <img
-              src="/joystick.svg"
-              alt="Joystick Icon"
-              className="w-[34px] h-[36px] mr-4"
-            />
-            <p className="">
-              Discover a variety of exciting games that cater to all types of
-              players.
-            </p>
-          </div>
-          <div className="bg-[#363636] p-4 w-[308px] h-[136px] flex items-center text-left mx-auto">
-            <img
-              src="/trophy.svg"
-              alt="Trophy Icon"
-              className="w-[34px] h-[36px] mr-4"
-            />
-            <p className="">
-              Earn IGNix points for real-world rewards and use Cultix to unlock
-              on-chain benefits and ownership.
-            </p>
-          </div>
-          <div className="bg-[#363636] p-4 w-[308px] h-[136px] flex items-center text-left mx-auto">
-            <img
-              src="/Group.svg"
-              alt="Group Icon"
-              className="w-[34px] h-[36px] mr-4"
-            />
-            <p className="">
-              Create your profile and showcase your achievements to the
-              community.
-            </p>
-          </div>
-        </div>
-      </section>
-      <section className="max-[1023px]:hidden relative min-[1023px]:mt-[100px] px-6 max-w-[100%] mx-auto
-      
-      ">
-        <h2 className="text-center text-3xl text-[#82E300] font-bold mb-16">
-          Welcome to Ignicult
-        </h2>
-        <div className="relative overflow-hidden h-[150px]">
-          <div className="bg-[#363636] p-4 w-[200px] h-[126px] flex items-center absolute left-[10vw] top-0 text-left mx-auto
-          min-[1339px]:w-[260px] 
-          ">
-            <img
-              src="/fire.svg"
-              alt="Fire Icon"
-              className="w-[34px] h-[36px] mr-4"
-            />
-            <p className="text-[11px] min-[1339px]:text-[13.6px]">
-              Ignicult is a revolutionary hyper-casual gaming platform where you
-              can play, earn, and enjoy with both off-chain and on-chain rewards!
-            </p>
-          </div>
-          <div className="bg-[#363636] p-4 w-[200px] h-[126px] flex items-center absolute left-[30vw] top-0 text-left mx-auto min-[1339px]:w-[260px] ">
-            <img
-              src="/joystick.svg"
-              alt="Joystick Icon"
-              className="w-[34px] h-[36px] mr-4"
-            />
-            <p className="text-[14px] min-[1339px]:text-[15px]">
-              Discover a variety of exciting games that cater to all types of
-              players.
-            </p>
-          </div>
-          <div className="bg-[#363636] p-4 w-[200px] h-[126px] flex items-center absolute left-[50vw] top-0 text-left mx-auto min-[1339px]:w-[260px] ">
-            <img
-              src="/trophy.svg"
-              alt="Trophy Icon"
-              className="w-[34px] h-[36px] mr-4"
-            />
-            <p className="text-[12px] min-[1339px]:text-[15px]">
-              Earn IGNix points for real-world rewards and use Cultix to unlock
-              on-chain benefits and ownership.
-            </p>
-          </div>
-          <div className="bg-[#363636] p-4 w-[200px] h-[126px] flex items-center absolute left-[71vw] top-0 text-left mx-auto min-[1339px]:w-[260px] ">
-            <img
-              src="/Group.svg"
-              alt="Group Icon"
-              className="w-[34px] h-[36px] mr-4"
-            />
-            <p className="text-[14px] min-[1339px]:text-[15px] ">
-              Create your profile and showcase your achievements to the
-              community.
-            </p>
-          </div>
-        </div>
-      </section>
+    <button
+      className={`px-6 py-3 rounded-xl font-medium transition-colors ${
+        primary
+          ? "bg-gradient-to-r from-red-600 to-amber-500 text-white shadow-lg shadow-amber-900/20"
+          : "border border-[#FFB000] bg-[#1D1D1D] hover:bg-gray-800"
+      } ${className}`}
+      onClick={onClick}
+    >
+      {children}
+    </button>
+  );
+};
 
-      <section className="py-6 px-6 lg:hidden relative max-w-md mx-auto mb-24">
-        <h2 className="text-center text-3xl text-[#82E300] font-bold mb-4">
-          Why choose ignicult?
-        </h2>
-        <div className="flex flex-wrap justify-center gap-1 p-4 text-white">
-          {[
-            {
-              img: "/rockett.svg",
-              title: "Fast",
-              subtitle: "and seamless",
-              desc: "gaming experience with web3 integration",
-            },
-            {
-              img: "/money.svg",
-              title: "Earn",
-              subtitle: "points",
-              desc: "for real-world rewards and use cultix to unlock on-chain benefits and ownership",
-            },
-            {
-              img: "/trust.svg",
-              title: "Secure",
-              subtitle: "and transparent",
-              desc: "transactions powered by blockchain technology",
-            },
-            {
-              img: "/earth.svg",
-              title: "Join",
-              subtitle: "global Community",
-              desc: "of gamers and blockchain enthusiasts",
-            },
-          ].map((item, index) => (
-            <div
-              key={index}
-              className="bg-[#363636] w-[308px] h-[136px]  flex items-center p-4 text-left mx-auto"
-            >
-              <img src={item.img} alt={item.title} className="h-12 w-12 mr-4" />
-              <div>
-                <h3 className="text-[#82E300] text-lg font-bold">
-                  {item.title}
-                </h3>
-                <h3
-                  className="text-white text-lg mt-[-5px] font-bold tracking-tight"
-                  style={{ whiteSpace: "nowrap" }}
-                >
-                  {item.subtitle}
-                </h3>
-                <p className="text-sm leading-tight">{item.desc}</p>
+const wallets = [
+  inAppWallet({
+    auth: {
+      options: [
+        "google",
+        "x",
+        "apple",
+        "discord",
+        "facebook",
+        "farcaster",
+        "telegram",
+        "coinbase",
+        "line",
+        "email",
+        "phone",
+        "passkey",
+        "guest",
+      ],
+    },
+  }),
+];
+
+const LandingPage = () => {
+  const [showConnect, setShowConnect] = useState(false);
+  const navigate = useNavigate();
+
+  const handleConnectWallet = () => {
+    setShowConnect(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowConnect(false);
+  };
+
+  const features = [
+    {
+      icon: <Trophy className="w-8 h-8 text-yellow-500" />,
+      title: "Competitive Tournaments",
+      description:
+        "Join high-stakes tournaments with players from around the world and compete for massive prizes.",
+    },
+    {
+      icon: <Award className="w-8 h-8 text-yellow-500" />,
+      title: "Exclusive Rewards",
+      description:
+        "Earn unique rewards, achievements, and digital collectibles as you play and win.",
+    },
+    {
+      icon: <Star className="w-8 h-8 text-yellow-500" />,
+      title: "Premium Experiences",
+      description:
+        "Access VIP tournaments, special events, and customized gaming experiences.",
+    },
+    {
+      icon: <Activity className="w-8 h-8 text-yellow-500" />,
+      title: "Real-time Statistics",
+      description:
+        "Track your performance with detailed analytics and see how you rank against global players.",
+    },
+  ];
+
+  const trendingGames = [
+    {
+      title: "catch Pro",
+      imageUrl: "./game1.jpg",
+      numberofplayer: 124500,
+    },
+    {
+      title: "color ship",
+      imageUrl: "./game2.jpg",
+      numberofplayer: 98700,
+    },
+    {
+      title: "cricket",
+      imageUrl: "./game3.jpg",
+      numberofplayer: 85300,
+    },
+    {
+      title: "jumping jack",
+      imageUrl: "./game4.jpg",
+      numberofplayer: 65800,
+    },
+    {
+      title: "drop the number",
+      imageUrl: "./game5.jpg",
+      numberofplayer: 65800,
+    },
+  ];
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-[#1D1D1D] to-[#0D0D0D] text-white">
+      <main>
+        <section className="relative">
+          <div className="relative h-[80vh] overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-b from-[#1D1D1D]/90 via-[#0D0D0D] to-[#151515]"></div>
+          </div>
+          <motion.div
+            className="absolute inset-0 z-20 flex items-center justify-center"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="container mx-auto px-6 text-center">
+              <div className="max-w-4xl mx-auto">
+                <div>
+                  <h1 className="text-4xl md:text-5xl font-extrabold mb-6 tracking-tight">
+                    <span className="font-rubik text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-yellow-500 to-red-600 inline-block">
+                      Welcome to
+                      <img
+                        src="./blackLOgo.svg"
+                        alt="logo"
+                        className="w-16 relative left-[50%] top-[11px] translate-x-[-50%]"
+                        loading="eager"
+                      />
+                    </span>
+                  </h1>
+                </div>
+
+                <p className="text-xl md:text-xl text-gray-300 mb-12 leading-relaxed">
+                  The ultimate competitive gaming platform for{" "}
+                  <span className="text-yellow-400">serious players</span>
+                </p>
+
+                <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                  <Button primary className="text-base py-2 px-4">
+                    Play Now
+                  </Button>
+                  <Button
+                    onClick={() => navigate("/games")}
+                    className="text-base py-2 px-4"
+                  >
+                    Explore Games
+                  </Button>
+                  <Button
+                    onClick={handleConnectWallet}
+                    className="text-base py-2 px-4 bg-[#2A2A2A] border-[#3A3A3A]"
+                  >
+                    Sign In
+                  </Button>
+                </div>
+                <AnimatePresence>
+                  {showConnect && (
+                    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                      <div className="bg-black rounded-lg p-6 relative max-w-md w-full mx-4">
+                        <button
+                          onClick={handleCloseModal}
+                          className="absolute top-2 right-2 text-gray-500 hover:text-gray-800 text-xl"
+                        >
+                          &times;
+                        </button>
+                        <ConnectEmbed client={client} wallets={wallets} />
+                      </div>
+                    </div>
+                  )}
+                </AnimatePresence>
               </div>
             </div>
-          ))}
-        </div>
-      </section>
-      <section className="py-6 px-6 max-[1023px]:hidden mt-[150px] relative max-w-[100%] mx-auto mb-24  min-[1339px]:mt-[40px]">
-        <h2 className="text-center text-3xl text-[#82E300] font-bold mb-16">
-          Why choose ignicult?
-        </h2>
-        {/* Set an explicit height here as well */}
-        <div className="relative overflow-hidden h-[150px]">
-          <div className="bg-[#363636] p-4 w-[200px] h-[126px] flex items-center absolute left-[10vw] top-0 text-left mx-auto
-          min-[1339px]:w-[260px] ">
-            <img
-              src="/rockett.svg"
-              alt="Fast"
-              className="w-[34px] h-[36px] mr-4"
-            />
-            <div>
-              <h3 className="text-[#82E300] text-lg font-bold">Fast</h3>
-              <p className="text-[11px] min-[1339px]:text-[14px]">
-                and seamless gaming experience with web3 integration
+          </motion.div>
+          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#1D1D1D] to-transparent z-10"></div>
+        </section>
+        <TrendingGamesCarousel trendingGames={trendingGames} />
+        <section className="py-20 px-6 bg-[#151515] relative overflow-hidden">
+          <div className="container mx-auto relative z-10">
+            <div className="text-center mb-16">
+              <div>
+                <h2 className="text-4xl sm:text-6xl font-bold mb-4">
+                  <span className="bg-gradient-to-r font-inter font-semibold from-red-500 via-yellow-400 to-red-500 bg-clip-text text-transparent inline-block">
+                    <span className="text-4xl tracking-wider">Why Choose </span>{" "}
+                    <br />
+                    <span className="text-7xl tracking-tighter">
+                      IGNICULT ?
+                    </span>
+                  </span>
+                </h2>
+              </div>
+              <p className="text-gray-400 max-w-2xl mx-auto text-lg mt-6">
+                Experience the ultimate gaming platform designed for competitive
+                players and esports enthusiasts
               </p>
             </div>
-          </div>
-          <div className="bg-[#363636] p-4 w-[200px] h-[126px] flex items-center absolute left-[30vw] top-0 text-left mx-auto min-[1339px]:w-[260px] ">
-            <img
-              src="/money.svg"
-              alt="Earn"
-              className="w-[34px] h-[36px] mr-4"
-            />
-            <div>
-              <h3 className="text-[#82E300] text-lg font-bold">Earn</h3>
-              <p className="text-[11px] min-[1339px]:text-[14px]">
-                points for real-world rewards and use cultix to unlock on-chain
-                benefits and ownership
-              </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {features.map((feature, index) => (
+                <div key={feature.title}>
+                  <div className="bg-gradient-to-b from-[#2A2A2A] to-[#202020] p-8 rounded-2xl border border-gray-800 shadow-xl relative overflow-hidden h-full hover:-translate-y-2 transition-transform duration-300">
+                    <div className="relative z-10">
+                      <div className="flex justify-center mb-6">
+                        <div className="p-5 rounded-xl">
+                          {React.cloneElement(feature.icon, {
+                            className: "w-10 h-10 text-yellow-500",
+                          })}
+                        </div>
+                      </div>
+
+                      <h3 className="text-xl font-bold text-center text-white mb-3">
+                        {feature.title}
+                      </h3>
+
+                      <p className="text-gray-400 text-center">
+                        {feature.description}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
-          <div className="bg-[#363636] p-4 w-[200px] h-[126px] flex items-center absolute left-[50vw] top-0 text-left mx-auto min-[1339px]:w-[260px] ">
-            <img
-              src="/trust.svg"
-              alt="Secure"
-              className="w-[34px] h-[36px] mr-4"
-            />
-            <div>
-              <h3 className="text-[#82E300] text-lg font-bold">Secure</h3>
-              <p className="text-[11px] min-[1339px]:text-[14px]">
-                and transparent transactions powered by blockchain technology
+        </section>
+        <section className="py-20 px-6">
+          <div className="container mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl sm:text-6xl font-bold mb-4">
+                <span className="bg-gradient-to-r font-inter font-semibold from-red-500 via-yellow-400 to-red-500 bg-clip-text text-transparent inline-block">
+                  <span className="text-5xl font-inter tracking-tigher">
+                    What We Provide?
+                  </span>
+                </span>
+              </h2>
+              <p className="text-gray-400 max-w-2xl mx-auto">
+                Cutting-edge gaming experiences with rewards, tournaments, and
+                community
               </p>
             </div>
-          </div>
-          <div className="bg-[#363636] p-4 w-[200px] h-[126px] flex items-center absolute left-[71vw] top-0 text-left mx-auto min-[1339px]:w-[260px]  ">
-            <img
-              src="/earth.svg"
-              alt="Join"
-              className="w-[34px] h-[36px] mr-4"
-            />
-            <div>
-              <h3 className="text-[#82E300] text-lg font-bold">Join</h3>
-              <p className="text-[11px] min-[1339px]:text-[14px]">
-                global Community of gamers and blockchain enthusiasts
-              </p>
+
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              <div className="bg-gradient-to-br from-[#2A2A2A] to-[#202020] rounded-2xl p-8 border border-gray-800">
+                <h3 className="text-xl font-bold mb-4 text-yellow-500">
+                  Competitive Gaming
+                </h3>
+                <p className="text-gray-400 mb-6">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
+                  quam velit, vulputate eu pharetra nec, mattis ac neque.
+                </p>
+                <ul className="space-y-2">
+                  <li className="flex items-center">
+                    <div className="w-2 h-2 rounded-full bg-yellow-500 mr-2"></div>
+                    <span>Daily tournaments with cash prizes</span>
+                  </li>
+                  <li className="flex items-center">
+                    <div className="w-2 h-2 rounded-full bg-yellow-500 mr-2"></div>
+                    <span>Skill-based matchmaking</span>
+                  </li>
+                  <li className="flex items-center">
+                    <div className="w-2 h-2 rounded-full bg-yellow-500 mr-2"></div>
+                    <span>Global leaderboards</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="bg-gradient-to-br from-[#2A2A2A] to-[#202020] rounded-2xl p-8 border border-gray-800">
+                <h3 className="text-xl font-bold mb-4 text-red-500">
+                  Premium Tournaments
+                </h3>
+                <p className="text-gray-400 mb-6">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
+                  quam velit, vulputate eu pharetra nec, mattis ac neque.
+                </p>
+                <ul className="space-y-2">
+                  <li className="flex items-center">
+                    <div className="w-2 h-2 rounded-full bg-red-500 mr-2"></div>
+                    <span>Exclusive high-stake competitions</span>
+                  </li>
+                  <li className="flex items-center">
+                    <div className="w-2 h-2 rounded-full bg-red-500 mr-2"></div>
+                    <span>Professional tournament structure</span>
+                  </li>
+                  <li className="flex items-center">
+                    <div className="w-2 h-2 rounded-full bg-red-500 mr-2"></div>
+                    <span>Live streaming and commentary</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="bg-gradient-to-br from-[#2A2A2A] to-[#202020] rounded-2xl p-8 border border-gray-800">
+                <h3 className="text-xl font-bold mb-4 text-blue-500">
+                  Community & Rewards
+                </h3>
+                <p className="text-gray-400 mb-6">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
+                  quam velit, vulputate eu pharetra nec, mattis ac neque.
+                </p>
+                <ul className="space-y-2">
+                  <li className="flex items-center">
+                    <div className="w-2 h-2 rounded-full bg-blue-500 mr-2"></div>
+                    <span>Exclusive in-game rewards</span>
+                  </li>
+                  <li className="flex items-center">
+                    <div className="w-2 h-2 rounded-full bg-blue-500 mr-2"></div>
+                    <span>Community events and challenges</span>
+                  </li>
+                  <li className="flex items-center">
+                    <div className="w-2 h-2 rounded-full bg-blue-500 mr-2"></div>
+                    <span>Discord integration and social features</span>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </main>
     </div>
   );
 };

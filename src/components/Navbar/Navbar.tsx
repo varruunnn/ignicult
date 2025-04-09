@@ -1,345 +1,248 @@
-import Sidebar from "../Sidebar/Sidebar";
-import { useState } from "react";
-import { inAppWallet, createWallet } from "thirdweb/wallets";
-import { darkTheme } from "thirdweb/react";
-import { ConnectButton } from "thirdweb/react";
-import { IoMenu } from "react-icons/io5";
-import styled from "styled-components";
-import { client } from "../../client";
-import { motion } from "framer-motion";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, { useState, useEffect, useCallback } from "react";
+import {
+  X,
+  Menu as MenuIcon,
+  Home,
+  User,
+  Trophy,
+  Award,
+  Star,
+  Activity,
+  Gift,
+  HelpCircle,
+  GamepadIcon,
+} from "lucide-react";
+import { useNavigate, useLocation } from "react-router-dom";
 
-interface NavbarProps {
-  isSidebarOpen: boolean;
-  setSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
+const Logo = () => (
+  <div className="flex items-center">
+    <div className="relative">
+      <img
+        src="/blackLOgo.svg"
+        alt="Logo"
+        className="w-10 h-10 relative z-10"
+      />
+    </div>
+  </div>
+);
 
-const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen, setSidebarOpen }) => {
-  const customTheme = darkTheme({
-    colors: {
-      selectedTextColor: "hsl(228, 78%, 48%)",
-      secondaryIconColor: "hsl(0, 0%, 14%)",
-      secondaryIconHoverColor: "hsl(240, 6%, 94%)",
-      modalBg: "hsl(0, 0%, 14%)",
-      borderColor: "hsl(86, 100%, 50%)",
-      accentText: "hsl(86, 100%, 50%)",
-      separatorLine: "hsl(86, 100%, 50%)",
-      secondaryText: "hsl(0, 0%, 95%)",
-      primaryText: "hsl(0, 0%, 100%)",
-      primaryButtonText: "hsl(0, 0%, 100%)",
-    },
-  });
+const menuItems = [
+  { icon: <Home className="w-5 h-5 mr-2" />, text: "Home", path: "/" },
+  {
+    icon: <User className="w-5 h-5 mr-2" />,
+    text: "Profile",
+    path: "/profile",
+  },
+  {
+    icon: <GamepadIcon className="w-5 h-5 mr-2" />,
+    text: "Games",
+    path: "/games",
+  },
+  {
+    icon: <Trophy className="w-5 h-5 mr-2" />,
+    text: "Leaderboard",
+    path: "/leaderboard",
+  },
+  {
+    icon: <Award className="w-5 h-5 mr-2" />,
+    text: "Tournaments",
+    path: "/tournaments",
+  },
+  {
+    icon: <Star className="w-5 h-5 mr-2 text-yellow-400" />,
+    text: "Premium Tournaments",
+    path: "/premium-tournaments",
+    highlight: true,
+  },
+  {
+    icon: <Activity className="w-5 h-5 mr-2" />,
+    text: "Activity",
+    path: "/activity",
+  },
+  {
+    icon: <Gift className="w-5 h-5 mr-2" />,
+    text: "Rewards",
+    path: "/rewards",
+  },
+  {
+    icon: <HelpCircle className="w-5 h-5 mr-2" />,
+    text: "Support",
+    path: "/support",
+  },
+];
 
-  const wallets = [
-    inAppWallet({
-      auth: {
-        options: [
-          "google",
-          "discord",
-          "telegram",
-          "farcaster",
-          "email",
-          "x",
-          "passkey",
-          "phone",
-        ],
-      },
-    }),
-    createWallet("io.metamask"),
-    createWallet("com.coinbase.wallet"),
-    createWallet("me.rainbow"),
-    createWallet("io.rabby"),
-    createWallet("io.zerion.wallet"),
-  ];
-
-  const [isPopupVisible, setPopupVisible] = useState(false);
+const Navbar = () => {
   const location = useLocation();
-  const isPremiumRoute = location.pathname === "/premium-tournaments";
+  const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
-  const routes = [
-    { name: "Home", path: "/home", icon: "/home.svg" },
-    { name: "Profile", path: "/profile", icon: "/profile.svg" },
-    { name: "Games", path: "/games", icon: "/games.svg" },
-    { name: "Leaderboard", path: "/leaderboard", icon: "/leaderboard.svg" },
-    { name: "Tournaments", path: "/tournament", icon: "/tournament.svg" },
-    { name: "Premium Tournaments", path: "/premium-tournaments", icon: "/premium-tournaments.svg" },
-    { name: "Activity", path: "/activity", icon: "/activity.svg" },
-    { name: "Rewards", path: "/rewards", icon: "/rewards.svg" },
-    { name: "Support", path: "/support", icon: "/support.svg" },
-  ];
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isNavigating, setIsNavigating] = useState(false);
 
-  const togglePopup = () => {
-    setPopupVisible((prev) => !prev);
-  };
-
-  // Close the popup
-  const closePopup = () => {
-    setPopupVisible(false);
-  };
-
-  const buttonStyle = isPremiumRoute
-    ? {
-      backgroundColor: "#282828",
-      borderRadius: "20000px",
-      color: "#F94EA6",
-      border: "2px solid #F94EA6",
-      minWidth: "1px",
-      height: "41px",
-      boxShadow: "0 2px 4px rgba(249, 78, 166, 1)",
-    }
-    : {
-      backgroundColor: "#282828",
-      borderRadius: "20000px",
-      color: "#82E300",
-      border: "2px solid #82E300",
-      minWidth: "1px",
-      height: "41px",
-      boxShadow: "0px 2px 5px rgba(130, 227, 0, 1)",
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 10) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
     };
 
-  const toggleSidebar = () => {
-    setSidebarOpen(!isSidebarOpen);
-  };
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
-  const closeSidebar = () => {
-    setSidebarOpen(false);
-  };
+  const handleNavigate = useCallback((path: string) => () => {
+    if (isNavigating || path === location.pathname) {
+      setMenuOpen(false);
+      return;
+    }
+    
+    setIsNavigating(true);
+    setMenuOpen(false);
+    
+
+    setTimeout(() => {
+      navigate(path);
+      setTimeout(() => setIsNavigating(false), 100);
+    }, 10);
+  }, [navigate, location.pathname, isNavigating]);
+
+
+  const getNavbarColor = useCallback(() => {
+    switch (location.pathname) {
+      case "/":
+        return "bg-[#1e1d1d]";
+      case "/profile":
+        return "bg-[#0d0d0d]";
+      case "/games":
+        return "bg-[#040404]";
+      case "/leaderboard":
+        return "bg-[#000001]";
+      case "/support":
+        return "bg-[#1c0b0b]";
+      case "/rewards":
+        return "bg-[#111111]";
+      case "/activity":
+        return "bg-[#1c1c1c]";
+      case "/tournaments":
+        return "bg-[#111827]";
+      case "/premium-tournaments":
+        return "bg-[#111827]";
+      default:
+        return "bg-[#0d0d0d]";
+    }
+  }, [location.pathname]);
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (menuOpen && !(e.target as Element).closest('.menu-container')) {
+        setMenuOpen(false);
+      }
+    };
+
+    if (menuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [menuOpen]);
+
+
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [location.pathname]);
 
   return (
     <div>
-      {/* Mobile sidebar section */}
-      <div className="max-[485px]:bg-transparent min-[1023px]:hidden overflow-x-hidden text-white min-[1024px]:bg-none">
-        <motion.header
-          initial={{ y: -50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          className="fixed top-0 left-0 right-0 backdrop-blur-sm flex justify-between items-center px-6 py-4 h-[131px] max-[398px]:z-10 z-50 shadow-md min-[1024px]:h-[100px]"
-        >
-          <motion.button
-            whileHover={{ scale: 1.1 }}
-            onClick={toggleSidebar}
-            className="cursor-pointer relative"
-            aria-label="Open Sidebar Menu"
-          >
-            <IoMenu size={37} className="text-white" />
-          </motion.button>
-          <motion.div
-            initial={{ scale: 0.95, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.4 }}
-          >
-            <ConnectButton
-              client={client}
-              wallets={wallets}
-              modal-bg-color="#FFFFFF"
-              connectModal={{ size: "compact" }}
-              theme={customTheme}
-              connectButton={{
-                label: "Lets dive in",
-                style: buttonStyle,
-              }}
-              appMetadata={{
-                name: "Example app",
-                url: "https://example.com",
-              }}
-            />
-          </motion.div>
-        </motion.header>
-        <div
-          className={`fixed top-0 left-0 h-full z-[1000] transition-transform duration-300 ease-in-out ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-            }`}
-        >
-          <Sidebar onClose={closeSidebar} />
-        </div>
-      </div>
-
-      <div className="max-[485px]:bg-transparent max-[1023px]:hidden overflow-x-hidden text-white min-[1024px]:bg-none">
-        <motion.header
-          initial={{ y: -50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          className="fixed top-0 left-0 right-0 backdrop-blur-sm flex justify-between items-center px-6 py-4 h-[131px] max-[398px]:z-10 z-50 shadow-md min-[1024px]:h-[100px]"
-        >
-          <div className="absolute   min-[1339px]:w-[90vw] min-[1339px]:left-[10%]  min-[2559px]:h-[5vh] min-[2559px]:w-[89%] min-[1339px]:h-[10vh] w-[95%] h-[15vh]">
-            <motion.button
-              className="absolute min-[1339px]:left-[20%] max-[1023px]:hidden cursor-pointer w-[60px] h-[40px] top-[26%] z-50 left-[28%]"
-              onClick={() => {
-                navigate("/home");
-              }}
-              whileHover={
-                {
-                  scale:1.2
-                }
-              }
-            >
-              <img
-                src="/homee.svg"
-                className="relative left-[-2%] top-[-20%] w-[20px] z-50"
-                alt=""
-              />
-              <h3 className="absolute text-[#9A999C] top-[1%] left-[35%] z-50">
-                Home
-              </h3>
-            </motion.button>
-            <motion.button
-              className="absolute  max-[1023px]:hidden cursor-pointer w-[200px] h-[4px] top-[9%] z-50 left-[59%]"
-              onClick={() => {
-                navigate("/games");
-              }}
-              whileHover={
-                {
-                  scale:0.9
-                }
-              }
-            >
-              <img
-                src="/play.svg"
-                className="relative left-[-2%] top-[-44%] w-[160px] z-50"
-                alt=""
-              />
-            </motion.button>
-            <div className="absolute  max-[1023px]:hidden min-[1024px]:top-[0px] z-100">
-              <img
-                src="/vector2.svg"
-                className="max-[1023px]:hidden min-[1399px]:w-[950px] fixed min-[2559px]:left-[31%] min-[2559px]:w-[40%] left-[20%] top-[0] z-10 min-[1399px]:left-[18%] rounded-lg"
-                alt="desktopnav"
-              />
-            </div>
-            <motion.button
-              className="absolute max-[1023px]:hidden cursor-pointer w-[60px] h-[40px] top-[26%] z-50 left-[48%]"
-              onClick={() => {
-                navigate("/profile");
-              }}
-              whileHover={
-                {
-                  scale:1.2
-                }
-              }
-            >
-              <img
-                src="/groupp.svg"
-                className="relative right-[-2%] top-[-20%] w-[20px] z-50"
-                alt=""
-              />
-              <h3 className="absolute text-[#9A999C] top-[1%] left-[38%] z-50">
-                Profile
-              </h3>
-            </motion.button>
-          </div>
-          <motion.button
-            whileHover={{ scale: 1.1 }}
-            onClick={togglePopup}
-            className="cursor-pointer relative"
-            aria-label="Open Menu Popup"
-          >
-            <IoMenu size={37} className="text-white" />
-          </motion.button>
-          <motion.div
-            initial={{ scale: 0.95, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.4 }}
-            className="pointer-events-auto relative   z-[60]"
-            whileHover={
-              {
-                scale:0.9
-              }
-            }
-          >
-            <ConnectButton
-              client={client}
-              wallets={wallets}
-              modal-bg-color="#FFFFFF"
-              connectModal={{ size: "compact" }}
-              theme={customTheme}
-              connectButton={{
-                label: "Lets dive in",
-                style: buttonStyle,
-              }}
-              appMetadata={{
-                name: "Example app",
-                url: "https://example.com",
-              }}
-            />
-          </motion.div>
-        </motion.header>
-        {isPopupVisible && (
-          <div
-            onClick={closePopup}
-            className="fixed inset-0 [perspective::1000px] [transform-style:preserve:3d] z-[1000] flex items-center justify-center bg-black bg-opacity-50"
-          >
-            <motion.div
-              onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside the popup
-              initial={{ scale: 0.1, opacity: 0  }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.3 }}
-              className="bg-[#141414] p-6 rounded-lg w-[60vw] h-[30vh] relative"
-            >
-              <motion.button
-                whileHover={{
-                  scale: 1.2,
-                }}
-                
-                onClick={closePopup}
-                className="absolute top-2 right-2 text-white text-2xl"
-                aria-label="Close Menu Popup"
+      <header
+        className={`w-full z-50 backdrop-blur-lg ${getNavbarColor()} transition-all duration-200
+          ${isScrolled ? 'fixed top-0 shadow-md' : 'sticky top-0'}
+          ${location.pathname === "/" ? "" : "w-full"}`}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            <div className="flex items-center space-x-4">
+              <button
+                onClick={() => setMenuOpen(prev => !prev)}
+                className="p-2 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-[#fe6200]"
+                aria-label="Toggle menu"
               >
-                &times;
-              </motion.button>
-              <ul className="mt-4 flex flex-wrap justify-center gap-4">
-                {routes.map((route) => {
-                  const isPremium = route.name === "Premium Tournaments";
-                  return (
-                    <li key={route.name}>
-                      <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2 }}
-                        whileHover={{ scale: 1.05 ,rotateX:20,rotateY:-10,boxShadow: isPremium ? "0 20px 50px #F94EA6" : "0 20px 50px #82E300" }}
-                        style={{
-                          translateZ:100,
-                        }}
-                        className={`${isPremium
-                            ? "border border-[#F94EA6]"
-                            : "border border-[#82E300]"
-                          } rounded-lg`}
-                      >
-                        <motion.button
-                          onClick={() => {
-                            navigate(route.path);
-                            closePopup();
-                          }}
+                <MenuIcon className="w-6 h-6 text-white" />
+              </button>
 
-                          whileHover={{ scale: 1.05, transition: { duration: 0.2 },
-                          boxShadow: isPremium ? "0 20px 50px #F94EA6" : "0 20px 50px #82E300"
-                        }}
-                          whileTap={{ scale: 0.95 }}
-                          className="flex items-center p-2 hover:bg-[#282828] transition-colors"
-                        >
-                          <motion.img
-                            src={route.icon}
-                            alt={route.name}
-                            className="w-6 h-6 mr-2"
-                            whileHover={{ rotate: 15 }}
-                          />
-                          <motion.span
-                            className={`text-lg ${isPremium
-                                ? "bg-gradient-to-r from-[#EE49FD] to-[#F94EA6] bg-clip-text text-transparent"
-                                : "text-white"
-                              }`}
-                            whileHover={{ scale: 1.05}}
-                          >
-                            {route.name}
-                          </motion.span>
-                        </motion.button>
-                      </motion.div>
-                    </li>
-                  );
-                })}
-              </ul>
-            </motion.div>
+              <div className="hidden md:grid grid-cols-5 gap-4 px-4">
+                <button
+                  onClick={handleNavigate("/")}
+                  className={`flex items-center px-3 cursor-pointer py-2 rounded-lg text-white  transition-colors ${location.pathname === "/" ? "bg-[#2A2A2A]" : ""}`}
+                  disabled={isNavigating}
+                >
+                  <Home className="w-5 h-5 mr-1" />
+                  <span>Home</span>
+                </button>
+                <button
+                  onClick={handleNavigate("/profile")}
+                  className={`flex items-center px-3 cursor-pointer py-2 rounded-lg text-white  transition-colors ${location.pathname === "/profile" ? "bg-[#2A2A2A]" : ""}`}
+                  disabled={isNavigating}
+                >
+                  <User className="w-5 h-5 mr-1" />
+                  <span>Profile</span>
+                </button>
+              </div>
+            </div>
+
+            <div className="md:hidden">
+              <Logo />
+            </div>
+            <div className="hidden md:block">
+              <Logo />
+            </div>
           </div>
-        )}
-      </div>
+        </div>
+      </header>
+      {menuOpen && (
+        <>
+          <div
+            className="fixed inset-0 bg-black/70 z-[60] transition-opacity duration-200"
+            onClick={() => setMenuOpen(false)}
+          />
+
+          <div className="menu-container fixed inset-0 text-white md:w-[70%] md:h-[50%] md:top-[50%] md:left-[50%] md:translate-x-[-50%] md:translate-y-[-50%] bg-black/95 z-[70] flex flex-col overflow-y-auto border border-[#fe6200] border-[0.7px] shadow-[0_0_100px_rgba(254,98,0,0.4)] rounded-xl transition-all duration-200 ease-out">
+            <div className="flex justify-between items-center p-6">
+              <Logo />
+              <button
+                onClick={() => setMenuOpen(false)}
+                className="p-2 rounded-full  transition-transform duration-150 focus:outline-none focus:ring-2 focus:ring-[#fe6200]"
+                aria-label="Close menu"
+              >
+                <X className="w-6 h-6 text-white" />
+              </button>
+            </div>
+
+            <div className="flex flex-col md:relative md:top-[50%] md:translate-y-[-90%] md:grid md:grid-cols-5 md:gap-8 md:px-10 py-8 gap-3 mx-auto md:max-w-[90%]">
+              {menuItems.map((item) => (
+                <button
+                  key={item.path}
+                  onClick={handleNavigate(item.path)}
+                  disabled={isNavigating}
+                  className={`flex items-center p-4 md:p-0 md:w-full cursor-pointer rounded-xl transition-all duration-200 hover:pl-6  focus:outline-none focus:ring-1 focus:ring-[#fe6200]
+                    ${location.pathname === item.path ? "bg-black" : ""}
+                    ${item.highlight
+                      ? "bg-gradient-to-r from-[#3D1D1D] to-[#3D2D0D] border-l-4 border-yellow-500"
+                      : ""
+                    }`}
+                >
+                  {item.icon}
+                  <span className={`${item.highlight ? "font-bold" : ""}`}>
+                    {item.text}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };

@@ -1,406 +1,215 @@
-import React, { useState, useEffect } from "react";
-import { useSwipeable } from "react-swipeable";
-import { motion } from "framer-motion";
-import SwipeHintOverlay from "../SwipeHintOverlay/SwipeHintOverlay";
+import React, { useState } from 'react';
 
-type Player = {
+// Type definitions
+interface PlayerData {
   rank: number;
   wallet: string;
   score: number;
-};
+}
 
-type TournamentData = {
-  [key: string]: Player[];
-};
+interface TournamentData {
+  [gameName: string]: PlayerData[];
+}
 
-const mockTournamentData: TournamentData = {
-  "Cricket Catch Pro": [
-    { rank: 1, wallet: "a1b2c3...908e", score: 10000 },
-    { rank: 2, wallet: "d4e5f6...123a", score: 9500 },
-    { rank: 3, wallet: "g7h8i9...456b", score: 9200 },
-    { rank: 4, wallet: "d0af8c...908e", score: 6038 },
-    { rank: 5, wallet: "j1k2l3...789c", score: 5900 },
-    { rank: 6, wallet: "a1b2c3...908e", score: 10000 },
-    { rank: 7, wallet: "d4e5f6...123a", score: 9500 },
-    { rank: 8, wallet: "g7h8i9...456b", score: 9200 },
-    { rank: 9, wallet: "d0af8c...908e", score: 6038 },
-    { rank: 10, wallet: "j1k2l3...789c", score: 5900 },
-    { rank: 11, wallet: "a1b2c3...908e", score: 10000 },
-    { rank: 12, wallet: "d4e5f6...123a", score: 9500 },
-    { rank: 13, wallet: "c9d8e7...456b", score: 8600 },
-    { rank: 14, wallet: "l2m3n4...789c", score: 7800 },
-    { rank: 15, wallet: "o5p6q7...111f", score: 7200 },
-    { rank: 16, wallet: "r9s8t7...224g", score: 6900 },
-    { rank: 17, wallet: "h2u3v4...555d", score: 6600 },
-    { rank: 18, wallet: "k8w7x6...333a", score: 6400 },
-    { rank: 19, wallet: "z9y8x7...000e", score: 6200 },
-    { rank: 20, wallet: "c1b2a3...678d", score: 6100 },
-    { rank: 21, wallet: "v4w5x6...910f", score: 6000 },
-    { rank: 22, wallet: "s7t8u9...654g", score: 5900 },
-    { rank: 23, wallet: "p3q4r5...123b", score: 5800 },
-    { rank: 24, wallet: "n9m8l7...456c", score: 5700 },
-    { rank: 25, wallet: "j0k9i8...789e", score: 5600 },
-    { rank: 26, wallet: "e5f6g7...123d", score: 5500 },
-    { rank: 27, wallet: "d2c3b4...000f", score: 5400 },
-    { rank: 28, wallet: "a7b8c9...111e", score: 5300 },
-    { rank: 29, wallet: "t0u1v2...234g", score: 5200 },
-    { rank: 30, wallet: "z4x5y6...789h", score: 5100 },
-  ],
-  "Color Circle Puzzle": [
-    { rank: 1, wallet: "p1q2r3...123d", score: 10500 },
-    { rank: 2, wallet: "s4t5u6...456e", score: 10100 },
-    { rank: 3, wallet: "v7w8x9...789f", score: 9500 },
-    { rank: 4, wallet: "d0af8c...908e", score: 6038 },
-    { rank: 5, wallet: "y1z2a3...012g", score: 5400 },
-    { rank: 6, wallet: "a1b2c3...908e", score: 10000 },
-    { rank: 7, wallet: "d4e5f6...123a", score: 9500 },
-    { rank: 8, wallet: "g7h8i9...456b", score: 9200 },
-    { rank: 9, wallet: "d0af8c...908e", score: 6038 },
-    { rank: 10, wallet: "j1k2l3...789c", score: 5900 },
-  ],
-};
-
-export default function Tournaments() {
-  const [selectedGame, setSelectedGame] =
-    useState<keyof typeof mockTournamentData>("Cricket Catch Pro");
-  const [currentPage, setCurrentPage] = useState<number>(0);
-  const itemsPerPage = 10;
-
-  useEffect(() => {
-    setCurrentPage(0);
-  }, [selectedGame]);
-
-  const handleGameChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedGame(event.target.value as keyof typeof mockTournamentData);
+const TournamentsPage = () => {
+  // Mock tournament data
+  const mockTournamentData: TournamentData = {
+    "Cricket Catch Pro": [
+      { rank: 1, wallet: "a1b2c3...908e", score: 10000 },
+      { rank: 2, wallet: "d4e5f6...123a", score: 9500 },
+      { rank: 3, wallet: "g7h8i9...456b", score: 9200 },
+      { rank: 4, wallet: "d0af8c...908e", score: 6038 },
+      { rank: 5, wallet: "j1k2l3...789c", score: 5900 },
+      { rank: 6, wallet: "a1b2c3...908e", score: 10000 },
+      { rank: 7, wallet: "d4e5f6...123a", score: 9500 },
+      { rank: 8, wallet: "g7h8i9...456b", score: 9200 },
+      { rank: 9, wallet: "d0af8c...908e", score: 6038 },
+      { rank: 10, wallet: "j1k2l3...789c", score: 5900 },
+      { rank: 11, wallet: "a1b2c3...908e", score: 10000 },
+      { rank: 12, wallet: "d4e5f6...123a", score: 9500 },
+      { rank: 13, wallet: "c9d8e7...456b", score: 8600 },
+      { rank: 14, wallet: "l2m3n4...789c", score: 7800 },
+      { rank: 15, wallet: "o5p6q7...111f", score: 7200 },
+      { rank: 16, wallet: "r9s8t7...224g", score: 6900 },
+      { rank: 17, wallet: "h2u3v4...555d", score: 6600 },
+      { rank: 18, wallet: "k8w7x6...333a", score: 6400 },
+      { rank: 19, wallet: "z9y8x7...000e", score: 6200 },
+      { rank: 20, wallet: "c1b2a3...678d", score: 6100 },
+      { rank: 21, wallet: "v4w5x6...910f", score: 6000 },
+      { rank: 22, wallet: "s7t8u9...654g", score: 5900 },
+      { rank: 23, wallet: "p3q4r5...123b", score: 5800 },
+      { rank: 24, wallet: "n9m8l7...456c", score: 5700 },
+      { rank: 25, wallet: "j0k9i8...789e", score: 5600 },
+      { rank: 26, wallet: "e5f6g7...123d", score: 5500 },
+      { rank: 27, wallet: "d2c3b4...000f", score: 5400 },
+      { rank: 28, wallet: "a7b8c9...111e", score: 5300 },
+      { rank: 29, wallet: "t0u1v2...234g", score: 5200 },
+      { rank: 30, wallet: "z4x5y6...789h", score: 5100 },
+    ],
+    "Color Circle Puzzle": [
+      { rank: 1, wallet: "p1q2r3...123d", score: 10500 },
+      { rank: 2, wallet: "s4t5u6...456e", score: 10100 },
+      { rank: 3, wallet: "v7w8x9...789f", score: 9500 },
+      { rank: 4, wallet: "d0af8c...908e", score: 6038 },
+      { rank: 5, wallet: "y1z2a3...012g", score: 5400 },
+      { rank: 6, wallet: "a1b2c3...908e", score: 10000 },
+      { rank: 7, wallet: "d4e5f6...123a", score: 9500 },
+      { rank: 8, wallet: "g7h8i9...456b", score: 9200 },
+      { rank: 9, wallet: "d0af8c...908e", score: 6038 },
+      { rank: 10, wallet: "j1k2l3...789c", score: 5900 },
+    ],
   };
 
-  const tournamentData = mockTournamentData[selectedGame];
-  const totalPages = Math.ceil(tournamentData.length / itemsPerPage);
-  const paginatedData = tournamentData.slice(
-    currentPage * itemsPerPage,
-    currentPage * itemsPerPage + itemsPerPage
-  );
+  // State for selected game and pagination
+  const [selectedGame, setSelectedGame] = useState<string>(Object.keys(mockTournamentData)[0]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const playersPerPage = 10;
 
-  const swipeHandlers = useSwipeable({
-    onSwipedLeft: () =>
-      setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1)),
-    onSwipedRight: () => setCurrentPage((prev) => Math.max(prev - 1, 0)),
-    delta: 50,
-    trackTouch: true,
-    trackMouse: false,
-  });
+  // Get current players for pagination
+  const currentPlayers = mockTournamentData[selectedGame];
+  const indexOfLastPlayer = currentPage * playersPerPage;
+  const indexOfFirstPlayer = indexOfLastPlayer - playersPerPage;
+  const currentPagePlayers = currentPlayers.slice(indexOfFirstPlayer, indexOfLastPlayer);
+  const totalPages = Math.ceil(currentPlayers.length / playersPerPage);
+
+  // Handle game change
+  const handleGameChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedGame(e.target.value);
+    setCurrentPage(1); // Reset to first page when changing games
+  };
+
+  // Pagination controls
+  const goToPage = (page: number) => {
+    if (page > 0 && page <= totalPages) {
+      setCurrentPage(page);
+    }
+  };
 
   return (
-    <div>
-      <div className="p-4 w-full mt-[-40px] lg:hidden min-h-screen relative text-white">
-        <div className="absolute top-[-21%] left-[20%]">
-          <SwipeHintOverlay />
-        </div>
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mt-20"
-        >
-          <motion.h1
-            className="ml-[-20px] text-white text-lg font-semibold text-center text-shadow-glow"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-          >
-            Monthly Tournaments
-          </motion.h1>
-          <div className="mt-4 flex justify-center items-center">
-            <motion.select
-              className="px-4 py-2 w-[70vw] rounded-full h-[5.9vh] bg-gray-900 appearance-none pl-4 pr-8 text-white border-[1px] border-[#82E300] focus:outline-none hover:border-[#6ac100] transition-all"
+    <div className="min-h-screen bg-gray-900 text-gray-100 p-6
+    max-[365px]:mt-[64px]
+    ">
+      <div className="max-w-4xl mx-auto">
+        <header className="flex flex-col md:flex-row items-center justify-between mb-10 border-b border-gray-700 pb-6">
+          <h1 className="text-3xl font-bold text-purple-500 mb-4 md:mb-0">TOURNAMENTS</h1>
+          <div className="w-full md:w-64">
+            <select 
               value={selectedGame}
               onChange={handleGameChange}
-              style={{
-                backgroundImage: 'url("/down.svg")',
-                backgroundPosition: "right 10px center",
-                backgroundRepeat: "no-repeat",
-              }}
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.5 }}
+              className="w-full bg-gray-800 border border-gray-700 text-white py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
             >
               {Object.keys(mockTournamentData).map((game) => (
                 <option key={game} value={game}>
                   {game}
                 </option>
               ))}
-            </motion.select>
-
-            <motion.button
-              className="ml-2 w-[44px] h-[44px] flex justify-center items-center rounded-full bg-[#82E300] hover:bg-[#6ac100] text-black shadow-glow transition-all"
-              whileHover={{ scale: 1.1 }}
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.35, duration: 0.5 }}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="black"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="w-[16px] h-[16px]"
+            </select>
+          </div>
+        </header>
+        <main>
+          <div className="mb-8">
+            <h2 className="text-2xl font-bold text-white mb-2">{selectedGame} Leaderboard</h2>
+            <p className="text-gray-400">Top players ranked by score</p>
+          </div>
+          <div className="bg-gray-800 rounded-lg overflow-hidden shadow-lg border border-gray-700">
+            <div className="grid grid-cols-12 bg-gray-700 py-3 px-4 text-sm font-medium">
+              <div className="col-span-2 text-center">#</div>
+              <div className="col-span-6">WALLET</div>
+              <div className="col-span-4 text-center">SCORE</div>
+            </div>
+            
+            {currentPagePlayers.map((player) => (
+              <div 
+                key={player.rank}
+                className="grid grid-cols-12 py-4 px-4 items-center border-b border-gray-700 last:border-0 hover:bg-gray-700 transition-colors"
               >
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                <polyline points="17 8 12 3 7 8" />
-                <line x1="12" y1="3" x2="12" y2="15" />
-              </svg>
-            </motion.button>
+                <div className="col-span-2 text-center">
+                  <span className={`inline-flex items-center justify-center w-6 h-6 rounded-full ${
+                    player.rank === 1 ? 'bg-yellow-500' :
+                    player.rank === 2 ? 'bg-gray-400' :
+                    player.rank === 3 ? 'bg-yellow-700' : 'bg-gray-600'
+                  } text-black font-bold text-sm`}>
+                    {player.rank}
+                  </span>
+                </div>
+                
+                <div className="col-span-6 font-mono text-sm">
+                  {player.wallet}
+                </div>
+                
+                <div className="col-span-4 text-center font-mono text-purple-400 font-medium">
+                  {player.score.toLocaleString()}
+                </div>
+              </div>
+            ))}
           </div>
-        </motion.div>
-        <motion.div
-          {...swipeHandlers}
-          initial={{ opacity: 0, scale: 0.95, y: 30 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="mt-10 mx-auto w-[108%] left-[-15px] max-w-4xl bg-[#141414] border-t-2 border-t-[#82E300] p-4 rounded-3xl relative"
-        >
-          <div className="relative flex items-center justify-center mb-4">
-            <motion.h2
-              className="text-center text-xl text-[#82E300] font-extrabold"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.5 }}
-            >
-              January 2025
-            </motion.h2>
-          </div>
-          <div className="w-full max-h-[50vh] mb-4 max-[378px]:h-[40vh] max-[378px]:mb-[60px] bg-[#3E3E3E] rounded-lg overflow-y-auto">
-            <table className="w-full text-left text-sm text-gray-400 border-collapse">
-              <thead className="bg-[#3E3E3E]">
-                <tr>
-                  <th className="py-2 px-4 border text-[#82E300] border-gray-600">
-                    Rank
-                  </th>
-                  <th className="py-2 px-4 border text-[#82E300] border-gray-600">
-                    Wallet Address
-                  </th>
-                  <th className="py-2 px-4 border text-[#82E300] border-gray-600">
-                    Top Score
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {paginatedData.map((player, index) => (
-                  <motion.tr
-                    key={player.rank}
-                    className="hover:bg-gray-800 transition-colors"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4 + index * 0.05, duration: 0.3 }}
-                  >
-                    <td className="py-2 px-4 border border-gray-600">
-                      {player.rank}
-                    </td>
-                    <td className="py-2 px-4 border border-gray-600">
-                      {player.wallet}
-                    </td>
-                    <td className="py-2 px-4 border border-gray-600">
-                      {player.score}
-                    </td>
-                  </motion.tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <div className="flex  justify-center gap-10">
-            <motion.button
-              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
-              disabled={currentPage === 0}
-              className="px-4 py-2 max-[370px]:top-[-49px] max-[376px]:top-[-55px] rounded relative bg-[#1e1e1e] text-[#82E300] border border-[#82E300] hover:bg-[#6ac100] hover:text-black transition-all disabled:opacity-50"
-              whileHover={{ scale: 1.05 }}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.4 }}
-            >
-              &larr; Prev
-            </motion.button>
-            <motion.button
-              onClick={() =>
-                setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1))
-              }
-              disabled={currentPage >= totalPages - 1}
-              className="px-4 py-2 max-[370px]:top-[-49px] max-[376px]:top-[-55px]  rounded relative bg-[#1e1e1e] text-[#82E300] border border-[#82E300] hover:bg-[#6ac100] hover:text-black transition-all disabled:opacity-50"
-              whileHover={{ scale: 1.05 }}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.55, duration: 0.4 }}
-            >
-              Next &rarr;
-            </motion.button>
-          </div>
-        </motion.div>
-      </div>
-      <div className="p-4 w-full mt-[0px] min-h-screen max-[1023px]:hidden relative text-white">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mt-20"
-        >
-          <motion.h1
-            className=" text-white text-xl font-semibold text-left ml-[15px] text-shadow-glow"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-          >
-            Monthly Tournaments
-          </motion.h1>
-
-          <div className="mt-4 flex absolute top-[9%] right-[1%] justify-center items-center">
-            <motion.select
-              className="px-4 py-2 w-[20vw] rounded-full h-[8vh] bg-gray-900 appearance-none pl-4 pr-8 text-white border-[1px] border-[#82E300] focus:outline-none hover:border-[#6ac100] transition-all"
-              value={selectedGame}
-              onChange={handleGameChange}
-              style={{
-                backgroundImage: 'url("/down.svg")',
-                backgroundPosition: "right 10px center",
-                backgroundRepeat: "no-repeat",
-              }}
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.5 }}
-            >
-              {Object.keys(mockTournamentData).map((game) => (
-                <option key={game} value={game}>
-                  {game}
-                </option>
-              ))}
-            </motion.select>
-
-            <motion.button
-              className="ml-2 w-[44px] h-[44px] flex justify-center items-center rounded-full bg-[#82E300] hover:bg-[#6ac100] text-black shadow-glow transition-all"
-              whileHover={{ scale: 1.1 }}
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.35, duration: 0.5 }}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="black"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="w-[16px] h-[16px]"
+          <div className="flex justify-between items-center mt-6">
+            <div className="text-sm text-gray-400">
+              Showing {indexOfFirstPlayer + 1}-{Math.min(indexOfLastPlayer, currentPlayers.length)} of {currentPlayers.length}
+            </div>
+            <div className="flex space-x-2">
+              <button 
+                onClick={() => goToPage(currentPage - 1)}
+                disabled={currentPage === 1}
+                className={`px-3 py-1 rounded-md ${
+                  currentPage === 1 ? 'bg-gray-800 text-gray-600 cursor-not-allowed' : 'bg-gray-700 text-white hover:bg-gray-600'
+                }`}
               >
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                <polyline points="17 8 12 3 7 8" />
-                <line x1="12" y1="3" x2="12" y2="15" />
-              </svg>
-            </motion.button>
-          </div>
-          <div className="bg-[#92FF00] w-[110%] mt-[40px] left-[-20px] relative h-[2px]"></div>
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95, y: 30 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="mt-10 mx-auto w-[108%] left-[-15px] max-w-4xl bg-[#3E3E3E]  p-4 rounded-3xl relative"
-        >
-          <div className="relative flex items-center justify-center mb-4">
-            <motion.h2
-              className="text-center text-xl relative left-[-20px] text-[#82E300] font-extrabold"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.5 }}
-            >
-              January 2025
-            </motion.h2>
-          </div>
-          <div className="w-[100%] mb-4 bg-[#3E3E3E] text-center rounded-lg">
-            <table className="w-full text-centre text-sm text-gray-400 border-collapse">
-              <thead className="bg-[#3E3E3E]">
-                <tr>
-                  <th className="py-2 px-4 border  text-[#82E300] border-gray-600">
-                    Rank
-                  </th>
-                  <th className="py-2 px-4 border text-[#82E300] border-gray-600">
-                    Wallet Address
-                  </th>
-                  <th className="py-2 px-4 border text-[#82E300] border-gray-600">
-                    Top Score
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {paginatedData.map((player, index) => (
-                  <motion.tr
-                    key={player.rank}
-                    className="hover:bg-gray-800 transition-colors"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4 + index * 0.05, duration: 0.3 }}
-                  >
-                    <td className="py-2 text-centre px-4 border border-gray-600">
-                      {player.rank}
-                    </td>
-                    <td className="py-2 text-centre px-4 border border-gray-600">
-                      {player.wallet}
-                    </td>
-                    <td className="py-2 text-centre px-4 border border-gray-600">
-                      {player.score}
-                    </td>
-                  </motion.tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <div className="flex  justify-center gap-10">
-            <motion.button
-              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
-              disabled={currentPage === 0}
-              className="px-4 py-2 max-[370px]:top-[-49px] max-[376px]:top-[-55px] rounded relative bg-[#1e1e1e] text-[#82E300] border border-[#82E300] hover:bg-[#6ac100] hover:text-black transition-all disabled:opacity-50"
-              whileHover={{ scale: 1.05 }}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.4 }}
-            >
-              &larr; Prev
-            </motion.button>
-            <motion.button
-              onClick={() =>
-                setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1))
+                Prev
+              </button>
+              
+              {Array.from({ length: totalPages }, (_, i) => i + 1)
+                .filter(pageNum => 
+                  pageNum === 1 || 
+                  pageNum === totalPages || 
+                  (pageNum >= currentPage - 1 && pageNum <= currentPage + 1)
+                )
+                .map((pageNum, index, array) => {
+                  if (index > 0 && pageNum - array[index - 1] > 1) {
+                    return (
+                      <React.Fragment key={`ellipsis-${pageNum}`}>
+                        <span className="px-2 py-1 text-gray-500">...</span>
+                        <button
+                          key={pageNum}
+                          onClick={() => goToPage(pageNum)}
+                          className={`w-8 h-8 flex items-center justify-center rounded-md ${
+                            currentPage === pageNum ? 'bg-purple-600 text-white' : 'bg-gray-700 text-white hover:bg-gray-600'
+                          }`}
+                        >
+                          {pageNum}
+                        </button>
+                      </React.Fragment>
+                    );
+                  }
+                  return (
+                    <button
+                      key={pageNum}
+                      onClick={() => goToPage(pageNum)}
+                      className={`w-8 h-8 flex items-center justify-center rounded-md ${
+                        currentPage === pageNum ? 'bg-purple-600 text-white' : 'bg-gray-700 text-white hover:bg-gray-600'
+                      }`}
+                    >
+                      {pageNum}
+                    </button>
+                  );
+                })
               }
-              disabled={currentPage >= totalPages - 1}
-              className="px-4 py-2 max-[370px]:top-[-49px] max-[376px]:top-[-55px]  rounded relative bg-[#1e1e1e] text-[#82E300] border border-[#82E300] hover:bg-[#6ac100] hover:text-black transition-all disabled:opacity-50"
-              whileHover={{ scale: 1.05 }}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.55, duration: 0.4 }}
-            >
-              Next &rarr;
-            </motion.button>
+              
+              <button 
+                onClick={() => goToPage(currentPage + 1)}
+                disabled={currentPage === totalPages}
+                className={`px-3 py-1 rounded-md ${
+                  currentPage === totalPages ? 'bg-gray-800 text-gray-600 cursor-not-allowed' : 'bg-gray-700 text-white hover:bg-gray-600'
+                }`}
+              >
+                Next
+              </button>
+            </div>
           </div>
-        </motion.div>
+        </main>
       </div>
     </div>
   );
-}
-{/* <button
-onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
-disabled={currentPage === 0}
-className="bg-[#1e1e1e] text-[#92FF00] relative border border-[#92FF00] px-4 py-2 rounded hover:bg-[#92FF00] hover:text-black transition-all disabled:opacity-50
-max-[370px]:top-[-14px]
-"
->
-&larr; Prev
-</button>
-<button
-onClick={() =>
-  setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1))
-}
-disabled={currentPage >= totalPages - 1}
-className="bg-[#1e1e1e] text-[#92FF00] border relative border-[#92FF00] px-4 py-2 rounded hover:bg-[#92FF00] hover:text-black transition-all disabled:opacity-50
- max-[370px]:top-[-14px]"
->
-Next &rarr;
-</button> */}
+};
+
+export default TournamentsPage;

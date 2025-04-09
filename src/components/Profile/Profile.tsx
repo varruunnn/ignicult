@@ -1,702 +1,641 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect } from "react";
+import {
+  motion,
+  AnimatePresence,
+  animate,
+  useScroll,
+  useTransform,
+} from "framer-motion";
+import { useNavigate } from "react-router-dom";
+import {
+  Trophy,
+  Zap,
+  Star,
+  Gift,
+  Ticket,
+  ChevronRight,
+  Crown,
+  Gamepad2,
+  Flame,
+  Sparkles,
+} from "lucide-react";
 
-const ProfilePage: React.FC = () => {
+const profileData = {
+  playerName: "CryptoGamer",
+  playerImage: "/player-avatar.jpg",
+  walletAddress: "0x1A2B3C4D5E6F7G8H9I0J1K2L3M4N5O6P7Q8R9S0",
+  totalPoints: 45680,
+  totalGamesPlayed: 287,
+  mostPlayedGame: "Color Ship Shooter",
+  hoursPerWeek: 24,
+  tournamentsParticipated: 18,
+  cultixBalance: 1250,
+  level: 1,
+  experience: 78,
+  games: [
+    {
+      name: "Color Ship Shooter",
+      score: 24350,
+      rank: 42,
+      highestScore: 41200,
+      topAchieverWallet: "0x7B423F5E6F7G89H0I1J2K3L4M5N6O7P8",
+      icon: "👾",
+    },
+    {
+      name: "Color puzzle",
+      score: 18650,
+      rank: 89,
+      highestScore: 31500,
+      topAchieverWallet: "0xCD923F5E6F7G89H0I1J2K3L4M5N6O7P8",
+      icon: "⚔️",
+    },
+    {
+      name: "Cricket Catch Pro",
+      score: 2680,
+      rank: 543,
+      highestScore: 28750,
+      topAchieverWallet: "0xEF113F5E6F7G89H0I1J2K3L4M5N6O7P8",
+      icon: "🚀",
+    },
+    {
+      name: "tic tak toe",
+      score: 0,
+      rank: 0,
+      highestScore: 22400,
+      topAchieverWallet: "0x5A423F5E6F7G89H0I1J2K3L4M5N6O7P8",
+      icon: "🐉",
+    },
+  ],
+  achievements: [
+    {
+      id: "first-win",
+      title: "First Victory",
+      description: "Win your first game",
+      icon: <Trophy size={24} />,
+      date: "2024-12-15",
+      rarity: "Common",
+      completed: true,
+    },
+    {
+      id: "tournament-pro",
+      title: "Tournament Pro",
+      description: "Participate in 10+ tournaments",
+      icon: <Crown size={24} />,
+      date: "2025-01-22",
+      rarity: "Rare",
+      completed: true,
+    },
+    {
+      id: "high-score",
+      title: "High Roller",
+      description: "Score over 20,000 in any game",
+      icon: <Star size={24} />,
+      date: "2025-02-05",
+      rarity: "Epic",
+      completed: true,
+    },
+    {
+      id: "master-strategist",
+      title: "Master Strategist",
+      description: "Win 5 consecutive games",
+      icon: <Zap size={24} />,
+      date: null,
+      rarity: "Legendary",
+      completed: false,
+      progress: 60,
+    },
+  ],
+  coupons: [
+    {
+      id: "coupon-1",
+      title: "50% Off Next Tournament",
+      description: "Half price entry to any tournament",
+      code: "CRYPTO50",
+      validUntil: "2025-04-12",
+      icon: <Ticket size={24} />,
+      redeemed: false,
+      backgroundColor: "from-purple-600 to-indigo-700",
+    },
+    {
+      id: "coupon-2",
+      title: "Free Legendary Skin",
+      description: "Redeem for any legendary skin in the marketplace",
+      code: "LEGENDARYSKIN",
+      validUntil: "2025-03-30",
+      icon: <Sparkles size={24} />,
+      redeemed: false,
+      backgroundColor: "from-amber-500 to-orange-600",
+    },
+    {
+      id: "coupon-3",
+      title: "Double XP Weekend",
+      description: "Earn 2x XP for an entire weekend",
+      code: "DOUBLEXP",
+      validUntil: "2025-04-05",
+      icon: <Flame size={24} />,
+      redeemed: false,
+      backgroundColor: "from-emerald-500 to-teal-700",
+    },
+    {
+      id: "coupon-4",
+      title: "Free Game Access",
+      description: "One week access to premium game title",
+      code: "FREEGAME",
+      validUntil: "2025-03-20",
+      icon: <Gamepad2 size={24} />,
+      redeemed: true,
+      backgroundColor: "from-rose-600 to-pink-700",
+    },
+  ],
+};
+const CountUp = ({
+  target,
+  duration = 2,
+  format = (n: number) => n.toFixed(0),
+  className = "",
+}: {
+  target: number;
+  duration?: number;
+  format?: (n: number) => string;
+  className?: string;
+}) => {
+  const [value, setValue] = useState(0);
+
+  useEffect(() => {
+    const controls = animate(0, target, {
+      duration,
+      type: "spring",
+      stiffness: 50,
+      damping: 15,
+      onUpdate: (latest) => setValue(latest),
+    });
+    return () => controls.stop();
+  }, [target, duration]);
+
   return (
-    <div>
-      <div
-        className="h-[120vh] p-4 py-20 mt-[170px] text-white overflow-x-hidden min-[1023px]:hidden
-      max-[468px]:mt-[150px]
-      max-[400px]:mt-[140px]
-      max-[375px]:mt-[130px]
-      max-[370px]:mt-[120px]"
-      >
-        <motion.h1
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-white relative  text-lg font-semibold text-center text-shadow-glow mt-[-35px]
-          max-[468px]:left-[-2px] max-[468px]:top-[-16px]
-          max-[400px]:left-[-4px]
-          max-[370px]:left-[-3px]
-        "
-        >
-          Profile
-        </motion.h1>
+    <motion.span className={`font-bold ${className}`}>
+      {format(value)}
+    </motion.span>
+  );
+};
 
-        <div
-          className="border-t-[1px] mt-[30px] bg-[#141414] border-[#92FF00] relative h-[100vh] w-[100%] left-[-16px] max-w-4xl mx-auto rounded-t-[20px] p-4
-        max-[468px]:w-[109%]
-        max-[400px]:w-[109%]
-        max-[375px]:w-[109%]
-        max-[370px]:w-[109%]
-        max-[468px]:h-[120vh]
-        max-[400px]:h-[130vh]
-        max-[375px]:h-[140vh]
-        max-[370px]:h-[150vh]
-        max-[468px]:rounded-t-[20px]
-        max-[400px]:rounded-t-[20px]
-        max-[375px]:rounded-t-[20px]
-        max-[370px]:rounded-t-[20px]"
-        >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8 }}
-            className="absolute left-0 w-full top-[100px] h-[100vh] rounded-[80px] p-4 mx-auto
-          max-[468px]:rounded-[70px]
-          max-[400px]:rounded-[60px]
-          max-[375px]:rounded-[50px]
-          max-[370px]:rounded-[40px]"
-          >
-            <motion.img
-              src="/profilee.svg"
-              alt="Profile"
-              className="w-16 h-16 absolute left-[43%] top-[-130px] rounded-full border-[1px] border-[#82E300]
-              max-[468px]:w-[80px] max-[468px]:h-[80px] max-[468px]:top-[-140px] max-[468px]:left-[40%]
-              max-[400px]:w-[70px] max-[400px]:h-[70px] max-[400px]:top-[-135px] max-[400px]:left-[40%]
-              max-[375px]:w-12 max-[375px]:h-12 max-[375px]:top-[-120px] max-[375px]:left-[41%]
-              max-[370px]:w-[70px] max-[370px]:h-[70px] max-[370px]:top-[-135px] max-[370px]:left-[39.5%]"
-              initial={{ scale: 0, rotate: -90 }}
-              animate={{ scale: 1, rotate: 0 }}
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              whileHover={{ scale: 1.1 }}
-            />
-            <motion.h1
-              className="text-lg absolute text-[#858585] left-[35%] top-[-60px] font-bold
-              max-[468px]:text-lg max-[468px]:top-[-50px] max-[468px]:left-[35%]
-              max-[400px]:text-base max-[400px]:top-[-55px] max-[400px]:left-[34%]
-              max-[375px]:text-base max-[375px]:top-[-30x] max-[375px]:left-[33%]
-              max-[370px]:text-sm max-[370px]:top-[-50px] max-[370px]:left-[36%]"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.5 }}
-            >
-              Wallet Address
-            </motion.h1>
-            <motion.p
-              className="text-sm absolute text-[#CACACA] left-[42%] top-[-30px]
-              max-[468px]:text-sm max-[468px]:top-[-24px] max-[468px]:left-[42%]
-              max-[400px]:text-xs max-[400px]:top-[-28px] max-[400px]:left-[41%]
-              max-[375px]:text-xs max-[375px]:top-[-26px] max-[375px]:left-[40%]
-              max-[370px]:text-xs max-[370px]:top-[-32px] max-[370px]:left-[41%]"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.35, duration: 0.5 }}
-            >
-              abcd12345
-            </motion.p>
-            <motion.span
-              className="bg-[#82E300] absolute text-black font-bold w-[65px] h-[66px] py-1 left-[35px] top-[16px] rounded-l-lg flex items-center justify-center
-              max-[468px]:w-[65px] max-[468px]:h-[66px] 
-              max-[400px]:w-[60px] max-[400px]:h-[68px] max-[400px]:left-[30px] max-[400px]:top-[11px]
-              max-[375px]:w-[55px] max-[375px]:h-[60px] max-[375px]:left-[25px] max-[375px]:top-[12px]
-              max-[370px]:w-[50px] max-[370px]:h-[67px] max-[370px]:left-[20px] max-[370px]:top-[11px]"
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.4, duration: 0.5 }}
-            >
-              <h3
-                className="font-medium leading-tight tracking-tighter text-black text-center text-sm
-                max-[468px]:text-sm
-                max-[400px]:text-sm
-                max-[375px]:text-xs
-                max-[370px]:text-xs"
-              >
-                Total Points
-              </h3>
-            </motion.span>
-            <motion.span
-              className="bg-[#82E300] absolute text-black font-bold w-[65px] h-[68px] py-1 left-[35px] top-[105px] rounded-l-lg flex items-center justify-center
-              max-[468px]:w-[65px] max-[468px]:h-[68px] 
-              max-[400px]:w-[60px] max-[400px]:h-[68px] max-[400px]:left-[30px] max-[400px]:top-[98px]
-              max-[375px]:w-[55px] max-[375px]:h-[60px] max-[375px]:left-[25px] max-[375px]:top-[95px]
-              max-[370px]:w-[50px] max-[370px]:h-[67px] max-[370px]:left-[20px] max-[370px]:top-[99px]"
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.45, duration: 0.5 }}
-            >
-              <h3
-                className="font-medium leading-tight tracking-tighter text-center text-sm
-                max-[468px]:text-sm 
-                max-[400px]:text-sm
-                max-[375px]:text-xs
-                max-[370px]:text-xs"
-              >
-                Games Played
-              </h3>
-            </motion.span>
-            <motion.div
-              className="flex flex-col relative gap-4 h-[150px] w-full left-[17px]
-              max-[468px]:left-[15px]
-              max-[400px]:left-[10px]
-              max-[375px]:left-[5px]
-              max-[370px]:left-[2px]"
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.5 }}
-            >
-              <div
-                className="flex items-center relative w-[74vw] h-[95px] right-[-60px] justify-between bg-[#1E1E1E] border-2 border-[#82E300] rounded-lg rounded-r-3xl
-                max-[468px]:w-[74vw] max-[468px]:h-[95px] max-[468px]:right-[-60px]
-                max-[400px]:w-[74vw] max-[400px]:h-[90px] max-[400px]:right-[-55px] max-[400px]:top-[-5px]
-                max-[375px]:w-[75vw] max-[375px]:h-[85px] max-[375px]:right-[-50px]
-                max-[370px]:w-[78vw] max-[370px]:h-[80px] max-[370px]:right-[-45px]"
-                style={{
-                  width: window.innerHeight < 700 ? "75vw" : "",
-                }}
-              >
-                <span
-                  className="text-[#FEA50D] ml-[10px] font-bold text-xl flex-grow text-left
-                max-[468px]:text-xl
-                max-[400px]:text-lg
-                max-[375px]:text-base
-                max-[370px]:text-base"
-                >
-                  000
-                </span>
-                <img
-                  src="/100.svg"
-                  alt="Emoji Events"
-                  className="w-[50px] h-[50px] mr-[5px] bg-[#FFA500] rounded-3xl
-                max-[468px]:w-[50px] max-[468px]:h-[50px]
-                max-[400px]:w-[45px] max-[400px]:h-[45px]
-                max-[375px]:w-[40px] max-[375px]:h-[40px]
-                max-[370px]:w-[38px] max-[370px]:h-[38px]"
-                />
-              </div>
-              <div
-                className="flex items-center relative w-[74vw] h-[97px] right-[-60px] justify-between bg-[#1E1E1E] border-2 border-[#82E300] rounded-lg rounded-r-3xl
-                max-[468px]:w-[74vw] max-[468px]:h-[97px] max-[468px]:right-[-60px] max-[468px]:top-[6px]
-                max-[400px]:w-[74vw] max-[400px]:h-[90px] max-[400px]:right-[-55px] max-[400px]:top-[0px]
-                max-[375px]:w-[65vw] max-[375px]:h-[85px] max-[375px]:right-[-50px]
-                max-[370px]:w-[78vw] max-[370px]:h-[80px] max-[370px]:right-[-45px]"
-                style={{
-                  width: window.innerHeight < 700 ? "75vw" : "",
-                }}
-              >
-                <span
-                  className="text-[#FEA50D] ml-[10px] font-bold text-xl flex-grow text-left
-                max-[468px]:text-xl
-                max-[400px]:text-lg
-                max-[375px]:text-base
-                max-[370px]:text-base"
-                >
-                  000
-                </span>
-                <img
-                  src="/gc.svg"
-                  alt="Emoji Events"
-                  className="w-[50px] h-[50px] mr-[5px] bg-[#FFA500] rounded-3xl
-                max-[468px]:w-[50px] max-[468px]:h-[50px]
-                max-[400px]:w-[45px] max-[400px]:h-[45px]
-                max-[375px]:w-[40px] max-[375px]:h-[40px]
-                max-[370px]:w-[38px] max-[370px]:h-[38px]"
-                />
-              </div>
-            </motion.div>
-            <motion.div
-              className="mt-[30px] relative w-full h-[55vh]
-              max-[468px]:left-[20px]
-              max-[400px]:left-[10px]
-              max-[375px]:
-              max-[370px]:left-[3px]"
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.6, duration: 0.5 }}
-            >
-              <h2
-                className="text-sm relative text-[#A3A3A3] mb-1
-              max-[468px]:text-sm
-              max-[400px]:text-xs
-              max-[375px]:text-xs
-              max-[370px]:text-xs"
-              >
-                Tournaments Participated
-              </h2>
-              <div
-                className="bg-[#141414] border h-[50px] w-[86vw] border-[#92FF00] rounded-2xl p-4 mb-4
-              max-[468px]:w-[86vw]
-              max-[400px]:w-[88vw]
-              max-[375px]:w-[89vw]
-              max-[370px]:w-[90vw]
-              max-[468px]:p-4
-              max-[400px]:p-3
-              max-[375px]:p-2
-              max-[370px]:p-2"
-              >
-                <p
-                  className="text-xl text-[#FEA50D] absolute top-[40px] font-bold
-                max-[468px]:text-xl max-[468px]:top-[36px]
-                max-[400px]:text-lg max-[400px]:top-[32px]
-                max-[375px]:text-base max-[375px]:top-[32px]
-                max-[370px]:text-base max-[370px]:top-[35px]"
-                >
-                  000
-                </p>
-              </div>
-              <h2
-                className="text-sm relative mt-7 text-[#A3A3A3] mb-1
-              max-[468px]:text-sm
-              max-[400px]:text-xs
-              max-[375px]:text-xs
-              max-[370px]:text-xs"
-              >
-                Tournaments
-              </h2>
-              <div
-                className="bg-[#353535] border w-[86vw] border-[#92FF00] rounded-2xl p-4 relative
-                max-[468px]:w-[86vw] max-[468px]:h-[23vh] max-[468px]:p-4
-                max-[400px]:w-[88vw] max-[400px]:h-[22vh] max-[400px]:p-3
-                max-[370px]:w-[90vw] max-[370px]:h-[22vh] max-[370px]:p-2"
-                style={{
-                  height: window.innerWidth === 375 ? "30vh" : "23vh",
-                }}
-              >
-                <select
-                  className="w-full h-[6.5vh] mt-[1px]  appearance-none bg-[#353535] text-[#B3B3B3] border border-[#B3B3B3] rounded-[100px] p-2
-                max-[468px]:p-2
-                max-[400px]:p-1
-                max-[375px]:p-1
-                max-[370px]:p-1"
-                >
-                  <option>Cricket Catch Pro</option>
-                  <option>Cricket Powerplay</option>
-                  <option>Color Ship Shooter</option>
-                  <option>Color Circle Puzzle</option>
-                  <option>Wave Run</option>
-                  <option>Number Snake</option>
-                  <option>Fire Number Up</option>
-                  <option>Two Colors</option>
-                  <option>Drop The Number</option>
-                  <option>Snake Color Break</option>
-                </select>
-                <div className="absolute top-[-30%]  max-[370px]:top-[-30%] max-[370px]:right-[20px] flex items-center justify-center h-full pointer-events-none
-              max-[468px]:right-[30px] max-[468px]:top-[-28%]
-              ">
-                  <svg
-                    width="12"
-                    height="12"
-                    fill="#B3B3B3"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M0 3L6 9L12 3H0Z" />
-                  </svg>
-                </div>
-                <div className="mt-4 relative">
-                  <h3
-                    className="text-sm text-[#A3A3A3] relative
-                  max-[468px]:text-sm max-[468px]:top-[24px]
-                  max-[400px]:text-xs
-                  max-[375px]:text-xs max-[375px]:top-[20px]
-                  max-[370px]:text-xs max-[370px]:top-[7px]"
-                  >
-                    Highest Score
-                  </h3>
-                  <p
-                    className="text-xl relative text-right text-[#FEA50D] font-bold
-                  max-[468px]:text-xl
-                  max-[400px]:text-lg
-                  max-[375px]:text-base
-                  max-[370px]:text-base max-[370px]:top-[-11px]"
-                  >
-                    00000
-                  </p>
-                  <div
-                    className="w-full h-[55px] rounded-2xl max-[468px]:top-[55px] bg-[#141414] absolute top-[30px]
-                  max-[370px]:top-[34px] 
-                  max-[400px]:top-[44px]"
-                  >
-                    <p className="absolute top-[7px] font-light italic text-sm left-[18px]">
-                      Your Score
-                    </p>
-                    <p className="absolute top-[25px] text-[#FEA50D] text-lg left-[20px]">
-                      000
-                    </p>
-                  </div>
-                  <div
-                    className="mx-auto max-w-4xl relative left-[-16px] grid grid-cols-2 w-[106%] gap-2 p-4 mt-[70px]
-                    max-[370px]:mt-[110px]
-                    max-[370px]:w-full
-                    max-[370px]:h-auto
-                    max-[370px]:gap-4
-                    max-[370px]:left-[-22px]"
-                  >
-                    <div
-                      className="w-[210px] h-[140px] relative left-[-30px] p-4 text-center rounded-3xl
-                    max-[370px]:top-[-60px]
-                    max-[370px]:w-[200px]
-                    max-[400px]:w-[200px]"
-                    >
-                      <img
-                        src="/d1.svg"
-                        alt="Image 1"
-                        className="w-full h-full object-cover rounded-3xl"
-                      />
-                      <p className="relative text-lg font-normal top-[-42px] left-[2px] text-[#FEA50D]">
-                        Color ship shooter
-                      </p>
-                    </div>
-                    <div
-                      className="p-4 w-[210px] h-[140px] relative text-center rounded-3xl
-                    max-[370px]:top-[-60px]
-                    max-[370px]:w-[200px]
-                    max-[400px]:w-[200px]"
-                    >
-                      <img
-                        src="/d2.svg"
-                        alt="Image 2"
-                        className="w-full h-full object-cover rounded-3xl"
-                      />
-                      <p className="relative text-lg font-normal top-[-42px] left-[40px] text-[#FEA50D]">
-                        48
-                      </p>
-                      <p className="absolute text-sm font-normal top-[63%] right-[14%] text-[#FEA50D]">
-                        HR
-                      </p>
-                    </div>
-                    <div
-                      className="p-4 w-[210px] h-[140px] relative left-[-30px] rounded-3xl text-center
-                    max-[370px]:top-[-60px]
-                    max-[370px]:w-[200px]
-                    max-[400px]:w-[200px]
-                    max-[378px]:mt-[-30px]"
-                    >
-                      <img
-                        src="/d3.svg"
-                        alt="Image 3"
-                        className="w-full h-full object-cover rounded-3xl"
-                      />
-                      <p className="relative text-lg font-normal top-[-40px] left-[40px] text-[#FEA50D]">
-                        -98 IGNIx
-                      </p>
-                    </div>
-                    <div
-                      className="p-4 w-[210px] h-[140px] relative text-center rounded-3xl
-                    max-[370px]:top-[-60px]
-                    max-[370px]:w-[200px]
-                    max-[400px]:w-[200px]
-                    max-[378px]:mt-[-30px]"
-                    >
-                      <img
-                        src="/d4.svg"
-                        alt="Image 4"
-                        className="w-full h-full object-cover rounded-3xl"
-                      />
-                      <p className="relative text-lg font-normal top-[-43px] left-[5px] text-[#FEA50D]">
-                        Color ship shooter
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
+const StatCard = ({
+  icon,
+  label,
+  value,
+  bgGradient = "from-[#2A2A2A] to-[#202020]",
+}: {
+  icon: React.ReactNode;
+  label: string;
+  value: string | number;
+  bgGradient?: string;
+}) => {
+  return (
+    <motion.div
+      className={`bg-gradient-to-b ${bgGradient} p-5 rounded-2xl shadow-lg border border-gray-800 relative overflow-hidden`}
+      whileHover={{
+        y: -5,
+        boxShadow:
+          "0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2)",
+      }}
+      transition={{ type: "spring", stiffness: 400, damping: 17 }}
+    >
+      <div className="absolute top-0 right-0 opacity-10 text-6xl p-2">
+        {icon}
+      </div>
+      <div className="flex items-center justify-between">
+        <div>
+          <p className="text-gray-400 text-sm">{label}</p>
+          <h2 className="text-2xl font-bold mt-1">{value}</h2>
         </div>
       </div>
+    </motion.div>
+  );
+};
 
+interface Coupon {
+  id: string;
+  title: string;
+  description: string;
+  code: string;
+  validUntil: string;
+  icon: React.ReactNode;
+  redeemed: boolean;
+  backgroundColor: string;
+}
 
+const CouponCard = ({ coupon }: { coupon: Coupon }) => {
+  const [isFlipped, setIsFlipped] = useState(false);
 
-      <div className="p-4 py-20 mt-[170px] min-[1339px]:mt-[280px]  text-white overflow-x-hidden max-[1023px]:hidden
-    
-    "
+  return (
+    <motion.div
+      className="perspective"
+      whileHover={{ scale: 1.02 }}
+      onClick={() => setIsFlipped(!isFlipped)}
+    >
+      <motion.div
+        className="relative w-full h-48 cursor-pointer"
+        initial={false}
+        animate={{ rotateY: isFlipped ? 180 : 0 }}
+        transition={{
+          duration: 0.6,
+          type: "spring",
+          stiffness: 300,
+          damping: 20,
+        }}
+        style={{ transformStyle: "preserve-3d" }}
       >
+        <motion.div
+          className={`absolute w-full h-full bg-gradient-to-br ${coupon.backgroundColor} rounded-xl p-6 shadow-xl flex flex-col justify-between backface-hidden border-2 border-gray-800`}
+          style={{ backfaceVisibility: "hidden" }}
+        >
+          <div className="flex justify-between items-start">
+            <div className="flex items-center space-x-2">
+              <div className="p-2 bg-white bg-opacity-20 rounded-lg">
+                {coupon.icon}
+              </div>
+              <h3 className="font-bold text-lg">{coupon.title}</h3>
+            </div>
+            {coupon.redeemed && (
+              <div className="bg-black bg-opacity-40 px-3 py-1 rounded-full text-xs font-bold">
+                REDEEMED
+              </div>
+            )}
+          </div>
 
-        <div className="bg-[#92FF00] w-full min-[1339px]:w-[1339px] min-[1339px]:left-[21%] z-50 absolute mt-[10px] left-[0px] h-[2px]"></div>
-        <div className=" absolute w-full max-w-4xl  mx-auto  p-4">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8 }}
-            className="absolute left-0 w-full top-[100px] h-[100vh] rounded-[80px] p-4 mx-auto"
-          >
+          <div className="mt-2">
+            <p className="text-sm text-white text-opacity-80">
+              {coupon.description}
+            </p>
+            <p className="text-xs mt-2 text-white text-opacity-70">
+              Valid until: {coupon.validUntil}
+            </p>
+          </div>
 
-            <motion.img
-              src="/profilee.svg"
-              alt="Profile"
-              className="w-[80px] h-[80px] min-[1339px]:left-[35%] min-[1399px]:top-[-29%] left-[4%] top-[-33%] absolute rounded-full border-[1px] border-[#82E300]
-        
-            "
-              initial={{ scale: 0, rotate: -90 }}
-              animate={{ scale: 1, rotate: 0 }}
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              whileHover={{ scale: 1.1 }}
-            />
-            <motion.h1
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="text-white text-lg font-semibold text-center text-shadow-glow mb-8
-        top-[-30%] left-[17.5%] absolute min-[1339px]:left-[50%] min-[1399px]:top-[-29%]
-        "
-            >
-              Profile
-            </motion.h1>
-            <motion.h1
-              className="text-sm absolute text-[#858585] min-[1339px]:left-[50%] left-[17.6%] top-[-25%] font-bold"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.5 }}
-            >
-              Wallet Address
-            </motion.h1>
-            <motion.p
-              className="text-md absolute min-[1339px]:left-[50%] text-[#CACACA] left-[17.6%] top-[-22%]"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.35, duration: 0.5 }}
-            >
-              abcd12345
-            </motion.p>
-
-
-
+          <div className="flex justify-end mt-2">
             <motion.div
-              className="flex flex-col relative gap-4 min-[1339px]:left-[19.5%]  h-[150px] w-full left-[17px] 
-      max-[468px]:left-[15px]
-      max-[400px]:left-[10px]
-      max-[375px]:left-[5px]
-      max-[370px]:left-[2px]"
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.5 }}
+              className="p-1 rounded-full bg-white bg-opacity-20"
+              whileTap={{ scale: 0.9 }}
             >
-              <div
-                className="flex items-center justify-between  relative w-[38vw] h-[69px] bg-[#1E1E1E] border-2 border-[#82E300] rounded-xl rounded-r-3xl top-[-51.1%] left-[10%] min-[1399px]:left-[20%]
-        max-[468px]:w-[74vw] max-[468px]:h-[97px]
-        max-[400px]:w-[74vw] max-[400px]:h-[90px]
-        max-[375px]:w-[65vw] max-[375px]:h-[85px]
-        max-[370px]:w-[78vw] max-[370px]:h-[80px]"
-              >
-                <div className="flex items-center">
-                  <span className="text-[#FEA50D] ml-2 font-bold text-xl">
-                    000
-                  </span>
-                  <motion.span
-                    className="bg-[#82E300] text-black font-bold left-[-95%] relative w-[65px] h-[68.4px] py-1 rounded-l-lg flex items-center justify-center"
-                    initial={{ opacity: 0, scale: 0 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.45, duration: 0.5 }}
-                  >
-                    <h3 className="font-medium leading-tight tracking-tighter text-center text-sm">
-                      Total Points
-                    </h3>
-                  </motion.span>
-                </div>
-                <img
-                  src="/100.svg"
-                  alt="Emoji Events"
-                  className="w-[50px] h-[50px] mr-1 bg-[#FFA500] rounded-3xl"
-                />
-              </div>
-
-              <div
-                className="flex items-center left-[70%] justify-between top-[-108%] relative w-[40vw] h-[70px] bg-[#1E1E1E] border-2 border-[#82E300] rounded-xl rounded-l-3xl min-[1399px]:left-[100%]
-        max-[468px]:w-[74vw] max-[468px]:h-[97px]
-        max-[400px]:w-[74vw] max-[400px]:h-[90px]
-        max-[375px]:w-[65vw] max-[375px]:h-[85px]
-        max-[370px]:w-[78vw] max-[370px]:h-[80px]"
-              >
-                <img
-                  src="/gc.svg"
-                  alt="Emoji Events"
-                  className="w-[50px] h-[50px] ml-1 bg-[#FFA500] rounded-3xl"
-                />
-                <div className="flex items-center">
-                  <span className="text-[#FEA50D] mr-1 font-bold text-xl">
-                    000
-                  </span>
-                  <motion.span
-                    className="bg-[#82E300] text-black font-bold w-[65px] h-[68px] py-1 rounded-r-lg flex items-center justify-center"
-                    initial={{ opacity: 0, scale: 0 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.45, duration: 0.5 }}
-                  >
-                    <h3 className="font-medium leading-tight tracking-tighter text-center text-sm">
-                      Games Played
-                    </h3>
-                  </motion.span>
-                </div>
-              </div>
+              <ChevronRight size={16} />
             </motion.div>
+          </div>
+        </motion.div>
 
-            <motion.div
-              className="mt-[-100px] relative w-full h-[55vh] min-[1339px]:absolute left-[-2%] min-[1339px]:left-[26%]  min-[1339px]:mt-[-10px]
-      max-[468px]:left-[20px]
-      max-[400px]:left-[10px]
-      max-[370px]:left-[3px]"
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.6, duration: 0.5 }}
-            >
-              <h2
-                className="text-sm relative left-[7.5%] text-[#A3A3A3] top-[-10%] mb-1
-      max-[468px]:text-sm
-      max-[400px]:text-xs
-      max-[375px]:text-xs
-      max-[370px]:text-xs"
+        {/* Back side */}
+        <motion.div
+          className={`absolute w-full h-full bg-gradient-to-br ${coupon.backgroundColor} rounded-xl p-6 shadow-xl flex flex-col justify-between backface-hidden border-2 border-gray-800`}
+          style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
+        >
+          <div className="text-center flex flex-col items-center justify-center h-full">
+            <div className="text-sm mb-2">COUPON CODE</div>
+            <div className="font-mono text-xl font-bold p-3 bg-white bg-opacity-20 rounded-lg w-full text-center">
+              {coupon.code}
+            </div>
+            {!coupon.redeemed ? (
+              <motion.button
+                className="mt-4 px-4 py-2 bg-white text-black font-bold rounded-lg"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                Tournaments Participated
-              </h2>
-              <div
-                className="bg-[#141414] border h-[50px] relative left-[7%] top-[-9%] w-[42vw] border-[#92FF00] rounded-2xl p-4 mb-4"
-              >
-                <p
-                  className="text-xl text-[#FEA50D] absolute top-[12px] font-bold
-        max-[468px]:text-xl max-[468px]:top-[36px]
-        max-[400px]:text-lg max-[400px]:top-[32px]
-        max-[375px]:text-base max-[375px]:top-[32px]
-        max-[370px]:text-base max-[370px]:top-[35px]"
-                >
-                  000
-                </p>
+                REDEEM NOW
+              </motion.button>
+            ) : (
+              <div className="mt-4 px-4 py-2 bg-gray-800 text-gray-400 font-bold rounded-lg cursor-not-allowed">
+                ALREADY REDEEMED
               </div>
-              <div
-                className="bg-[#353535]  w-[42vw] left-[76.5%] top-[-27.5%] h-[45vh]  rounded-xl p-4 relative min-[1399px]:left-[90%]
-        max-[468px]:w-[86vw] max-[468px]:h-[23vh] max-[468px]:p-4
-        max-[400px]:w-[88vw] max-[400px]:h-[22vh] max-[400px]:p-3
-        max-[370px]:w-[90vw] max-[370px]:h-[22vh] max-[370px]:p-2"
-              >
-                <h2
-                  className="text-sm relative mt-7 left-[6%] text-[#A3A3A3] mb-1
-        max-[468px]:text-sm
-        max-[400px]:text-xs
-        max-[375px]:text-xs
-        max-[370px]:text-xs"
-                >
-                  Tournaments
-                </h2>
-                <select
-                  className="w-[20vw] h-[6.5vh] mt-[1px]  appearance-none bg-[#353535] text-[#B3B3B3] border border-[#92FF00] rounded-lg p-2 relative left-[6%]
-        max-[468px]:p-2
-        max-[400px]:p-1
-        max-[375px]:p-1
-        max-[370px]:p-1"
-                >
-                  <option>Cricket Catch Pro</option>
-                  <option>Cricket Powerplay</option>
-                  <option>Color Ship Shooter</option>
-                  <option>Color Circle Puzzle</option>
-                  <option>Wave Run</option>
-                  <option>Number Snake</option>
-                  <option>Fire Number Up</option>
-                  <option>Two Colors</option>
-                  <option>Drop The Number</option>
-                  <option>Snake Color Break</option>
-                </select>
-                <div className="absolute top-[-17.5%] left-[21vw]  max-[370px]:top-[-30%] max-[370px]:right-[20px] flex items-center justify-center h-full min-[1339px]:left-[50%] min-[1339px]:top-[-75px] pointer-events-none">
-                  <svg
-                    width="12"
-                    height="12"
-                    fill="#B3B3B3"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M0 3L6 9L12 3H0Z" />
-                  </svg>
+            )}
+          </div>
+        </motion.div>
+      </motion.div>
+    </motion.div>
+  );
+};
+
+interface Achievement {
+  completed: boolean;
+  icon: React.ReactNode;
+  title: string;
+  rarity: "Common" | "Rare" | "Epic" | "Legendary";
+  description: string;
+  date?: string;
+  progress?: number;
+}
+
+const Profile = () => {
+  const navigate = useNavigate();
+  const [selectedGameIndex, setSelectedGameIndex] = useState(0);
+  const [activeTab, setActiveTab] = useState("achievements");
+  const { scrollYProgress } = useScroll();
+  const headerOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0.3]);
+
+  const currentGameDetails = profileData.games[selectedGameIndex];
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-[#0D0D0D] to-[#050505] text-white overflow-x-hidden">
+      <div className="fixed top-20 -left-20 w-96 h-96 rounded-full bg-purple-900 opacity-20 filter blur-3xl"></div>
+      <div className="fixed bottom-20 -right-20 w-80 h-80 rounded-full bg-blue-900 opacity-20 filter blur-3xl"></div>
+
+      <div className="pt-24 pb-12">
+        <motion.div
+          className="max-w-6xl mx-auto px-6"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <div className="relative bg-gradient-to-b from-[#1A1A1A] to-[#0D0D0D] rounded-3xl p-8 border border-gray-800 shadow-2xl overflow-hidden">
+            <div className="absolute top-0 right-0 w-40 h-40 bg-yellow-500 rounded-full filter blur-3xl opacity-10"></div>
+            <div className="absolute bottom-0 left-0 w-40 h-40 bg-blue-500 rounded-full filter blur-3xl opacity-10"></div>
+
+            <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
+              <motion.div className="relative" whileHover={{ scale: 1.03 }}>
+                <img
+                  //   src={profileData.playerImage}
+                  src="https://img.freepik.com/free-vector/cute-alien-playing-vr-game-with-controller-cartoon-vector-icon-illustration-science-technology-flat_138676-13965.jpg"
+                  alt="Player Avatar"
+                  className="w-32 h-32 rounded-2xl border-4 border-yellow-500 shadow-xl z-10"
+                />
+                <div className="absolute -bottom-2 -right-2 bg-gradient-to-r from-yellow-500 to-orange-600 rounded-full p-2 shadow-lg border-2 border-gray-900">
+                  <Crown size={16} className="text-white" />
                 </div>
-                <div className="mt-7 relative left-[6%]">
-                  <h3
-                    className="text-sm text-[#A3A3A3] relative
-          max-[468px]:text-sm max-[468px]:top-[24px]
-          max-[400px]:text-xs
-          max-[375px]:text-xs max-[375px]:top-[20px]
-          max-[370px]:text-xs max-[370px]:top-[7px]"
-                  >
-                    Highest Score
-                  </h3>
-                  <p
-                    className="text-xl relative left-[76%] top-[-28px] text-[#FEA50D] font-bold"
-                  >
-                    00000
-                  </p>
-                  <div
-                    className="w-[35vw] h-[55px] rounded-2xl max-[468px]:top-[55px] bg-[#141414] absolute top-[30px]
-          max-[370px]:top-[34px] 
-          max-[400px]:top-[44px]"
-                  >
-                    <p className="absolute top-[7px] font-light italic text-sm left-[18px]">
-                      Your Score
+              </motion.div>
+
+              <div className="flex-1 text-center md:text-left">
+                <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                  <div>
+                    <h1 className="text-4xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-yellow-500 via-amber-500 to-orange-500">
+                      {profileData.playerName}
+                    </h1>
+                    <p className="text-gray-400 font-mono text-sm mt-1">
+                      {profileData.walletAddress.slice(0, 10)}...
+                      {profileData.walletAddress.slice(-6)}
                     </p>
-                    <p className="absolute top-[25px] text-[#FEA50D] text-lg left-[20px]">
-                      000
-                    </p>
+                  </div>
+
+                  <div className="flex flex-col items-center md:items-end">
+                    <div className="flex items-center">
+                      <Flame className="text-orange-500 mr-2" size={20} />
+                      <span className="text-xl font-bold mr-1">Level</span>
+                      <CountUp
+                        target={profileData.level}
+                        className="text-yellow-400 text-2xl"
+                      />
+                    </div>
+                    <div className="w-full max-w-xs mt-2">
+                      <div className="w-full bg-gray-800 rounded-full h-2">
+                        <motion.div
+                          className="bg-gradient-to-r from-orange-500 to-yellow-500 h-2 rounded-full"
+                          initial={{ width: 0 }}
+                          animate={{ width: `${profileData.experience}%` }}
+                          transition={{ duration: 1.5, type: "spring" }}
+                        />
+                      </div>
+                      <div className="flex justify-between text-xs text-gray-400 mt-1">
+                        <span>XP</span>
+                        <span>{profileData.experience}%</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <div className="flex flex-col items-center md:items-start">
+                    <p className="text-gray-400 text-xs">TOTAL POINTS</p>
+                    <div className="mt-1">
+                      <CountUp
+                        target={profileData.totalPoints}
+                        className="text-xl text-yellow-400"
+                        format={(n) => n.toLocaleString()}
+                      />
+                    </div>
+                  </div>
+                  <div className="flex flex-col items-center md:items-start">
+                    <p className="text-gray-400 text-xs">CULTIX BALANCE</p>
+                    <div className="flex items-center mt-1">
+                      <span className="text-emerald-400 mr-1">✦</span>
+                      <CountUp
+                        target={profileData.cultixBalance}
+                        className="text-xl text-emerald-400"
+                        format={(n) => n.toLocaleString()}
+                      />
+                    </div>
+                  </div>
+                  <div className="flex flex-col items-center md:items-start">
+                    <p className="text-gray-400 text-xs">GAMES PLAYED</p>
+                    <div className="mt-1">
+                      <CountUp
+                        target={profileData.totalGamesPlayed}
+                        className="text-xl"
+                        format={(n) => n.toLocaleString()}
+                      />
+                    </div>
+                  </div>
+                  <div className="flex flex-col items-center md:items-start">
+                    <p className="text-gray-400 text-xs">TOURNAMENTS</p>
+                    <div className="mt-1">
+                      <CountUp
+                        target={profileData.tournamentsParticipated}
+                        className="text-xl"
+                        format={(n) => n.toLocaleString()}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
-              <div
-                className="w-[210px] h-[140px] relative top-[-90%] left-[40px] p-4 text-center rounded-3xl
-          max-[370px]:top-[-60px]
-          max-[370px]:w-[200px]
-          max-[400px]:w-[200px]"
-              >
-                <img
-                  src="/d1.svg"
-                  alt="Image 1"
-                  className="w-full h-full object-cover rounded-3xl"
-                />
-                <p className="relative text-lg font-normal top-[-42px] left-[2px] text-[#FEA50D]">
-                  Color ship shooter
-                </p>
-              </div>
+            </div>
+          </div>
+        </motion.div>
 
-              <div
-                className="p-4 w-[210px] h-[140px] left-[40px] relative top-[-90%] text-center rounded-3xl
-          max-[370px]:top-[-60px]
-          max-[370px]:w-[200px]
-          max-[400px]:w-[200px]"
-              >
-                <img
-                  src="/d2.svg"
-                  alt="Image 2"
-                  className="w-full h-full object-cover rounded-3xl"
-                />
-                <p className="relative text-lg font-normal top-[-42px] left-[40px] text-[#FEA50D]">
-                  48
-                </p>
-                <p className="absolute text-sm font-normal top-[63%] right-[14%] text-[#FEA50D]">
-                  HR
-                </p>
-              </div>
-
-              <div
-                className="p-4 w-[210px] h-[140px] left-[300px] absolute top-[20%] rounded-3xl text-center min-[1399px]:top-[15%] 
-          max-[370px]:top-[-60px]
-          max-[370px]:w-[200px]
-          max-[400px]:w-[200px]
-          max-[378px]:mt-[-30px]"
-              >
-                <img
-                  src="/d3.svg"
-                  alt="Image 3"
-                  className="w-full h-full object-cover rounded-3xl"
-                />
-                <p className="relative text-lg font-normal top-[-40px] left-[40px] text-[#FEA50D]">
-                  -98 IGNIx
-                </p>
-              </div>
-              <div
-                className="p-4 w-[210px] h-[140px]  left-[300px] absolute top-[61.5%] text-center rounded-3xl min-[1399px]:top-[47%]
-          max-[370px]:top-[-60px]
-          max-[370px]:w-[200px]
-          max-[400px]:w-[200px]
-          max-[378px]:mt-[-30px]"
-              >
-                <img
-                  src="/d4.svg"
-                  alt="Image 4"
-                  className="w-full h-full object-cover rounded-3xl"
-                />
-                <p className="relative text-lg font-normal top-[-43px] left-[5px] text-[#FEA50D]">
-                  Color ship shooter
-                </p>
-              </div>
-            </motion.div>
+        <motion.div
+          className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 px-6 mt-6"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          <motion.div variants={itemVariants}>
+            <StatCard
+              icon="👾"
+              label="Most Played Game"
+              value={profileData.mostPlayedGame}
+              bgGradient="from-indigo-900/40 to-indigo-950/80"
+            />
           </motion.div>
+          <motion.div variants={itemVariants}>
+            <StatCard
+              icon="⏱️"
+              label="Hours per Week"
+              value={profileData.hoursPerWeek}
+              bgGradient="from-purple-900/40 to-purple-950/80"
+            />
+          </motion.div>
+          <motion.div variants={itemVariants}>
+            <StatCard
+              icon="🏆"
+              label="Tournament Rank"
+              value="#289"
+              bgGradient="from-amber-900/40 to-amber-950/80"
+            />
+          </motion.div>
+          <motion.div variants={itemVariants}>
+            <StatCard
+              icon="🔥"
+              label="Win Streak"
+              value="3 Games"
+              bgGradient="from-red-900/40 to-red-950/80"
+            />
+          </motion.div>
+        </motion.div>
 
-        </div>
+        <motion.div
+          className="max-w-6xl mx-auto px-6 mt-10"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+        >
+          <div className="flex flex-col sm:flex-row items-center justify-between mb-6">
+            <h2 className="text-2xl font-bold flex items-center">
+              <Gamepad2 className="mr-2 text-blue-400" /> Game Details
+            </h2>
+            <motion.select
+              value={selectedGameIndex}
+              onChange={(e) => setSelectedGameIndex(Number(e.target.value))}
+              className="mt-4 sm:mt-0 w-64 appearance-none bg-[#1A1A1A] text-white px-4 py-2 rounded-xl outline-none border border-gray-700 shadow-lg"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              {profileData.games.map((game, idx) => (
+                <option key={game.name} value={idx}>
+                  {game.icon} {game.name}
+                </option>
+              ))}
+            </motion.select>
+          </div>
+
+          <motion.div
+            className="bg-gradient-to-b from-[#1A1A1A] to-[#0D0D0D] p-6 rounded-2xl shadow-xl border border-gray-800"
+            layout
+            key={currentGameDetails.name}
+            initial={{ scale: 0.95, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.4, type: "spring" }}
+          >
+            <div className="flex items-center mb-6">
+              <span className="text-4xl mr-3">{currentGameDetails.icon}</span>
+              <h3 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
+                {currentGameDetails.name}
+              </h3>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="bg-black bg-opacity-30 p-4 rounded-xl border border-gray-800">
+                <p className="text-gray-400 text-sm">Your Score</p>
+                <div className="flex items-baseline">
+                  <h2 className="text-4xl font-bold">
+                    <CountUp
+                      target={currentGameDetails.score}
+                      className="text-yellow-400"
+                      format={(n) => n.toLocaleString()}
+                    />
+                  </h2>
+                  <span className="ml-2 text-gray-400">points</span>
+                </div>
+
+                {currentGameDetails.score > 0 && (
+                  <div className="mt-4">
+                    <div className="w-full bg-gray-800 rounded-full h-2">
+                      <motion.div
+                        className="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full"
+                        initial={{ width: 0 }}
+                        animate={{
+                          width: `${
+                            (currentGameDetails.score /
+                              currentGameDetails.highestScore) *
+                            100
+                          }%`,
+                        }}
+                        transition={{ duration: 1 }}
+                      />
+                    </div>
+                    <div className="flex justify-between text-xs text-gray-400 mt-1">
+                      <span>
+                        {Math.round(
+                          (currentGameDetails.score /
+                            currentGameDetails.highestScore) *
+                            100
+                        )}
+                        % of top score
+                      </span>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              <div className="bg-black bg-opacity-30 p-4 rounded-xl border border-gray-800">
+                <p className="text-gray-400 text-sm">Your Rank</p>
+                <h2 className="text-4xl font-bold">
+                  {currentGameDetails.rank > 0 ? (
+                    <span className="text-blue-400">
+                      #{currentGameDetails.rank}
+                    </span>
+                  ) : (
+                    <span className="text-gray-500">Unranked</span>
+                  )}
+                </h2>
+                {currentGameDetails.rank > 0 && (
+                  <p className="text-sm text-gray-400 mt-1">
+                    Top {((currentGameDetails.rank / 1000) * 100).toFixed(1)}%
+                    of players
+                  </p>
+                )}
+              </div>
+
+              <div className="bg-black bg-opacity-30 p-4 rounded-xl border border-gray-800">
+                <p className="text-gray-400 text-sm">Highest Global Score</p>
+                <h2 className="text-3xl font-bold text-purple-400">
+                  {currentGameDetails.highestScore.toLocaleString()}
+                </h2>
+                <p className="text-sm text-gray-400 mt-2 font-mono">
+                  {currentGameDetails.topAchieverWallet.slice(0, 6)}...
+                  {currentGameDetails.topAchieverWallet.slice(-4)}
+                </p>
+              </div>
+
+              <div className="bg-black bg-opacity-30 p-4 rounded-xl border border-gray-800 flex flex-col justify-between">
+                <p className="text-gray-400 text-sm">Quick Play</p>
+                <motion.button
+                  className="mt-4 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold rounded-xl flex items-center justify-center shadow-lg"
+                  whileHover={{
+                    scale: 1.02,
+                    boxShadow: "0 10px 15px -3px rgba(37, 99, 235, 0.3)",
+                  }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={() => navigate(`/games/${currentGameDetails.name}`)}
+                >
+                  <Zap size={20} className="mr-2" />
+                  PLAY NOW
+                </motion.button>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
       </div>
     </div>
   );
 };
 
-export default ProfilePage;
+export default Profile;

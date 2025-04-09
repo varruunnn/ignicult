@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from "framer-motion";
 const rewards = [
   {
     title: "Gameplay Rewards",
-    top: "15px",
     infoTitle: "Earn IGNIx and CultiX by playing your favorite games!",
     infoDetails: [
       "Points Scored: Earn IGNIx for every point you score. The better your performance, the more you earn.",
@@ -13,7 +12,6 @@ const rewards = [
   },
   {
     title: "Achievement Rewards",
-    top: "15px",
     infoTitle: "Unlock achievements and earn IGNIx and CultiX!",
     infoDetails: [
       "Tournaments: Participate and win in tournaments to earn IGNIx and CultiX.",
@@ -22,7 +20,6 @@ const rewards = [
   },
   {
     title: "Engagement Rewards",
-    top: "15px",
     infoTitle: "Stay engaged and earn even more rewards!",
     infoDetails: [
       "Daily Login: Earn IGNIx every day you log in to the platform",
@@ -31,8 +28,6 @@ const rewards = [
   },
   {
     title: "Weekly Leaderboard Rewards",
-    top: "5px",
-    isMultiline: true,
     infoTitle: "Compete on the leaderboard and earn even more rewards!",
     infoDetails: [
       "Top Performers: The top players on our weekly leaderboards will receive bonus IGNIx and CultiX.",
@@ -40,7 +35,6 @@ const rewards = [
   },
   {
     title: "Special Event Rewards",
-    top: "15px",
     infoTitle: "Join special events for exclusive rewards!",
     infoDetails: [
       "Event-Based Rewards: Participate in special events to earn higher IGNIx and CultiX rewards, along with exclusive prizes.",
@@ -48,7 +42,6 @@ const rewards = [
   },
   {
     title: "Future Rewards",
-    top: "15px",
     infoTitle: "Be part of our exciting future!",
     infoDetails: [
       "Direct Token Rewards: Earn CultiX directly for your activities on the platform",
@@ -58,7 +51,6 @@ const rewards = [
   },
   {
     title: "Security and Fairness",
-    top: "15px",
     infoTitle: "We prioritize your security and ensure fair play",
     infoDetails: [
       "Activity Monitoring: We actively monitor activities to prevent fraud and abuse.",
@@ -68,17 +60,15 @@ const rewards = [
   },
   {
     title: "Stay Informed",
-    top: "15px",
     infoTitle: "Keep up with the latest updates and announcements.",
     infoDetails: [
       "In-App Announcements: Get regular updates and announcements within the app.",
       "Social Media: Follow us on social media for the latest news.",
       "Email Newsletters: Subscribe to our newsletters for periodic updates.",
     ],
-  },
+  }, 
   {
     title: "Community Engagement",
-    top: "15px",
     infoTitle: "Join our community and help shape the future of Ignicult.",
     infoDetails: [
       "Surveys and Polls: Participate in surveys and polls to share your feedback.",
@@ -95,159 +85,111 @@ const RewardsPage = () => {
     setSelectedReward((prev) => (prev === index ? null : index));
   };
 
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 }
+  };
+
   return (
-    <div>
-      <div className="max-[400px]:ml-[-15px] lg:hidden max-[400px]:mb-[70px] py-10 pb-20 text-left left-[-20px] mt-[110px] relative min-h-screen overflow-x-hidden p-4 text-white">
-        <motion.header
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
+    <div className="min-h-screen bg-[#111111] text-gray-200 py-12 px-4
+    max-[365px]:mt-[64px]
+    ">
+      <motion.div 
+        className="max-w-3xl mx-auto"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+
+        <motion.div 
+          className="text-center mb-12"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
         >
-          <h1 className="text-[#92FF00] text-3xl font-roboto pl-10 font-semibold">
-            Welcome to <br /> Ignicult Rewards
+          <h1 className="text-3xl md:text-4xl font-sarpanch font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-yellow-500">
+            REWARDS
           </h1>
-          <p className="text-white font-roboto pl-10 mt-[15px]">
-            At Ignicult, we reward both casual players and <br /> blockchain
-            enthusiasts. Here’s what you can earn <br /> by joining us:
-          </p>
-        </motion.header>
-        <motion.section
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
-        >
+          <div className="h-1 w-20 bg-gradient-to-r from-red-500 to-yellow-500 mx-auto mt-4"></div>
+        </motion.div>
+
+        <div className="space-y-4">
           {rewards.map((reward, index) => (
-            <div key={index} className="mb-4">
+            <motion.div
+              key={index}
+              variants={itemVariants}
+              initial="hidden"
+              animate="visible"
+              transition={{ duration: 0.4, delay: index * 0.05 }}
+            >
+
               <motion.div
                 onClick={() => handleRewardClick(index)}
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className="bg-[#363636] relative w-[349px] h-[67px] pl-10 mt-[10px] ml-9 cursor-pointer flex items-center"
+                className="bg-[#1A1A1A] border-l-2 border-red-500 p-4 rounded-sm flex items-center justify-between cursor-pointer"
+                whileHover={{ x: 5 }}
+                transition={{ type: "tween", duration: 0.2 }}
               >
-                {reward.isMultiline ? (
-                  <h3 className="text-[#92FF00] text-lg font-roboto font-medium absolute left-[25px] top-[5px]">
-                    {reward.title}
-                    <br /> Rewards
-                  </h3>
-                ) : (
-                  <h3
-                    className="text-[#92FF00] text-[21px] font-roboto font-medium absolute left-[25px]"
-                    style={{ top: reward.top }}
-                  >
-                    {reward.title}
-                  </h3>
-                )}
-                <motion.img
-                  src="/arrow.svg"
-                  alt="arrow"
-                  className="absolute max-[399px]:right-[35px] right-[20px] top-[20px]"
+                <h2 className="text-lg font-sarpanch font-semibold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-yellow-500">
+                  {reward.title}
+                </h2>
+                <motion.div
                   animate={{ rotate: selectedReward === index ? 180 : 0 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                />
+                  transition={{ duration: 0.3 }}
+                >
+                  <svg 
+                    width="20" 
+                    height="20" 
+                    viewBox="0 0 24 24" 
+                    fill="none" 
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="text-gray-400"
+                  >
+                    <path 
+                      d="M6 9L12 15L18 9" 
+                      stroke="currentColor" 
+                      strokeWidth="2" 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </motion.div>
               </motion.div>
+
               <AnimatePresence>
                 {selectedReward === index && (
                   <motion.div
-                    initial={{ opacity: 0, scale: 0 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0 }}
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.3 }}
-                    className="bg-black p-4 rounded-lg mt-2 w-[349px] ml-9"
+                    className="overflow-hidden bg-[#232323] rounded-sm"
                   >
-                    <h4 className="text-xl font-bold mb-2">
-                      {reward.infoTitle}
-                    </h4>
-                    <ul className="list-disc ml-5">
-                      {reward.infoDetails.map((detail, i) => (
-                        <li key={i} className="mb-1">
-                          {detail}
-                        </li>
-                      ))}
-                    </ul>
+                    <div className="p-4 border-l-2 border-yellow-500 ml-4">
+                      <p className="font-sarpanch font-medium text-gray-300 mb-3">
+                        {reward.infoTitle}
+                      </p>
+                      <ul className="space-y-2">
+                        {reward.infoDetails.map((detail, idx) => (
+                          <motion.li
+                            key={idx}
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: idx * 0.1 }}
+                            className="flex items-start text-sm text-gray-400"
+                          >
+                            <span className="text-yellow-500 mr-2 mt-1">•</span>
+                            <span className="font-sarpanch">{detail}</span>
+                          </motion.li>
+                        ))}
+                      </ul>
+                    </div>
                   </motion.div>
                 )}
               </AnimatePresence>
-            </div>
+            </motion.div>
           ))}
-        </motion.section>
-      </div>
-      <div className="max-[400px]:ml-[-15px] max-[1023px]:hidden max-[400px]:mb-[70px] py-10 pb-20 text-left  mt-[110px] relative min-h-screen w-[150%] overflow-x-hidden p-4 text-white">
-        <motion.header
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          <h1 className="text-[#92FF00]  text-2xl left-[0%] relative font-roboto pl-10 font-semibold">
-            Welcome to <br /> Ignicult Rewards
-          </h1>
-          <div className="bg-[#92FF00] w-full mt-[10px] left-[-20px] relative h-[2px]"></div>
-          <p className="text-white font-roboto text-[12px] pl-10 mt-[15px]">
-            At Ignicult, we reward both casual players and blockchain
-            enthusiasts. Here’s what you can earn by joining us:
-          </p>
-        </motion.header>
-        <motion.section
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          {rewards.map((reward, index) => (
-            <div key={index} className="mb-4">
-              <motion.div
-                onClick={() => handleRewardClick(index)}
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className="bg-[#363636] relative w-[90vw] h-[67px] pl-10 mt-[10px] ml-9 cursor-pointer flex items-center"
-              >
-                {reward.isMultiline ? (
-                  <h3 className="text-[#92FF00] text-lg font-roboto font-medium absolute left-[25px] top-[5px]">
-                    {reward.title}
-                    <br /> Rewards
-                  </h3>
-                ) : (
-                  <h3
-                    className="text-[#92FF00] text-[21px] font-roboto font-medium absolute left-[25px]"
-                    style={{ top: reward.top }}
-                  >
-                    {reward.title}
-                  </h3>
-                )}
-                <motion.img
-                  src="/arrow.svg"
-                  alt="arrow"
-                  className="absolute max-[399px]:right-[35px] right-[20px] top-[20px]"
-                  animate={{ rotate: selectedReward === index ? 180 : 0 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                />
-              </motion.div>
-              <AnimatePresence>
-                {selectedReward === index && (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="bg-black p-4 rounded-lg mt-2 w-[90vw] ml-9"
-                  >
-                    <h4 className="text-xl font-bold mb-2">
-                      {reward.infoTitle}
-                    </h4>
-                    <ul className="list-disc ml-5">
-                      {reward.infoDetails.map((detail, i) => (
-                        <li key={i} className="mb-1">
-                          {detail}
-                        </li>
-                      ))}
-                    </ul>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          ))}
-        </motion.section>
-      </div>
+        </div>
+      </motion.div>
     </div>
   );
 };

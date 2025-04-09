@@ -1,533 +1,295 @@
-import React, { useState, useEffect } from "react";
-import { useSwipeable } from "react-swipeable";
-import { motion } from "framer-motion";
-import SwipeHintOverlay from "../SwipeHintOverlay/SwipeHintOverlay";
+import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 
-const Leaderboard: React.FC = () => {
-  type GameName = "Cricket Catch Pro" | "Soccer Stars" | "Basketball Blitz";
-  const mockData: Record<
-    GameName,
-    Record<
-      "Daily" | "Weekly" | "Monthly" | "Overall",
-      { rank: number; wallet: string; score: number }[]
-    >
-  > = {
-    "Cricket Catch Pro": {
-      Daily: [
-        { rank: 1, wallet: "d0af8c...908e", score: 7055 },
-        { rank: 2, wallet: "d0af8c...908e", score: 7055 },
-        { rank: 3, wallet: "d0af8c...908e", score: 7055 },
-        { rank: 4, wallet: "d0af8c...908e", score: 7055 },
-        { rank: 5, wallet: "d0af8c...908e", score: 7055 },
-        { rank: 6, wallet: "d0af8c...908e", score: 7055 },
-        { rank: 7, wallet: "d0af8c...908e", score: 7055 },
-        { rank: 8, wallet: "d0af8c...908e", score: 7055 },
-        { rank: 9, wallet: "d0af8c...908e", score: 7055 },
-        { rank: 10, wallet: "d0af8c...908e", score: 7055 },
-        { rank: 11, wallet: "d0af8c...908e", score: 7055 },
-      ],
-      Weekly: [
-        { rank: 1, wallet: "d0af8c...908e", score: 7055 },
-        { rank: 2, wallet: "d0af8c...908e", score: 7055 },
-        { rank: 3, wallet: "d0af8c...908e", score: 7055 },
-      ],
-      Monthly: [
-        { rank: 1, wallet: "d0af8c...908e", score: 7055 },
-        { rank: 2, wallet: "d0af8c...908e", score: 7055 },
-        { rank: 3, wallet: "d0af8c...908e", score: 7055 },
-      ],
-      Overall: [
-        { rank: 1, wallet: "d0af8c...908e", score: 7055 },
-        { rank: 2, wallet: "d0af8c...908e", score: 7055 },
-        { rank: 3, wallet: "d0af8c...908e", score: 7055 },
-      ],
-    },
-    "Soccer Stars": {
-      Daily: [
-        { rank: 1, wallet: "abcd12...ef34", score: 6500 },
-        { rank: 2, wallet: "abcd12...ef34", score: 6400 },
-        { rank: 3, wallet: "abcd12...ef34", score: 6300 },
-      ],
-      Weekly: [
-        { rank: 1, wallet: "abcd12...ef34", score: 6500 },
-        { rank: 2, wallet: "abcd12...ef34", score: 6400 },
-        { rank: 3, wallet: "abcd12...ef34", score: 6300 },
-      ],
-      Monthly: [
-        { rank: 1, wallet: "abcd12...ef34", score: 6500 },
-        { rank: 2, wallet: "abcd12...ef34", score: 6400 },
-        { rank: 3, wallet: "abcd12...ef34", score: 6300 },
-      ],
-      Overall: [
-        { rank: 1, wallet: "abcd12...ef34", score: 6500 },
-        { rank: 2, wallet: "abcd12...ef34", score: 6400 },
-        { rank: 3, wallet: "abcd12...ef34", score: 6300 },
-      ],
-    },
-    "Basketball Blitz": {
-      Daily: [
-        { rank: 1, wallet: "xyza34...gh56", score: 7200 },
-        { rank: 2, wallet: "xyza34...gh56", score: 7100 },
-        { rank: 3, wallet: "xyza34...gh56", score: 7000 },
-      ],
-      Weekly: [
-        { rank: 1, wallet: "xyza34...gh56", score: 7200 },
-        { rank: 2, wallet: "xyza34...gh56", score: 7100 },
-        { rank: 3, wallet: "xyza34...gh56", score: 7000 },
-      ],
-      Monthly: [
-        { rank: 1, wallet: "xyza34...gh56", score: 7200 },
-        { rank: 2, wallet: "xyza34...gh56", score: 7100 },
-        { rank: 3, wallet: "xyza34...gh56", score: 7000 },
-      ],
-      Overall: [
-        { rank: 1, wallet: "xyza34...gh56", score: 7200 },
-        { rank: 2, wallet: "xyza34...gh56", score: 7100 },
-        { rank: 3, wallet: "xyza34...gh56", score: 7000 },
-      ],
-    },
+const GamingLeaderboard = () => {
+  const [selectedGame, setSelectedGame] = useState('Color Cath Pro');
+  const [timePeriod, setTimePeriod] = useState('Daily');
+  const [currentPage, setCurrentPage] = useState(0);
+
+  const topThreePlayers = [
+    { rank: 1, wallet: "0x8F21...a7b9", score: 2850, avatar: "https://img.freepik.com/free-vector/cute-alien-playing-vr-game-with-controller-cartoon-vector-icon-illustration-science-technology-flat_138676-13965.jpg" },
+    { rank: 2, wallet: "0x3E67...c4d2", score: 2420, avatar: "https://cdn1.iconfinder.com/data/icons/video-games-flat-design-video-game-icon-with-simpl/114/gaming-boy-512.png" },
+    { rank: 3, wallet: "0x9D45...e8f1", score: 2180, avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdCs4cyMZSfKQQeO36dwVp7BQcKEimQP6Kkg&s" },
+  ];
+  
+  const otherPlayers = [
+    { rank: 4, wallet: "0x1A2B...c3d4", score: 1950 },
+    { rank: 5, wallet: "0x5E6F...g7h8", score: 1820 },
+    { rank: 6, wallet: "0xJ9K0...l1m2", score: 1760 },
+    { rank: 7, wallet: "0xN3O4...p5q6", score: 1690 },
+    { rank: 8, wallet: "0xR7S8...t9u0", score: 1650 },
+    { rank: 9, wallet: "0xV1W2...x3y4", score: 1610 },
+    { rank: 10, wallet: "0xZ5A6...b7c8", score: 1580 },
+    { rank: 11, wallet: "0xD9E0...f1g2", score: 1550 },
+    { rank: 12, wallet: "0xH3I4...j5k6", score: 1520 },
+  ];
+  
+  const games = [
+    'Color Cath Pro',
+    'Crypto Racers',
+    'NFT Hunters',
+    'Blockchain Battles',
+    'Meta Miners',
+    'Token Defenders'
+  ];
+  
+  const timePeriods = ['Daily', 'Weekly', 'Monthly', 'Overall'];
+  
+
+  const playersPerPage = 5;
+  const displayPlayers = otherPlayers.slice(
+    currentPage * playersPerPage, 
+    (currentPage * playersPerPage) + playersPerPage
+  );
+  
+  const maxPages = Math.ceil(otherPlayers.length / playersPerPage);
+  
+
+  const [animate, setAnimate] = useState(false);
+  
+  useEffect(() => {
+    setAnimate(true);
+    const timer = setTimeout(() => setAnimate(false), 1000);
+    return () => clearTimeout(timer);
+  }, [selectedGame, timePeriod]);
+
+
+  const podiumVariants = {
+    hidden: { opacity: 0, scale: 0.8, y: 20 },
+    visible: { opacity: 1, scale: 1, y: 0 }
   };
 
-  const [selectedGame, setSelectedGame] =
-    useState<GameName>("Cricket Catch Pro");
-  const [timeframe, setTimeframe] = useState<
-    "Daily" | "Weekly" | "Monthly" | "Overall"
-  >("Daily");
-  const [currentPage, setCurrentPage] = useState<number>(0);
-  const itemsPerPage = 5;
-
-  useEffect(() => {
-    setCurrentPage(0);
-  }, [selectedGame, timeframe]);
-
-  const podiumData = mockData[selectedGame][timeframe].slice(0, 3);
-  const regularData = mockData[selectedGame][timeframe].slice(3);
-  const totalPages = Math.ceil(regularData.length / itemsPerPage);
-  const paginatedData = regularData.slice(
-    currentPage * itemsPerPage,
-    currentPage * itemsPerPage + itemsPerPage
-  );
-  const swipeHandlers = useSwipeable({
-    onSwipedLeft: () =>
-      setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1)),
-    onSwipedRight: () => setCurrentPage((prev) => Math.max(prev - 1, 0)),
-    delta: 20,
-    trackTouch: true,
-    trackMouse: false,
-  });
-
   return (
-    <div>
-      <div className="min-h-screen min-[1023px]:hidden w-full mt-[93px] text-white overflow-x-hidden overflow-y-auto">
-        <SwipeHintOverlay />
-        <div className="w-full py-8 px-4 flex flex-col items-center">
-          <h2 className="text-white text-lg font-semibold mb-4 text-center">
-            Leaderboard
-          </h2>
-          <select
-            className="bg-[#1e1e1e] text-[#92FF00] border-[1px] border-[#92FF00] relative left-[-20px] p-2 rounded-full w-[75vw] h-[45px] appearance-none pl-4 pr-8"
-            value={selectedGame}
-            onChange={(e) => setSelectedGame(e.target.value as GameName)}
-            style={{
-              backgroundImage: 'url("/down.svg")',
-              backgroundPosition: "right 10px center",
-              backgroundRepeat: "no-repeat",
-            }}
+    <div className="min-h-screen w-full bg-gradient-to-b from-black via-gray-900 to-black text-white p-6
+    max-[365px]:mt-[34px]
+    ">
+      <div className="max-w-5xl mx-auto">
+
+        <div className="flex flex-col md:flex-row justify-between items-center mb-10 mt-8">
+          <motion.h1 
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-4xl font-bold mb-6 md:mb-0 bg-clip-text text-transparent bg-gradient-to-r from-red-600 via-yellow-500 to-red-600"
           >
-            {Object.keys(mockData).map((game) => (
-              <option key={game} value={game}>
-                {game}
-              </option>
-            ))}
-          </select>
-
-          <button className="ml-2 w-[46px] h-[46px] flex justify-center items-center absolute left-[82%] top-[167px] rounded-full bg-[#82E300] hover:bg-[#6ac100] text-black shadow-glow transition-all">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="black"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="w-[20px] h-[20px]"
-            >
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-              <polyline points="17 8 12 3 7 8" />
-              <line x1="12" y1="3" x2="12" y2="15" />
-            </svg>
-          </button>
-        </div>
-
-        <div className="mx-0 mb-8 bg-[#141414] min-[400px]:h-[60vh] rounded-3xl border-t-[1px] border-[#92FF00]">
-          <div className="flex gap-[0px] max-[369px]:gap-[15px] p-[5px] items-center max-[468px]:ml-[10px] max-[468px]:gap-[33px] max-[398px]:gap-[20px] mb-4">
-            {["Daily", "Weekly", "Monthly", "Overall"].map((period) => (
-              <a
-                key={period}
-                className={`relative px-4 py-2 mr-[-9px] text-md font-semibold cursor-pointer ${timeframe === period ? "text-white" : "text-gray-500"
-                  }`}
-                onClick={() =>
-                  setTimeframe(
-                    period as "Daily" | "Weekly" | "Monthly" | "Overall"
-                  )
-                }
-              >
-                {period}
-                <span
-                  className={`absolute bottom-0 left-0 h-[2px] bg-[#92FF00] transition-all duration-300 ease-in-out ${timeframe === period ? "w-full" : "w-0"
-                    }`}
-                />
-              </a>
-            ))}
-          </div>
-
-          {currentPage === 0 && (
-            <div className="flex justify-center items-end mt-[30px] gap-0 mb-4">
-              <motion.div
-                initial={{ y: 50, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.2, type: "spring", stiffness: 100 }}
-                className="flex flex-col items-center"
-              >
-                <div className="bg-gradient-to-b max-[369px]:w-[100px] max-[399px]:w-[120px] max-[379px]:w-[110px] from-[#535353] to-[#121212] p-4 rounded-t-lg w-[103px] h-[154px]">
-                  <div className="relative">
-                    <div className="absolute -top-12 left-1/2 transform -translate-x-1/2">
-                      <img
-                        src="/two.svg"
-                        alt="2nd Place"
-                        className="mx-auto w-[69px] h-[69px]"
-                      />
-                    </div>
-                    <div className="text-[#70C200] left-[-5px] top-[30px] max-[369px]:left-[-10px] relative text-sm mb-1">
-                      {podiumData[1]?.wallet}
-                    </div>
-                    <div className="text-yellow-500 mt-[30px] ml-[6px] text-2xl font-bold">
-                      {podiumData[1]?.score}
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-              <motion.div
-                initial={{ y: 50, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.3, type: "spring", stiffness: 100 }}
-                className="flex flex-col items-center"
-              >
-                <div className="bg-gradient-to-b max-[369px]:w-[120px] from-[#535353] to-[#121212] p-4 rounded-t-lg w-[103px] h-[184px]">
-                  <div className="relative">
-                    <div className="absolute -top-8 left-1/2 transform -translate-x-1/2">
-                      <img src="/one.svg" alt="1st Place" className="mx-auto" />
-                    </div>
-                    <div className="text-[#70C200] left-[-5px] absolute top-[40px] text-sm mb-1">
-                      {podiumData[0]?.wallet}
-                    </div>
-                    <div className="text-yellow-500 text-2xl relative top-[57px] font-bold flex items-center justify-center">
-                      {podiumData[0]?.score}
-                    </div>
-                    <div className="relative">
-                      <img
-                        src="/trophy1.svg"
-                        alt="Crown"
-                        className="w-11 absolute left-[16px] top-[70px] h-11 max-[398px]:top-[60px]"
-                        style={{
-                          left: window.innerWidth < 369 ? "20px" : "",
-                        }}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-              <motion.div
-                initial={{ y: 50, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.4, type: "spring", stiffness: 100 }}
-                className="flex flex-col items-center"
-              >
-                <div className="bg-gradient-to-b max-[369px]:w-[100px] from-[#535353] to-[#121212] p-4 rounded-t-lg w-[103px] h-[140px]">
-                  <div className="relative">
-                    <div className="absolute -top-8 left-1/2 transform -translate-x-1/2">
-                      <img src="/three.svg" alt="3rd Place" className="mx-auto" />
-                    </div>
-                    <div className="text-[#70C200] top-[30px] max-[369px]:left-[-10px] relative text-sm mb-1">
-                      {podiumData[2]?.wallet}
-                    </div>
-                    <div className="text-yellow-500 relative top-[30px] left-[10px] text-2xl font-bold">
-                      {podiumData[2]?.score}
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-          )}
-
-          <div className="p-5 mt-[-20px]" {...swipeHandlers}>
-            <table className="w-[115%] left-[-25px] mx-auto relative border-collapse bg-[#3E3E3E] text-center">
-              <thead>
-                <tr>
-                  <th className="border-b border-gray-600 border-r py-2 px-3 text-[#92FF00] font-light">
-                    Rank
-                  </th>
-                  <th className="border-b border-gray-600 border-r py-2 px-3 text-[#92FF00] font-light">
-                    Wallet Address
-                  </th>
-                  <th className="border-b border-gray-600 py-2 px-3 text-[#92FF00] font-light">
-                    Total Score
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {paginatedData.map((entry, index) => (
-                  <tr key={index}>
-                    <td className="border-b border-gray-600 border-r py-2 px-3 text-[#B9B9B9]">
-                      {entry.rank}
-                    </td>
-                    <td className="border-b border-gray-600 border-r py-2 px-3 text-[#B9B9B9]">
-                      {entry.wallet}
-                    </td>
-                    <td className="border-b border-gray-600 py-2 px-3 text-[#B9B9B9]">
-                      {entry.score}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            <div className="flex justify-center mt-6 mb-[55px] gap-4
+            LEADERBOARD
+          </motion.h1>
           
-          ">
-              <button
-                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
-                disabled={currentPage === 0}
-                className="bg-[#1e1e1e] text-[#92FF00] relative border border-[#92FF00] px-4 py-2 rounded hover:bg-[#92FF00] hover:text-black transition-all disabled:opacity-50
-            max-[370px]:top-[-14px]
-            "
-              >
-                &larr; Prev
-              </button>
-              <button
-                onClick={() =>
-                  setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1))
-                }
-                disabled={currentPage >= totalPages - 1}
-                className="bg-[#1e1e1e] text-[#92FF00] border relative border-[#92FF00] px-4 py-2 rounded hover:bg-[#92FF00] hover:text-black transition-all disabled:opacity-50
-             max-[370px]:top-[-14px]"
-              >
-                Next &rarr;
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-
-      <div className="min-h-screen relative max-[1023px]:hidden w-full mt-[93px] text-white overflow-x-hidden">
-        <div className="w-full py-8 relative px-4 flex flex-col items-center">
-          <h2 className="text-white text-2xl absolute top-[37%] left-[3%] font-semibold mb-4 text-center">
-            Leaderboard
-          </h2>
-          <select
-            className="bg-[#1e1e1e] text-[#92FF00] border-[1px] border-[#92FF00] relative right-[-36%] p-2 rounded-full w-[20vw] h-[45px] appearance-none pl-4 pr-8"
-            value={selectedGame}
-            onChange={(e) => setSelectedGame(e.target.value as GameName)}
-            style={{
-              backgroundImage: 'url("/down.svg")',
-              backgroundPosition: "right 10px center",
-              backgroundRepeat: "no-repeat",
-            }}
+          <motion.div 
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            className="relative w-64"
           >
-            {Object.keys(mockData).map((game) => (
-              <option key={game} value={game}>
-                {game}
-              </option>
-            ))}
-          </select>
-
-          <button className="ml-2 w-[46px] h-[46px] flex justify-center items-center absolute right-[0.8%] top-[31px] rounded-full bg-[#82E300] hover:bg-[#6ac100] text-black shadow-glow transition-all">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="black"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="w-[20px] h-[20px]"
+            <select
+              value={selectedGame}
+              onChange={(e) => setSelectedGame(e.target.value)}
+              className="w-full px-4 py-3 rounded-lg appearance-none bg-gray-800 border-2 border-[#fe9400] focus:outline-none focus:[#fe4700] text-white"
             >
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-              <polyline points="17 8 12 3 7 8" />
-              <line x1="12" y1="3" x2="12" y2="15" />
-            </svg>
-          </button>
+              {games.map((game) => (
+                <option key={game} value={game}>{game}</option>
+              ))}
+            </select>
+            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3">
+              <svg className="h-5 w-5 text-[#fe4700]" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+              </svg>
+            </div>
+          </motion.div>
         </div>
-        <div className="bg-[#92FF00] w-full mt-[-6px] left-[0px] relative h-[2px]"></div>
 
-        <div className="mx-0 mt-[20px] mb-8  rounded-3xl ">
-          <motion.div className="flex gap-[80px] p-[5px] left-[30%] relative items-center  mb-4"
-
-          >
-            {["Daily", "Weekly", "Monthly", "Overall"].map((period) => (
-              <motion.a
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="flex justify-center mb-12"
+        >
+          <div className="inline-flex p-2 bg-gray-800 rounded-lg">
+            {timePeriods.map((period) => (
+              <button
                 key={period}
-                className={`relative px-4 py-2 mr-[-9px] text-md font-semibold cursor-pointer ${timeframe === period ? "text-white" : "text-gray-500"
-                  }`}
-                onClick={() =>
-                  setTimeframe(
-                    period as "Daily" | "Weekly" | "Monthly" | "Overall"
-                  )
-                }
-                whileHover={
-                  {
-                    scale: 1.2
-                  }
-                }
+                onClick={() => setTimePeriod(period)}
+                className={`px-6 py-2 rounded-md transition-all duration-300 ${
+                  timePeriod === period 
+                    ? 'bg-gradient-to-r from-[#fe7500] to-pink-600 text-white shadow-lg transform scale-105' 
+                    : 'text-gray-400 hover:text-white'
+                }`}
               >
                 {period}
-                <span
-                  className={`absolute bottom-0 left-0 h-[2px] bg-[#92FF00] transition-all duration-300 ease-in-out ${timeframe === period ? "w-full" : "w-0"
-                    }`}
-                />
-              </motion.a>
+              </button>
             ))}
-          </motion.div>
-
-          {currentPage === 0 && (
-            <div className="flex justify-center items-end mt-[30px] gap-0 mb-4">
-              <motion.div
-                initial={{ y: 50, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.2, type: "spring", stiffness: 100 }}
-                className="flex flex-col items-center"
-              >
-                <div className="bg-gradient-to-b max-[369px]:w-[100px] max-[399px]:w-[120px] max-[379px]:w-[110px] from-[#535353] to-[#121212] p-4 rounded-t-lg w-[103px] h-[154px]">
-                  <div className="relative">
-                    <div className="absolute -top-12 left-1/2 transform -translate-x-1/2">
-                      <img
-                        src="/two.svg"
-                        alt="2nd Place"
-                        className="mx-auto w-[69px] h-[69px]"
-                      />
-                    </div>
-                    <div className="text-[#70C200] left-[-5px] top-[30px] max-[369px]:left-[-10px] relative text-sm mb-1">
-                      {podiumData[1]?.wallet}
-                    </div>
-                    <div className="text-yellow-500 mt-[30px] ml-[6px] text-2xl font-bold">
-                      {podiumData[1]?.score}
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-              <motion.div
-                initial={{ y: 50, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.3, type: "spring", stiffness: 100 }}
-                className="flex flex-col items-center"
-              >
-                <div className="bg-gradient-to-b max-[369px]:w-[120px] from-[#535353] to-[#121212] p-4 rounded-t-lg w-[103px] h-[184px]">
-                  <div className="relative">
-                    <div className="absolute -top-8 left-1/2 transform -translate-x-1/2">
-                      <img src="/one.svg" alt="1st Place" className="mx-auto" />
-                    </div>
-                    <div className="text-[#70C200] left-[-5px] absolute top-[40px] text-sm mb-1">
-                      {podiumData[0]?.wallet}
-                    </div>
-                    <div className="text-yellow-500 text-2xl relative top-[57px] font-bold flex items-center justify-center">
-                      {podiumData[0]?.score}
-                    </div>
-                    <div className="relative">
-                      <img
-                        src="/trophy1.svg"
-                        alt="Crown"
-                        className="w-11 absolute left-[16px] top-[70px] h-11 max-[398px]:top-[60px]"
-                        style={{
-                          left: window.innerWidth < 369 ? "20px" : "",
-                        }}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-              <motion.div
-                initial={{ y: 50, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.4, type: "spring", stiffness: 100 }}
-                className="flex flex-col items-center"
-              >
-                <div className="bg-gradient-to-b max-[369px]:w-[100px] from-[#535353] to-[#121212] p-4 rounded-t-lg w-[103px] h-[140px]">
-                  <div className="relative">
-                    <div className="absolute -top-8 left-1/2 transform -translate-x-1/2">
-                      <img src="/three.svg" alt="3rd Place" className="mx-auto" />
-                    </div>
-                    <div className="text-[#70C200] top-[30px] max-[369px]:left-[-10px] relative text-sm mb-1">
-                      {podiumData[2]?.wallet}
-                    </div>
-                    <div className="text-yellow-500 relative top-[30px] left-[10px] text-2xl font-bold">
-                      {podiumData[2]?.score}
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-          )}
-
-          <div className="p-5 mt-[-20px]">
-            <table className="w-[65vw] left-[px] rounded-2xl mx-auto relative border-collapse bg-[#3E3E3E] text-center">
-              <thead>
-                <tr>
-                  <th className="border-b border-gray-600 border-r py-2 px-3 text-[#92FF00] font-light">
-                    Rank
-                  </th>
-                  <th className="border-b border-gray-600 border-r py-2 px-3 text-[#92FF00] font-light">
-                    Wallet Address
-                  </th>
-                  <th className="border-b border-gray-600 py-2 px-3 text-[#92FF00] font-light">
-                    Total Score
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {paginatedData.map((entry, index) => (
-                  <tr key={index}>
-                    <td className="border-b border-gray-600 border-r py-2 px-3 text-[#B9B9B9]">
-                      {entry.rank}
-                    </td>
-                    <td className="border-b border-gray-600 border-r py-2 px-3 text-[#B9B9B9]">
-                      {entry.wallet}
-                    </td>
-                    <td className="border-b border-gray-600 py-2 px-3 text-[#B9B9B9]">
-                      {entry.score}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            <div className="flex justify-center mt-6 mb-[55px] gap-4
-            
-            ">
-              <button
-                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
-                disabled={currentPage === 0}
-                className="bg-[#1e1e1e] text-[#92FF00] relative border border-[#92FF00] px-4 py-2 rounded hover:bg-[#92FF00] hover:text-black transition-all disabled:opacity-50
-              max-[370px]:top-[-14px]
-              "
-              >
-                &larr; Prev
-              </button>
-              <button
-                onClick={() =>
-                  setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1))
-                }
-                disabled={currentPage >= totalPages - 1}
-                className="bg-[#1e1e1e] text-[#92FF00] border relative border-[#92FF00] px-4 py-2 rounded hover:bg-[#92FF00] hover:text-black transition-all disabled:opacity-50
-               max-[370px]:top-[-14px]"
-              >
-                Next &rarr;
-              </button>
-            </div>
           </div>
+        </motion.div>
+
+        <div className="flex justify-center items-end mb-16">
+
+          <motion.div 
+            className="flex flex-col items-center mx-4 transform translate-y-8
+            max-[365px]:relative max-[365px]:left-[29px]
+            max-[392px]:relative max-[392px]:left-[29px]
+            "
+            initial="hidden"
+            animate="visible"
+            variants={podiumVariants}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-b from-yellow-300 to-yellow-500 rounded-full blur-md"></div>
+              <img 
+                src={topThreePlayers[1].avatar} 
+                alt="2nd Place" 
+                className="w-20 h-20 rounded-full border-2 border-yellow-400  z-10 relative"
+              />
+              <div className="absolute -bottom-2 z-10 -right-2 w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center border-2 border-yellow-700 text-yellow-800 font-bold">
+                2
+              </div>
+            </div>
+            <div className="mt-4 p-4 bg-gray-800 rounded-lg w-32 text-center
+            max-[365px]:w-[110px]
+            ">
+              <p className="text-sm text-gray-400 truncate">{topThreePlayers[1].wallet}</p>
+              <p className="text-xl font-bold text-yellow-300">{topThreePlayers[1].score}</p>
+            </div>
+            <div className="h-20 w-16 bg-[linear-gradient(to_top,_rgba(285,_150,_10,_0.4),_rgba(285,_221,_51,_0.7))] rounded-t-lg mt-2"></div>
+          </motion.div>
+          
+
+          <motion.div 
+            className="flex flex-col items-center mx-4 transform -translate-y-4"
+            initial="hidden"
+            animate="visible"
+            variants={podiumVariants}
+            transition={{ duration: 0.5, delay: 0.5 }}
+          >
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-b from-yellow-300 to-yellow-800 rounded-full blur-md"></div>
+              <img 
+                src={topThreePlayers[0].avatar} 
+                alt="1st Place" 
+                className="w-24 h-24 rounded-full border-4 border-yellow-300 z-10 relative"
+              />
+              <div className="absolute -bottom-2 z-10  -right-2 w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center border-2 border-yellow-700 text-yellow-900 font-bold">
+                1
+              </div>
+            </div>
+            <div className="mt-4 p-4 bg-gradient-to-b from-yellow-700 to-yellow-900 rounded-lg w-36 text-center shadow-lg">
+              <p className="text-sm text-yellow-300 truncate">{topThreePlayers[0].wallet}</p>
+              <p className="text-2xl font-bold text-yellow-100">{topThreePlayers[0].score}</p>
+            </div>
+            <div className="h-28 w-20 bg-gradient-to-t from-yellow-800 to-yellow-500 rounded-t-lg mt-2"></div>
+          </motion.div>
+          
+
+          <motion.div 
+            className="flex flex-col items-center mx-4 transform translate-y-12
+            max-[365px]:relative max-[365px]:left-[-29px]
+            max-[392px]:relative max-[392px]:left-[-29px]
+            "
+            initial="hidden"
+            animate="visible"
+            variants={podiumVariants}
+            transition={{ duration: 0.5, delay: 0.7 }}
+          >
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-b from-yellow-300 to-yellow-600 rounded-full blur-md
+            
+              "></div>
+              <img 
+                src={topThreePlayers[2].avatar} 
+                alt="3rd Place" 
+                className="w-16 h-16 rounded-full border-4 border-yellow-500 z-10 relative"
+              />
+              <div className="absolute z-10  -bottom-2 -right-2 w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center border-2 border-yellow-700 text-yellow-900 font-bold">
+                3
+              </div>
+            </div>
+            <div className="mt-4 p-4 bg-gray-800 rounded-lg w-28 text-center
+            max-[365px]:w-[110px]
+            ">
+              <p className="text-sm text-gray-400 truncate">{topThreePlayers[2].wallet}</p>
+              <p className="text-lg font-bold text-orange-300">{topThreePlayers[2].score}</p>
+            </div>
+            <div className="h-14 w-12 bg-[linear-gradient(to_top,_rgba(285,_150,_10,_0.4),_rgba(285,_221,_51,_0.6))] rounded-t-lg mt-2"></div>
+          </motion.div>
         </div>
+
+        <motion.div 
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          className="bg-gray-800 bg-opacity-60 rounded-xl p-6 backdrop-filter backdrop-blur-sm border border-gray-700 mx-8 md:mx-16
+          max-[365px]:w-[325px] max-[365px]:relative max-[365px]:left-[-37px]
+          max-[392px]:w-[325px] max-[392px]:relative max-[392px]:left-[-23px]
+          "
+        >
+          <table className="w-full
+          max-[365px]:w-[165px]
+          max-[392px]:w-[165px]
+
+          ">
+            <thead>
+              <tr className="border-b border-gray-700">
+                <th className="p-3 text-left">RANK</th>
+                <th className="p-3 text-left">WALLET ADDRESS</th>
+                <th className="p-3 text-right">SCORE</th>
+              </tr>
+            </thead>
+            <tbody>
+              {displayPlayers.map((player, idx) => (
+                <motion.tr 
+                  key={idx} 
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.3, delay: 0.9 + (idx * 0.1) }}
+                  className="border-b border-gray-700 hover:bg-gray-700 transition-colors duration-200"
+                >
+                  <td className="p-3 font-mono">#{player.rank}</td>
+                  <td className="p-3 text-gray-300">{player.wallet}</td>
+                  <td className="p-3 text-right font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500">
+                    {player.score}
+                  </td>
+                </motion.tr>
+              ))}
+            </tbody>
+          </table>
+
+          <div className="flex justify-between items-center mt-6">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setCurrentPage(prev => Math.max(0, prev - 1))}
+              disabled={currentPage === 0}
+              className={`px-4 py-2 rounded-md ${
+                currentPage === 0 
+                  ? 'bg-gray-700 text-gray-500 cursor-not-allowed' 
+                  : 'bg-gray-700 hover:bg-gray-600 text-white'
+              }`}
+            >
+              Previous
+            </motion.button>
+            
+            <p className="text-gray-400">
+              Page {currentPage + 1} of {maxPages}
+            </p>
+            
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setCurrentPage(prev => Math.min(maxPages - 1, prev + 1))}
+              disabled={currentPage >= maxPages - 1}
+              className={`px-4 py-2 rounded-md ${
+                currentPage >= maxPages - 1
+                  ? 'bg-gray-700 text-gray-500 cursor-not-allowed' 
+                  : 'bg-gray-700 hover:bg-gray-600 text-white'
+              }`}
+            >
+              Next
+            </motion.button>
+          </div>
+        </motion.div>
       </div>
     </div>
   );
 };
 
-export default Leaderboard;
+export default GamingLeaderboard;

@@ -1,114 +1,108 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-const games = [
-  { id: 1, svg: "/game0.svg" },
-  { id: 2, svg: "/game2.svg" },
-  { id: 3, svg: "/game3.svg" },
-  { id: 4, svg: "/game4.svg" },
-  { id: 5, svg: "/game5.svg" },
-  { id: 6, svg: "/game6.svg" },
-  { id: 7, svg: "/game7.svg" },
-  { id: 8, svg: "/game8.svg" },
-  { id: 9, svg: "/game9.svg" },
-  { id: 10, svg: "/game10.svg" },
-];
-
-export default function GamingSection() {
-  const handleGameClick = (id: number) => {
-    alert(`Game ID: ${id} clicked!`);
-  };
-
-  const headingVariants = {
-    hidden: { opacity: 0, y: -20 },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
-      transition: { duration: 0.5 } 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.3,
     },
-  };
-  const cardVariants = {
-    hidden: { opacity: 0, scale: 0.95 },
-    visible: { 
-      opacity: 1, 
-      scale: 1,
-      transition: { type: "spring", stiffness: 100, damping: 10 }
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring",
+      stiffness: 260,
+      damping: 20,
     },
+  },
+};
+
+const Games = () => {
+  const games = Array.from({ length: 15 }, (_, i) => i + 1);
+
+  const handleGameClick = (gameNumber: number) => {
+    console.log(`Game ${gameNumber} clicked`);
+    alert(`Game ${gameNumber} clicked`);
   };
 
   return (
-    <div className="px-6 mt-30 py-[90px] font-[roboto] mb-[50px] overflow-x-hidden w-full min-h-[100vh] text-white relative
-    ">
-      <motion.h1
-        variants={headingVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.5 }}
-        className="text-lg font-semibold text-center min-[1023px]:hidden text-[#FFFFFF] mb-10  tracking-wide transition-all duration-300 ease-in-out transform relative hover:scale-105 
-        max-[370px]:left-[-1px]
-        "
-      >
-        Games
-      </motion.h1>
-      <div className="grid absolute min-[1023px]:hidden grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 pb-16 w-full mx-auto justify-center
-      max-[468px]:left-[15%]
-      max-[400px]:left-[11%]
-      max-[370px]:left-[8%]
-      ">
-        {games.map((game) => (
-          <motion.div
-            key={game.id}
-            variants={cardVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.5 }}
-            whileHover={{ scale: 1.05, boxShadow: "0 0 20px 4px rgba(130,227,0,0.8)" }}
-            onClick={() => handleGameClick(game.id)}
-            className="w-[300px] h-[200px] rounded-lg  cursor-pointer transition-transform"
-          >
-            <img
-              src={game.svg}
-              alt={`Game ${game.id}`}
-              className="w-full h-full object-cover rounded-lg "
-            />
-          </motion.div>
-        ))}
-      </div>
+    <div
+      className="bg-gradient-to-br from-black via-[#050505] to-[#050505] min-h-screen p-8
+    max-[365px]:mt-[64px]
+    "
+    >
+      <div className="max-w-7xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-12"
+        >
+          <motion.span className=" text-5xl font-bold font-rubik text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-yellow-500 to-red-600 inline-block">
+          Game Collection
+          </motion.span>
+          <p className="text-gray-300 text-lg max-w-2xl mx-auto">
+            Explore our selection of premium games and embark on epic adventures
+          </p>
+        </motion.div>
 
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+          variants={containerVariants}
+          initial="hidden"
+          animate="show"
+        >
+          {games.map((gameNumber) => (
+            <motion.div
+              key={gameNumber}
+              variants={itemVariants}
+              className="relative group"
+            >
+              <motion.button
+                onClick={() => handleGameClick(gameNumber)}
+                className="w-full bg-gray-800 bg-opacity-60 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-700 shadow-lg group-hover:shadow-purple-500/20 transition duration-300"
+                whileHover={{
+                  scale: 1.03,
+                  transition: { duration: 0.2 },
+                }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <div className="relative">
+                  <motion.img
+                    src={`/game${gameNumber}.jpg`}
+                    alt={`Game ${gameNumber}`}
+                    className="w-full h-56 object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-60" />
 
-      <motion.h1
-        variants={headingVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.5 }}
-        className="text-lg font-semibold text-center max-[1023px]:hidden text-[#FFFFFF] mb-10  tracking-wide transition-all duration-300 ease-in-out transform relative hover:scale-105 
-        max-[370px]:left-[-1px]
-        "
-      >
-        Games
-      </motion.h1>
-      <div className="grid relative max-[1023px]:hidden gap-8 pb-16 w-full mx-auto justify-center
-      grid-cols-3 ml-[40px]
-      ">
-        {games.map((game) => (
-          <motion.div
-            key={game.id}
-            variants={cardVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.5 }}
-            whileHover={{ scale: 1.05, boxShadow: "0 0 20px 4px rgba(130,227,0,0.8)" }}
-            onClick={() => handleGameClick(game.id)}
-            className="w-[300px] h-[200px] rounded-lg  cursor-pointer transition-transform"
-          >
-            <img
-              src={game.svg}
-              alt={`Game ${game.id}`}
-              className="w-full h-full object-cover rounded-lg "
-            />
-          </motion.div>
-        ))}
+                  <motion.div
+                    className="absolute bottom-0 left-0 w-full p-4"
+                    initial={{ opacity: 0, y: 10 }}
+                    whileHover={{ opacity: 1, y: 0 }}
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="bg-purple-600 text-white px-2 py-1 rounded text-xs font-medium">
+                        Adventure
+                      </span>
+                      <span className="text-gray-300 text-sm">4.8 ★</span>
+                    </div>
+                  </motion.div>
+                </div>
+              </motion.button>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </div>
   );
-}
+};
+
+export default Games;
