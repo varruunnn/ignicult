@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import { ConnectButton } from "thirdweb/react";
+import { darkTheme } from "thirdweb/react";
 const TrendingGamesCarousel = React.lazy(
   () => import("./TrendingGamesCarousel")
 );
-import { inAppWallet } from "thirdweb/wallets";
+import { inAppWallet, createWallet } from "thirdweb/wallets";
 import { client } from "../../client";
-import { ConnectEmbed } from "thirdweb/react";
 import { Trophy, Award, Star, Activity } from "lucide-react";
 
 const Button = ({
@@ -57,16 +58,8 @@ const wallets = [
 ];
 
 const LandingPage = () => {
-  const [showConnect, setShowConnect] = useState(false);
   const navigate = useNavigate();
 
-  const handleConnectWallet = () => {
-    setShowConnect(true);
-  };
-
-  const handleCloseModal = () => {
-    setShowConnect(false);
-  };
 
   const features = [
     {
@@ -167,31 +160,20 @@ const LandingPage = () => {
                   >
                     Explore Games
                   </Button>
-                  <Button onClick={handleConnectWallet} className="text-base">
-                    Sign In
-                  </Button>
+                  <ConnectButton
+                    client={client}
+                    wallets={wallets}
+                    theme={darkTheme({
+                      colors: {
+                        primaryButtonBg: "#1D1D1D",
+                        primaryButtonText: "#FFB000",
+                        connectedButtonBg: "hsl(240, 9%, 3%)",
+                        connectedButtonBgHover: "hsl(231, 11%, 12%)",
+                      },
+                    })}
+                    connectModal={{ size: "compact" }}
+                  />
                 </div>
-                <AnimatePresence>
-                  {showConnect && (
-                    <motion.div
-                      className="fixed mt-[70px] inset-0 flex items-center justify-center z-50"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      onClick={handleCloseModal}
-                    >
-                      <motion.div
-                        className="rounded-2xl p-6 relative max-w-md mx-4"
-                        initial={{ scale: 0.95 }}
-                        animate={{ scale: 1 }}
-                        exit={{ scale: 0.95 }}
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        <ConnectEmbed client={client} wallets={wallets} />
-                      </motion.div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
               </div>
             </div>
           </motion.div>
