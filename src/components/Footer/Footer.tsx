@@ -35,41 +35,37 @@ const Footer = () => {
       <div className="absolute inset-0 overflow-hidden">
         <motion.div 
           className="absolute w-40 h-40 rounded-full bg-gradient-to-r from-red-600 to-yellow-500 opacity-10 blur-3xl"
-          animate={{ 
-            x: ["-10%", "60%", "-10%"],
-            y: ["30%", "60%", "30%"],
-          }}
-          transition={{ 
-            repeat: Infinity, 
-            duration: 15,
-            ease: "easeInOut"
-          }}
+          // animate={{ 
+          //   x: ["-10%", "60%", "-10%"],
+          //   y: ["30%", "60%", "30%"],
+          // }}
+          // transition={{ 
+          //   repeat: Infinity, 
+          //   duration: 15,
+          //   ease: "easeInOut"
+          // }}
         />
         <motion.div 
           className="absolute w-64 h-64 rounded-full bg-gradient-to-r from-yellow-500 to-red-600 opacity-10 blur-3xl right-0"
-          animate={{ 
-            x: ["60%", "-10%", "60%"],
-            y: ["10%", "40%", "10%"],
-          }}
-          transition={{ 
-            repeat: Infinity, 
-            duration: 18,
-            ease: "easeInOut"
-          }}
+          // animate={{ 
+          //   x: ["60%", "-10%", "60%"],
+          //   y: ["10%", "40%", "10%"],
+          // }}
+          // transition={{ 
+          //   repeat: Infinity, 
+          //   duration: 18,
+          //   ease: "easeInOut"
+          // }}
         />
       </div>
-
-      {/* Actual footer content */}
-      {/* Reduced py-16 to py-8 */}
       <div className="max-w-7xl mx-auto px-6 py-8 relative z-10">
         <motion.div 
           className="grid grid-cols-1 md:grid-cols-3 gap-12"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
+          // variants={containerVariants}
+          // initial="hidden"
+          // whileInView="visible"
+          // viewport={{ once: true, amount: 0.3 }}
         >
-          {/* Logo & description column */}
           <motion.div variants={itemVariants} className="space-y-6">
             <motion.div className="flex items-center space-x-3 mb-4">
               <motion.div
