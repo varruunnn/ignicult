@@ -5,6 +5,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 .blurred {
   filter: blur(30px);
   pointer-events: none; /* Prevents interactions when blurred */

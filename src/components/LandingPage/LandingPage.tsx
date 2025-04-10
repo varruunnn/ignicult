@@ -60,7 +60,6 @@ const wallets = [
 const LandingPage = () => {
   const navigate = useNavigate();
 
-
   const features = [
     {
       icon: <Trophy className="w-8 h-8 text-yellow-500" />,
@@ -160,19 +159,22 @@ const LandingPage = () => {
                   >
                     Explore Games
                   </Button>
-                  <ConnectButton
-                    client={client}
-                    wallets={wallets}
-                    theme={darkTheme({
-                      colors: {
-                        primaryButtonBg: "#1D1D1D",
-                        primaryButtonText: "#FFB000",
-                        connectedButtonBg: "hsl(240, 9%, 3%)",
-                        connectedButtonBgHover: "hsl(231, 11%, 12%)",
-                      },
-                    })}
-                    connectModal={{ size: "compact" }}
-                  />
+                  <div className="custom-connect-button  border-[2px] border-[#b08205] rounded-xl">
+                    <ConnectButton
+                      client={client}
+                      wallets={wallets}
+                      theme={darkTheme({
+                        colors: {
+                          primaryButtonBg: "#1D1D1D",
+                          primaryButtonText: "#FFB000",
+                          connectedButtonBg: "hsl(240, 9%, 3%)",
+                          connectedButtonBgHover: "hsl(231, 11%, 12%)",
+                        },
+                        
+                      })}
+                      connectModal={{ size: "compact" }}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
