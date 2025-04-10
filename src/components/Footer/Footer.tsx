@@ -87,7 +87,6 @@ const Footer = () => {
             </motion.p>
           </motion.div>
 
-          {/* Quick links column */}
           <motion.div variants={itemVariants} className="md:mx-auto">
             <motion.h3 
               className="text-xl font-bold mb-6 flex items-center"
