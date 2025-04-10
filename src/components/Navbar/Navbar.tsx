@@ -81,11 +81,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 10);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -136,7 +132,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (menuOpen && !(e.target as Element).closest('.menu-container')) {
+      if (menuOpen && e.target && !(e.target as HTMLElement).closest('.menu-container')) {
         setMenuOpen(false);
       }
     };
@@ -152,46 +148,51 @@ const Navbar = () => {
   useEffect(() => {
     setMenuOpen(false);
   }, [location.pathname]);
-
-  // Animation variants
   const menuButtonVariants = {
     initial: { scale: 1 },
     tap: { scale: 0.95 }
   };
-
-  const navItemVariants = {
-    initial: { opacity: 0, x: -10 },
-    animate: (i: number) => ({ 
-      opacity: 1, 
-      x: 0,
-      transition: { delay: i * 0.05, duration: 0.2 }
-    }),
-    exit: { opacity: 0, x: -10 }
-  };
-
-  const overlayVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { duration: 0.2 } },
-    exit: { opacity: 0, transition: { duration: 0.2 } }
-  };
-
-  const menuVariants = {
-    hidden: { 
+  const menuContainerVariants = {
+    hidden: {
       opacity: 0,
       scale: 0.98,
       y: -10
     },
-    visible: { 
+    visible: {
       opacity: 1,
       scale: 1,
       y: 0,
-      transition: { duration: 0.2, type: "spring", stiffness: 300, damping: 24 }
+      transition: { 
+        duration: 0.25,
+        ease: [0.22, 1, 0.36, 1], 
+        staggerChildren: 0.03,
+        delayChildren: 0.1
+      }
     },
-    exit: { 
+    exit: {
       opacity: 0,
       scale: 0.98,
       y: -10,
-      transition: { duration: 0.15 }
+      transition: { 
+        duration: 0.15,
+        ease: "easeInOut"
+      }
+    }
+  };
+  const menuItemVariants = {
+    hidden: { opacity: 0, x: -8 },
+    visible: { opacity: 1, x: 0 },
+    exit: { opacity: 0 }
+  };
+  const overlayVariants = {
+    hidden: { opacity: 0 },
+    visible: { 
+      opacity: 1, 
+      transition: { duration: 0.2 } 
+    },
+    exit: { 
+      opacity: 0, 
+      transition: { duration: 0.15 } 
     }
   };
 
@@ -265,11 +266,21 @@ const Navbar = () => {
             />
 
             <motion.div
-              className="menu-container fixed inset-0 text-white md:w-[70%] md:h-[50%] md:top-[30%] md:left-[17%] md:translate-x-[-50%] md:translate-y-[-50%] bg-black/95 z-[70] flex flex-col overflow-y-auto border border-[#fe6200] border-[0.7px] shadow-[0_0_100px_rgba(254,98,0,0.4)] rounded-xl"
-              variants={menuVariants}
+              className="menu-container fixed z-[70] bg-black/95 border border-[#fe6200] border-[0.7px] shadow-[0_0_100px_rgba(254,98,0,0.4)] rounded-xl text-white"
+              style={{
+                width: window.innerWidth < 768 ? '100%' : '70%',
+                height: window.innerWidth < 768 ? '100%' : 'auto',
+                maxHeight: window.innerWidth < 768 ? '100%' : '85vh',
+                top: window.innerWidth < 768 ? '0' : '24%',
+                left: window.innerWidth < 768 ? '0' : '16%',
+                transform: window.innerWidth < 768 ? 'none' : 'translate(-50%, -50%)',
+                overflow: 'auto'
+              }}
+              variants={menuContainerVariants}
               initial="hidden"
               animate="visible"
               exit="exit"
+              layoutId="menuContainer"
             >
               <div className="flex justify-between items-center p-6">
                 <Logo />
@@ -285,24 +296,30 @@ const Navbar = () => {
                 </motion.button>
               </div>
 
-              <div className="flex flex-col md:relative md:top-[50%] md:translate-y-[-90%] md:grid md:grid-cols-5 md:gap-8 md:px-10 py-8 gap-3 mx-auto md:max-w-[90%]">
-                {menuItems.map((item, i) => (
+              <div className={`
+                flex flex-col p-4
+                md:grid md:grid-cols-3 md:gap-4 md:px-6 md:py-8
+                lg:grid-cols-4 lg:gap-6 
+                xl:grid-cols-5 xl:gap-6
+              `}>
+                {menuItems.map((item) => (
                   <motion.button
                     key={item.path}
                     onClick={handleNavigate(item.path)}
                     disabled={isNavigating}
-                    className={`flex items-center p-4 md:p-0 md:w-full cursor-pointer rounded-xl transition-all duration-200 hover:pl-6 focus:outline-none focus:ring-1 focus:ring-[#fe6200]
+                    className={`
+                      flex items-center p-3 mb-2 md:mb-0 
+                      cursor-pointer rounded-xl 
+                      transition-all duration-200
+                      focus:outline-none focus:ring-1 focus:ring-[#fe6200]
                       ${location.pathname === item.path ? "bg-black" : ""}
                       ${item.highlight
                         ? "bg-gradient-to-r from-[#3D1D1D] to-[#3D2D0D] border-l-4 border-yellow-500"
                         : ""
-                      }`}
-                    variants={navItemVariants}
-                    custom={i}
-                    initial="initial"
-                    animate="animate"
-                    exit="exit"
-                    whileHover={{ x: 5 }}
+                      }
+                    `}
+                    variants={menuItemVariants}
+                    whileHover={{ x: 5, transition: { duration: 0.2 } }}
                     whileTap={{ scale: 0.98 }}
                   >
                     {item.icon}
