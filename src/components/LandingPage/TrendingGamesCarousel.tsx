@@ -1,11 +1,20 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Flame, ChevronRight, ChevronLeft, Play } from "lucide-react";
 
+
 const gameImages = import.meta.glob("../../assets/trendingGames/*.jpg", {
   eager: true,
   import: "default",
 });
+const preloadedImages: Record<number, string> = {};
 
+Object.entries(gameImages).forEach(([path, img]) => {
+  const match = path.match(/game(\d+)\.jpg$/);
+  if (match) {
+    const id = parseInt(match[1]);
+    preloadedImages[id] = img as string;
+  }
+});
 interface Game {
   gameId: number;
   title: string;
@@ -67,11 +76,18 @@ const TrendingGamesCarousel = () => {
   }, [currentIndex]);
 
   const getGameImage = (gameId: number) => {
-    return gameImages[`../../assets/trendingGames/game${gameId}.jpg`] as string;
+    return preloadedImages[gameId] || "/fallback.jpg";
   };
-
+  if (trendingGames.length === 0) {
+    return (
+      <div className="min-h-[60vh] flex items-center justify-center text-white text-lg">
+        Loading Trending Games...
+      </div>
+    );
+  }
   return (
     <section className="py-20 px-6 bg-gradient-to-b from-[#1D1D1D]/90 via-[#0D0D0D] to-[#151515] text-white">
+      
       <div className="container mx-auto">
         <div className="flex justify-between items-center mb-12">
           <h2 className="text-3xl font-bold flex items-center">
