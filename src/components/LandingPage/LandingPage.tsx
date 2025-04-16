@@ -87,33 +87,6 @@ const LandingPage = () => {
     },
   ];
 
-  const trendingGames = [
-    {
-      title: "catch Pro",
-      imageUrl: "./game1.jpg",
-      numberofplayer: 124500,
-    },
-    {
-      title: "color ship",
-      imageUrl: "./game2.jpg",
-      numberofplayer: 98700,
-    },
-    {
-      title: "cricket",
-      imageUrl: "./game3.jpg",
-      numberofplayer: 85300,
-    },
-    {
-      title: "jumping jack",
-      imageUrl: "./game4.jpg",
-      numberofplayer: 65800,
-    },
-    {
-      title: "drop the number",
-      imageUrl: "./game5.jpg",
-      numberofplayer: 65800,
-    },
-  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#1D1D1D] to-[#0D0D0D] text-white">
@@ -181,7 +154,7 @@ const LandingPage = () => {
           </motion.div>
           <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#1D1D1D] to-transparent z-10"></div>
         </section>
-        <TrendingGamesCarousel trendingGames={trendingGames} />
+        <TrendingGamesCarousel />
         <section className="py-20 px-6 bg-[#151515] relative overflow-hidden">
           <div className="container mx-auto relative z-10">
             <div className="text-center mb-16">
