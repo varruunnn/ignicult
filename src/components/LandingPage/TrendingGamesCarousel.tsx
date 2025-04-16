@@ -8,8 +8,6 @@ interface TrendingGamesCarouselProps {
 const TrendingGamesCarousel: React.FC<TrendingGamesCarouselProps> = ({ trendingGames }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-
-  // Reset the auto-rotation timer when user interacts
   const resetTimeout = () => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
