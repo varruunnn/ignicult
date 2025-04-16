@@ -139,7 +139,7 @@ const LandingPage = () => {
                       theme={darkTheme({
                         colors: {
                           primaryButtonBg: "#1D1D1D",
-                          primaryButtonText: "#FFB000",
+                          primaryButtonText: "#FFFFFF",
                           connectedButtonBg: "hsl(240, 9%, 3%)",
                           connectedButtonBgHover: "hsl(231, 11%, 12%)",
                         },

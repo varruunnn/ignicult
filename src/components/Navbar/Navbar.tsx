@@ -257,7 +257,7 @@ const Navbar = () => {
             <div className="flex items-center space-x-4">
               <motion.button
                 onClick={() => setMenuOpen(prev => !prev)}
-                className="p-2 rounded-lg  transition-colors focus:outline-none focus:ring-2 focus:ring-[#fe6200]"
+                className="p-2 md:hidden rounded-lg  transition-colors focus:outline-none focus:ring-2 focus:ring-[#fe6200]"
                 aria-label="Toggle menu"
                 variants={menuButtonVariants}
                 initial="initial"
@@ -270,7 +270,7 @@ const Navbar = () => {
               <div className="hidden md:grid grid-cols-5 gap-4 px-4">
               <motion.button
                 onClick={toggleDesktopMenu}
-                className="p-2  rounded-lg  transition-colors focus:outline-none focus:ring-2 focus:ring-[#fe6200]"
+                className="p-2  rounded-lg  transition-colors "
                 aria-label="Toggle menu"
                 variants={menuButtonVariants}
                 initial="initial"
@@ -399,13 +399,12 @@ const Navbar = () => {
             />
 
             <motion.div
-              className="menu-container fixed z-[70] hidden md:block bg-black/95 border border-[#fe6200] border-[0.7px] shadow-[0_0_100px_rgba(254,98,0,0.4)] rounded-xl text-white"
+              className="menu-container fixed z-[70] hidden md:block bg-black/95 border border-[#fe6200] border-[0.7px] rounded-xl text-white left-[28%] min-[1556px]:left-[35%]"
               style={{
                 width: '50%',
                 maxWidth: '800px',
                 maxHeight: '80vh',
                 top: '5rem',
-                left: '50%',
                 transform: 'translateX(-50%)',
                 overflow: 'auto'
               }}
