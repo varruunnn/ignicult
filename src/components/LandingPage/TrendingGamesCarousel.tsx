@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Flame, ChevronRight, ChevronLeft, Play } from "lucide-react";
 
-const gameImages = import.meta.glob("../../assets/gameImages/*.jpg", {
+const gameImages = import.meta.glob("../../assets/trendingGames/*.jpg", {
   eager: true,
   import: "default",
 });
@@ -67,7 +67,7 @@ const TrendingGamesCarousel = () => {
   }, [currentIndex]);
 
   const getGameImage = (gameId: number) => {
-    return gameImages[`../../assets/gameImages/game${gameId}.jpg`] as string;
+    return gameImages[`../../assets/trendingGames/game${gameId}.jpg`] as string;
   };
 
   return (
