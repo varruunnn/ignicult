@@ -1,8 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { FaInstagram, FaLinkedin, FaTwitter, FaFacebook, FaFire, FaArrowRight } from 'react-icons/fa';
 import { FaXTwitter } from "react-icons/fa6";
 const Footer = () => {
+  const navigate = useNavigate();
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -13,7 +15,9 @@ const Footer = () => {
       }
     }
   };
-
+  const handleClick = (link: string) => {
+    navigate(`/${link.toLowerCase().replace(' ', '-')}`);
+  };
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
     visible: { y: 0, opacity: 1, transition: { type: "spring", stiffness: 100 } }
@@ -107,10 +111,11 @@ const Footer = () => {
                 <motion.li key={index}
                   variants={itemVariants}
                   whileHover="hover"
+                  
                 >
                   <motion.a 
-                    href={`/${link.toLowerCase().replace(' ', '-')}`} 
-                    className="text-gray-300 hover:text-yellow-400 transition-colors flex items-center"
+                    onClick={() => handleClick(link)}
+                    className="text-gray-300 hover:text-yellow-400 cursor-pointer transition-colors flex items-center"
                     variants={linkVariants}
                   >
                     <motion.span 
@@ -195,7 +200,7 @@ const Footer = () => {
             {['Privacy Policy', 'Terms & Conditions', 'Cookies', 'FAQ'].map((link, index) => (
               <motion.a 
                 key={index}
-                href={`/${link.toLowerCase().replace(/\s+/g, '-')}`} 
+                onClick={() => handleClick(link)}
                 className="text-gray-400 text-sm hover:text-yellow-400 transition-all"
                 variants={itemVariants}
                 whileHover={{ y: -2 }}
