@@ -78,6 +78,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isNavigating, setIsNavigating] = useState(false);
+  const [isDesktopMenuVisible, setIsDesktopMenuVisible] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -93,11 +94,13 @@ const Navbar = () => {
   const handleNavigate = useCallback((path: string) => () => {
     if (isNavigating || path === location.pathname) {
       setMenuOpen(false);
+      setIsDesktopMenuVisible(false);
       return;
     }
     
     setIsNavigating(true);
     setMenuOpen(false);
+    setIsDesktopMenuVisible(false);
     
     setTimeout(() => {
       navigate(path);
@@ -132,26 +135,33 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (menuOpen && e.target && !(e.target as HTMLElement).closest('.menu-container')) {
+      if ((menuOpen || isDesktopMenuVisible) && 
+          e.target && 
+          !(e.target as HTMLElement).closest('.menu-container') && 
+          !(e.target as HTMLElement).closest('.desktop-menu-toggle')) {
         setMenuOpen(false);
+        setIsDesktopMenuVisible(false);
       }
     };
 
-    if (menuOpen) {
+    if (menuOpen || isDesktopMenuVisible) {
       document.addEventListener('mousedown', handleClickOutside);
     }
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [menuOpen]);
+  }, [menuOpen, isDesktopMenuVisible]);
 
   useEffect(() => {
     setMenuOpen(false);
+    setIsDesktopMenuVisible(false);
   }, [location.pathname]);
+
   const menuButtonVariants = {
     initial: { scale: 1 },
     tap: { scale: 0.95 }
   };
+
   const menuContainerVariants = {
     hidden: {
       opacity: 0,
@@ -179,11 +189,47 @@ const Navbar = () => {
       }
     }
   };
+
+  const desktopMenuContainerVariants = {
+    hidden: {
+      opacity: 0,
+      scale: 0.98,
+      y: 10
+    },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      y: 0,
+      transition: { 
+        duration: 0.2,
+        ease: "easeOut",
+        staggerChildren: 0.02,
+        delayChildren: 0.05
+      }
+    },
+    exit: {
+      opacity: 0,
+      scale: 0.98,
+      y: 10,
+      transition: { 
+        duration: 0.15,
+        ease: "easeInOut"
+      }
+    }
+  };
+
   const menuItemVariants = {
     hidden: { opacity: 0, x: -8 },
     visible: { opacity: 1, x: 0 },
     exit: { opacity: 0 }
   };
+
+  const desktopMenuItemVariants = {
+    hidden: { opacity: 0, y: -5 },
+    visible: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: -5 }
+  };
+
   const overlayVariants = {
     hidden: { opacity: 0 },
     visible: { 
@@ -196,6 +242,9 @@ const Navbar = () => {
     }
   };
 
+  const toggleDesktopMenu = () => {
+    setIsDesktopMenuVisible(prev => !prev);
+  };
   return (
     <div>
       <header
@@ -208,7 +257,7 @@ const Navbar = () => {
             <div className="flex items-center space-x-4">
               <motion.button
                 onClick={() => setMenuOpen(prev => !prev)}
-                className="p-2 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-[#fe6200]"
+                className="p-2 rounded-lg  transition-colors focus:outline-none focus:ring-2 focus:ring-[#fe6200]"
                 aria-label="Toggle menu"
                 variants={menuButtonVariants}
                 initial="initial"
@@ -216,8 +265,19 @@ const Navbar = () => {
               >
                 <MenuIcon className="w-6 h-6 text-white" />
               </motion.button>
+              
 
               <div className="hidden md:grid grid-cols-5 gap-4 px-4">
+              <motion.button
+                onClick={toggleDesktopMenu}
+                className="p-2  rounded-lg  transition-colors focus:outline-none focus:ring-2 focus:ring-[#fe6200]"
+                aria-label="Toggle menu"
+                variants={menuButtonVariants}
+                initial="initial"
+                whileTap="tap"
+              >
+                <MenuIcon className="w-6 h-6 text-white" />
+              </motion.button>
                 <motion.button
                   onClick={handleNavigate("/")}
                   className={`flex items-center px-3 cursor-pointer py-2 rounded-lg text-white transition-colors ${location.pathname === "/" ? "bg-[#2A2A2A]" : ""}`}
@@ -252,7 +312,6 @@ const Navbar = () => {
           </div>
         </div>
       </header>
-
       <AnimatePresence>
         {menuOpen && (
           <>
@@ -268,19 +327,18 @@ const Navbar = () => {
             <motion.div
               className="menu-container fixed z-[70] bg-black/95 border border-[#fe6200] border-[0.7px] shadow-[0_0_100px_rgba(254,98,0,0.4)] rounded-xl text-white"
               style={{
-                width: window.innerWidth < 768 ? '100%' : '70%',
-                height: window.innerWidth < 768 ? '100%' : 'auto',
-                maxHeight: window.innerWidth < 768 ? '100%' : '85vh',
-                top: window.innerWidth < 768 ? '0' : '24%',
-                left: window.innerWidth < 768 ? '0' : '16%',
-                transform: window.innerWidth < 768 ? 'none' : 'translate(-50%, -50%)',
+                width: '100%',
+                height: '100%',
+                maxHeight: '100%',
+                top: '0',
+                left: '0',
                 overflow: 'auto'
               }}
               variants={menuContainerVariants}
               initial="hidden"
               animate="visible"
               exit="exit"
-              layoutId="menuContainer"
+              layoutId="mobileMenuContainer"
             >
               <div className="flex justify-between items-center p-6">
                 <Logo />
@@ -296,19 +354,14 @@ const Navbar = () => {
                 </motion.button>
               </div>
 
-              <div className={`
-                flex flex-col p-4
-                md:grid md:grid-cols-3 md:gap-4 md:px-6 md:py-8
-                lg:grid-cols-4 lg:gap-6 
-                xl:grid-cols-5 xl:gap-6
-              `}>
+              <div className="flex flex-col p-4">
                 {menuItems.map((item) => (
                   <motion.button
                     key={item.path}
                     onClick={handleNavigate(item.path)}
                     disabled={isNavigating}
                     className={`
-                      flex items-center p-3 mb-2 md:mb-0 
+                      flex items-center p-3 mb-2 
                       cursor-pointer rounded-xl 
                       transition-all duration-200
                       focus:outline-none focus:ring-1 focus:ring-[#fe6200]
@@ -320,6 +373,83 @@ const Navbar = () => {
                     `}
                     variants={menuItemVariants}
                     whileHover={{ x: 5, transition: { duration: 0.2 } }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    {item.icon}
+                    <span className={`${item.highlight ? "font-bold" : ""}`}>
+                      {item.text}
+                    </span>
+                  </motion.button>
+                ))}
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {isDesktopMenuVisible && (
+          <>
+            <motion.div
+              className="fixed inset-0 bg-black/50 z-[60] hidden md:block"
+              onClick={() => setIsDesktopMenuVisible(false)}
+              variants={overlayVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+            />
+
+            <motion.div
+              className="menu-container fixed z-[70] hidden md:block bg-black/95 border border-[#fe6200] border-[0.7px] shadow-[0_0_100px_rgba(254,98,0,0.4)] rounded-xl text-white"
+              style={{
+                width: '50%',
+                maxWidth: '800px',
+                maxHeight: '80vh',
+                top: '5rem',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                overflow: 'auto'
+              }}
+              variants={desktopMenuContainerVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              layoutId="desktopMenuContainer"
+            >
+              <div className="flex justify-between items-center p-4 border-b border-gray-800">
+                <h2 className="text-xl font-bold text-white">Navigation</h2>
+                <motion.button
+                  onClick={() => setIsDesktopMenuVisible(false)}
+                  className="p-2 rounded-full hover:bg-gray-800 transition-colors focus:outline-none focus:ring-2 focus:ring-[#fe6200]"
+                  aria-label="Close menu"
+                  whileHover={{ rotate: 90 }}
+                  whileTap={{ scale: 0.9 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <X className="w-5 h-5 text-white" />
+                </motion.button>
+              </div>
+
+              <div className="grid grid-cols-3 gap-3 p-6">
+                {menuItems.map((item) => (
+                  <motion.button
+                    key={item.path}
+                    onClick={handleNavigate(item.path)}
+                    disabled={isNavigating}
+                    className={`
+                      flex items-center p-3
+                      cursor-pointer rounded-xl 
+                      transition-all duration-200
+                      focus:outline-none focus:ring-1 focus:ring-[#fe6200]
+                      ${location.pathname === item.path 
+                        ? "bg-[#1A1A1A] border-l-2 border-[#fe6200]" 
+                        : "hover:bg-[#1A1A1A]"}
+                      ${item.highlight
+                        ? "bg-gradient-to-r from-[#3D1D1D] to-[#3D2D0D] border-l-4 border-yellow-500"
+                        : ""
+                      }
+                    `}
+                    variants={desktopMenuItemVariants}
+                    whileHover={{ scale: 1.03, x: 3 }}
                     whileTap={{ scale: 0.98 }}
                   >
                     {item.icon}
