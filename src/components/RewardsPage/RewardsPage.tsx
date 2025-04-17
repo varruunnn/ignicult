@@ -92,7 +92,6 @@ const RewardsPage = () => {
 
   return (
     <div className="min-h-screen bg-[#111111] text-gray-200 py-12 px-4
-    max-[365px]:mt-[64px]
     ">
       <motion.div 
         className="max-w-3xl mx-auto"

@@ -79,7 +79,6 @@ const PremiumTournament = () => {
 
   return (
     <div className="min-h-screen w-full bg-gradient-to-b from-gray-900 via-gray-950 to-black text-white p-6
-    max-[365px]:mt-[24px]
     ">
       <div className="max-w-5xl mx-auto">
         {/* Tournament header with glowing effect */}

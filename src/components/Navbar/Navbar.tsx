@@ -123,7 +123,7 @@ const Navbar = () => {
       case "/rewards":
         return "bg-[#111111]";
       case "/activity":
-        return "bg-[#1c1c1c]";
+        return "bg-[#040404]";
       case "/tournaments":
         return "bg-[#111827]";
       case "/premium-tournaments":

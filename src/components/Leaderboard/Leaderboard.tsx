@@ -61,7 +61,6 @@ const GamingLeaderboard = () => {
 
   return (
     <div className="min-h-screen w-full bg-gradient-to-b from-black via-gray-900 to-black text-white p-6
-    max-[365px]:mt-[34px]
     ">
       <div className="max-w-5xl mx-auto">
 

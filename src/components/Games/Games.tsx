@@ -46,7 +46,7 @@ const Games = () => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-black via-[#050505] to-[#050505] min-h-screen p-8 max-[365px]:mt-[64px]">
+    <div className="bg-gradient-to-br from-black via-[#050505] to-[#050505] min-h-screen p-8 ">
       <div className="max-w-7xl mx-auto">
         <motion.div className="text-center mb-12">
           <motion.span className=" text-5xl font-bold font-rubik text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-yellow-500 to-red-600 inline-block">

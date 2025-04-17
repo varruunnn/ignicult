@@ -107,7 +107,7 @@ const Footer = () => {
               <FaFire className="mr-2 text-yellow-500" /> Quick Links
             </motion.h3>
             <ul className="space-y-3">
-              {['Home', 'Profile', 'Games', 'Tournaments', 'Join Us', 'Contact Us'].map((link, index) => (
+              {['Home', 'Profile', 'Games', 'Tournaments', 'Support'].map((link, index) => (
                 <motion.li key={index}
                   variants={itemVariants}
                   whileHover="hover"
@@ -142,7 +142,7 @@ const Footer = () => {
               variants={containerVariants}
             >
               {[
-                { icon: FaXTwitter , color: "bg-sky-500", url: "https://twitter.com" },
+                { icon: FaXTwitter , color: "bg-sky-500", url: "https://x.com/ignicult" },
               ].map((social, index) => (
                 <motion.a
                   key={index}

@@ -97,7 +97,6 @@ const Help: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#1b0b0b] to-[#2f0c0c] text-white
-    max-[365px]:mt-[64px]
     ">
       <motion.section 
         className="relative h-80 sm:h-96 flex flex-col items-center justify-center overflow-hidden"
