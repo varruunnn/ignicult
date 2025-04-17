@@ -40,21 +40,25 @@ const wallets = [
     auth: {
       options: [
         "google",
-        "x",
-        "apple",
         "discord",
-        "facebook",
-        "farcaster",
         "telegram",
-        "coinbase",
-        "line",
+        "farcaster",
         "email",
-        "phone",
+        "x",
         "passkey",
+        "phone",
+        "github",
+        "twitch",
+        "apple",
         "guest",
       ],
     },
   }),
+  createWallet("com.coinbase.wallet"),
+  createWallet("io.rabby"),
+  createWallet("io.zerion.wallet"),
+  createWallet("me.rainbow"),
+  createWallet("io.metamask"),
 ];
 
 const LandingPage = () => {
