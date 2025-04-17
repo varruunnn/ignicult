@@ -7,6 +7,7 @@ import {
   useTransform,
 } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import LoadingScreen from "../../LoadingScreen";
 import {
   Zap,
   Crown,
@@ -118,37 +119,44 @@ const StatCard = ({
     </motion.div>
   );
 };
+
 const mapApiDataToProfileData = (apiData: any): ProfileData => {
   const games = apiData.games?.map((game: any) => ({
     name: game.name || "Unknown Game",
-    score: game.userScore || 0,
-    rank: game.userRank || 0,
+    score: game.score || 0,
+    rank: game.rank || 0,
     highestScore: game.highestScore || 0,
-    topAchieverWallet: game.topPlayer || "0x0000000000",
-    icon: getGameIcon(game.name), // Helper function to assign icons
+    topAchieverWallet: game.topAchieverWallet || "0x0000000000",
+    icon: getGameIcon(game.name), 
   })) || [];
   
+  const hoursPerWeek = 8; 
+  const level = 5; 
+  const experience = 75; 
+  
   return {
-    playerName: apiData.username || "Anonymous",
-    playerImage: apiData.avatar || "/player-avatar.jpg",
+    playerName: apiData.playerName || "Anonymous",
+    playerImage: apiData.playerImage || "/player-avatar.jpg",
     walletAddress: apiData.walletAddress || "",
-    totalPoints: apiData.totalPoints || 0,
-    totalGamesPlayed: apiData.gamesPlayed || 0,
-    mostPlayedGame: games.length > 0 ? games[0].name : "No Games",
-    hoursPerWeek: apiData.hoursPlayed || 0,
-    tournamentsParticipated: apiData.tournamentsJoined || 0,
-    cultixBalance: apiData.cultixBalance || 0,
-    level: apiData.level || 1,
-    experience: apiData.experiencePercentage || 0,
+    totalPoints: apiData.totalPoints?.value || 0,
+    totalGamesPlayed: apiData.totalGamesPlayed?.value || 0,
+    mostPlayedGame: apiData.mostPlayedGame?.name || "No Games",
+    hoursPerWeek: hoursPerWeek,
+    tournamentsParticipated: apiData.tournamentsParticipated?.value || 0,
+    cultixBalance: apiData.cultixBalance?.value || 0,
+    level: level,
+    experience: experience,
     games: games,
   };
 };
+
 const getGameIcon = (gameName: string): string => {
   const gameIcons: {[key: string]: string} = {
+    "Number Snake": "🐍",
+    "Tic Tac Toe": "❌",
     "Color Ship Shooter": "👾",
     "Color puzzle": "⚔️",
     "Cricket Catch Pro": "🚀",
-    "tic tak toe": "🐉",
   };
   
   return gameIcons[gameName] || "🎮";
@@ -163,22 +171,15 @@ const Profile = () => {
   const [profileData, setProfileData] = useState<ProfileData>(defaultProfileData);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const hardcodedUserId = "0324dfa6-3d7f-4502-9eb3-a2ecb5743493";
   
-  const account = useActiveAccount();
-  const address = account?.address;
   useEffect(() => {
     const fetchProfileData = async () => {
-      if (!address) {
-        setError("Please connect your wallet to view your profile");
-        setIsLoading(false);
-        return;
-      }
-
       setIsLoading(true);
       setError(null);
       
       try {
-        const response = await fetch(`https://ignicult.com/api/metrics/user/${address}`);
+        const response = await fetch(`https://ignicult.com/api/metrics/user/${hardcodedUserId}`);
         
         if (!response.ok) {
           throw new Error(`Failed to fetch profile data: ${response.status}`);
@@ -197,7 +198,7 @@ const Profile = () => {
     };
 
     fetchProfileData();
-  }, [address]);
+  }, []);
 
   const currentGameDetails = profileData.games[selectedGameIndex] || {
     name: "No Game Selected",
@@ -222,22 +223,27 @@ const Profile = () => {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 },
   };
+  
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-[#0D0D0D] to-[#050505] text-white flex flex-col items-center justify-center">
-        <Loader2 className="animate-spin text-blue-400 h-12 w-12 mb-4" />
-        <p className="text-xl">Loading your profile...</p>
+      <div className="z-50 min-h-screen bg-gradient-to-b from-[#0D0D0D] to-[#050505] text-white flex flex-col items-center justify-center p-6">
+              <LoadingScreen loading={true}/>
       </div>
     );
   }
-  if (!address||error) {
+  
+  if (error) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-[#0D0D0D] to-[#050505] text-white flex flex-col items-center justify-center p-6">
         <div className="bg-blue-900/30 border border-blue-800 rounded-xl p-8 max-w-md text-center">
-          <h2 className="text-2xl font-bold mb-4">Welcome to Ignicult</h2>
-          <p className="mb-6">Please connect your wallet to view your profile and game statistics.</p>
-          <p className="text-gray-400 mb-6">Use the connect button on the landing to get started.</p>
-          <p>Error: {error}</p>
+          <h2 className="text-2xl font-bold mb-4">Unable to Load Profile</h2>
+          <p className="mb-6">{error}</p>
+          <button 
+            className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            onClick={() => window.location.reload()}
+          >
+            Try Again
+          </button>
         </div>
       </div>
     );
