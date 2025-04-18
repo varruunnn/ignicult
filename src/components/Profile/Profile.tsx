@@ -153,11 +153,11 @@ const mapApiDataToProfileData = (apiData: any): ProfileData => {
     rank: game.rank || 0,
     highestScore: game.highestScore || 0,
     topAchieverWallet: game.topAchieverWallet || "0x0000000000",
-    icon: getGameIcon(game.name), 
+    icon: getGameIcon(game.name),
   })) || [];
-  
+
   const hoursPerWeek = 8; // Hardcoded value since it's not in the API
-  
+
   return {
     walletAddress: apiData.walletAddress || "",
     totalPoints: apiData.totalPoints?.value || 0,
@@ -182,14 +182,14 @@ const mapApiDataToProfileData = (apiData: any): ProfileData => {
 };
 
 const getGameIcon = (gameName: string): string => {
-  const gameIcons: {[key: string]: string} = {
+  const gameIcons: { [key: string]: string } = {
     "Number Snake": "🐍",
     "Tic Tac Toe": "❌",
     "Color Ship Shooter": "👾",
     "Color puzzle": "⚔️",
     "Cricket Catch Pro": "🚀",
   };
-  
+
   return gameIcons[gameName] || "🎮";
 };
 
@@ -198,27 +198,27 @@ const Profile = () => {
   const [selectedGameIndex, setSelectedGameIndex] = useState(0);
   const { scrollYProgress } = useScroll();
   const headerOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0.3]);
-  
+
   const [profileData, setProfileData] = useState<ProfileData>(defaultProfileData);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const hardcodedUserId = "0324dfa6-3d7f-4502-9eb3-a2ecb5743493";
-  
+
   useEffect(() => {
     const fetchProfileData = async () => {
       setIsLoading(true);
       setError(null);
-      
+
       try {
         const response = await fetch(`https://ignicult.com/api/metrics/user/${hardcodedUserId}`);
-        
+
         if (!response.ok) {
           throw new Error(`Failed to fetch profile data: ${response.status}`);
         }
-        
+
         const data = await response.json();
         const formattedData = mapApiDataToProfileData(data);
-        
+
         setProfileData(formattedData);
         setIsLoading(false);
       } catch (err) {
@@ -254,22 +254,22 @@ const Profile = () => {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 },
   };
-  
+
   if (isLoading) {
     return (
       <div className="z-50 min-h-screen bg-gradient-to-b from-[#0D0D0D] to-[#050505] text-white flex flex-col items-center justify-center p-6">
-              <LoadingScreen loading={true}/>
+        <LoadingScreen loading={true} />
       </div>
     );
   }
-  
+
   if (error) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-[#0D0D0D] to-[#050505] text-white flex flex-col items-center justify-center p-6">
         <div className="bg-blue-900/30 border border-blue-800 rounded-xl p-8 max-w-md text-center">
           <h2 className="text-2xl font-bold mb-4">Unable to Load Profile</h2>
           <p className="mb-6">{error}</p>
-          <button 
+          <button
             className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
             onClick={() => window.location.reload()}
           >
@@ -282,9 +282,9 @@ const Profile = () => {
   const formatDate = (dateString: string) => {
     if (!dateString) return "";
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', { 
-      year: 'numeric', 
-      month: 'short', 
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'short',
       day: 'numeric'
     });
   };
@@ -305,26 +305,29 @@ const Profile = () => {
             <div className="absolute top-0 right-0 w-40 h-40 bg-yellow-500 rounded-full filter blur-3xl opacity-10"></div>
             <div className="absolute bottom-0 left-0 w-40 h-40 bg-blue-500 rounded-full filter blur-3xl opacity-10"></div>
 
-            <div className="flex flex-col md:flex-row gap-8 items-center">
-              <motion.div 
-                className="flex flex-col items-center"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
+            <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
+              <motion.div
+                className="relative"
+                whileHover={{ scale: 1.03 }}
               >
                 <img
                   src="https://img.freepik.com/free-vector/cute-alien-playing-vr-game-with-controller-cartoon-vector-icon-illustration-science-technology-flat_138676-13965.jpg"
-                  alt="Default Player Avatar"
+                  alt="Player Avatar"
                   className="w-32 h-32 rounded-2xl border-4 border-yellow-500 shadow-xl z-10"
                 />
-                <div className="mt-4 px-4 py-2 bg-gray-800 rounded-lg border border-gray-700">
-                  <p className="text-gray-300 font-mono text-lg break-all">
-                    {profileData.walletAddress}
-                  </p>
+                <div className="absolute -bottom-2 -right-2 bg-gradient-to-r from-yellow-500 to-orange-600 rounded-full p-2 shadow-lg border-2 border-gray-900">
+                  <Crown size={16} className="text-white" />
                 </div>
               </motion.div>
 
-              <div className="flex-1">
+              <div className="flex-1 text-center md:text-left">
+                <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                  <div>
+                    <p className="text-gray-300 font-mono text-lg">{profileData.walletAddress}</p>
+                  </div>
+                </div>
+
+
                 <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4">
                   <div className="flex flex-col items-center md:items-start">
                     <p className="text-gray-400 text-xs">TOTAL POINTS</p>
@@ -514,11 +517,10 @@ const Profile = () => {
                           className="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full"
                           initial={{ width: 0 }}
                           animate={{
-                            width: `${
-                              (currentGameDetails.score /
+                            width: `${(currentGameDetails.score /
                                 currentGameDetails.highestScore) *
                               100
-                            }%`,
+                              }%`,
                           }}
                           transition={{ duration: 1 }}
                         />
@@ -617,7 +619,7 @@ const Profile = () => {
             >
               <div className="relative p-6">
                 <div className="absolute top-0 right-0 w-40 h-40 bg-yellow-500 rounded-full filter blur-3xl opacity-10"></div>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <div className="bg-black bg-opacity-30 p-4 rounded-xl border border-yellow-800">
                     <p className="text-gray-400 text-sm">Game</p>
@@ -628,7 +630,7 @@ const Profile = () => {
                       {formatDate(profileData.bestPerformance.date)}
                     </p>
                   </div>
-                  
+
                   <div className="bg-black bg-opacity-30 p-4 rounded-xl border border-yellow-800">
                     <p className="text-gray-400 text-sm">Score</p>
                     <h2 className="text-4xl font-bold text-yellow-400 mt-1">
@@ -639,7 +641,7 @@ const Profile = () => {
                       />
                     </h2>
                   </div>
-                  
+
                   <div className="bg-black bg-opacity-30 p-4 rounded-xl border border-yellow-800 flex flex-col justify-between">
                     <p className="text-gray-400 text-sm">Play Again</p>
                     <motion.button

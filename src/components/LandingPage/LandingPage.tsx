@@ -102,14 +102,18 @@ const LandingPage = () => {
             className="absolute inset-0 z-20 flex items-center justify-center"
           >
             <div className="container mx-auto px-4 sm:px-6 text-center">
-              <div className="max-w-4xl mx-auto">
-                <div>
-                  <h1 className="text-5xl sm:text-5xl font-extrabold mb-6 tracking-tight">
-                    <span className="font-rubik text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-yellow-500 to-red-600 inline-block">
-                      Welcome to <br /> IGNICULT
+            <div className="text-center mb-12 sm:mb-16">
+              <div>
+                <h2 className="text-4xl sm:text-6xl font-bold mb-4">
+                  <span className="bg-gradient-to-r font-inter font-semibold from-red-500 via-yellow-400 to-red-500 bg-clip-text text-transparent inline-block">
+                    <span className="text-2xl sm:text-4xl tracking-wider">Welcome To</span>{" "}
+                    <br />
+                    <span className="text-5xl sm:text-7xl tracking-tighter">
+                      IGNICULT 
                     </span>
-                  </h1>
-                </div>
+                  </span>
+                </h2>
+              </div>
 
                 <p className="text-lg md:text-xl text-gray-300 mb-8 sm:mb-12 leading-relaxed">
                   The ultimate competitive gaming platform for{" "}
@@ -132,7 +136,7 @@ const LandingPage = () => {
                       wallets={wallets}
                       theme={darkTheme({
                         colors: {
-                          primaryButtonBg: "",
+                          primaryButtonBg: "#202020",
                           primaryButtonText: "#FFFFFF",
                           connectedButtonBg: "hsl(240, 9%, 3%)",
                           connectedButtonBgHover: "hsl(231, 11%, 12%)",

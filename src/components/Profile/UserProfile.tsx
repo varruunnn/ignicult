@@ -198,7 +198,7 @@ const getGameIcon = (gameName: string): string => {
 
 const UserProfile = () => {
   const navigate = useNavigate();
-  const { walletId } = useParams<{ walletId: string }>(); 
+  const { walletId } = useParams<{ walletId: string }>();
   const [selectedGameIndex, setSelectedGameIndex] = useState(0);
   const { scrollYProgress } = useScroll();
   const headerOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0.3]);
@@ -320,31 +320,37 @@ const UserProfile = () => {
             <div className="absolute top-0 right-0 w-40 h-40 bg-cyan-500 rounded-full filter blur-3xl opacity-10"></div>
             <div className="absolute bottom-0 left-0 w-40 h-40 bg-indigo-500 rounded-full filter blur-3xl opacity-10"></div>
 
-            <div className="flex flex-col md:flex-row gap-8 items-center">
+
+            <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
               <motion.div
-                className="flex flex-col items-center"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
+                className="relative"
+                whileHover={{ scale: 1.03 }}
               >
-                <div className="w-32 h-32 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-700 border-4 border-cyan-500 shadow-xl z-10 flex items-center justify-center">
-                  <User className="text-white" size={64} />
-                </div>
-                <div className="mt-4 px-4 py-2 bg-gray-800 rounded-lg border border-cyan-900/40">
-                  <p className="text-gray-300 font-mono text-lg break-all">
-                    {profileData.walletAddress}
-                  </p>
+                <img
+                  src="https://img.freepik.com/free-vector/cute-alien-playing-vr-game-with-controller-cartoon-vector-icon-illustration-science-technology-flat_138676-13965.jpg"
+                  alt="Player Avatar"
+                  className="w-32 h-32 rounded-2xl border-4 border-yellow-500 shadow-xl z-10"
+                />
+                <div className="absolute -bottom-2 -right-2 bg-gradient-to-r from-yellow-500 to-orange-600 rounded-full p-2 shadow-lg border-2 border-gray-900">
+                  <Crown size={16} className="text-white" />
                 </div>
               </motion.div>
 
-              <div className="flex-1">
+              <div className="flex-1 text-center md:text-left">
+                <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                  <div>
+                    <p className="text-gray-300 font-mono text-lg">{profileData.walletAddress}</p>
+                  </div>
+                </div>
+
+
                 <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4">
                   <div className="flex flex-col items-center md:items-start">
                     <p className="text-gray-400 text-xs">TOTAL POINTS</p>
                     <div className="mt-1">
                       <CountUp
                         target={profileData.totalPoints}
-                        className="text-xl text-cyan-400"
+                        className="text-xl text-yellow-400"
                         format={(n) => n.toLocaleString()}
                       />
                     </div>
@@ -352,10 +358,10 @@ const UserProfile = () => {
                   <div className="flex flex-col items-center md:items-start">
                     <p className="text-gray-400 text-xs">CULTIX BALANCE</p>
                     <div className="flex items-center mt-1">
-                      <span className="text-cyan-400 mr-1">✦</span>
+                      <span className="text-emerald-400 mr-1">✦</span>
                       <CountUp
                         target={profileData.cultixBalance}
-                        className="text-xl text-cyan-400"
+                        className="text-xl text-emerald-400"
                         format={(n) => n.toLocaleString()}
                       />
                     </div>
@@ -385,7 +391,6 @@ const UserProfile = () => {
             </div>
           </div>
         </motion.div>
-
         <motion.div
           className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 px-6 mt-6"
           variants={containerVariants}
@@ -529,11 +534,10 @@ const UserProfile = () => {
                           className="bg-gradient-to-r from-cyan-500 to-blue-500 h-2 rounded-full"
                           initial={{ width: 0 }}
                           animate={{
-                            width: `${
-                              (currentGameDetails.score /
+                            width: `${(currentGameDetails.score /
                                 currentGameDetails.highestScore) *
                               100
-                            }%`,
+                              }%`,
                           }}
                           transition={{ duration: 1 }}
                         />
