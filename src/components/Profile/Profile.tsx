@@ -14,6 +14,11 @@ import {
   Gamepad2,
   Flame,
   Loader2,
+  Trophy,
+  Calendar,
+  Check,
+  X,
+  Star,
 } from "lucide-react";
 import { useActiveAccount } from "thirdweb/react"
 interface Game {
@@ -25,9 +30,20 @@ interface Game {
   icon: string;
 }
 
+interface TournamentHistoryItem {
+  month: string;
+  gamesPlayed: number;
+  totalScore: number;
+}
+
+interface BestPerformance {
+  score: number;
+  gameId: number;
+  gameName: string;
+  date: string;
+}
+
 interface ProfileData {
-  playerName: string;
-  playerImage: string;
   walletAddress: string;
   totalPoints: number;
   totalGamesPlayed: number;
@@ -35,14 +51,15 @@ interface ProfileData {
   hoursPerWeek: number;
   tournamentsParticipated: number;
   cultixBalance: number;
-  level: number;
-  experience: number;
   games: Game[];
+  completionRate: number;
+  tournamentHistory: TournamentHistoryItem[];
+  gameDiversityScore: number;
+  dnfRate: number;
+  bestPerformance: BestPerformance;
 }
 
 const defaultProfileData: ProfileData = {
-  playerName: "Loading...",
-  playerImage: "/player-avatar.jpg",
   walletAddress: "",
   totalPoints: 0,
   totalGamesPlayed: 0,
@@ -50,9 +67,17 @@ const defaultProfileData: ProfileData = {
   hoursPerWeek: 0,
   tournamentsParticipated: 0,
   cultixBalance: 0,
-  level: 0,
-  experience: 0,
   games: [],
+  completionRate: 0,
+  tournamentHistory: [],
+  gameDiversityScore: 0,
+  dnfRate: 0,
+  bestPerformance: {
+    score: 0,
+    gameId: 0,
+    gameName: "",
+    date: ""
+  }
 };
 
 const CountUp = ({
@@ -130,13 +155,9 @@ const mapApiDataToProfileData = (apiData: any): ProfileData => {
     icon: getGameIcon(game.name), 
   })) || [];
   
-  const hoursPerWeek = 8; 
-  const level = 5; 
-  const experience = 75; 
+  const hoursPerWeek = 8; // Hardcoded value since it's not in the API
   
   return {
-    playerName: apiData.playerName || "Anonymous",
-    playerImage: apiData.playerImage || "/player-avatar.jpg",
     walletAddress: apiData.walletAddress || "",
     totalPoints: apiData.totalPoints?.value || 0,
     totalGamesPlayed: apiData.totalGamesPlayed?.value || 0,
@@ -144,9 +165,17 @@ const mapApiDataToProfileData = (apiData: any): ProfileData => {
     hoursPerWeek: hoursPerWeek,
     tournamentsParticipated: apiData.tournamentsParticipated?.value || 0,
     cultixBalance: apiData.cultixBalance?.value || 0,
-    level: level,
-    experience: experience,
     games: games,
+    completionRate: apiData.completionRate?.value || 0,
+    tournamentHistory: apiData.tournamentStats?.tournamentHistory?.value || [],
+    gameDiversityScore: apiData.gameDiversityScore?.value || 0,
+    dnfRate: apiData.dnfRate?.value || 0,
+    bestPerformance: apiData.bestPerformance?.value || {
+      score: 0,
+      gameId: 0,
+      gameName: "",
+      date: ""
+    }
   };
 };
 
@@ -249,6 +278,17 @@ const Profile = () => {
     );
   }
 
+  // Format date for best performance section
+  const formatDate = (dateString: string) => {
+    if (!dateString) return "";
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', { 
+      year: 'numeric', 
+      month: 'short', 
+      day: 'numeric'
+    });
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0D0D0D] to-[#050505] text-white overflow-x-hidden">
       <div className="fixed top-20 -left-20 w-96 h-96 rounded-full bg-purple-900 opacity-20 filter blur-3xl"></div>
@@ -265,56 +305,26 @@ const Profile = () => {
             <div className="absolute top-0 right-0 w-40 h-40 bg-yellow-500 rounded-full filter blur-3xl opacity-10"></div>
             <div className="absolute bottom-0 left-0 w-40 h-40 bg-blue-500 rounded-full filter blur-3xl opacity-10"></div>
 
-            <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
-              <motion.div className="relative" whileHover={{ scale: 1.03 }}>
+            <div className="flex flex-col md:flex-row gap-8 items-center">
+              <motion.div 
+                className="flex flex-col items-center"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+              >
                 <img
-                  src={profileData.playerImage || "https://img.freepik.com/free-vector/cute-alien-playing-vr-game-with-controller-cartoon-vector-icon-illustration-science-technology-flat_138676-13965.jpg"}
-                  alt="Player Avatar"
+                  src="https://img.freepik.com/free-vector/cute-alien-playing-vr-game-with-controller-cartoon-vector-icon-illustration-science-technology-flat_138676-13965.jpg"
+                  alt="Default Player Avatar"
                   className="w-32 h-32 rounded-2xl border-4 border-yellow-500 shadow-xl z-10"
                 />
-                <div className="absolute -bottom-2 -right-2 bg-gradient-to-r from-yellow-500 to-orange-600 rounded-full p-2 shadow-lg border-2 border-gray-900">
-                  <Crown size={16} className="text-white" />
+                <div className="mt-4 px-4 py-2 bg-gray-800 rounded-lg border border-gray-700">
+                  <p className="text-gray-300 font-mono text-lg break-all">
+                    {profileData.walletAddress}
+                  </p>
                 </div>
               </motion.div>
 
-              <div className="flex-1 text-center md:text-left">
-                <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                  <div>
-                    <h1 className="text-4xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-yellow-500 via-amber-500 to-orange-500">
-                      {profileData.playerName}
-                    </h1>
-                    <p className="text-gray-400 font-mono text-sm mt-1">
-                      {profileData.walletAddress.slice(0, 10)}...
-                      {profileData.walletAddress.slice(-6)}
-                    </p>
-                  </div>
-
-                  <div className="flex flex-col items-center md:items-end">
-                    <div className="flex items-center">
-                      <Flame className="text-orange-500 mr-2" size={20} />
-                      <span className="text-xl font-bold mr-1">Level</span>
-                      <CountUp
-                        target={profileData.level}
-                        className="text-yellow-400 text-2xl"
-                      />
-                    </div>
-                    <div className="w-full max-w-xs mt-2">
-                      <div className="w-full bg-gray-800 rounded-full h-2">
-                        <motion.div
-                          className="bg-gradient-to-r from-orange-500 to-yellow-500 h-2 rounded-full"
-                          initial={{ width: 0 }}
-                          animate={{ width: `${profileData.experience}%` }}
-                          transition={{ duration: 1.5, type: "spring" }}
-                        />
-                      </div>
-                      <div className="flex justify-between text-xs text-gray-400 mt-1">
-                        <span>XP</span>
-                        <span>{profileData.experience}%</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
+              <div className="flex-1">
                 <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4">
                   <div className="flex flex-col items-center md:items-start">
                     <p className="text-gray-400 text-xs">TOTAL POINTS</p>
@@ -363,6 +373,7 @@ const Profile = () => {
           </div>
         </motion.div>
 
+        {/* First row of stat cards */}
         <motion.div
           className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 px-6 mt-6"
           variants={containerVariants}
@@ -399,6 +410,48 @@ const Profile = () => {
               label="Win Streak"
               value="3 Games"
               bgGradient="from-red-900/40 to-red-950/80"
+            />
+          </motion.div>
+        </motion.div>
+
+        {/* Second row of stat cards - New additions */}
+        <motion.div
+          className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 px-6 mt-6"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          transition={{ delay: 0.2 }}
+        >
+          <motion.div variants={itemVariants}>
+            <StatCard
+              icon={<Check className="text-green-400" />}
+              label="Completion Rate"
+              value={`${profileData.completionRate.toFixed(1)}%`}
+              bgGradient="from-green-900/40 to-green-950/80"
+            />
+          </motion.div>
+          <motion.div variants={itemVariants}>
+            <StatCard
+              icon={<Calendar className="text-blue-400" />}
+              label="Tournament History"
+              value={`${profileData.tournamentHistory.length} Months`}
+              bgGradient="from-blue-900/40 to-blue-950/80"
+            />
+          </motion.div>
+          <motion.div variants={itemVariants}>
+            <StatCard
+              icon={<Star className="text-yellow-400" />}
+              label="Game Diversity"
+              value={profileData.gameDiversityScore}
+              bgGradient="from-yellow-900/40 to-yellow-950/80"
+            />
+          </motion.div>
+          <motion.div variants={itemVariants}>
+            <StatCard
+              icon={<X className="text-red-400" />}
+              label="DNF Rate"
+              value={`${profileData.dnfRate.toFixed(1)}%`}
+              bgGradient="from-pink-900/40 to-pink-950/80"
             />
           </motion.div>
         </motion.div>
@@ -560,6 +613,71 @@ const Profile = () => {
                 BROWSE GAMES
               </motion.button>
             </div>
+          </motion.div>
+        )}
+
+        {/* New Best Performance Section */}
+        {profileData.bestPerformance && profileData.bestPerformance.gameName && (
+          <motion.div
+            className="max-w-6xl mx-auto px-6 mt-10"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+          >
+            <div className="flex items-center mb-6">
+              <h2 className="text-2xl font-bold flex items-center">
+                <Trophy className="mr-2 text-yellow-400" /> Best Performance
+              </h2>
+            </div>
+
+            <motion.div
+              className="bg-gradient-to-b from-[#1A1A1A] to-[#0D0D0D] rounded-2xl shadow-xl border border-gray-800 overflow-hidden"
+              whileHover={{ scale: 1.01 }}
+              transition={{ type: "spring", stiffness: 300, damping: 15 }}
+            >
+              <div className="relative p-6">
+                <div className="absolute top-0 right-0 w-40 h-40 bg-yellow-500 rounded-full filter blur-3xl opacity-10"></div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="bg-black bg-opacity-30 p-4 rounded-xl border border-yellow-800">
+                    <p className="text-gray-400 text-sm">Game</p>
+                    <h2 className="text-2xl font-bold text-yellow-400 mt-1">
+                      {profileData.bestPerformance.gameName}
+                    </h2>
+                    <p className="text-sm text-gray-400 mt-2">
+                      {formatDate(profileData.bestPerformance.date)}
+                    </p>
+                  </div>
+                  
+                  <div className="bg-black bg-opacity-30 p-4 rounded-xl border border-yellow-800">
+                    <p className="text-gray-400 text-sm">Score</p>
+                    <h2 className="text-4xl font-bold text-yellow-400 mt-1">
+                      <CountUp
+                        target={profileData.bestPerformance.score}
+                        className="text-yellow-400"
+                        format={(n) => n.toLocaleString()}
+                      />
+                    </h2>
+                  </div>
+                  
+                  <div className="bg-black bg-opacity-30 p-4 rounded-xl border border-yellow-800 flex flex-col justify-between">
+                    <p className="text-gray-400 text-sm">Play Again</p>
+                    <motion.button
+                      className="mt-4 py-3 bg-gradient-to-r from-yellow-600 to-amber-600 text-white font-bold rounded-xl flex items-center justify-center shadow-lg"
+                      whileHover={{
+                        scale: 1.02,
+                        boxShadow: "0 10px 15px -3px rgba(234, 179, 8, 0.3)",
+                      }}
+                      whileTap={{ scale: 0.98 }}
+                      onClick={() => navigate(`/games/${profileData.bestPerformance.gameName}`)}
+                    >
+                      <Trophy size={20} className="mr-2" />
+                      BEAT YOUR BEST
+                    </motion.button>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
           </motion.div>
         )}
       </div>
