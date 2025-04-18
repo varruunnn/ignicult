@@ -25,11 +25,23 @@ const DesktopNav: React.FC<DesktopNavProps> = ({
     tap: { scale: 0.95 }
   };
 
+  const toggleDesktopMenu = () => {
+    setIsDesktopMenuVisible(prev => !prev);
+  };
+
+  const closeDesktopMenu = () => {
+    setIsDesktopMenuVisible(false);
+  };
+
+  // Get the home and profile menu items for the quick access buttons
+  const homeItem = menuItems.find(item => item.path === "/");
+  const profileItem = menuItems.find(item => item.path === "/profile");
+
   return (
-    <>
-      <div className="hidden md:grid grid-cols-5 gap-4 px-4">
+    <div className="hidden md:flex items-center w-full justify-between">
+      <div className="grid grid-cols-5 gap-4 px-4">
         <motion.button
-          onClick={() => setIsDesktopMenuVisible(prev => !prev)}
+          onClick={toggleDesktopMenu}
           className="p-2 rounded-lg transition-colors desktop-menu-toggle"
           aria-label="Toggle menu"
           variants={menuButtonVariants}
@@ -39,54 +51,51 @@ const DesktopNav: React.FC<DesktopNavProps> = ({
           <MenuIcon className="w-6 h-6 text-white" />
         </motion.button>
         
-        <motion.button
-          onClick={handleNavigate("/")}
-          className={`flex items-center px-3 cursor-pointer py-2 rounded-lg text-white transition-colors ${currentPath === "/" ? "bg-[#2A2A2A]" : ""}`}
-          disabled={isNavigating}
-          whileHover={{ scale: 1.03 }}
-          whileTap={{ scale: 0.97 }}
-          transition={{ duration: 0.1 }}
-        >
-          <Home className="w-5 h-5 mr-1" />
-          <span>Home</span>
-        </motion.button>
+        {homeItem && (
+          <motion.button
+            onClick={handleNavigate("/")}
+            className={`flex items-center px-3 cursor-pointer py-2 rounded-lg text-white transition-colors ${currentPath === "/" ? "bg-[#2A2A2A]" : ""}`}
+            disabled={isNavigating}
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ duration: 0.1 }}
+          >
+            <Home className="w-5 h-5 mr-1" />
+            <span>Home</span>
+          </motion.button>
+        )}
         
-        <motion.button
-          onClick={handleNavigate("/profile")}
-          className={`flex items-center px-3 cursor-pointer py-2 rounded-lg text-white transition-colors ${currentPath === "/profile" ? "bg-[#2A2A2A]" : ""}`}
-          disabled={isNavigating}
-          whileHover={{ scale: 1.03 }}
-          whileTap={{ scale: 0.97 }}
-          transition={{ duration: 0.1 }}
-        >
-          <User className="w-5 h-5 mr-1" />
-          <span>Profile</span>
-        </motion.button>
+        {profileItem && (
+          <motion.button
+            onClick={handleNavigate("/profile")}
+            className={`flex items-center px-3 cursor-pointer py-2 rounded-lg text-white transition-colors ${currentPath === "/profile" ? "bg-[#2A2A2A]" : ""}`}
+            disabled={isNavigating}
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ duration: 0.1 }}
+          >
+            <User className="w-5 h-5 mr-1" />
+            <span>Profile</span>
+          </motion.button>
+        )}
       </div>
-      <div className="hidden md:block">
-        <Logo />
-      </div>
+      
+      <Logo />
 
       <AnimatePresence>
         {isDesktopMenuVisible && (
           <NavMenu
             menuItems={menuItems}
             isOpen={isDesktopMenuVisible}
-            closeMenu={() => setIsDesktopMenuVisible(false)}
-            handleNavigate={(path) => {
-              const navigate = handleNavigate(path);
-              return () => {
-                setIsDesktopMenuVisible(false);
-                navigate();
-              };
-            }}
+            closeMenu={closeDesktopMenu}
+            handleNavigate={handleNavigate}
             currentPath={currentPath}
             isNavigating={isNavigating}
             variant="desktop"
           />
         )}
       </AnimatePresence>
-    </>
+    </div>
   );
 };
 

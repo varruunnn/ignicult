@@ -10,15 +10,16 @@ interface NavItemProps {
   variant: 'mobile' | 'desktop';
 }
 
-const NavItem: React.FC<NavItemProps> = ({ 
-  item, 
-  onClick, 
-  isActive, 
+const NavItem: React.FC<NavItemProps> = ({
+  item,
+  onClick,
+  isActive,
   isNavigating,
   variant
 }) => {
   const isMobile = variant === 'mobile';
   
+  // Define variants based on mobile or desktop
   const itemVariants = isMobile
     ? {
         hidden: { opacity: 0, x: -8 },
@@ -31,29 +32,43 @@ const NavItem: React.FC<NavItemProps> = ({
         exit: { opacity: 0, y: -5 }
       };
 
+  // Define hover animations based on mobile or desktop
   const hoverAnimation = isMobile
     ? { x: 5, transition: { duration: 0.2 } }
     : { scale: 1.03, x: 3 };
+
+  // Define class names based on mobile or desktop
+  const className = isMobile
+    ? `
+      flex items-center p-3 mb-2 
+      cursor-pointer rounded-xl 
+      transition-all duration-200
+      focus:outline-none focus:ring-1 focus:ring-[#fe6200]
+      ${isActive ? "bg-black" : ""}
+      ${item.highlight
+        ? "bg-gradient-to-r from-[#3D1D1D] to-[#3D2D0D] border-l-4 border-yellow-500"
+        : ""
+      }
+    `
+    : `
+      flex items-center p-3
+      cursor-pointer rounded-xl 
+      transition-all duration-200
+      focus:outline-none focus:ring-1 focus:ring-[#fe6200]
+      ${isActive
+        ? "bg-[#1A1A1A] border-l-2 border-[#fe6200]" 
+        : "hover:bg-[#1A1A1A]"}
+      ${item.highlight
+        ? "bg-gradient-to-r from-[#3D1D1D] to-[#3D2D0D] border-l-4 border-yellow-500"
+        : ""
+      }
+    `;
 
   return (
     <motion.button
       onClick={onClick}
       disabled={isNavigating}
-      className={`
-        flex items-center p-3 ${isMobile ? 'mb-2' : ''}
-        cursor-pointer rounded-xl 
-        transition-all duration-200
-        focus:outline-none focus:ring-1 focus:ring-[#fe6200]
-        ${isActive 
-          ? isMobile 
-            ? "bg-black" 
-            : "bg-[#1A1A1A] border-l-2 border-[#fe6200]" 
-          : isMobile ? "" : "hover:bg-[#1A1A1A]"}
-        ${item.highlight
-          ? "bg-gradient-to-r from-[#3D1D1D] to-[#3D2D0D] border-l-4 border-yellow-500"
-          : ""
-        }
-      `}
+      className={className}
       variants={itemVariants}
       whileHover={hoverAnimation}
       whileTap={{ scale: 0.98 }}

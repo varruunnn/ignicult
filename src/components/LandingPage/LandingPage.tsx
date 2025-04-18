@@ -87,7 +87,7 @@ const LandingPage = () => {
                       wallets={wallets}
                       theme={darkTheme({
                         colors: {
-                          primaryButtonBg: "#202020",
+                          primaryButtonBg: "#",
                           primaryButtonText: "#FFFFFF",
                           connectedButtonBg: "hsl(240, 9%, 3%)",
                           connectedButtonBgHover: "hsl(231, 11%, 12%)",
