@@ -57,6 +57,7 @@ interface ProfileData {
   gameDiversityScore: number;
   dnfRate: number;
   bestPerformance: BestPerformance;
+  gamingStreak: number;
 }
 
 const defaultProfileData: ProfileData = {
@@ -72,6 +73,7 @@ const defaultProfileData: ProfileData = {
   tournamentHistory: [],
   gameDiversityScore: 0,
   dnfRate: 0,
+  gamingStreak: 0,
   bestPerformance: {
     score: 0,
     gameId: 0,
@@ -170,6 +172,7 @@ const mapApiDataToProfileData = (apiData: any): ProfileData => {
     tournamentHistory: apiData.tournamentStats?.tournamentHistory?.value || [],
     gameDiversityScore: apiData.gameDiversityScore?.value || 0,
     dnfRate: apiData.dnfRate?.value || 0,
+    gamingStreak: apiData.gamingStreak?.value || 0,
     bestPerformance: apiData.bestPerformance?.value || {
       score: 0,
       gameId: 0,
@@ -399,22 +402,20 @@ const Profile = () => {
           <motion.div variants={itemVariants}>
             <StatCard
               icon="🏆"
-              label="Tournament Rank"
-              value="#289"
+              label="Game Diversity Score"
+              value={profileData.gameDiversityScore}
               bgGradient="from-amber-900/40 to-amber-950/80"
             />
           </motion.div>
           <motion.div variants={itemVariants}>
             <StatCard
               icon="🔥"
-              label="Win Streak"
-              value="3 Games"
+              label="Gaming Streak"
+              value={profileData.gamingStreak}
               bgGradient="from-red-900/40 to-red-950/80"
             />
           </motion.div>
         </motion.div>
-
-        {/* Second row of stat cards - New additions */}
         <motion.div
           className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 px-6 mt-6"
           variants={containerVariants}
