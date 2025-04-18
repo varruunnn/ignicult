@@ -67,8 +67,6 @@ const Navbar: React.FC = () => {
   const location = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const { handleNavigate, isNavigating, currentPath } = useNavigation();
-
-  // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
@@ -79,14 +77,11 @@ const Navbar: React.FC = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-
-  // Close menus when clicking outside
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (e.target && 
           !(e.target as HTMLElement).closest('.menu-container') && 
           !(e.target as HTMLElement).closest('.desktop-menu-toggle')) {
-        // This effect is now handled within the respective nav components
       }
     };
 
@@ -112,8 +107,6 @@ const Navbar: React.FC = () => {
               currentPath={currentPath}
               isNavigating={isNavigating}
             />
-            
-            {/* Desktop Navigation */}
             <DesktopNav 
               menuItems={menuItems}
               handleNavigate={handleNavigate}
