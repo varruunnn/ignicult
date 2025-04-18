@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import LoadingScreen from '../../LoadingScreen';
 
 interface Player {
@@ -13,6 +14,7 @@ interface GameData {
 }
 
 const TournamentsPage = () => {
+  const navigate = useNavigate();
   const [games, setGames] = useState<GameData[]>([]);
   const [selectedGame, setSelectedGame] = useState<GameData | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
@@ -42,6 +44,10 @@ const TournamentsPage = () => {
     const game = games.find((g) => g.title === e.target.value);
     setSelectedGame(game || null);
     setCurrentPage(1);
+  };
+
+  const navigateToUserProfile = (walletAddress: string) => {
+    navigate(`/profile/${walletAddress}`);
   };
 
   const currentPlayers = selectedGame?.topTotalScorers || [];
@@ -108,7 +114,11 @@ const TournamentsPage = () => {
                     {indexOfFirstPlayer + index + 1}
                   </span>
                 </div>
-                <div className="col-span-6 font-mono text-sm truncate">
+                <div 
+                  className="col-span-6 font-mono text-sm truncate cursor-pointer hover:text-purple-400"
+                  onClick={() => navigateToUserProfile(player.walletAddress)}
+                  title="View player profile"
+                >
                   {player.walletAddress}
                 </div>
                 <div className="col-span-4 text-center font-mono text-purple-400 font-medium">

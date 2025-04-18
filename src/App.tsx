@@ -15,6 +15,7 @@ const Help = lazy(() => import("./components/Help/Help"));
 const Activity = lazy(() => import("./components/Activity/Activity"));
 const Tournaments = lazy(() => import("./components/Tournaments/Tournaments"));
 const PremiumTournament = lazy(() => import("./components/Premium/Premium"));
+const UserProfile = lazy(() => import("./components/Profile/UserProfile"));
 
 export function App() {
   return (
@@ -29,6 +30,7 @@ export function App() {
             <Route path="/rewards" element={<RewardsPage />} />
             <Route path="/leaderboard" element={<Leaderboard />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/profile/:walletId" element={<UserProfile />} />
             <Route path="/support" element={<Help />} />
             <Route path="/activity" element={<Activity />} />
             <Route path="/tournaments" element={<Tournaments />} />

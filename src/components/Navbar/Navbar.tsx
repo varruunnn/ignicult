@@ -13,7 +13,7 @@ import {
   HelpCircle,
   GamepadIcon,
 } from "lucide-react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation,matchPath } from "react-router-dom";
 
 const Logo = () => (
   <div className="flex items-center">
@@ -109,7 +109,13 @@ const Navbar = () => {
   }, [navigate, location.pathname, isNavigating]);
 
   const getNavbarColor = useCallback(() => {
-    switch (location.pathname) {
+    const path = location.pathname;
+  
+    if (matchPath("/profile/:walletId", path)) {
+      return "bg-[#0f1a2a]";
+    }
+  
+    switch (path) {
       case "/":
         return "bg-[#1e1d1d]";
       case "/profile":
@@ -125,13 +131,13 @@ const Navbar = () => {
       case "/activity":
         return "bg-[#040404]";
       case "/tournaments":
-        return "bg-[#111827]";
       case "/premium-tournaments":
         return "bg-[#111827]";
       default:
         return "bg-[#0d0d0d]";
     }
   }, [location.pathname]);
+  
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
