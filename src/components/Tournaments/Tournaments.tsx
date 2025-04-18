@@ -1,66 +1,48 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LoadingScreen from '../../LoadingScreen';
-
-interface Player {
-  walletAddress: string;
-  totalScore: number;
-}
-
-interface GameData {
-  gameId: number;
-  title: string;
-  topTotalScorers: Player[];
-}
+import { GameData } from '../../types/tournament.types';
+import { useTournament } from '../../hooks/useTournament';
+import { usePagination } from '../../utils/pagination';
 
 const TournamentsPage = () => {
   const navigate = useNavigate();
-  const [games, setGames] = useState<GameData[]>([]);
-  const [selectedGame, setSelectedGame] = useState<GameData | null>(null);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [loading, setLoading] = useState(true);
-  const playersPerPage = 10;
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const res = await fetch('https://ignicult.com/api/trending-games');
-        const json = await res.json();
-        const gameList: GameData[] = json.data;
-        setGames(gameList);
-        setSelectedGame(gameList[0]);
-      } catch (error) {
-        console.error('Error fetching tournament data:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
+  const { games, selectedGame, loading, error, setSelectedGame } = useTournament();
+  const {
+    currentItems: currentPagePlayers,
+    currentPage,
+    totalPages,
+    indexOfFirstItem,
+    indexOfLastItem,
+    totalItems: totalPlayers,
+    goToPage
+  } = usePagination(selectedGame?.topTotalScorers || [], 1, 10);
 
   const handleGameChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const game = games.find((g) => g.title === e.target.value);
     setSelectedGame(game || null);
-    setCurrentPage(1);
   };
 
   const navigateToUserProfile = (walletAddress: string) => {
     navigate(`/profile/${walletAddress}`);
   };
 
-  const currentPlayers = selectedGame?.topTotalScorers || [];
-  const indexOfLastPlayer = currentPage * playersPerPage;
-  const indexOfFirstPlayer = indexOfLastPlayer - playersPerPage;
-  const currentPagePlayers = currentPlayers.slice(indexOfFirstPlayer, indexOfLastPlayer);
-  const totalPages = Math.ceil(currentPlayers.length / playersPerPage);
-
-  const goToPage = (page: number) => {
-    if (page > 0 && page <= totalPages) {
-      setCurrentPage(page);
-    }
-  };
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gray-900 text-gray-100 p-6 flex items-center justify-center">
+        <div className="bg-red-900 p-6 rounded-lg max-w-md mx-auto">
+          <h2 className="text-2xl font-bold mb-2">Error Loading Tournament Data</h2>
+          <p>{error.message}</p>
+          <button 
+            onClick={() => window.location.reload()}
+            className="mt-4 bg-red-700 hover:bg-red-600 px-4 py-2 rounded"
+          >
+            Try Again
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="relative min-h-screen bg-gray-900 text-gray-100 p-6">
@@ -107,11 +89,11 @@ const TournamentsPage = () => {
               >
                 <div className="col-span-2 text-center">
                   <span className={`inline-flex items-center justify-center w-6 h-6 rounded-full ${
-                    index + 1 === 1 ? 'bg-yellow-500' :
-                    index + 1 === 2 ? 'bg-gray-400' :
-                    index + 1 === 3 ? 'bg-yellow-700' : 'bg-gray-600'
+                    indexOfFirstItem + index + 1 === 1 ? 'bg-yellow-500' :
+                    indexOfFirstItem + index + 1 === 2 ? 'bg-gray-400' :
+                    indexOfFirstItem + index + 1 === 3 ? 'bg-yellow-700' : 'bg-gray-600'
                   } text-black font-bold text-sm`}>
-                    {indexOfFirstPlayer + index + 1}
+                    {indexOfFirstItem + index + 1}
                   </span>
                 </div>
                 <div 
@@ -130,7 +112,7 @@ const TournamentsPage = () => {
 
           <div className="flex justify-between items-center mt-6">
             <div className="text-sm text-gray-400">
-              Showing {indexOfFirstPlayer + 1}-{Math.min(indexOfLastPlayer, currentPlayers.length)} of {currentPlayers.length}
+              Showing {indexOfFirstItem + 1}-{Math.min(indexOfLastItem, totalPlayers)} of {totalPlayers}
             </div>
             <div className="flex space-x-2">
               <button

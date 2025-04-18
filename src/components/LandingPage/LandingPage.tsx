@@ -6,60 +6,11 @@ import { darkTheme } from "thirdweb/react";
 const TrendingGamesCarousel = React.lazy(
   () => import("./TrendingGamesCarousel")
 );
-import { inAppWallet, createWallet } from "thirdweb/wallets";
+import { wallets } from "../../config/wallet.config";
 import { client } from "../../client";
 import { Trophy, Award, Star, Activity } from "lucide-react";
+import Button from "../../common/Button";
 
-const Button = ({
-  children,
-  primary = false,
-  onClick,
-  className = "",
-}: {
-  children: React.ReactNode;
-  primary?: boolean;
-  onClick?: () => void;
-  className?: string;
-}) => {
-  return (
-    <button
-      className={`px-4 py-2 sm:px-6 sm:py-3 rounded-xl font-medium transition-colors ${
-        primary
-          ? "bg-gradient-to-r from-red-600 to-amber-500 text-white shadow-lg shadow-amber-900/20"
-          : "border border-[#FFB000] bg-[#1D1D1D] hover:bg-gray-800"
-      } ${className}`}
-      onClick={onClick}
-    >
-      {children}
-    </button>
-  );
-};
-
-const wallets = [
-  inAppWallet({
-    auth: {
-      options: [
-        "google",
-        "discord",
-        "telegram",
-        "farcaster",
-        "email",
-        "x",
-        "passkey",
-        "phone",
-        "github",
-        "twitch",
-        "apple",
-        "guest",
-      ],
-    },
-  }),
-  createWallet("com.coinbase.wallet"),
-  createWallet("io.rabby"),
-  createWallet("io.zerion.wallet"),
-  createWallet("me.rainbow"),
-  createWallet("io.metamask"),
-];
 
 const LandingPage = () => {
   const navigate = useNavigate();

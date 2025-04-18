@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   motion,
-  AnimatePresence,
-  animate,
   useScroll,
   useTransform,
 } from "framer-motion";
@@ -12,189 +10,16 @@ import {
   Zap,
   Crown,
   Gamepad2,
-  Flame,
-  Loader2,
   Trophy,
   Calendar,
   Check,
   X,
   Star,
-  ArrowLeft,
-  User,
 } from "lucide-react";
-
-interface Game {
-  name: string;
-  score: number;
-  rank: number;
-  highestScore: number;
-  topAchieverWallet: string;
-  icon: string;
-}
-
-interface TournamentHistoryItem {
-  month: string;
-  gamesPlayed: number;
-  totalScore: number;
-}
-
-interface BestPerformance {
-  score: number;
-  gameId: number;
-  gameName: string;
-  date: string;
-}
-
-interface ProfileData {
-  walletAddress: string;
-  totalPoints: number;
-  totalGamesPlayed: number;
-  mostPlayedGame: string;
-  hoursPerWeek: number;
-  tournamentsParticipated: number;
-  cultixBalance: number;
-  games: Game[];
-  completionRate: number;
-  tournamentHistory: TournamentHistoryItem[];
-  gameDiversityScore: number;
-  dnfRate: number;
-  bestPerformance: BestPerformance;
-  gamingStreak: number;
-}
-
-const defaultProfileData: ProfileData = {
-  walletAddress: "",
-  totalPoints: 0,
-  totalGamesPlayed: 0,
-  mostPlayedGame: "Loading...",
-  hoursPerWeek: 0,
-  tournamentsParticipated: 0,
-  cultixBalance: 0,
-  games: [],
-  completionRate: 0,
-  tournamentHistory: [],
-  gameDiversityScore: 0,
-  dnfRate: 0,
-  gamingStreak: 0,
-  bestPerformance: {
-    score: 0,
-    gameId: 0,
-    gameName: "",
-    date: "",
-  },
-};
-
-const CountUp = ({
-  target,
-  duration = 2,
-  format = (n: number) => n.toFixed(0),
-  className = "",
-}: {
-  target: number;
-  duration?: number;
-  format?: (n: number) => string;
-  className?: string;
-}) => {
-  const [value, setValue] = useState(0);
-
-  useEffect(() => {
-    const controls = animate(0, target, {
-      duration,
-      type: "spring",
-      stiffness: 50,
-      damping: 15,
-      onUpdate: (latest) => setValue(latest),
-    });
-    return () => controls.stop();
-  }, [target, duration]);
-
-  return (
-    <motion.span className={`font-bold ${className}`}>
-      {format(value)}
-    </motion.span>
-  );
-};
-
-const StatCard = ({
-  icon,
-  label,
-  value,
-  bgGradient = "from-[#2A2A2A] to-[#202020]",
-}: {
-  icon: React.ReactNode;
-  label: string;
-  value: string | number;
-  bgGradient?: string;
-}) => {
-  return (
-    <motion.div
-      className={`bg-gradient-to-b ${bgGradient} p-5 rounded-2xl shadow-lg border border-gray-800 relative overflow-hidden h-full`}
-      whileHover={{
-        y: -5,
-        boxShadow:
-          "0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2)",
-      }}
-      transition={{ type: "spring", stiffness: 400, damping: 17 }}
-    >
-      <div className="absolute top-0 right-0 opacity-10 text-6xl p-2">
-        {icon}
-      </div>
-      <div className="flex items-center justify-between">
-        <div>
-          <p className="text-gray-400 text-sm">{label}</p>
-          <h2 className="text-2xl font-bold mt-1">{value}</h2>
-        </div>
-      </div>
-    </motion.div>
-  );
-};
-
-const mapApiDataToProfileData = (apiData: any): ProfileData => {
-  const games = apiData.games?.map((game: any) => ({
-    name: game.name || "Unknown Game",
-    score: game.score || 0,
-    rank: game.rank || 0,
-    highestScore: game.highestScore || 0,
-    topAchieverWallet: game.topAchieverWallet || "0x0000000000",
-    icon: getGameIcon(game.name),
-  })) || [];
-
-  const hoursPerWeek = 8;
-
-  return {
-    walletAddress: apiData.walletAddress || "",
-    totalPoints: apiData.totalPoints?.value || 0,
-    totalGamesPlayed: apiData.totalGamesPlayed?.value || 0,
-    mostPlayedGame: apiData.mostPlayedGame?.name || "No Games",
-    hoursPerWeek: hoursPerWeek,
-    tournamentsParticipated: apiData.tournamentsParticipated?.value || 0,
-    cultixBalance: apiData.cultixBalance?.value || 0,
-    games: games,
-    completionRate: apiData.completionRate?.value || 0,
-    tournamentHistory: apiData.tournamentStats?.tournamentHistory?.value || [],
-    gameDiversityScore: apiData.gameDiversityScore?.value || 0,
-    dnfRate: apiData.dnfRate?.value || 0,
-    gamingStreak: apiData.gamingStreak?.value || 0,
-    bestPerformance: apiData.bestPerformance?.value || {
-      score: 0,
-      gameId: 0,
-      gameName: "",
-      date: "",
-    },
-  };
-};
-
-const getGameIcon = (gameName: string): string => {
-  const gameIcons: { [key: string]: string } = {
-    "Number Snake": "🐍",
-    "Tic Tac Toe": "❌",
-    "Color Ship Shooter": "👾",
-    "Color puzzle": "⚔️",
-    "Cricket Catch Pro": "🚀",
-  };
-
-  return gameIcons[gameName] || "🎮";
-};
+import CountUp from "../../common/CountUp";
+import StatCard from "../../common/StatCard";
+import { useProfileData } from "../../hooks/useProfileData";
+import { formatDate } from "../../utils/formatters";
 
 const UserProfile = () => {
   const navigate = useNavigate();
@@ -203,51 +28,7 @@ const UserProfile = () => {
   const { scrollYProgress } = useScroll();
   const headerOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0.3]);
 
-  const [profileData, setProfileData] = useState<ProfileData>(defaultProfileData);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchProfileData = async () => {
-      if (!walletId) {
-        setError("No wallet address provided");
-        setIsLoading(false);
-        return;
-      }
-
-      setIsLoading(true);
-      setError(null);
-
-      try {
-        const response = await fetch(`https://ignicult.com/api/metrics/user/${walletId}`);
-
-        if (!response.ok) {
-          throw new Error(`Failed to fetch profile data: ${response.status}`);
-        }
-
-        const data = await response.json();
-        const formattedData = mapApiDataToProfileData(data);
-
-        setProfileData(formattedData);
-        setIsLoading(false);
-      } catch (err) {
-        console.error("Error fetching profile data:", err);
-        setError("Failed to load profile data. Please try again later.");
-        setIsLoading(false);
-      }
-    };
-
-    fetchProfileData();
-  }, [walletId]);
-
-  const currentGameDetails = profileData.games[selectedGameIndex] || {
-    name: "No Game Selected",
-    score: 0,
-    rank: 0,
-    highestScore: 0,
-    topAchieverWallet: "",
-    icon: "❓",
-  };
+  const { profileData, isLoading, error, refetch } = useProfileData(walletId || "");
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -262,6 +43,15 @@ const UserProfile = () => {
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 },
+  };
+
+  const currentGameDetails = profileData.games[selectedGameIndex] || {
+    name: "No Game Selected",
+    score: 0,
+    rank: 0,
+    highestScore: 0,
+    topAchieverWallet: "",
+    icon: "❓",
   };
 
   if (isLoading) {
@@ -280,7 +70,7 @@ const UserProfile = () => {
           <p className="mb-6">{error}</p>
           <button
             className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4"
-            onClick={() => window.location.reload()}
+            onClick={() => refetch()}
           >
             Try Again
           </button>
@@ -294,17 +84,6 @@ const UserProfile = () => {
       </div>
     );
   }
-
-  const formatDate = (dateString: string) => {
-    if (!dateString) return "";
-    const date = new Date(dateString);
-    return date.toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    });
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0F1A2A] to-[#050A15] text-white overflow-x-hidden">
       <div className="fixed top-20 -left-20 w-96 h-96 rounded-full bg-cyan-900 opacity-20 filter blur-3xl"></div>
