@@ -1,13 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Flame, ChevronRight, ChevronLeft, Play } from "lucide-react";
-
-
 const gameImages = import.meta.glob("../../assets/trendingGames/*.jpg", {
   eager: true,
   import: "default",
 });
 const preloadedImages: Record<number, string> = {};
-
 Object.entries(gameImages).forEach(([path, img]) => {
   const match = path.match(/game(\d+)\.jpg$/);
   if (match) {
@@ -15,6 +12,7 @@ Object.entries(gameImages).forEach(([path, img]) => {
     preloadedImages[id] = img as string;
   }
 });
+
 interface Game {
   gameId: number;
   title: string;
@@ -25,27 +23,30 @@ interface Game {
 const TrendingGamesCarousel = () => {
   const [trendingGames, setTrendingGames] = useState<Game[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+  const [imagesLoaded, setImagesLoaded] = useState<Record<number, boolean>>({});
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-
+  const carouselActive = useRef<boolean>(false);
   const resetTimeout = () => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    timeoutRef.current = setTimeout(() => nextSlide(), 5000);
+    if (carouselActive.current) {
+      timeoutRef.current = setTimeout(() => nextSlide(), 5000);
+    }
   };
 
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev + 1) % trendingGames.length);
-    resetTimeout();
   };
 
   const prevSlide = () => {
     setCurrentIndex((prev) =>
       prev === 0 ? trendingGames.length - 1 : prev - 1
     );
-    resetTimeout();
   };
 
   useEffect(() => {
     const fetchTrendingGames = async () => {
+      setIsLoading(true);
       try {
         const res = await fetch("https://ignicult.com/api/trending-games");
         const json = await res.json();
@@ -55,39 +56,97 @@ const TrendingGamesCarousel = () => {
             .sort(
               (a: Game, b: Game) => b.totalGamesPlayed - a.totalGamesPlayed
             )
-            .slice(0, 5); 
+            .slice(0, 5);
           setTrendingGames(sortedGames);
+          const initialLoadingState: Record<number, boolean> = {};
+          sortedGames.forEach((game: Game) => {
+            initialLoadingState[game.gameId] = false;
+          });
+          setImagesLoaded(initialLoadingState);
+          sortedGames.forEach((game: Game) => {
+            const img = new Image();
+            const imgSrc = getGameImage(game.gameId);
+            img.src = imgSrc;
+            img.onload = () => {
+              setImagesLoaded(prev => ({
+                ...prev,
+                [game.gameId]: true
+              }));
+            };
+            img.onerror = () => {
+              console.error(`Failed to load image for game ${game.gameId}`);
+              setImagesLoaded(prev => ({
+                ...prev,
+                [game.gameId]: true 
+              }));
+            };
+          });
         }
       } catch (err) {
         console.error("Failed to load trending games:", err);
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchTrendingGames();
+    
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+      carouselActive.current = false;
+    };
   }, []);
-
   useEffect(() => {
-    resetTimeout();
+    if (trendingGames.length === 0) return;
+    const allImagesLoaded = trendingGames.every(game => imagesLoaded[game.gameId]);
+    
+    if (allImagesLoaded && !carouselActive.current) {
+      carouselActive.current = true;
+      resetTimeout();
+    }
+    
     return () => {
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
       }
     };
+  }, [imagesLoaded, trendingGames]);
+  useEffect(() => {
+    resetTimeout();
   }, [currentIndex]);
 
   const getGameImage = (gameId: number) => {
-    return preloadedImages[gameId] || "/fallback.jpg";
+    return preloadedImages[gameId] || "/assets/fallback.jpg";
   };
-  if (trendingGames.length === 0) {
+  
+  const areAllImagesForCarouselLoaded = () => {
+    return trendingGames.length > 0 && 
+           trendingGames.every(game => imagesLoaded[game.gameId]);
+  };
+
+  if (isLoading || !areAllImagesForCarouselLoaded()) {
     return (
-      <div className="min-h-[60vh] flex items-center justify-center text-white text-lg">
-        Loading Trending Games...
+      <div className="min-h-[60vh] flex items-center justify-center text-white text-lg bg-gradient-to-b from-[#1D1D1D]/90 via-[#0D0D0D] to-[#151515]">
+        <div className="flex flex-col items-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white mb-4"></div>
+          Loading Trending Games...
+        </div>
       </div>
     );
   }
+  
+  if (trendingGames.length === 0) {
+    return (
+      <div className="min-h-[60vh] flex items-center justify-center text-white text-lg bg-gradient-to-b from-[#1D1D1D]/90 via-[#0D0D0D] to-[#151515]">
+        No trending games available at the moment.
+      </div>
+    );
+  }
+
   return (
     <section className="py-20 px-6 bg-gradient-to-b from-[#1D1D1D]/90 via-[#0D0D0D] to-[#151515] text-white">
-      
       <div className="container mx-auto">
         <div className="flex justify-between items-center mb-12">
           <h2 className="text-3xl font-bold flex items-center">
@@ -142,27 +201,35 @@ const TrendingGamesCarousel = () => {
               );
             })}
           </div>
+          
           <button
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-60 rounded-full p-2 focus:outline-none z-20"
-            onClick={prevSlide}
+            className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-60 rounded-full p-2 focus:outline-none z-20 hover:bg-opacity-80"
+            onClick={() => {
+              prevSlide();
+              resetTimeout();
+            }}
           >
             <ChevronLeft className="w-8 h-8 text-white" />
           </button>
 
           <button
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-60 rounded-full p-2 focus:outline-none z-20"
-            onClick={nextSlide}
+            className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-60 rounded-full p-2 focus:outline-none z-20 hover:bg-opacity-80"
+            onClick={() => {
+              nextSlide();
+              resetTimeout();
+            }}
           >
             <ChevronRight className="w-8 h-8 text-white" />
           </button>
+          
           <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
             {trendingGames.map((_, index) => (
               <button
                 key={index}
-                className={`w-3 h-3 rounded-full ${
+                className={`w-3 h-3 rounded-full transition-all ${
                   index === currentIndex
                     ? "bg-white"
-                    : "bg-white bg-opacity-50"
+                    : "bg-white bg-opacity-50 hover:bg-opacity-75"
                 }`}
                 onClick={() => {
                   setCurrentIndex(index);
@@ -177,8 +244,8 @@ const TrendingGamesCarousel = () => {
           {trendingGames.map((game, index) => (
             <div
               key={game.gameId}
-              className={`relative cursor-pointer rounded-lg overflow-hidden w-24 h-16 ${
-                index === currentIndex ? "ring-2 ring-yellow-500" : "opacity-70"
+              className={`relative cursor-pointer rounded-lg overflow-hidden w-24 h-16 transition-all ${
+                index === currentIndex ? "ring-2 ring-yellow-500" : "opacity-70 hover:opacity-100"
               }`}
               onClick={() => {
                 setCurrentIndex(index);
@@ -189,7 +256,6 @@ const TrendingGamesCarousel = () => {
                 src={getGameImage(game.gameId)}
                 alt={game.title}
                 className="w-full h-full object-cover"
-                loading={index < 2 ? "eager" : "lazy"}
               />
             </div>
           ))}
