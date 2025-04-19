@@ -74,7 +74,8 @@ const Games = () => {
               >
                 <motion.button
                   onClick={() => handleGameClick(gameNumber)}
-                  className="w-full bg-gray-800 bg-opacity-60 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-700 shadow-lg group-hover:shadow-purple-500/20 transition duration-300"
+                  className="w-full bg-gray-800 bg-opacity-60 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-700 shadow-lg group-hover:shadow-purple-500/20 transition duration-300
+                  "
                   whileHover={{
                     scale: 1.03,
                     transition: { duration: 0.2 },
@@ -85,7 +86,7 @@ const Games = () => {
                     <motion.img
                       src={imagePath}
                       alt={`Game ${gameNumber}`}
-                      className="w-full h-56 object-cover"
+                      className="w-full max-[376px]:h-44 h-56 object-cover"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-60" />
 

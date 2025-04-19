@@ -1,15 +1,29 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Flame, ChevronRight, ChevronLeft, Play } from "lucide-react";
-const gameImages = import.meta.glob("../../assets/trendingGames/*.jpg", {
+const desktopGameImages = import.meta.glob("../../assets/trendingGames/*.jpg", {
   eager: true,
   import: "default",
 });
-const preloadedImages: Record<number, string> = {};
-Object.entries(gameImages).forEach(([path, img]) => {
+const mobileGameImages = import.meta.glob("../../assets/mobileTrendingImage/*.jpg", {
+  eager: true,
+  import: "default",
+});
+
+const preloadedDesktopImages: Record<number, string> = {};
+Object.entries(desktopGameImages).forEach(([path, img]) => {
   const match = path.match(/game(\d+)\.jpg$/);
   if (match) {
     const id = parseInt(match[1]);
-    preloadedImages[id] = img as string;
+    preloadedDesktopImages[id] = img as string;
+  }
+});
+
+const preloadedMobileImages: Record<number, string> = {};
+Object.entries(mobileGameImages).forEach(([path, img]) => {
+  const match = path.match(/game(\d+)\.jpg$/);
+  if (match) {
+    const id = parseInt(match[1]);
+    preloadedMobileImages[id] = img as string;
   }
 });
 
@@ -25,8 +39,18 @@ const TrendingGamesCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [imagesLoaded, setImagesLoaded] = useState<Record<number, boolean>>({});
+  const [isMobile, setIsMobile] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const carouselActive = useRef<boolean>(false);
+  useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    checkIfMobile();
+    window.addEventListener('resize', checkIfMobile);
+    return () => window.removeEventListener('resize', checkIfMobile);
+  }, []);
+
   const resetTimeout = () => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
     if (carouselActive.current) {
@@ -63,22 +87,29 @@ const TrendingGamesCarousel = () => {
             initialLoadingState[game.gameId] = false;
           });
           setImagesLoaded(initialLoadingState);
+          
+          // Preload both desktop and mobile images
           sortedGames.forEach((game: Game) => {
-            const img = new Image();
-            const imgSrc = getGameImage(game.gameId);
-            img.src = imgSrc;
-            img.onload = () => {
-              setImagesLoaded(prev => ({
-                ...prev,
-                [game.gameId]: true
-              }));
+            // Load desktop image
+            const desktopImg = new Image();
+            const desktopImgSrc = getGameImage(game.gameId, false);
+            desktopImg.src = desktopImgSrc;
+            desktopImg.onload = () => {
+              updateImagesLoaded(game.gameId);
             };
-            img.onerror = () => {
-              console.error(`Failed to load image for game ${game.gameId}`);
-              setImagesLoaded(prev => ({
-                ...prev,
-                [game.gameId]: true 
-              }));
+            desktopImg.onerror = () => {
+              console.error(`Failed to load desktop image for game ${game.gameId}`);
+              updateImagesLoaded(game.gameId);
+            };
+            const mobileImg = new Image();
+            const mobileImgSrc = getGameImage(game.gameId, true);
+            mobileImg.src = mobileImgSrc;
+            mobileImg.onload = () => {
+              updateImagesLoaded(game.gameId);
+            };
+            mobileImg.onerror = () => {
+              console.error(`Failed to load mobile image for game ${game.gameId}`);
+              updateImagesLoaded(game.gameId);
             };
           });
         }
@@ -98,6 +129,18 @@ const TrendingGamesCarousel = () => {
       carouselActive.current = false;
     };
   }, []);
+  const updateImagesLoaded = (gameId: number) => {
+    setImagesLoaded(prev => {
+      if (!prev[gameId]) {
+        return {
+          ...prev,
+          [gameId]: true
+        };
+      }
+      return prev;
+    });
+  };
+
   useEffect(() => {
     if (trendingGames.length === 0) return;
     const allImagesLoaded = trendingGames.every(game => imagesLoaded[game.gameId]);
@@ -113,12 +156,14 @@ const TrendingGamesCarousel = () => {
       }
     };
   }, [imagesLoaded, trendingGames]);
+
   useEffect(() => {
     resetTimeout();
   }, [currentIndex]);
 
-  const getGameImage = (gameId: number) => {
-    return preloadedImages[gameId] || "/assets/fallback.jpg";
+  const getGameImage = (gameId: number, mobile = false) => {
+    const images = mobile ? preloadedMobileImages : preloadedDesktopImages;
+    return images[gameId] || "/assets/fallback.jpg";
   };
   
   const areAllImagesForCarouselLoaded = () => {
@@ -163,10 +208,10 @@ const TrendingGamesCarousel = () => {
           </a>
         </div>
 
-        <div className="relative h-[60vh] rounded-2xl overflow-hidden">
+        <div className="relative h-[60vh] max-[768px]:h-[400px] rounded-2xl overflow-hidden mx-auto">
           <div className="relative w-full h-full">
             {trendingGames.map((game, index) => {
-              const image = getGameImage(game.gameId);
+              const image = getGameImage(game.gameId, isMobile);
               return (
                 <div
                   key={game.gameId}
@@ -182,18 +227,21 @@ const TrendingGamesCarousel = () => {
                   </div>
 
                   <div className="absolute inset-0 flex flex-col justify-end p-8 z-10">
-                    <div className="text-3xl font-bold mb-2">{game.title}</div>
-                    <div className="flex items-center text-lg mb-4">
+                    <div className="text-3xl max-[468px]:relative max-[468px]:top-[20%] max-[468px]:left-[-11px] max-[768px]:text-[20px] font-bold mb-2">{game.title}</div>
+                    <div className="flex items-center max-[468px]:top-[20%] max-[468px]:relative max-[468px]:left-[-11px] text-lg max-[768px]:text-sm mb-4">
                       <span className="bg-blue-600 px-3 py-1 rounded-full mr-3">
                         {game.uniquePlayers} Players
                       </span>
-                      <span className="text-yellow-400">
+                      <span className="text-yellow-400 max-[468px]:hidden ">
                         {game.totalGamesPlayed.toLocaleString()} Plays
                       </span>
                     </div>
+                    <span className="text-yellow-400 max-[468px]:top-[19%] max-[468px]:left-[-5px] max-[468px]:text-sm max-[468px]:relative md:hidden ">
+                        {game.totalGamesPlayed.toLocaleString()} Plays
+                      </span>
 
-                    <button className="bg-red-600 hover:bg-red-700 text-white rounded-full flex items-center justify-center w-48 py-3 font-bold text-lg transition-all duration-300">
-                      <Play className="w-5 h-5 mr-2" />
+                    <button className="bg-red-600 hover:bg-red-700 text-white rounded-full flex items-center justify-center w-48 max-[468px]:relative max-[468px]:top-[4%] max-[468px]:right-[-60%] max-[768px]:w-36 py-3 font-bold text-lg max-[768px]:text-base transition-all duration-300">
+                      <Play className="w-5 h-5 max-[468px]:w-2 max-[468px]:h-2 mr-2" />
                       Play Now
                     </button>
                   </div>
@@ -209,7 +257,7 @@ const TrendingGamesCarousel = () => {
               resetTimeout();
             }}
           >
-            <ChevronLeft className="w-8 h-8 text-white" />
+            <ChevronLeft className="w-8 h-8 max-[768px]:w-6 max-[768px]:h-6 text-white" />
           </button>
 
           <button
@@ -219,32 +267,15 @@ const TrendingGamesCarousel = () => {
               resetTimeout();
             }}
           >
-            <ChevronRight className="w-8 h-8 text-white" />
+            <ChevronRight className="w-8 h-8 max-[768px]:w-6 max-[768px]:h-6 text-white" />
           </button>
-          
-          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
-            {trendingGames.map((_, index) => (
-              <button
-                key={index}
-                className={`w-3 h-3 rounded-full transition-all ${
-                  index === currentIndex
-                    ? "bg-white"
-                    : "bg-white bg-opacity-50 hover:bg-opacity-75"
-                }`}
-                onClick={() => {
-                  setCurrentIndex(index);
-                  resetTimeout();
-                }}
-              />
-            ))}
-          </div>
         </div>
 
-        <div className="mt-6 flex justify-center space-x-4">
+        <div className="mt-6 flex justify-center space-x-4 overflow-x-auto pb-2">
           {trendingGames.map((game, index) => (
             <div
               key={game.gameId}
-              className={`relative cursor-pointer rounded-lg overflow-hidden w-24 h-16 transition-all ${
+              className={`relative cursor-pointer rounded-lg overflow-hidden w-24 h-16 flex-shrink-0 transition-all ${
                 index === currentIndex ? "ring-2 ring-yellow-500" : "opacity-70 hover:opacity-100"
               }`}
               onClick={() => {
@@ -253,7 +284,7 @@ const TrendingGamesCarousel = () => {
               }}
             >
               <img
-                src={getGameImage(game.gameId)}
+                src={getGameImage(game.gameId, isMobile)}
                 alt={game.title}
                 className="w-full h-full object-cover"
               />
