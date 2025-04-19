@@ -87,10 +87,7 @@ const TrendingGamesCarousel = () => {
             initialLoadingState[game.gameId] = false;
           });
           setImagesLoaded(initialLoadingState);
-          
-          // Preload both desktop and mobile images
           sortedGames.forEach((game: Game) => {
-            // Load desktop image
             const desktopImg = new Image();
             const desktopImgSrc = getGameImage(game.gameId, false);
             desktopImg.src = desktopImgSrc;
@@ -121,7 +118,7 @@ const TrendingGamesCarousel = () => {
     };
 
     fetchTrendingGames();
-    
+
     return () => {
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
@@ -144,12 +141,12 @@ const TrendingGamesCarousel = () => {
   useEffect(() => {
     if (trendingGames.length === 0) return;
     const allImagesLoaded = trendingGames.every(game => imagesLoaded[game.gameId]);
-    
+
     if (allImagesLoaded && !carouselActive.current) {
       carouselActive.current = true;
       resetTimeout();
     }
-    
+
     return () => {
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
@@ -165,10 +162,10 @@ const TrendingGamesCarousel = () => {
     const images = mobile ? preloadedMobileImages : preloadedDesktopImages;
     return images[gameId] || "/assets/fallback.jpg";
   };
-  
+
   const areAllImagesForCarouselLoaded = () => {
-    return trendingGames.length > 0 && 
-           trendingGames.every(game => imagesLoaded[game.gameId]);
+    return trendingGames.length > 0 &&
+      trendingGames.every(game => imagesLoaded[game.gameId]);
   };
 
   if (isLoading || !areAllImagesForCarouselLoaded()) {
@@ -181,7 +178,7 @@ const TrendingGamesCarousel = () => {
       </div>
     );
   }
-  
+
   if (trendingGames.length === 0) {
     return (
       <div className="min-h-[60vh] flex items-center justify-center text-white text-lg bg-gradient-to-b from-[#1D1D1D]/90 via-[#0D0D0D] to-[#151515]">
@@ -215,13 +212,19 @@ const TrendingGamesCarousel = () => {
               return (
                 <div
                   key={game.gameId}
-                  className={`absolute inset-0 transition-opacity duration-500 ${
-                    index === currentIndex ? "opacity-100 z-10" : "opacity-0"
-                  }`}
+                  className={`absolute inset-0 transition-opacity duration-500 ${index === currentIndex ? "opacity-100 z-10" : "opacity-0"
+                    }`}
                 >
                   <div
                     className="absolute inset-0 bg-cover h-full bg-center"
-                    style={{ backgroundImage: `url(${image})` }}
+                    style={{
+                      backgroundImage: `url(${image})`,
+                      ...(isMobile && window.innerWidth <= 368 ? {
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center 50%', 
+                        height: '270px' 
+                      } : {})
+                    }}
                   >
                     <div className="absolute inset-0 bg-black bg-opacity-40" />
                   </div>
@@ -237,11 +240,11 @@ const TrendingGamesCarousel = () => {
                       </span>
                     </div>
                     <span className="text-yellow-400 max-[468px]:top-[19%] max-[468px]:left-[-5px] max-[468px]:text-sm max-[468px]:relative md:hidden ">
-                        {game.totalGamesPlayed.toLocaleString()} Plays
-                      </span>
+                      {game.totalGamesPlayed.toLocaleString()} Plays
+                    </span>
 
-                    <button className="bg-red-600 hover:bg-red-700 text-white rounded-full flex items-center justify-center w-48 max-[468px]:relative max-[468px]:top-[4%] max-[468px]:right-[-60%] max-[768px]:w-36 py-3 font-bold text-lg max-[768px]:text-base transition-all duration-300">
-                      <Play className="w-5 h-5 max-[468px]:w-2 max-[468px]:h-2 mr-2" />
+                    <button className="bg-red-600  hover:bg-red-700 text-white rounded-full flex items-center justify-center w-48 max-[468px]:relative max-[468px]:top-[4%] max-[468px]:right-[-60%] max-[768px]:w-36 py-3 font-bold text-lg max-[768px]:text-base transition-all duration-300 max-[368px]:right-[-50%]">
+                      <Play className="w-5 h-5  max-[468px]:w-2 max-[468px]:h-2 mr-2" />
                       Play Now
                     </button>
                   </div>
@@ -249,7 +252,7 @@ const TrendingGamesCarousel = () => {
               );
             })}
           </div>
-          
+
           <button
             className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-60 rounded-full p-2 focus:outline-none z-20 hover:bg-opacity-80"
             onClick={() => {
@@ -271,13 +274,12 @@ const TrendingGamesCarousel = () => {
           </button>
         </div>
 
-        <div className="mt-6 flex justify-center space-x-4 overflow-x-auto pb-2">
+        <div className="mt-6 flex justify-center space-x-4 max-[368px]:space-x-2 overflow-x-auto pb-2">
           {trendingGames.map((game, index) => (
             <div
               key={game.gameId}
-              className={`relative cursor-pointer rounded-lg overflow-hidden w-24 h-16 flex-shrink-0 transition-all ${
-                index === currentIndex ? "ring-2 ring-yellow-500" : "opacity-70 hover:opacity-100"
-              }`}
+              className={`relative cursor-pointer rounded-lg overflow-hidden w-24 h-16 max-[368px]:w-20 max-[368px]:h-14 flex-shrink-0 transition-all ${index === currentIndex ? "ring-2 ring-yellow-500" : "opacity-70 hover:opacity-100"
+                }`}
               onClick={() => {
                 setCurrentIndex(index);
                 resetTimeout();
