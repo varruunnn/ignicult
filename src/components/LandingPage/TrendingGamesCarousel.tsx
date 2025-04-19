@@ -217,14 +217,7 @@ const TrendingGamesCarousel = () => {
                 >
                   <div
                     className="absolute inset-0 bg-cover h-full bg-center"
-                    style={{
-                      backgroundImage: `url(${image})`,
-                      ...(isMobile && window.innerWidth <= 368 ? {
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center 50%', 
-                        height: '270px' 
-                      } : {})
-                    }}
+                    style={{ backgroundImage: `url(${image})` }}
                   >
                     <div className="absolute inset-0 bg-black bg-opacity-40" />
                   </div>
