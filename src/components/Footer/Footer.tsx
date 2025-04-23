@@ -145,7 +145,7 @@ const Footer = () => {
                     <social.icon />
                   </motion.div>
                   <motion.span className="text-white text-xs font-medium">
-                    Follow Us
+                  {index === 0 ? 'Follow us' : index === 1 ? 'Join us' : null}
                   </motion.span>
                 </motion.a>
               ))}
