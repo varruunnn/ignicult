@@ -68,12 +68,12 @@ const LandingPage = () => {
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                  <Button primary className="text-sm sm:text-base w-64 mx-auto sm:mx-0 sm:w-auto">
+                  <Button primary className="text-sm sm:text-base w-64 mx-auto sm:mx-0 sm:w-auto max-[468px]:h-12">
                     Play Now
                   </Button>
                   <Button
                     onClick={() => navigate("/games")}
-                    className="text-sm sm:text-base w-64 mx-auto sm:mx-0 sm:w-auto"
+                    className="text-sm sm:text-base w-64 mx-auto sm:mx-0 sm:w-auto max-[468px]:h-12"
                   >
                     Explore Games
                   </Button>
@@ -170,16 +170,16 @@ const LandingPage = () => {
                   Hyper-casual games for anyone, anytime
                 </p>
                 <ul className="space-y-2">
-                  <li className="flex items-center">
-                    <div className="w-2 h-2 rounded-full bg-yellow-500 mr-2"></div>
+                  <li className="flex items-start">
+                    <div className="w-2 h-2 rounded-full bg-yellow-500 mr-2 mt-2"></div>
                     <span className="text-sm sm:text-base">Fast-paced games that are easy to pick up</span>
                   </li>
-                  <li className="flex items-center">
-                    <div className="w-2 h-2 rounded-full bg-yellow-500 mr-2"></div>
+                  <li className="flex items-start">
+                    <div className="w-2 h-2 rounded-full bg-yellow-500 mr-2 mt-2"></div>
                     <span className="text-sm sm:text-base">No gaming experience or downloads needed</span>
                   </li>
-                  <li className="flex items-center">
-                    <div className="w-2 h-2 rounded-full bg-yellow-500 mr-2"></div>
+                  <li className="flex items-start">
+                    <div className="w-2 h-2 rounded-full bg-yellow-500 mr-2 mt-2"></div>
                     <span className="text-sm sm:text-base">Designed for quick, fun sessions on the go</span>
                   </li>
                 </ul>
@@ -193,17 +193,17 @@ const LandingPage = () => {
                   Blockchain gaming without the learning curve
                 </p>
                 <ul className="space-y-2">
-                  <li className="flex items-center">
-                    <div className="w-2 h-2 rounded-full bg-red-500 mr-2"></div>
-                    <span className="text-sm sm:text-base">Play without a wallet or crypto knowledge</span>
+                  <li className="flex items-start">
+                    <div className="w-2 h-2 rounded-full bg-red-500 mr-2 mt-2"></div>
+                    <span className="text-sm sm:text-base">Play without a wallet or digital vouchers knowledge</span>
                   </li>
-                  <li className="flex items-center">
-                    <div className="w-2 h-2 rounded-full bg-red-500 mr-2"></div>
+                  <li className="flex items-start">
+                    <div className="w-2 h-2 rounded-full bg-red-500 mr-2 mt-2"></div>
                     <span className="text-sm sm:text-base">Seamless onboarding into the Web3 ecosystem
                     </span>
                   </li>
-                  <li className="flex items-center">
-                    <div className="w-2 h-2 rounded-full bg-red-500 mr-2"></div>
+                  <li className="flex items-start">
+                    <div className="w-2 h-2 rounded-full bg-red-500 mr-2 mt-2"></div>
                     <span className="text-sm sm:text-base">Fair, skill-based rewards with anti-bot protection</span>
                   </li>
                 </ul>
@@ -217,16 +217,16 @@ const LandingPage = () => {
                   A connected, rewarding community
                 </p>
                 <ul className="space-y-2">
-                  <li className="flex items-center">
-                    <div className="w-2 h-2 rounded-full bg-blue-500 mr-2"></div>
-                    <span className="text-sm sm:text-base">Earn crypto and progress across multiple games</span>
+                  <li className="flex items-start">
+                    <div className="w-2 h-2 rounded-full bg-blue-500 mr-2 mt-2"></div>
+                    <span className="text-sm sm:text-base">Earn digital vouchers and progress across multiple games</span>
                   </li>
-                  <li className="flex items-center">
-                    <div className="w-2 h-2 rounded-full bg-blue-500 mr-2"></div>
+                  <li className="flex items-start">
+                    <div className="w-2 h-2 rounded-full bg-blue-500 mr-2 mt-2"></div>
                     <span className="text-sm sm:text-base">Participate in tournaments, events, and exclusive drops</span>
                   </li>
-                  <li className="flex items-center">
-                    <div className="w-2 h-2 rounded-full bg-blue-500 mr-2"></div>
+                  <li className="flex items-start">
+                    <div className="w-2 h-2 rounded-full bg-blue-500 mr-2 mt-2"></div>
                     <span className="text-sm sm:text-base">Be part of a vibrant, feedback-driven ecosystem</span>
                   </li>
                 </ul>

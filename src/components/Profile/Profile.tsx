@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   motion,
   useScroll,
@@ -44,6 +44,10 @@ const Profile = () => {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 },
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const currentGameDetails = profileData.games[selectedGameIndex] || {
     name: "No Game Selected",

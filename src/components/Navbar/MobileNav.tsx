@@ -43,13 +43,19 @@ const MobileNav: React.FC<MobileNavProps> = ({
     })
   };
 
+  const handleLogoClick = () => {
+    handleNavigate("/")();
+    setIsMenuOpen(false);
+  };
+
+
   const getMenuBgColor = () => {
     return navbarColor;
   };
 
   const getHoverColor = (itemPath: string) => {
     if (currentPath === itemPath) return "";
-    
+
     if (currentPath.includes("profile")) {
       return "hover:bg-[#1a2d4a] transition-colors duration-300";
     }
@@ -62,7 +68,7 @@ const MobileNav: React.FC<MobileNavProps> = ({
   return (
     <div className="md:hidden w-full">
       <div className={`flex justify-between items-center py-3 px-4 ${navbarColor} transition-colors duration-300`}>
-        <Logo />
+        <div onClick={handleLogoClick}><Logo /></div>
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           className={`p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#fe6200] transition-transform duration-300 ${isMenuOpen ? "rotate-90" : ""}`}
@@ -126,14 +132,14 @@ const MobileNav: React.FC<MobileNavProps> = ({
                     whileHover={{ x: 5 }}
                     whileTap={{ scale: 0.98 }}
                   >
-                    <motion.div 
+                    <motion.div
                       className="mr-3"
                       whileHover={{ rotate: 10 }}
                       transition={{ type: "spring", stiffness: 400 }}
                     >
                       {item.icon}
                     </motion.div>
-                    <span 
+                    <span
                       className={`
                         ${item.highlight ? "font-bold" : ""} 
                         ${isActive ? "font-medium" : ""}
@@ -141,9 +147,9 @@ const MobileNav: React.FC<MobileNavProps> = ({
                     >
                       {item.text}
                     </span>
-                    
+
                     {isActive && (
-                      <motion.div 
+                      <motion.div
                         className="ml-auto"
                         initial={{ scale: 0 }}
                         animate={{ scale: 1 }}

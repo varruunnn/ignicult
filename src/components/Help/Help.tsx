@@ -1,13 +1,13 @@
 import React, { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { 
-  MessageSquare, 
-  Mail, 
-  Globe, 
-  ArrowDown, 
-  Phone, 
-  HelpCircle, 
-  MessageCircle, 
+import {
+  MessageSquare,
+  Mail,
+  Globe,
+  ArrowDown,
+  Phone,
+  HelpCircle,
+  MessageCircle,
   Clock,
   ChevronRight,
   X
@@ -50,20 +50,20 @@ const Help: React.FC = () => {
 
   const itemVariants = {
     hidden: { y: 50, opacity: 0 },
-    visible: { 
-      y: 0, 
+    visible: {
+      y: 0,
       opacity: 1,
-      transition: { 
-        type: "spring", 
-        stiffness: 100, 
-        damping: 15 
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 15
       }
     }
   };
 
   const floatingVariants = {
     initial: { y: 0 },
-    animate: { 
+    animate: {
       y: [-10, 10, -10],
       transition: {
         repeat: Infinity,
@@ -75,7 +75,7 @@ const Help: React.FC = () => {
 
   const fadeInVariants = {
     hidden: { opacity: 0 },
-    visible: { 
+    visible: {
       opacity: 1,
       transition: { duration: 0.8 }
     }
@@ -134,11 +134,14 @@ const Help: React.FC = () => {
       answer: "You can redeem Cultix for vouchers, premium features, and exclusive perks via the Redemption Center—no gas fees involved."
     },
   ];
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#1b0b0b] to-[#2f0c0c] text-white">
       {showEmailAlert && (
-        <motion.div 
+        <motion.div
           className="fixed top-4 right-4 bg-green-800 text-white p-4 rounded-lg shadow-lg z-50 flex items-center"
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -150,8 +153,8 @@ const Help: React.FC = () => {
           </button>
         </motion.div>
       )}
-      
-      <motion.section 
+
+      <motion.section
         className="relative h-80 sm:h-96 flex flex-col items-center justify-center overflow-hidden"
         initial="hidden"
         animate="visible"
@@ -183,7 +186,7 @@ const Help: React.FC = () => {
           className="relative z-10 text-center px-6"
           variants={itemVariants}
         >
-          <motion.div 
+          <motion.div
             className="inline-block mb-6"
             initial="initial"
             animate="animate"
@@ -191,13 +194,13 @@ const Help: React.FC = () => {
           >
             <HelpCircle className="w-16 h-16 sm:w-24 sm:h-24 text-yellow-500" />
           </motion.div>
-          <motion.h1 
+          <motion.h1
             className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-yellow-500"
             variants={fadeInVariants}
           >
             Happy to Help You
           </motion.h1>
-          <motion.p 
+          <motion.p
             className="text-lg sm:text-xl text-gray-300 max-w-2xl"
             variants={fadeInVariants}
           >
@@ -221,7 +224,7 @@ const Help: React.FC = () => {
           <ArrowDown className="w-6 h-6" />
         </motion.button>
       </motion.section>
-      <motion.section 
+      <motion.section
         className="py-16 px-6"
         initial="hidden"
         whileInView="visible"
@@ -229,13 +232,13 @@ const Help: React.FC = () => {
         variants={containerVariants}
       >
         <div className="max-w-7xl mx-auto">
-          <motion.h2 
+          <motion.h2
             className="text-2xl sm:text-3xl font-bold mb-8 sm:mb-12 text-center"
             variants={itemVariants}
           >
             How Can We <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-yellow-500">Assist You?</span>
           </motion.h2>
-          <motion.div 
+          <motion.div
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto"
             variants={containerVariants}
           >
@@ -289,7 +292,7 @@ const Help: React.FC = () => {
         </div>
       </motion.section>
 
-      <motion.section 
+      <motion.section
         className="py-16 px-6 bg-[#240c0c]"
         initial="hidden"
         whileInView="visible"
@@ -298,7 +301,7 @@ const Help: React.FC = () => {
       >
         <div className="max-w-5xl mx-auto">
           <motion.div className="text-center mb-8 sm:mb-12" variants={itemVariants}>
-            <motion.h2 
+            <motion.h2
               className="text-2xl sm:text-3xl font-bold mb-4"
               variants={itemVariants}
             >
@@ -311,7 +314,7 @@ const Help: React.FC = () => {
 
           <motion.div className="space-y-4 sm:space-y-6" variants={containerVariants}>
             {faqItems.map((item, index) => (
-              <motion.div 
+              <motion.div
                 key={index}
                 className="bg-gradient-to-r from-[#341616] to-[#371111] rounded-lg overflow-hidden"
                 variants={itemVariants}
@@ -326,7 +329,7 @@ const Help: React.FC = () => {
                       </svg>
                     </span>
                   </summary>
-                  <motion.div 
+                  <motion.div
                     className="mt-4 text-gray-300 text-sm sm:text-base"
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: "auto" }}

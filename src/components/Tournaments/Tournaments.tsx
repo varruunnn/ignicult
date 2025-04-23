@@ -26,6 +26,9 @@ const TournamentsPage = () => {
   const navigateToUserProfile = (walletAddress: string) => {
     navigate(`/profile/${walletAddress}`);
   };
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   if (error) {
     return (
@@ -33,7 +36,7 @@ const TournamentsPage = () => {
         <div className="bg-red-900 p-6 rounded-lg max-w-md mx-auto">
           <h2 className="text-2xl font-bold mb-2">Error Loading Tournament Data</h2>
           <p>{error.message}</p>
-          <button 
+          <button
             onClick={() => window.location.reload()}
             className="mt-4 bg-red-700 hover:bg-red-600 px-4 py-2 rounded"
           >
@@ -88,15 +91,14 @@ const TournamentsPage = () => {
                 className="grid grid-cols-12 py-4 px-4 items-center border-b border-gray-700 last:border-0 hover:bg-gray-700 transition-colors"
               >
                 <div className="col-span-2 text-center">
-                  <span className={`inline-flex items-center justify-center w-6 h-6 rounded-full ${
-                    indexOfFirstItem + index + 1 === 1 ? 'bg-yellow-500' :
-                    indexOfFirstItem + index + 1 === 2 ? 'bg-gray-400' :
-                    indexOfFirstItem + index + 1 === 3 ? 'bg-yellow-700' : 'bg-gray-600'
-                  } text-black font-bold text-sm`}>
+                  <span className={`inline-flex items-center justify-center w-6 h-6 rounded-full ${indexOfFirstItem + index + 1 === 1 ? 'bg-yellow-500' :
+                      indexOfFirstItem + index + 1 === 2 ? 'bg-gray-400' :
+                        indexOfFirstItem + index + 1 === 3 ? 'bg-yellow-700' : 'bg-gray-600'
+                    } text-black font-bold text-sm`}>
                     {indexOfFirstItem + index + 1}
                   </span>
                 </div>
-                <div 
+                <div
                   className="col-span-6 font-mono text-sm truncate cursor-pointer hover:text-purple-400"
                   onClick={() => navigateToUserProfile(player.walletAddress)}
                   title="View player profile"
@@ -118,9 +120,8 @@ const TournamentsPage = () => {
               <button
                 onClick={() => goToPage(currentPage - 1)}
                 disabled={currentPage === 1}
-                className={`px-3 py-1 rounded-md ${
-                  currentPage === 1 ? 'bg-gray-800 text-gray-600 cursor-not-allowed' : 'bg-gray-700 text-white hover:bg-gray-600'
-                }`}
+                className={`px-3 py-1 rounded-md ${currentPage === 1 ? 'bg-gray-800 text-gray-600 cursor-not-allowed' : 'bg-gray-700 text-white hover:bg-gray-600'
+                  }`}
               >
                 Prev
               </button>
@@ -128,9 +129,8 @@ const TournamentsPage = () => {
                 <button
                   key={page}
                   onClick={() => goToPage(page)}
-                  className={`w-8 h-8 flex items-center justify-center rounded-md ${
-                    currentPage === page ? 'bg-purple-600 text-white' : 'bg-gray-700 text-white hover:bg-gray-600'
-                  }`}
+                  className={`w-8 h-8 flex items-center justify-center rounded-md ${currentPage === page ? 'bg-purple-600 text-white' : 'bg-gray-700 text-white hover:bg-gray-600'
+                    }`}
                 >
                   {page}
                 </button>
@@ -138,9 +138,8 @@ const TournamentsPage = () => {
               <button
                 onClick={() => goToPage(currentPage + 1)}
                 disabled={currentPage === totalPages}
-                className={`px-3 py-1 rounded-md ${
-                  currentPage === totalPages ? 'bg-gray-800 text-gray-600 cursor-not-allowed' : 'bg-gray-700 text-white hover:bg-gray-600'
-                }`}
+                className={`px-3 py-1 rounded-md ${currentPage === totalPages ? 'bg-gray-800 text-gray-600 cursor-not-allowed' : 'bg-gray-700 text-white hover:bg-gray-600'
+                  }`}
               >
                 Next
               </button>

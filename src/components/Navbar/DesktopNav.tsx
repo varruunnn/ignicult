@@ -33,6 +33,12 @@ const DesktopNav: React.FC<DesktopNavProps> = ({
     setIsDesktopMenuVisible(prev => !prev);
   };
 
+  const handleLogoClick = () => {
+    handleNavigate("/")();
+    closeDesktopMenu();
+  };
+
+
   const closeDesktopMenu = () => {
     setIsDesktopMenuVisible(false);
   };
@@ -126,7 +132,7 @@ const DesktopNav: React.FC<DesktopNavProps> = ({
         )}
       </div>
       <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
-        <Logo />
+      <div onClick={handleLogoClick} className="cursor-pointer"><Logo /></div>
       </div>
       <AnimatePresence>
         {isDesktopMenuVisible && (

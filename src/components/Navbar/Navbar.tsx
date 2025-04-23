@@ -17,7 +17,6 @@ import { useNavigation } from "../../hooks/useNavigation";
 import { getNavbarColor } from "../../utils/getNavbarColor";
 import { NavItem } from "../../types/navigation";
 
-// Menu items configuration
 const menuItems: NavItem[] = [
   { icon: <Home className="w-5 h-5 mr-2" />, text: "Home", path: "/" },
   {

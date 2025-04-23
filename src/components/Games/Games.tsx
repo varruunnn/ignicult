@@ -33,17 +33,20 @@ const itemVariants = {
 
 const Games = () => {
   const games = Object.keys(gameImages)
-  .map((path) => {
-    const match = path.match(/game(\d+)\.jpg$/);
-    return match ? parseInt(match[1]) : null;
-  })
-  .filter((n): n is number => n !== null)
-  .sort((a, b) => a - b);;
+    .map((path) => {
+      const match = path.match(/game(\d+)\.jpg$/);
+      return match ? parseInt(match[1]) : null;
+    })
+    .filter((n): n is number => n !== null)
+    .sort((a, b) => a - b);;
 
   const handleGameClick = (gameNumber: number) => {
     console.log(`Game ${gameNumber} clicked`);
     alert(`Game ${gameNumber} clicked`);
   };
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="bg-gradient-to-br from-black via-[#050505] to-[#050505] min-h-screen p-8 ">
