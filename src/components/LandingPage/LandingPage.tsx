@@ -237,12 +237,6 @@ const LandingPage = () => {
                 </ul>
               </div>
             </div>
-
-            <div className="mt-32 text-center">
-              <button className="px-8 py-4 bg-gradient-to-r from-red-500 to-yellow-500 rounded-lg font-medium text-white">
-                Join Now
-              </button>
-            </div>
           </div>
         </section>
       </main>
