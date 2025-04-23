@@ -167,7 +167,9 @@ const LandingPage = () => {
                   Play Effortlessly
                 </h3>
                 <p className="text-sm sm:text-base text-gray-400 mb-4 sm:mb-6">
-                  Hyper-casual games for anyone, anytime
+                  Hyper-casual games made for everyone
+                  Instant fun, zero learning curve
+                  Jump in anytime, play anywhere
                 </p>
                 <ul className="space-y-2">
                   <li className="flex items-start">
@@ -176,7 +178,7 @@ const LandingPage = () => {
                   </li>
                   <li className="flex items-start">
                     <div className="w-2 h-2 rounded-full bg-yellow-500 mr-2 mt-2"></div>
-                    <span className="text-sm sm:text-base">No gaming experience or downloads needed</span>
+                    <span className="text-sm sm:text-base">No gaming experience needed</span>
                   </li>
                   <li className="flex items-start">
                     <div className="w-2 h-2 rounded-full bg-yellow-500 mr-2 mt-2"></div>
@@ -190,21 +192,22 @@ const LandingPage = () => {
                   Web3, Simplified
                 </h3>
                 <p className="text-sm sm:text-base text-gray-400 mb-4 sm:mb-6">
-                  Blockchain gaming without the learning curve
+                  Blockchain gaming made simple and accessible
+                  No complicated wallets, no setup stress
+                  Just dive in, play, and earn with ease
                 </p>
                 <ul className="space-y-2">
                   <li className="flex items-start">
                     <div className="w-2 h-2 rounded-full bg-red-500 mr-2 mt-2"></div>
-                    <span className="text-sm sm:text-base">Play without a wallet or digital vouchers knowledge</span>
+                    <span className="text-sm sm:text-base">Play without web3 knowledge</span>
                   </li>
                   <li className="flex items-start">
                     <div className="w-2 h-2 rounded-full bg-red-500 mr-2 mt-2"></div>
-                    <span className="text-sm sm:text-base">Seamless onboarding into the Web3 ecosystem
-                    </span>
+                    <span className="text-sm sm:text-base">Effortless Web3 onboarding</span>
                   </li>
                   <li className="flex items-start">
                     <div className="w-2 h-2 rounded-full bg-red-500 mr-2 mt-2"></div>
-                    <span className="text-sm sm:text-base">Fair, skill-based rewards with anti-bot protection</span>
+                    <span className="text-sm sm:text-base">Skill-based rewards, protected from bots</span>
                   </li>
                 </ul>
               </div>
@@ -214,23 +217,31 @@ const LandingPage = () => {
                   Own the Experience
                 </h3>
                 <p className="text-sm sm:text-base text-gray-400 mb-4 sm:mb-6">
-                  A connected, rewarding community
+                  A connected community
+                  Driven by engagement and shared success
+                  Where every contribution is rewarded
                 </p>
                 <ul className="space-y-2">
                   <li className="flex items-start">
                     <div className="w-2 h-2 rounded-full bg-blue-500 mr-2 mt-2"></div>
-                    <span className="text-sm sm:text-base">Earn digital vouchers and progress across multiple games</span>
+                    <span className="text-sm sm:text-base">Earn vouchers and level up across games</span>
                   </li>
                   <li className="flex items-start">
                     <div className="w-2 h-2 rounded-full bg-blue-500 mr-2 mt-2"></div>
-                    <span className="text-sm sm:text-base">Participate in tournaments, events, and exclusive drops</span>
+                    <span className="text-sm sm:text-base">Join tournaments and exclusive drops</span>
                   </li>
                   <li className="flex items-start">
                     <div className="w-2 h-2 rounded-full bg-blue-500 mr-2 mt-2"></div>
-                    <span className="text-sm sm:text-base">Be part of a vibrant, feedback-driven ecosystem</span>
+                    <span className="text-sm sm:text-base">Thrive in a feedback-driven ecosystem</span>
                   </li>
                 </ul>
               </div>
+            </div>
+
+            <div className="mt-32 text-center">
+              <button className="px-8 py-4 bg-gradient-to-r from-red-500 to-yellow-500 rounded-lg font-medium text-white">
+                Join Now
+              </button>
             </div>
           </div>
         </section>
