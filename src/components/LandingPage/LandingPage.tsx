@@ -17,28 +17,24 @@ const LandingPage = () => {
 
   const features = [
     {
-      icon: <Trophy className="w-8 h-8 text-yellow-500" />,
-      title: "Competitive Tournaments",
-      description:
-        "Join high-stakes tournaments with players from around the world and compete for massive prizes.",
+      icon: <Award className="w-8 h-8 text-yellow-500" />,
+      title: "Get In Instantly",
+      description: "Jump into the action—no delays, no barriers. No downloads or setup required. Zero blockchain friction. Instant gameplay from your browser.",
     },
     {
-      icon: <Award className="w-8 h-8 text-yellow-500" />,
-      title: "Exclusive Rewards",
-      description:
-        "Earn unique rewards, achievements, and digital collectibles as you play and win.",
+      icon: <Trophy className="w-8 h-8 text-yellow-500" />,
+      title: "Play Your Way",
+      description: "Fun, fair, and competitive for all players. Perfect for casual gamers and competitive grinders. Skill-based mechanics with real rewards.",
     },
     {
       icon: <Star className="w-8 h-8 text-yellow-500" />,
-      title: "Premium Experiences",
-      description:
-        "Access VIP tournaments, special events, and customized gaming experiences.",
+      title: "Built With Purpose",
+      description: "Web3 that works for you. Real utility behind every reward. Transparent, secure reward distribution. No pay-to-win, no bots.",
     },
     {
       icon: <Activity className="w-8 h-8 text-yellow-500" />,
-      title: "Real-time Statistics",
-      description:
-        "Track your performance with detailed analytics and see how you rank against global players.",
+      title: "Powered by Community",
+      description: "Ignicult is built together with you. Open feedback loops and active community channels. Events, tournaments, and features shaped by players.",
     },
   ];
 
@@ -53,18 +49,18 @@ const LandingPage = () => {
             className="absolute inset-0 z-20 flex items-center justify-center"
           >
             <div className="container mx-auto px-4 sm:px-6 text-center">
-            <div className="text-center mb-12 sm:mb-16">
-              <div>
-                <h2 className="text-4xl sm:text-6xl font-bold mb-4">
-                  <span className="bg-gradient-to-r font-inter font-semibold from-red-500 via-yellow-400 to-red-500 bg-clip-text text-transparent inline-block">
-                    <span className="text-2xl sm:text-4xl tracking-wider">Welcome To</span>{" "}
-                    <br />
-                    <span className="text-5xl sm:text-7xl tracking-tighter">
-                      IGNICULT 
+              <div className="text-center mb-12 sm:mb-16">
+                <div>
+                  <h2 className="text-4xl sm:text-6xl font-bold mb-4">
+                    <span className="bg-gradient-to-r font-inter font-semibold from-red-500 via-yellow-400 to-red-500 bg-clip-text text-transparent inline-block">
+                      <span className="text-2xl sm:text-4xl tracking-wider">Welcome To</span>{" "}
+                      <br />
+                      <span className="text-5xl sm:text-7xl tracking-tighter">
+                        IGNICULT
+                      </span>
                     </span>
-                  </span>
-                </h2>
-              </div>
+                  </h2>
+                </div>
 
                 <p className="text-lg md:text-xl text-gray-300 mb-8 sm:mb-12 leading-relaxed">
                   The ultimate competitive gaming platform for{" "}
@@ -161,80 +157,77 @@ const LandingPage = () => {
                 </span>
               </h2>
               <p className="text-gray-400 max-w-2xl mx-auto text-sm sm:text-base">
-                Cutting-edge gaming experiences with rewards, tournaments, and
-                community
+                Ignicult is a hyper-casual Web3 gaming platform designed to make blockchain gaming fun, accessible, and rewarding for everyone. We offer:
               </p>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
               <div className="bg-gradient-to-br from-[#2A2A2A] to-[#202020] rounded-2xl p-6 sm:p-8 border border-gray-800">
                 <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-yellow-500">
-                  Competitive Gaming
+                  Play Effortlessly
                 </h3>
                 <p className="text-sm sm:text-base text-gray-400 mb-4 sm:mb-6">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-                  quam velit, vulputate eu pharetra nec, mattis ac neque.
+                  Hyper-casual games for anyone, anytime
                 </p>
                 <ul className="space-y-2">
                   <li className="flex items-center">
                     <div className="w-2 h-2 rounded-full bg-yellow-500 mr-2"></div>
-                    <span className="text-sm sm:text-base">Daily tournaments with cash prizes</span>
+                    <span className="text-sm sm:text-base">Fast-paced games that are easy to pick up</span>
                   </li>
                   <li className="flex items-center">
                     <div className="w-2 h-2 rounded-full bg-yellow-500 mr-2"></div>
-                    <span className="text-sm sm:text-base">Skill-based matchmaking</span>
+                    <span className="text-sm sm:text-base">No gaming experience or downloads needed</span>
                   </li>
                   <li className="flex items-center">
                     <div className="w-2 h-2 rounded-full bg-yellow-500 mr-2"></div>
-                    <span className="text-sm sm:text-base">Global leaderboards</span>
+                    <span className="text-sm sm:text-base">Designed for quick, fun sessions on the go</span>
                   </li>
                 </ul>
               </div>
 
               <div className="bg-gradient-to-br from-[#2A2A2A] to-[#202020] rounded-2xl p-6 sm:p-8 border border-gray-800">
                 <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-red-500">
-                  Premium Tournaments
+                  Web3, Simplified
                 </h3>
                 <p className="text-sm sm:text-base text-gray-400 mb-4 sm:mb-6">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-                  quam velit, vulputate eu pharetra nec, mattis ac neque.
+                  Blockchain gaming without the learning curve
                 </p>
                 <ul className="space-y-2">
                   <li className="flex items-center">
                     <div className="w-2 h-2 rounded-full bg-red-500 mr-2"></div>
-                    <span className="text-sm sm:text-base">Exclusive high-stake competitions</span>
+                    <span className="text-sm sm:text-base">Play without a wallet or crypto knowledge</span>
                   </li>
                   <li className="flex items-center">
                     <div className="w-2 h-2 rounded-full bg-red-500 mr-2"></div>
-                    <span className="text-sm sm:text-base">Professional tournament structure</span>
+                    <span className="text-sm sm:text-base">Seamless onboarding into the Web3 ecosystem
+                    </span>
                   </li>
                   <li className="flex items-center">
                     <div className="w-2 h-2 rounded-full bg-red-500 mr-2"></div>
-                    <span className="text-sm sm:text-base">Live streaming and commentary</span>
+                    <span className="text-sm sm:text-base">Fair, skill-based rewards with anti-bot protection</span>
                   </li>
                 </ul>
               </div>
 
               <div className="bg-gradient-to-br from-[#2A2A2A] to-[#202020] rounded-2xl p-6 sm:p-8 border border-gray-800">
                 <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-blue-500">
-                  Community & Rewards
+                  Own the Experience
                 </h3>
                 <p className="text-sm sm:text-base text-gray-400 mb-4 sm:mb-6">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-                  quam velit, vulputate eu pharetra nec, mattis ac neque.
+                  A connected, rewarding community
                 </p>
                 <ul className="space-y-2">
                   <li className="flex items-center">
                     <div className="w-2 h-2 rounded-full bg-blue-500 mr-2"></div>
-                    <span className="text-sm sm:text-base">Exclusive in-game rewards</span>
+                    <span className="text-sm sm:text-base">Earn crypto and progress across multiple games</span>
                   </li>
                   <li className="flex items-center">
                     <div className="w-2 h-2 rounded-full bg-blue-500 mr-2"></div>
-                    <span className="text-sm sm:text-base">Community events and challenges</span>
+                    <span className="text-sm sm:text-base">Participate in tournaments, events, and exclusive drops</span>
                   </li>
                   <li className="flex items-center">
                     <div className="w-2 h-2 rounded-full bg-blue-500 mr-2"></div>
-                    <span className="text-sm sm:text-base">Discord integration and social features</span>
+                    <span className="text-sm sm:text-base">Be part of a vibrant, feedback-driven ecosystem</span>
                   </li>
                 </ul>
               </div>

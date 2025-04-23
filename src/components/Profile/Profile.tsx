@@ -113,6 +113,7 @@ const Profile = () => {
               <div className="flex-1 text-center md:text-left">
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                   <div>
+                    <p>Wallet Address</p>
                     <p className="text-gray-300 font-mono text-lg">{profileData.walletAddress}</p>
                   </div>
                 </div>
@@ -308,7 +309,7 @@ const Profile = () => {
                           initial={{ width: 0 }}
                           animate={{
                             width: `${(currentGameDetails.score /
-                                currentGameDetails.highestScore) *
+                              currentGameDetails.highestScore) *
                               100
                               }%`,
                           }}

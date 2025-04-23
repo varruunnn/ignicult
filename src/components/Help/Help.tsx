@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
   MessageSquare, 
@@ -9,14 +9,32 @@ import {
   HelpCircle, 
   MessageCircle, 
   Clock,
-  ChevronRight
+  ChevronRight,
+  X
 } from 'lucide-react';
+import { FaDiscord } from "react-icons/fa6";
 
 const Help: React.FC = () => {
   const footerRef = useRef<HTMLDivElement>(null);
+  const [showEmailAlert, setShowEmailAlert] = useState(false);
+  const [emailAlertMessage, setEmailAlertMessage] = useState('');
 
   const scrollToFooter = () => {
     footerRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleEmailClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    navigator.clipboard.writeText('contact@ignicult.com');
+    const mailtoTimeout = setTimeout(() => {
+      setEmailAlertMessage('Email copied to clipboard: contact@ignicult.com');
+      setShowEmailAlert(true);
+      setTimeout(() => setShowEmailAlert(false), 4000);
+    }, 300);
+    window.location.href = 'mailto:contact@ignicult.com';
+    window.addEventListener('blur', () => {
+      clearTimeout(mailtoTimeout);
+    }, { once: true });
   };
 
   const containerVariants = {
@@ -69,35 +87,70 @@ const Help: React.FC = () => {
       title: "Connect on X (Twitter)",
       description: "Connect with us on X (Twitter) for any support queries or feedback. Follow us and send a message to our handle @ignicult.",
       color: "from-blue-600 to-blue-400",
-      delay: 0.2
+      delay: 0.2,
+      link: "https://x.com/ignicult"
     },
     {
       icon: Mail,
       title: "Email Support",
-      description: "Email us at support@ignicult.com for detailed support requests or inquiries.",
+      description: "Email us at contact@ignicult.com for detailed support requests or inquiries.",
       color: "from-red-500 to-yellow-500",
-      delay: 0.4
+      delay: 0.4,
+      action: handleEmailClick
     },
+    {
+      icon: FaDiscord,
+      title: "Discord Help Center",
+      description: "Get real-time support from our team and community members in our dedicated help channels on Discord.",
+      color: "from-purple-600 to-purple-400",
+      delay: 0.8,
+      link: "https://discord.gg/V9DGZvFNme"
+    }
   ];
 
   const faqItems = [
     {
-      question: "How do I reset my password?",
-      answer: "You can reset your password by clicking on the 'Forgot Password' link on the login page. A password reset link will be sent to your registered email."
+      question: "What is Ignicult?",
+      answer: "A Web3 gaming platform where players earn tokens (Cultix) by playing hyper-casual games, sharing content, and completing challenges."
     },
     {
-      question: "How do I join tournaments?",
-      answer: "To join tournaments, navigate to the 'Tournaments' section from your dashboard, browse available tournaments, and click the 'Join' button."
+      question: "Do I need to install anything?",
+      answer: "Nope! Just visit the website, connect your wallet, and start playing right from your browser."
     },
     {
-      question: "What payment methods do you accept?",
-      answer: "We accept all major credit/debit cards, PayPal, and various cryptocurrency payment options including Bitcoin and Ethereum."
-    }
+      question: "How do I earn tokens?",
+      answer: "Earn Cultix by winning games, ranking on leaderboards, or completing social tasks like boosting content."
+    },
+    {
+      question: "Is it free to play?",
+      answer: "Yes! You don't need to pay anything to start playing or earning."
+    },
+    {
+      question: "How is my data protected?",
+      answer: "Your identity is your wallet. We collect no personal data, and all game stats are tied to your on-chain profile."
+    },
+    {
+      question: "What kind of rewards can I redeem?",
+      answer: "You can redeem Cultix for vouchers, premium features, and exclusive perks via the Redemption Center—no gas fees involved."
+    },
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#1b0b0b] to-[#2f0c0c] text-white
-    ">
+    <div className="min-h-screen bg-gradient-to-b from-[#1b0b0b] to-[#2f0c0c] text-white">
+      {showEmailAlert && (
+        <motion.div 
+          className="fixed top-4 right-4 bg-green-800 text-white p-4 rounded-lg shadow-lg z-50 flex items-center"
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -50 }}
+        >
+          <span>{emailAlertMessage}</span>
+          <button onClick={() => setShowEmailAlert(false)} className="ml-4">
+            <X className="w-5 h-5" />
+          </button>
+        </motion.div>
+      )}
+      
       <motion.section 
         className="relative h-80 sm:h-96 flex flex-col items-center justify-center overflow-hidden"
         initial="hidden"
@@ -136,16 +189,16 @@ const Help: React.FC = () => {
             animate="animate"
             variants={floatingVariants}
           >
-            <HelpCircle className="w-24 h-24 text-yellow-500" />
+            <HelpCircle className="w-16 h-16 sm:w-24 sm:h-24 text-yellow-500" />
           </motion.div>
           <motion.h1 
-            className="text-4xl sm:text-5xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-yellow-500"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-yellow-500"
             variants={fadeInVariants}
           >
             Happy to Help You
           </motion.h1>
           <motion.p 
-            className="text-xl text-gray-300 max-w-2xl"
+            className="text-lg sm:text-xl text-gray-300 max-w-2xl"
             variants={fadeInVariants}
           >
             We're committed to providing you with the best support experience possible
@@ -177,43 +230,57 @@ const Help: React.FC = () => {
       >
         <div className="max-w-7xl mx-auto">
           <motion.h2 
-            className="text-3xl font-bold mb-12 text-center"
+            className="text-2xl sm:text-3xl font-bold mb-8 sm:mb-12 text-center"
             variants={itemVariants}
           >
             How Can We <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-yellow-500">Assist You?</span>
           </motion.h2>
-
           <motion.div 
-            className="grid grid-cols-1 md:grid-cols-2 gap-8"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto"
             variants={containerVariants}
           >
             {supportMethods.map((method, index) => (
               <motion.div
                 key={index}
-                className="bg-gradient-to-b from-[#271212] to-[#451414] rounded-xl overflow-hidden"
+                className="bg-gradient-to-b from-[#271212] to-[#451414] rounded-xl overflow-hidden h-full"
                 variants={itemVariants}
                 custom={index}
                 whileHover={{ y: -8, transition: { type: "spring", stiffness: 300 } }}
               >
                 <div className="p-6 h-full flex flex-col">
-                  <div className="flex items-start mb-4">
-                    <div className={`p-3 rounded-full bg-gradient-to-br ${method.color} shadow-lg mr-4`}>
-                      <method.icon className="w-8 h-8 text-white" />
+                  <div className="flex flex-col items-center text-center mb-4">
+                    <div className={`p-3 rounded-full bg-gradient-to-br ${method.color} shadow-lg mb-4`}>
+                      {method.icon === FaDiscord ? (
+                        <FaDiscord className="w-8 h-8 text-white" />
+                      ) : (
+                        <method.icon className="w-8 h-8 text-white" />
+                      )}
                     </div>
-                    <div>
-                      <h3 className="text-xl font-bold mb-2">{method.title}</h3>
-                      <p className="text-gray-300">{method.description}</p>
-                    </div>
+                    <h3 className="text-xl font-bold mb-2">{method.title}</h3>
+                    <p className="text-gray-300">{method.description}</p>
                   </div>
                   <div className="mt-auto">
-                    <motion.a
-                      href="#"
-                      className="inline-flex items-center text-yellow-500 hover:text-yellow-400"
-                      whileHover={{ x: 5 }}
-                    >
-                      Learn more
-                      <ChevronRight className="ml-1 w-4 h-4" />
-                    </motion.a>
+                    {method.link ? (
+                      <motion.a
+                        href={method.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center w-full py-2 px-4 rounded-lg bg-yellow-500 hover:bg-yellow-400 text-black font-medium transition-colors"
+                        whileHover={{ scale: 1.05 }}
+                      >
+                        Learn more
+                        <ChevronRight className="ml-1 w-4 h-4" />
+                      </motion.a>
+                    ) : method.action ? (
+                      <motion.button
+                        onClick={method.action}
+                        className="inline-flex items-center justify-center w-full py-2 px-4 rounded-lg bg-yellow-500 hover:bg-yellow-400 text-black font-medium transition-colors"
+                        whileHover={{ scale: 1.05 }}
+                      >
+                        Contact us
+                        <ChevronRight className="ml-1 w-4 h-4" />
+                      </motion.button>
+                    ) : null}
                   </div>
                 </div>
               </motion.div>
@@ -230,9 +297,9 @@ const Help: React.FC = () => {
         variants={containerVariants}
       >
         <div className="max-w-5xl mx-auto">
-          <motion.div className="text-center mb-12" variants={itemVariants}>
+          <motion.div className="text-center mb-8 sm:mb-12" variants={itemVariants}>
             <motion.h2 
-              className="text-3xl font-bold mb-4"
+              className="text-2xl sm:text-3xl font-bold mb-4"
               variants={itemVariants}
             >
               Frequently Asked <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-yellow-500">Questions</span>
@@ -242,7 +309,7 @@ const Help: React.FC = () => {
             </motion.p>
           </motion.div>
 
-          <motion.div className="space-y-6" variants={containerVariants}>
+          <motion.div className="space-y-4 sm:space-y-6" variants={containerVariants}>
             {faqItems.map((item, index) => (
               <motion.div 
                 key={index}
@@ -250,17 +317,17 @@ const Help: React.FC = () => {
                 variants={itemVariants}
                 whileHover={{ scale: 1.02 }}
               >
-                <details className="group p-6">
+                <details className="group p-4 sm:p-6">
                   <summary className="flex justify-between items-center cursor-pointer list-none">
-                    <h3 className="text-xl font-medium">{item.question}</h3>
+                    <h3 className="text-lg sm:text-xl font-medium">{item.question}</h3>
                     <span className="transition-transform duration-300 group-open:rotate-180">
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-yellow-500">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-500">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                       </svg>
                     </span>
                   </summary>
                   <motion.div 
-                    className="mt-4 text-gray-300"
+                    className="mt-4 text-gray-300 text-sm sm:text-base"
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: "auto" }}
                     transition={{ duration: 0.3 }}

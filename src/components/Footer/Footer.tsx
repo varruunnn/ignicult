@@ -2,7 +2,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { FaInstagram, FaLinkedin, FaTwitter, FaFacebook, FaFire, FaArrowRight } from 'react-icons/fa';
-import { FaXTwitter } from "react-icons/fa6";
+import { FaXTwitter, FaDiscord } from "react-icons/fa6";
+
 const Footer = () => {
   const navigate = useNavigate();
   const containerVariants = {
@@ -15,9 +16,20 @@ const Footer = () => {
       }
     }
   };
+  const handleLegalPageClick = (pageId: string) => {
+    const pageMap: { [key: string]: string } = {
+      'Privacy Policy': 'privacy',
+      'T&C': 'terms',
+      'Cookies': 'cookies',
+      'FAQ': 'faq'
+    };
+    navigate(`/legal/${pageMap[pageId]}`);
+  };
+
   const handleClick = (link: string) => {
     navigate(`/${link.toLowerCase().replace(' ', '-')}`);
   };
+
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
     visible: { y: 0, opacity: 1, transition: { type: "spring", stiffness: 100 } }
@@ -35,41 +47,16 @@ const Footer = () => {
 
   return (
     <footer className="bg-gradient-to-b border-t-2 border-[#3d2812] w-full h-auto from-[#0d0d0d] to-[#300a0a] relative overflow-hidden">
-      {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <motion.div 
+        <motion.div
           className="absolute w-40 h-40 rounded-full bg-gradient-to-r from-red-600 to-yellow-500 opacity-10 blur-3xl"
-          // animate={{ 
-          //   x: ["-10%", "60%", "-10%"],
-          //   y: ["30%", "60%", "30%"],
-          // }}
-          // transition={{ 
-          //   repeat: Infinity, 
-          //   duration: 15,
-          //   ease: "easeInOut"
-          // }}
         />
-        <motion.div 
+        <motion.div
           className="absolute w-64 h-64 rounded-full bg-gradient-to-r from-yellow-500 to-red-600 opacity-10 blur-3xl right-0"
-          // animate={{ 
-          //   x: ["60%", "-10%", "60%"],
-          //   y: ["10%", "40%", "10%"],
-          // }}
-          // transition={{ 
-          //   repeat: Infinity, 
-          //   duration: 18,
-          //   ease: "easeInOut"
-          // }}
         />
       </div>
       <div className="max-w-7xl mx-auto px-6 py-8 relative z-10">
-        <motion.div 
-          className="grid grid-cols-1 md:grid-cols-3 gap-12"
-          // variants={containerVariants}
-          // initial="hidden"
-          // whileInView="visible"
-          // viewport={{ once: true, amount: 0.3 }}
-        >
+        <motion.div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           <motion.div variants={itemVariants} className="space-y-6">
             <motion.div className="flex items-center space-x-3 mb-4">
               <motion.div
@@ -78,7 +65,7 @@ const Footer = () => {
               >
                 <img src="/logo.png" alt="Company Logo" className="w-16 h-18 drop-shadow-xl" />
               </motion.div>
-              <motion.span 
+              <motion.span
                 className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-yellow-500 text-3xl font-bold"
                 whileHover={{ scale: 1.05 }}
               >
@@ -92,12 +79,12 @@ const Footer = () => {
           </motion.div>
 
           <motion.div variants={itemVariants} className="md:mx-auto">
-            <motion.h3 
+            <motion.h3
               className="text-xl font-bold mb-6 flex items-center"
               initial={{ backgroundPosition: "0%" }}
               animate={{ backgroundPosition: "100%" }}
               transition={{ repeat: Infinity, duration: 3, repeatType: "reverse" }}
-              style={{ 
+              style={{
                 backgroundImage: "linear-gradient(90deg, #ef4743, #b55625, #ffae2f)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
@@ -111,14 +98,13 @@ const Footer = () => {
                 <motion.li key={index}
                   variants={itemVariants}
                   whileHover="hover"
-                  
                 >
-                  <motion.a 
+                  <motion.a
                     onClick={() => handleClick(link)}
                     className="text-gray-300 hover:text-yellow-400 cursor-pointer transition-colors flex items-center"
                     variants={linkVariants}
                   >
-                    <motion.span 
+                    <motion.span
                       className="w-0 h-0.5 bg-gradient-to-r from-red-500 to-yellow-500 mr-2 inline-block"
                       variants={{
                         hover: { width: "16px" }
@@ -132,24 +118,25 @@ const Footer = () => {
             </ul>
           </motion.div>
           <motion.div variants={itemVariants}>
-            <motion.h3 
+            <motion.h3
               className="text-xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-yellow-500"
             >
               Connect With Us
             </motion.h3>
-            <motion.div 
+            <motion.div
               className="grid grid-cols-2 gap-4"
               variants={containerVariants}
             >
               {[
-                { icon: FaXTwitter , color: "bg-sky-500", url: "https://x.com/ignicult" },
+                { icon: FaXTwitter, color: "bg-sky-500", url: "https://x.com/ignicult" },
+                { icon: FaDiscord, color: "bg-[#5865F2]", url: "https://discord.gg/V9DGZvFNme" },
               ].map((social, index) => (
                 <motion.a
                   key={index}
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`p-4 rounded-xl w-[100px] flex flex-col items-center ${social.color === "bg-gradient-to-br from-purple-600 via-pink-500 to-orange-400" ? social.color : ""} hover:shadow-lg transition-all`}
+                  className={`p-2 rounded-xl w-[100px] flex flex-col items-center ${social.color === "bg-gradient-to-br from-purple-600 via-pink-500 to-orange-400" ? social.color : ""} hover:shadow-lg transition-all`}
                   style={{ background: social.color !== "bg-gradient-to-br from-purple-600 via-pink-500 to-orange-400" ? social.color : undefined }}
                   variants={socialIconVariants}
                   whileHover="hover"
@@ -164,14 +151,11 @@ const Footer = () => {
               ))}
             </motion.div>
 
-            <motion.div 
+            <motion.div
               className="mt-6 bg-gradient-to-r from-[#582020] to-[#451414] p-4 rounded-lg"
               whileHover={{ y: -5 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              <p className="text-gray-300 text-sm">
-                <span className="text-yellow-400 font-bold">Office:</span> 123 Gaming Street, E-Sports City, ES 12345
-              </p>
               <p className="text-gray-300 text-sm mt-1">
                 <span className="text-yellow-400 font-bold">Email:</span> contact@ignicult.com
               </p>
@@ -179,29 +163,28 @@ const Footer = () => {
           </motion.div>
         </motion.div>
 
-        {/* Reduced mt-12 to mt-6 for less spacing */}
-        <motion.div 
+        <motion.div
           className="mt-6 border-t border-red-900 pt-6 flex flex-col md:flex-row justify-between items-center"
           variants={itemVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
         >
-          <motion.p 
+          <motion.p
             className="text-gray-400 text-sm"
             variants={itemVariants}
           >
             &copy; {new Date().getFullYear()} <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-yellow-500 font-bold">IGNICULT</span>. All rights reserved.
           </motion.p>
-          <motion.div 
+          <motion.div
             className="flex space-x-6 mt-4 md:mt-0"
             variants={containerVariants}
           >
-            {['Privacy Policy', 'Terms & Conditions', 'Cookies', 'FAQ'].map((link, index) => (
-              <motion.a 
+            {['Privacy Policy', 'T&C', 'Cookies', 'FAQ'].map((link, index) => (
+              <motion.a
                 key={index}
-                onClick={() => handleClick(link)}
-                className="text-gray-400 text-sm hover:text-yellow-400 transition-all"
+                onClick={() => handleLegalPageClick(link)}
+                className="text-gray-400 cursor-pointer text-sm hover:text-yellow-400 transition-all"
                 variants={itemVariants}
                 whileHover={{ y: -2 }}
               >

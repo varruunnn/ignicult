@@ -7,7 +7,9 @@ export const getNavbarColor = (pathname: string): string => {
 
   switch (pathname) {
     case "/":
-      return "bg-[#1e1d1d]";
+      return "bg-[#1c1c1c]";
+    case "/home":
+      return "bg-[#1c1c1c]";
     case "/profile":
       return "bg-[#0d0d0d]";
     case "/games":
